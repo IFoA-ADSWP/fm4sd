@@ -263,6 +263,7 @@ not placed yet:
   - tabgift — [arxiv](https://arxiv.org/abs/2610.16990) — [li et al. 2026]
   - tabmosaic — [arxiv](https://arxiv.org/abs/2610.15699) — [kim et al. 2026]
   - survicl — [arxiv](https://arxiv.org/abs/2610.22242) — [alberge et al. 2026]
+  - tabregobjectives — [arxiv](https://arxiv.org/abs/2610.13909) · [github](https://github.com/yandex-research/tabular-regression) — [rudenko et al. 2026]
 - relational
   - curriculummatters — [arxiv](https://arxiv.org/abs/2607.29120) — [abolhasani and ganapathy 2026]
   - zerorel — [acm](https://dl.acm.org/doi/10.1145/3770855.3818115) — [tian et al. 2026]
