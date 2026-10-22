@@ -65,6 +65,7 @@ rm <id>.tar.gz
   - earlystoppingicl — [arxiv](https://arxiv.org/abs/2506.21387) — [küken et al. 2025]
   - localpfn — [arxiv](https://arxiv.org/abs/2406.05207) · [neurips](https://proceedings.neurips.cc/paper_files/paper/2024/file/c40daf14d7a6469e65116507c21faeb7-Paper-Conference.pdf) — [thomas et al. 2024]
   - tfm-priority — [arxiv](https://arxiv.org/abs/2405.01147) · [icml](https://proceedings.mlr.press/v235/van-breugel24a.html) — [van breugel and van der schaar 2024]
+  - tfm-systematic-survey — [ssrn](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7531718) — [archetti et al. 2026]
 - relational
   - dfs — [pdf](https://groups.csail.mit.edu/EVO-DesignOpt/groupWebSite/uploads/Site/DSAA_DSM_2015.pdf) — [kanter and veeramachaneni 2015]
   - graphsage — [arxiv](https://arxiv.org/abs/1706.02216) · [neurips](https://papers.nips.cc/paper/2017/hash/5dd9db5e033da9c6fb5ba83c7a7ebea9-Abstract.html) — [hamilton et al. 2017]
@@ -88,6 +89,7 @@ rm <id>.tar.gz
   - rdb-pfn — [arxiv](https://arxiv.org/abs/2603.03805) · [github](https://github.com/MuLabPKU/RDBPFN) — [wang et al. 2026]
   - plurel-to-rdb-pfn — [arxiv](https://arxiv.org/abs/2607.29129) — [abolhasani and ganapathy 2026]
   - graphpfn — [arxiv](https://arxiv.org/abs/2509.21489) — [eremeev et al. 2025]
+  - modded-nanort — [arxiv](https://arxiv.org/abs/2610.28855) · [github](https://github.com/kunumi/nanoRT) — [veloso et al. 2026]
 - time series
   - forecasting
     - fev-bench — [arxiv](https://arxiv.org/abs/2509.26468) · [github](https://github.com/autogluon/fev) — [shchur et al. 2025]
