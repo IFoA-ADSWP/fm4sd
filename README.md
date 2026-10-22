@@ -83,6 +83,7 @@ rm <id>.tar.gz
   - plurel — [arxiv](https://arxiv.org/abs/2602.04029) · [icml](https://proceedings.mlr.press/v306/kothapalli26a.html) — [kothapalli et al. 2026]
   - rdblearn — [arxiv](https://arxiv.org/abs/2602.18495) · [arxiv](https://arxiv.org/abs/2602.13697) · [github](https://github.com/HKUSHXLab/rdblearn) — [zhang et al. 2026]
   - relarena-alpha — [arxiv](https://arxiv.org/abs/2608.16319) · [blog](https://priorlabs.ai/blog-posts/introducing-relarena) · [github](https://github.com/PriorLabs/relarena) — [hayler et al. 2026]
+  - tabpfn-rel — [github](https://github.com/PriorLabs/tabpfn-rel)
   - relicl — [arxiv](https://arxiv.org/abs/2610.01725) · [github](https://github.com/uma-pi1/relicl) — [forbat and gemulla 2026]
   - rdb-pfn — [arxiv](https://arxiv.org/abs/2603.03805) · [github](https://github.com/MuLabPKU/RDBPFN) — [wang et al. 2026]
   - plurel-to-rdb-pfn — [arxiv](https://arxiv.org/abs/2607.29129) — [abolhasani and ganapathy 2026]
