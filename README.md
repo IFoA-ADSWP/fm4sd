@@ -43,6 +43,7 @@ rm <id>.tar.gz
   - limix — [arxiv](https://arxiv.org/abs/2509.03505) · [github](https://github.com/limix-ldm/LimiX) — [zhang et al. 2025]
   - limix-2m — [arxiv](https://arxiv.org/abs/2606.04485) · [icml](https://proceedings.mlr.press/v306/wang26kw.html) · [github](https://github.com/limix-ldm-ai/LimiX) — [wang et al. 2026]
   - limix-v2 — [arxiv](https://arxiv.org/abs/2609.17488) · [github](https://github.com/limix-ldm/LimiX) — [zhang et al. 2026]
+  - limix2-contamination — [github](https://github.com/autogluon/tabarena/issues/648)
   - tabh2o — [arxiv](https://arxiv.org/abs/2605.18383) — [pfeiffer et al. 2026]
   - tabm — [arxiv](https://arxiv.org/abs/2410.24210) · [iclr](https://iclr.cc/virtual/2025/poster/29590) · [github](https://github.com/yandex-research/tabm) — [gorishniy et al. 2025]
   - mitra — [arxiv](https://arxiv.org/abs/2510.21204) · [neurips](https://neurips.cc/virtual/2025/poster/115625) — [zhang et al. 2025]
@@ -267,6 +268,9 @@ not placed yet:
   - tabmosaic — [arxiv](https://arxiv.org/abs/2610.15699) — [kim et al. 2026]
   - survicl — [arxiv](https://arxiv.org/abs/2610.22242) — [alberge et al. 2026]
   - tabregobjectives — [arxiv](https://arxiv.org/abs/2610.13909) · [github](https://github.com/yandex-research/tabular-regression) — [rudenko et al. 2026]
+  - ftfm — [arxiv](https://arxiv.org/abs/2610.25558) · [github](https://github.com/machinelearningnuremberg/ftfm-official) — [grabocka 2026]
+  - apt — [arxiv](https://arxiv.org/abs/2502.04573) — [wu and bergman 2025]
+  - tabiclr — [github](https://github.com/s-marton/TabICLR)
 - relational
   - curriculummatters — [arxiv](https://arxiv.org/abs/2607.29120) — [abolhasani and ganapathy 2026]
   - zerorel — [acm](https://dl.acm.org/doi/10.1145/3770855.3818115) — [tian et al. 2026]
@@ -305,6 +309,9 @@ not placed yet:
   - race — [arxiv](https://arxiv.org/abs/2610.00405) — [shi et al. 2026]
   - kit — [arxiv](https://arxiv.org/abs/2609.34507) · [github](https://github.com/Luciferbobo/KiT) — [zhang and li 2026]
   - timer-m1 — [arxiv](https://arxiv.org/abs/2610.11734) — [zhang et al. 2026]
+  - morpheus-2 — [arxiv](https://arxiv.org/abs/2610.24321) — [aakriti et al. 2026]
+  - timestral — [site](https://timestral.org)
+  - turkforecast — [github](https://github.com/Verm1lion/turkforecast-fm-chronos2-lora-v1)
 - causal
   - tscausalfm — [openreview](https://openreview.net/forum?id=CAaTQAfq7c) — [thumm et al. 2026]
   - causalfewshot — [openreview](https://openreview.net/forum?id=2yvEiFhNCT) — [ossen et al. 2026]
@@ -339,6 +346,8 @@ not placed yet:
   - aira2 — [arxiv](https://arxiv.org/abs/2603.26499) — [hambardzumyan et al. 2026]
   - vibecoding — [arxiv](https://arxiv.org/abs/2603.14133) · [chi](https://doi.org/10.1145/3772318.3791666) — [thorgeirsson et al. 2026]
   - mit-ai-report — [pdf](https://bpb-us-e1.wpmucdn.com/sites.mit.edu/dist/d/2418/files/2026/09/AI-Committee-Final-Report-Aug-13.pdf)
+  - diffusion-curriculum — [arxiv](https://arxiv.org/abs/2609.01449) — [drozdova et al. 2026]
+  - byte-distill — [arxiv](https://arxiv.org/abs/2609.12303) — [marathe et al. 2026]
 - mechanistic interpretability
   - tabular
     - tabfmmechanistic — [arxiv](https://arxiv.org/abs/2605.21288) — [biloš et al. 2026]
@@ -377,3 +386,4 @@ not placed yet:
 - tabularfoundationmodels-guide — [site](https://tabularfoundationmodels.com)
 - awesome-tfms — [github](https://github.com/jxucoder/Awesome-Tabular-Foundation-Models)
 - paperswithcode-tabular — [site](https://paperswithcode.co/tasks/tabular-learning)
+- data-foundry — [site](https://tabarena.github.io/data-foundry/) · [skills](https://github.com/TabArena/data-foundry/tree/main/.claude/skills)
