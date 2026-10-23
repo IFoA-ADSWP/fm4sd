@@ -271,6 +271,7 @@ not placed yet:
   - ftfm — [arxiv](https://arxiv.org/abs/2610.25558) · [github](https://github.com/machinelearningnuremberg/ftfm-official) — [grabocka 2026]
   - apt — [arxiv](https://arxiv.org/abs/2502.04573) — [wu and bergman 2025]
   - tabiclr — [github](https://github.com/s-marton/TabICLR)
+  - ramanbench — [arxiv](https://arxiv.org/abs/2605.02003) · [github](https://github.com/ml-lab-htw/RamanBench) — [koddenbrock et al. 2026]
 - relational
   - curriculummatters — [arxiv](https://arxiv.org/abs/2607.29120) — [abolhasani and ganapathy 2026]
   - zerorel — [acm](https://dl.acm.org/doi/10.1145/3770855.3818115) — [tian et al. 2026]
