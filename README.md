@@ -272,6 +272,17 @@ not placed yet:
   - apt — [arxiv](https://arxiv.org/abs/2502.04573) — [wu and bergman 2025]
   - tabiclr — [github](https://github.com/s-marton/TabICLR)
   - ramanbench — [arxiv](https://arxiv.org/abs/2605.02003) · [github](https://github.com/ml-lab-htw/RamanBench) — [koddenbrock et al. 2026]
+  - depth-help — [arxiv](https://arxiv.org/abs/2610.19814) — [gong et al. 2026]
+  - taffy — [arxiv](https://arxiv.org/abs/2610.07559) — [li et al. 2026]
+  - separability-gap — [arxiv](https://arxiv.org/abs/2610.14989) — [kobialka et al. 2026]
+  - shaping-prior — [arxiv](https://arxiv.org/abs/2605.18971) — [bouadi et al. 2026]
+  - one-model-rule — [arxiv](https://arxiv.org/abs/2505.20003) · [github](https://github.com/qinglong-tian/tabpfn_study) — [zhang et al. 2025]
+  - survival-icl — [arxiv](https://arxiv.org/abs/2603.29475) — [seletkov et al. 2026]
+  - active-feature-acq — [arxiv](https://arxiv.org/abs/2610.07406) — [kobayashi et al. 2026]
+  - strategic-tabular — [arxiv](https://arxiv.org/abs/2605.19662) — [lv et al. 2026]
+  - tfm-evo-surrogate — [arxiv](https://arxiv.org/abs/2609.18130) — [han et al. 2026]
+  - crash-kumo — [arxiv](https://arxiv.org/abs/2610.10321) · [github](https://github.com/pozapas/kumo-jev-crash-records) — [rafe and das 2026]
+  - powergrid-tfm — [arxiv](https://arxiv.org/abs/2610.20462) — [arowolo et al. 2026]
 - relational
   - curriculummatters — [arxiv](https://arxiv.org/abs/2607.29120) — [abolhasani and ganapathy 2026]
   - zerorel — [acm](https://dl.acm.org/doi/10.1145/3770855.3818115) — [tian et al. 2026]
@@ -292,6 +303,7 @@ not placed yet:
   - syntherela — [arxiv](https://arxiv.org/abs/2410.03411) · [iclr](https://iclr.cc/virtual/2025/32181) · [github](https://github.com/martinjurkovic/syntherela) — [hudovernik et al. 2025]
   - schemapile — [doi](https://doi.org/10.1145/3654975) · [pdf](https://ir.cwi.nl/pub/34763/34763.pdf) — [döhmen et al. 2024]
   - wikidbs — [neurips](https://proceedings.neurips.cc/paper_files/paper/2024/file/4847447cae911dde321ca19afe7d8707-Paper-Datasets_and_Benchmarks_Track.pdf) — [vogel et al. 2024]
+  - path-to-pfrm — [arxiv](https://arxiv.org/abs/2610.23073) — [abolhasani and ganapathy 2026]
 - time series
   - baguan-ts — [openreview](https://openreview.net/forum?id=xO10rIopwe) · [icml](https://proceedings.mlr.press/v306/yang26ac.html) — [yang et al. 2026]
   - simpletimebench — [arxiv](https://arxiv.org/abs/2610.02058) · [openreview](https://openreview.net/forum?id=iIRdd86Xkr) — [ghoroghchian et al. 2026]
@@ -313,6 +325,7 @@ not placed yet:
   - morpheus-2 — [arxiv](https://arxiv.org/abs/2610.24321) — [aakriti et al. 2026]
   - timestral — [site](https://timestral.org)
   - turkforecast — [github](https://github.com/Verm1lion/turkforecast-fm-chronos2-lora-v1)
+  - tsfm-identification — [arxiv](https://arxiv.org/abs/2610.08118) — [won 2026]
 - causal
   - tscausalfm — [openreview](https://openreview.net/forum?id=CAaTQAfq7c) — [thumm et al. 2026]
   - causalfewshot — [openreview](https://openreview.net/forum?id=2yvEiFhNCT) — [ossen et al. 2026]
@@ -339,6 +352,7 @@ not placed yet:
   - cider-fm — [arxiv](https://arxiv.org/abs/2609.39523) — [gao et al. 2026]
   - tiger — [arxiv](https://arxiv.org/abs/2610.06156) — [faouzi 2026]
   - proximalfm — [arxiv](https://arxiv.org/abs/2610.08078) — [muller et al. 2026]
+  - market-impact-cfm — [arxiv](https://arxiv.org/abs/2610.12537) — [thumm and chen 2026]
 - other
   - cdc-prompt — [pdf](https://cdn.openai.com/pdf/04d1d1e4-bc75-476a-97cf-49055cd98d31/cdc_prompt.pdf)
   - grpo — [arxiv](https://arxiv.org/abs/2402.03300) · [github](https://github.com/deepseek-ai/DeepSeek-Math) — [shao et al. 2024]
@@ -349,6 +363,7 @@ not placed yet:
   - mit-ai-report — [pdf](https://bpb-us-e1.wpmucdn.com/sites.mit.edu/dist/d/2418/files/2026/09/AI-Committee-Final-Report-Aug-13.pdf)
   - diffusion-curriculum — [arxiv](https://arxiv.org/abs/2609.01449) — [drozdova et al. 2026]
   - byte-distill — [arxiv](https://arxiv.org/abs/2609.12303) — [marathe et al. 2026]
+  - pde-pfn — [arxiv](https://arxiv.org/abs/2610.13334) — [park et al. 2026]
 - mechanistic interpretability
   - tabular
     - tabfmmechanistic — [arxiv](https://arxiv.org/abs/2605.21288) — [biloš et al. 2026]
