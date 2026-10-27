@@ -402,6 +402,7 @@ not placed yet:
 - fsml2026 — [site](https://fsml-ims-workshop.org)
 - tfm-survey — [site](https://tfm-survey.com)
 - tabularfoundationmodels-guide — [site](https://tabularfoundationmodels.com)
+- tfms-under-the-hood — [blog](https://www.dennisloevlie.com/blog/tabular-foundation-models-under-the-hood/) — [loevlie 2026]
 - awesome-tfms — [github](https://github.com/jxucoder/Awesome-Tabular-Foundation-Models)
 - paperswithcode-tabular — [site](https://paperswithcode.co/tasks/tabular-learning)
 - data-foundry — [site](https://tabarena.github.io/data-foundry/) · [skills](https://github.com/TabArena/data-foundry/tree/main/.claude/skills)
