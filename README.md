@@ -284,6 +284,7 @@ not placed yet:
   - tfm-evo-surrogate — [arxiv](https://arxiv.org/abs/2609.18130) — [han et al. 2026]
   - crash-kumo — [arxiv](https://arxiv.org/abs/2610.10321) · [github](https://github.com/pozapas/kumo-jev-crash-records) — [rafe and das 2026]
   - powergrid-tfm — [arxiv](https://arxiv.org/abs/2610.20462) — [arowolo et al. 2026]
+  - tabular-data-scaling — [arxiv](https://arxiv.org/abs/2610.26794) · [github](https://github.com/yandex-research/tabular-dl-more-data) — [rubachev et al. 2026]
 - relational
   - curriculummatters — [arxiv](https://arxiv.org/abs/2607.29120) — [abolhasani and ganapathy 2026]
   - zerorel — [acm](https://dl.acm.org/doi/10.1145/3770855.3818115) — [tian et al. 2026]
