@@ -261,6 +261,7 @@ not placed yet:
   - pfn-anomaly — [arxiv](https://arxiv.org/abs/2610.06693) — [bershtman and cohen 2026]
   - geneicl — [arxiv](https://arxiv.org/abs/2610.08694) — [bohl et al. 2026]
   - test-time-compute — [arxiv](https://arxiv.org/abs/2610.12005) · [github](https://github.com/kanghui-learning/test-time-compute-for-tabular-foundation-models) — [ning et al. 2026]
+  - tabrelibench — [arxiv](https://arxiv.org/abs/2610.13654) — [zhao et al. 2026]
   - retrospective-inference — [arxiv](https://arxiv.org/abs/2610.10317) — [cai et al. 2026]
   - privtab — [arxiv](https://arxiv.org/abs/2610.10068) — [alrawajfeh et al. 2026]
   - recurrent-icl — [arxiv](https://arxiv.org/abs/2610.14998) — [vaidhya et al. 2026]
