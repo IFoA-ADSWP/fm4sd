@@ -180,7 +180,7 @@ not placed yet:
   - shapinggeometry — [openreview](https://openreview.net/forum?id=IYnHchzvYB) · [poster](https://www.humzahmerchant.com/posters/fmsd%202026%20poster.PNG) — [merchant et al. 2026]
   - tabgenfm — [arxiv](https://arxiv.org/abs/2605.09424) · [openreview](https://openreview.net/forum?id=RcsaxrdpfE) — [jiang et al. 2026]
   - tabattnbench — [arxiv](https://arxiv.org/abs/2609.31306) · [openreview](https://openreview.net/forum?id=rwtcugrpDq) — [schambach et al. 2026]
-  - tabshallow — [openreview](https://openreview.net/forum?id=kCnZUf1VYC) — [cannistraci and vogt 2026]
+  - tabshallow — [arxiv](https://arxiv.org/abs/2610.13253) · [openreview](https://openreview.net/forum?id=kCnZUf1VYC) — [cannistraci and vogt 2026]
   - tabbarrier — [arxiv](https://arxiv.org/abs/2606.29091) · [openreview](https://openreview.net/forum?id=TUYc2XUdwz) — [klein and hoffart 2026]
   - tjepa — [arxiv](https://arxiv.org/abs/2410.05016) · [iclr](https://iclr.cc/virtual/2025/poster/28793) — [thimonier et al. 2025]
   - tablora — [arxiv](https://arxiv.org/abs/2607.10077) — [luo and xu 2026]
