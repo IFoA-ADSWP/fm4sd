@@ -32,7 +32,7 @@ NAMESPACES = {
     "arxiv": "http://arxiv.org/schemas/atom",
     "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
 }
-USER_AGENT = "fm4sd-corpus/1.0 (research; https://github.com/scotthawes/fm4sd)"
+USER_AGENT = "fm4sd-corpus/1.0 (research; https://github.com/IFoA-ADSWP/fm4sd)"
 
 
 def fetch_batch(ids: list[str], retries: int = 3) -> dict[str, dict]:

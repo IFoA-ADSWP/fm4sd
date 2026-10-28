@@ -1,6 +1,6 @@
 # Issue Tracker — GitHub
 
-Repo: `scotthawes/fm4sd`
+Repo: `IFoA-ADSWP/fm4sd`
 Configured by `/setup-matt-pocock-skills`.
 
 ## Vocabulary (triage labels)
@@ -24,32 +24,32 @@ out of scope for triage discovery. An explicitly named PR is always triaged rega
 ## Operations
 
 gh exposes these as first-class commands:
-- View issue: `gh issue view N -R scotthawes/fm4sd --json number,title,body,comments,labels,state`
-- Create issue: `gh issue create -R scotthawes/fm4sd --title ... --body ... --label ...`
-- Comment: `gh issue comment N -R scotthawes/fm4sd --body ...`
-- Close: `gh issue close N -R scotthawes/fm4sd` / reopen: `gh issue reopen N -R scotthawes/fm4sd`
-- List by label: `gh issue list -R scotthawes/fm4sd --label <label> ...`
+- View issue: `gh issue view N -R IFoA-ADSWP/fm4sd --json number,title,body,comments,labels,state`
+- Create issue: `gh issue create -R IFoA-ADSWP/fm4sd --title ... --body ... --label ...`
+- Comment: `gh issue comment N -R IFoA-ADSWP/fm4sd --body ...`
+- Close: `gh issue close N -R IFoA-ADSWP/fm4sd` / reopen: `gh issue reopen N -R IFoA-ADSWP/fm4sd`
+- List by label: `gh issue list -R IFoA-ADSWP/fm4sd --label <label> ...`
 
 Sub-issues and blocking relationships have **no** `gh` subcommand (`gh` 2.101); use `gh api`:
 - List sub-issues of #N:
-  `gh api repos/scotthawes/fm4sd/issues/N/sub_issues`
-- Resolve the database id of any issue: `gh issue view N -R scotthawes/fm4sd --json id -q .id` (a large
+  `gh api repos/IFoA-ADSWP/fm4sd/issues/N/sub_issues`
+- Resolve the database id of any issue: `gh issue view N -R IFoA-ADSWP/fm4sd --json id -q .id` (a large
   number, NOT the issue #N). All write calls below take this database id.
 - Add a sub-issue:
-  `gh api repos/scotthawes/fm4sd/issues/N/sub_issues -X POST -F sub_issue_id=<child-db-id>`
-- List what blocks #N: `gh api repos/scotthawes/fm4sd/issues/N/dependencies/blocked_by`
-- List what #N blocks: `gh api repos/scotthawes/fm4sd/issues/N/dependencies/blocking`
+  `gh api repos/IFoA-ADSWP/fm4sd/issues/N/sub_issues -X POST -F sub_issue_id=<child-db-id>`
+- List what blocks #N: `gh api repos/IFoA-ADSWP/fm4sd/issues/N/dependencies/blocked_by`
+- List what #N blocks: `gh api repos/IFoA-ADSWP/fm4sd/issues/N/dependencies/blocking`
 - Add a blocker:
-  `gh api repos/scotthawes/fm4sd/issues/N/dependencies/blocked_by -X POST -F issue_id=<blocker-db-id>`
+  `gh api repos/IFoA-ADSWP/fm4sd/issues/N/dependencies/blocked_by -X POST -F issue_id=<blocker-db-id>`
 - Remove a blocker:
-  `gh api repos/scotthawes/fm4sd/issues/N/dependencies/blocked_by/<blocker-db-id> -X DELETE`
+  `gh api repos/IFoA-ADSWP/fm4sd/issues/N/dependencies/blocked_by/<blocker-db-id> -X DELETE`
 
 If a call returns a 404, the endpoints may have moved; inspect with
-`gh api repos/scotthawes/fm4sd/issues/N --include` and retry against the path the response
+`gh api repos/IFoA-ADSWP/fm4sd/issues/N --include` and retry against the path the response
 nominates. Sub-issue/blocking ids are the child issue's numeric id, not its `#`-number's URL
 form.
 
-Issue reference resolution: bare `#N` resolves against `scotthawes/fm4sd` by default.
+Issue reference resolution: bare `#N` resolves against `IFoA-ADSWP/fm4sd` by default.
 
 ## Wayfinding operations
 

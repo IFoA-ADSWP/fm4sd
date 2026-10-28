@@ -47,7 +47,7 @@ REFERENCES = REPO / "references"
 MANIFEST = REFERENCES / "manifest.json"
 
 INDEX_URL = "https://raw.githubusercontent.com/borawhocodess/fm4sd/main/README.md"
-USER_AGENT = "fm4sd-corpus/1.0 (research; https://github.com/scotthawes/fm4sd)"
+USER_AGENT = "fm4sd-corpus/1.0 (research; https://github.com/IFoA-ADSWP/fm4sd)"
 
 # Politeness: arXiv asks that automated clients stay light. 3 req/s across a
 # small pool is far below anything that would look like abuse.

@@ -23,7 +23,7 @@ clone. This fork resolves those links against arXiv and builds a local, greppabl
 | **7** | papers digested closely, plus 5 corpus sweeps |
 
 ```bash
-git clone https://github.com/scotthawes/fm4sd && cd fm4sd
+git clone https://github.com/IFoA-ADSWP/fm4sd && cd fm4sd
 python3 scripts/fm4sd_fetch.py --index && python3 scripts/fm4sd_fetch.py --fetch   # ~30 MB
 pip install pymupdf    # only needed for the PDF fallback path
 
