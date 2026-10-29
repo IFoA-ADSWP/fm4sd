@@ -40,6 +40,7 @@ import urllib.error
 import urllib.request
 from dataclasses import dataclass, field, asdict
 from pathlib import Path
+from typing import Any
 
 REPO = Path(__file__).resolve().parent.parent
 PAPERS = REPO / "papers"
@@ -63,12 +64,21 @@ ARXIV_RE = re.compile(r"https?://arxiv\.org/(?:abs|pdf)/(?P<id>\d{4}\.\d{4,5})")
 ARXIV_PDF_RE = re.compile(r"https?://arxiv\.org/pdf/(?P<id>\d{4}\.\d{4,5})")
 ARXIV_ABS_RE = re.compile(r"https?://arxiv\.org/abs/(?P<id>\d{4}\.\d{4,5})")
 LINK_RE = re.compile(r"\[(?P<text>[^\]]+)\]\((?P<url>[^)]+)\)")
-CITATION_RE = re.compile(r"\\\[(?P<cite>[^\]]+)\\\]")
+# Optional backslashes: this README and upstream's both write `— [nie et al. 2023]`
+# unescaped, so requiring `\[` matched nothing and citation was empty on every entry
+# ever committed. parse_index() strips links out before applying this, which is what
+# keeps `[arxiv]` and `[video]` from being read as the citation.
+CITATION_RE = re.compile(r"\\?\[(?P<cite>[^\[\]]+?)\\?\]")
 
 # Section headings in the README: "## papers", "## queue", "## extras", plus
 # category headers like "  - tabular" and "    - forecasting".
 CATEGORY_RE = re.compile(r"^(?P<indent>\s*)-\s+(?P<name>[^\n]+?)\s*$")
 H2_RE = re.compile(r"^##\s+(?P<name>.+?)\s*$")
+# An INDENTED `##` is a sub-heading inside a bullet group, not a new section: the
+# actuarial block uses these for its severity / frequency / tail split. H2_RE is
+# anchored at the start of the line and CATEGORY_RE needs a "- " bullet, so without
+# this neither matches and all 28 entries lose their subcategory.
+SUB_H2_RE = re.compile(r"^(?P<indent>\s+)##\s+(?P<name>.+?)\s*$")
 
 # The "extras" section is a list of workshops, surveys and site links -- not
 # papers. Fetching those as if they were papers would just produce noise.
@@ -96,6 +106,13 @@ class Paper:
     sha256: str = ""          # of the downloaded bundle
     fetch_status: str = ""    # "ok" | "no-source" | "error: ..."
 
+    # Keys other tools wrote into the manifest that this script does not derive but
+    # must not destroy when the manifest is rebuilt -- the licence fields from
+    # fm4sd_licences.py. Flattened back into the JSON by to_json(), never serialised
+    # as an "extra" object, so a manifest built here and a manifest built before the
+    # split read the same way.
+    extra: dict[str, Any] = field(default_factory=dict)
+
     @property
     def has_code(self) -> bool:
         return any(k in self.links for k in ("github", "code"))
@@ -106,6 +123,7 @@ class Paper:
 
     def to_json(self) -> dict:
         d = asdict(self)
+        d.update(d.pop("extra", {}))
         d["has_code"] = self.has_code
         return d
 
@@ -179,6 +197,16 @@ def parse_index(markdown: str) -> list[Paper]:
         if not section:
             continue
 
+        sub = SUB_H2_RE.match(line)
+        if sub:
+            indent = len(sub.group("indent"))
+            cats = [(i, n) for i, n in cats if i < indent]
+            # Truncate at the first colon: "severity: loss distributions and heavy
+            # tails" is worth reading in the README but too long to filter on, and
+            # the head of it ("severity") is the part a query names.
+            cats.append((indent, sub.group("name").split(":", 1)[0].strip()))
+            continue
+
         # Category header: a bullet with no trailing content and no links.
         cat = CATEGORY_RE.match(line)
         if cat and "[" not in line:
@@ -193,7 +221,7 @@ def parse_index(markdown: str) -> list[Paper]:
 
         rest = entry.group("rest")
         links = {m.group("text").strip().lower(): m.group("url") for m in LINK_RE.finditer(rest)}
-        cite = CITATION_RE.search(rest)
+        cite = CITATION_RE.search(LINK_RE.sub("", rest))
 
         arxiv = ""
         for pattern in (ARXIV_RE, ARXIV_PDF_RE, ARXIV_ABS_RE):
@@ -421,23 +449,111 @@ def reconcile(papers: list[Paper]) -> int:
     return recovered
 
 
-def cmd_index(remote: bool = False) -> None:
+def load_prior() -> dict[str, dict]:
+    """The manifest as it stands now, keyed by slug. Missing or malformed -> {}.
+
+    This is the only place `--index` learns about fields it does not derive itself.
+    """
+    if not MANIFEST.exists():
+        return {}
+    try:
+        return {e["slug"]: e for e in load_manifest()}
+    except SystemExit:
+        return {}
+    except (json.JSONDecodeError, KeyError, TypeError):
+        return {}
+
+
+def carry_forward(papers: list[Paper], prior: dict[str, dict]) -> int:
+    """Keep metadata other tools wrote into the manifest across a rebuild.
+
+    `cmd_index()` re-derives everything from the README, so any key that is not a
+    `Paper` field -- the licence, published-date and title records written by
+    fm4sd_licences.py -- was being deleted by the next `--index`. The README tells
+    you to run `--index` first, so that was the documented path to losing them:
+    253 licence records went to 0 on a fresh clone.
+
+    Carried only when the arXiv id is unchanged. Licence, title and published date
+    all hang off that id, so a corrected link must not inherit them from the old
+    one -- the entry just loses its carried metadata and gets re-resolved.
+    """
+    kept = 0
+    fields = set(Paper.__annotations__)
+    for p in papers:
+        old = prior.get(p.slug)
+        if not old or old.get("arxiv_id") != p.arxiv_id:
+            continue
+        carried = {k: v for k, v in old.items() if k not in fields and k != "has_code"}
+        if carried:
+            p.extra = carried
+            kept += 1
+    return kept
+
+
+def compare_remote() -> None:
+    """Parse upstream's index and diff it against ours. Writes nothing.
+
+    `--remote` used to be `cmd_index(remote=True)` in disguise: it wrote MANIFEST
+    from upstream's README, which swapped our 303 entries for upstream's 355 and
+    took the 28 actuarial papers with them. Reading one side of a fork must not be
+    able to overwrite the record on the other side.
+    """
     limiter = RateLimiter()
+    md = http_get(INDEX_URL, limiter).decode("utf-8", "replace")
+    up = dedupe(parse_index(md))
+
+    local: list[Paper] = []
+    local_path = REPO / "README.md"
+    if local_path.exists():
+        local = dedupe(parse_index(local_path.read_text(encoding="utf-8", errors="replace")))
+    elif MANIFEST.exists():
+        local = [Paper(**{k: v for k, v in e.items() if k in Paper.__annotations__})
+                 for e in load_prior().values()]
+
+    us = {p.slug for p in up}
+    ls = {p.slug for p in local}
+
+    def with_arxiv(ps: list[Paper]) -> int:
+        return sum(1 for p in ps if p.arxiv_id)
+
+    print(f"upstream  {len(up)} entries ({with_arxiv(up)} with an arXiv id)   {INDEX_URL}")
+    print(f"local     {len(local)} entries ({with_arxiv(local)} with an arXiv id)")
+    if local:
+        print(f"  {len(us - ls):4d} upstream only — not in this index yet")
+        print(f"  {len(ls - us):4d} local only    — ours, e.g. candidates for a PR back")
+        print(f"  {len(us & ls):4d} in both")
+        for label, slugs in (("upstream only", sorted(us - ls)), ("local only", sorted(ls - us))):
+            if not slugs:
+                continue
+            shown = ", ".join(slugs[:20])
+            more = f", … +{len(slugs) - 20} more" if len(slugs) > 20 else ""
+            print(f"\n{label}:\n  {shown}{more}")
+    print("\nnothing written — this flag only reads upstream")
+
+
+def cmd_index(remote: bool = False) -> None:
     # Default to the LOCAL README. This repo is a fork we took over, so local edits -- a new
     # category, a corrected link -- must be what gets parsed. Fetching the upstream URL
     # silently ignored every local addition, which is how 28 freshly added entries parsed
-    # to zero until this branch caught it. `--remote` reads upstream instead, for checking
-    # what the original index says.
+    # to zero until this branch caught it. `--remote` reads upstream instead, but only to
+    # compare: see compare_remote().
     if remote:
-        source = INDEX_URL
-        md = http_get(INDEX_URL, limiter).decode("utf-8", "replace")
-    else:
-        local = REPO / "README.md"
-        if not local.exists():
-            sys.exit("no local README.md; use --remote to read the upstream index")
-        source = "LOCAL README.md"
-        md = local.read_text(encoding="utf-8", errors="replace")
+        compare_remote()
+        return
+
+    local = REPO / "README.md"
+    if not local.exists():
+        sys.exit("no local README.md; use --remote to compare against upstream")
+    source = "LOCAL README.md"
+    md = local.read_text(encoding="utf-8", errors="replace")
     papers = dedupe(parse_index(md))
+    # No arXiv id means no payload: stamp it now, while the reason is in hand, rather
+    # than leaving cmd_status() to call these "(pending)" forever. reconcile() below
+    # still overrides it to "ok" if a payload turns up on disk anyway.
+    for p in papers:
+        if not p.arxiv_id:
+            p.fetch_status = "skipped:no-arxiv-id"
+    carried = carry_forward(papers, load_prior())
     recovered = reconcile(papers)
 
     REFERENCES.mkdir(parents=True, exist_ok=True)
@@ -445,14 +561,16 @@ def cmd_index(remote: bool = False) -> None:
 
     with_arxiv = sum(1 for p in papers if p.arxiv_id)
     with_code = sum(1 for p in papers if p.has_code)
-    local = sum(1 for p in papers if p.fetch_status == "ok")
+    fetched = sum(1 for p in papers if p.fetch_status == "ok")
     print(f"parsed {len(papers)} entries -> {MANIFEST.relative_to(REPO)}")
     print(f"  {with_arxiv} have an arXiv id ({with_arxiv / len(papers):.0%})")
     print(f"  {with_code} link released code")
     if recovered:
         print(f"  {recovered} already fetched locally (metadata recovered from disk)")
     else:
-        print(f"  {local} fetched locally")
+        print(f"  {fetched} fetched locally")
+    if carried:
+        print(f"  {carried} carried forward metadata other tools wrote (licence, published, …)")
     for section in sorted({p.section for p in papers}):
         n = sum(1 for p in papers if p.section == section)
         print(f"  section {section or '(none)'}: {n}")
@@ -513,7 +631,7 @@ def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--index", action="store_true", help="parse the README into a manifest")
     ap.add_argument("--remote", action="store_true",
-                    help="--index: read the upstream index URL instead of the local README")
+                    help="--index: diff the upstream index against ours; writes nothing")
     ap.add_argument("--fetch", action="store_true", help="fetch + extract text")
     ap.add_argument("--status", action="store_true", help="show what is fetched")
     ap.add_argument("--only", nargs="*", default=None, help="restrict to these slugs/ids")

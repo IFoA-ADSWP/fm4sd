@@ -16,15 +16,19 @@ clone. This fork resolves those links against arXiv and builds a local, greppabl
 
 | | |
 |---|---|
-| **275** | entries in the index |
-| **225** | resolvable to arXiv, fetched locally (**221** LaTeX source, **4** PDF fallback) |
-| **30.5 MB** | of extracted plain text |
+| **303** | entries in the index |
+| **253** | resolvable to arXiv, fetched locally (**247** LaTeX source, **6** PDF fallback) |
+| **33.3 MB** | of extracted plain text |
 | **117** | link released code |
-| **7** | papers digested closely, plus 5 corpus sweeps |
+| **12** | digest documents (~35 papers read closely), plus 9 corpus sweeps |
+
+Counts above are `python3 scripts/fm4sd_search.py stats` and
+[`references/summaries/README.md`](references/summaries/README.md); `PROVENANCE.md` carries
+the same figures with their derivation.
 
 ```bash
 git clone https://github.com/IFoA-ADSWP/fm4sd && cd fm4sd
-python3 scripts/fm4sd_fetch.py --index && python3 scripts/fm4sd_fetch.py --fetch   # ~30 MB
+python3 scripts/fm4sd_fetch.py --index && python3 scripts/fm4sd_fetch.py --fetch   # ~33 MB
 pip install pymupdf    # only needed for the PDF fallback path
 
 python3 scripts/fm4sd_search.py stats

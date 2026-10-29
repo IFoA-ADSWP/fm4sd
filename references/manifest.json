@@ -11,7 +11,7 @@
     "section": "papers",
     "category": "general",
     "subcategory": "",
-    "citation": "",
+    "citation": "m\u00fcller et al. 2022",
     "links": {
       "arxiv": "https://arxiv.org/abs/2112.10510",
       "video": "https://www.youtube.com/watch?v=0Pi9ARZjIGg",
@@ -38,7 +38,7 @@
     "section": "papers",
     "category": "general",
     "subcategory": "",
-    "citation": "",
+    "citation": "m\u00fcller et al. 2025",
     "links": {
       "arxiv": "https://arxiv.org/abs/2505.23947",
       "icml": "https://proceedings.mlr.press/v267/muller25d.html"
@@ -63,7 +63,7 @@
     "section": "papers",
     "category": "general",
     "subcategory": "",
-    "citation": "",
+    "citation": "nagler 2023",
     "links": {
       "arxiv": "https://arxiv.org/abs/2305.11097",
       "icml": "https://proceedings.mlr.press/v202/nagler23a",
@@ -89,7 +89,7 @@
     "section": "papers",
     "category": "general",
     "subcategory": "",
-    "citation": "",
+    "citation": "krapivsky and redner 2001",
     "links": {
       "arxiv": "https://arxiv.org/abs/cond-mat/0011094",
       "doi": "https://doi.org/10.1103/PhysRevE.63.066123"
@@ -100,7 +100,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -109,7 +109,7 @@
     "section": "papers",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "hollmann et al. 2023",
     "links": {
       "arxiv": "https://arxiv.org/abs/2207.01848",
       "video": "https://www.youtube.com/watch?v=9cE8lqQiLyM",
@@ -136,7 +136,7 @@
     "section": "papers",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "hollmann et al. 2025",
     "links": {
       "nature": "https://www.nature.com/articles/s41586-024-08328-6",
       "pmc": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11711098/",
@@ -148,7 +148,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -157,7 +157,7 @@
     "section": "papers",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "grinsztajn et al. 2025",
     "links": {
       "arxiv": "https://arxiv.org/abs/2511.08667",
       "video": "https://www.youtube.com/watch?v=IpqBLWueeog"
@@ -182,7 +182,7 @@
     "section": "papers",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "grinsztajn et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2605.13986"
     },
@@ -206,7 +206,7 @@
     "section": "papers",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "j\u00e4ger et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2609.17895"
     },
@@ -230,7 +230,7 @@
     "section": "papers",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "garg et al. 2025",
     "links": {
       "arxiv": "https://arxiv.org/abs/2507.03971"
     },
@@ -254,7 +254,7 @@
     "section": "papers",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "helli et al. 2024",
     "links": {
       "arxiv": "https://arxiv.org/abs/2411.10634",
       "neurips": "https://proceedings.neurips.cc/paper_files/paper/2024/hash/b2e2774c8e76afe191b5bf518f5cb727-Abstract-Conference.html",
@@ -280,7 +280,7 @@
     "section": "papers",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "pfefferle et al. 2025",
     "links": {
       "arxiv": "https://arxiv.org/abs/2511.03634",
       "github": "https://github.com/automl/nanoTabPFN"
@@ -305,7 +305,7 @@
     "section": "papers",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "\u00f6zt\u00fcrk et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2606.03681",
       "github": "https://github.com/borawhocodess/modded-nanotabpfn",
@@ -331,7 +331,7 @@
     "section": "papers",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "ye et al. 2025",
     "links": {
       "arxiv": "https://arxiv.org/abs/2502.17361",
       "neurips": "https://neurips.cc/virtual/2025/poster/116283"
@@ -356,7 +356,7 @@
     "section": "papers",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "rubachev et al. 2025",
     "links": {
       "arxiv": "https://arxiv.org/abs/2506.08982",
       "github": "https://github.com/yandex-research/tabpfn-finetuning"
@@ -381,7 +381,7 @@
     "section": "papers",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "qu et al. 2025",
     "links": {
       "arxiv": "https://arxiv.org/abs/2502.05564",
       "icml": "https://proceedings.mlr.press/v267/qu25d.html",
@@ -407,7 +407,7 @@
     "section": "papers",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "qu et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2602.11139",
       "video": "https://youtu.be/MvEkj7TOmj8",
@@ -434,7 +434,7 @@
     "section": "papers",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "kong et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2609.37959",
       "blog": "https://research.google/blog/introducing-tabfm-a-zero-shot-foundation-model-for-tabular-data/"
@@ -459,7 +459,7 @@
     "section": "papers",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "fu et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2609.37989"
     },
@@ -483,7 +483,7 @@
     "section": "papers",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "ma et al. 2025",
     "links": {
       "arxiv": "https://arxiv.org/abs/2410.18164",
       "neurips": "https://neurips.cc/virtual/2025/poster/115970",
@@ -509,7 +509,7 @@
     "section": "papers",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "hosseinzadeh et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2608.01400",
       "github": "https://github.com/layer6ai-labs/TabDPT-inference"
@@ -534,7 +534,7 @@
     "section": "papers",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "zhang et al. 2025",
     "links": {
       "arxiv": "https://arxiv.org/abs/2509.03505",
       "github": "https://github.com/limix-ldm/LimiX"
@@ -559,7 +559,7 @@
     "section": "papers",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "wang et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2606.04485",
       "icml": "https://proceedings.mlr.press/v306/wang26kw.html",
@@ -585,7 +585,7 @@
     "section": "papers",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "zhang et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2609.17488",
       "github": "https://github.com/limix-ldm/LimiX"
@@ -610,7 +610,7 @@
     "section": "papers",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "pfeiffer et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2605.18383"
     },
@@ -634,7 +634,7 @@
     "section": "papers",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "gorishniy et al. 2025",
     "links": {
       "arxiv": "https://arxiv.org/abs/2410.24210",
       "iclr": "https://iclr.cc/virtual/2025/poster/29590",
@@ -660,7 +660,7 @@
     "section": "papers",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "zhang et al. 2025",
     "links": {
       "arxiv": "https://arxiv.org/abs/2510.21204",
       "neurips": "https://neurips.cc/virtual/2025/poster/115625"
@@ -685,7 +685,7 @@
     "section": "papers",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "tao et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2609.04540"
     },
@@ -709,7 +709,7 @@
     "section": "papers",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "zeng et al. 2025",
     "links": {
       "arxiv": "https://arxiv.org/abs/2506.05584",
       "icml": "https://proceedings.mlr.press/v267/zeng25b.html",
@@ -735,7 +735,7 @@
     "section": "papers",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "arazi et al. 2025",
     "links": {
       "arxiv": "https://arxiv.org/abs/2505.18125",
       "neurips": "https://neurips.cc/virtual/2025/poster/119007",
@@ -761,7 +761,7 @@
     "section": "papers",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "gorishniy et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2607.05380",
       "icml": "https://proceedings.mlr.press/v306/gorishniy26a.html",
@@ -787,7 +787,7 @@
     "section": "papers",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "nguyen et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2605.06047"
     },
@@ -811,7 +811,7 @@
     "section": "papers",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "holzm\u00fcller et al. 2024",
     "links": {
       "arxiv": "https://arxiv.org/abs/2407.04491",
       "video": "https://www.youtube.com/watch?v=UCHJzbs27z4",
@@ -838,7 +838,7 @@
     "section": "papers",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "herre et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2605.28418"
     },
@@ -862,7 +862,7 @@
     "section": "papers",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "liu et al. 2024",
     "links": {
       "arxiv": "https://arxiv.org/abs/2407.04057",
       "github": "https://github.com/qile2000/LAMDA-TALENT"
@@ -887,7 +887,7 @@
     "section": "papers",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "erickson et al. 2025",
     "links": {
       "arxiv": "https://arxiv.org/abs/2506.16791",
       "video": "https://youtu.be/mcPRMcJHW2Y",
@@ -913,7 +913,7 @@
     "section": "papers",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "purucker et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2606.30410"
     },
@@ -937,7 +937,7 @@
     "section": "papers",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "eo et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2608.25774",
       "github": "https://github.com/LGAI-Research/EXAONE-Tabular"
@@ -962,7 +962,7 @@
     "section": "papers",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "team et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2609.03880",
       "github": "https://github.com/xiaomi-research/xiaomi-tabldm"
@@ -987,7 +987,7 @@
     "section": "papers",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "cho et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2609.22866",
       "github": "https://github.com/nums-ai/causilo"
@@ -1022,7 +1022,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": true
   },
   {
@@ -1031,7 +1031,7 @@
     "section": "papers",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "cong et al. 2025",
     "links": {
       "pdf": "https://ir.cwi.nl/pub/36086/36086.pdf"
     },
@@ -1041,7 +1041,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -1061,7 +1061,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": true
   },
   {
@@ -1070,7 +1070,7 @@
     "section": "papers",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "k\u00fcken et al. 2025",
     "links": {
       "arxiv": "https://arxiv.org/abs/2506.21387"
     },
@@ -1094,7 +1094,7 @@
     "section": "papers",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "thomas et al. 2024",
     "links": {
       "arxiv": "https://arxiv.org/abs/2406.05207",
       "neurips": "https://proceedings.neurips.cc/paper_files/paper/2024/file/c40daf14d7a6469e65116507c21faeb7-Paper-Conference.pdf"
@@ -1119,7 +1119,7 @@
     "section": "papers",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "van breugel and van der schaar 2024",
     "links": {
       "arxiv": "https://arxiv.org/abs/2405.01147",
       "icml": "https://proceedings.mlr.press/v235/van-breugel24a.html"
@@ -1144,7 +1144,7 @@
     "section": "papers",
     "category": "relational",
     "subcategory": "",
-    "citation": "",
+    "citation": "akhter et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2607.03659",
       "github": "https://github.com/mdsamad001/Benchmarking-Deep-Relational-Database-Models"
@@ -1169,7 +1169,7 @@
     "section": "papers",
     "category": "relational",
     "subcategory": "",
-    "citation": "",
+    "citation": "dwivedi et al. 2025",
     "links": {
       "arxiv": "https://arxiv.org/abs/2506.16654",
       "kdd": "https://doi.org/10.1145/3711896.3736558"
@@ -1194,7 +1194,7 @@
     "section": "papers",
     "category": "relational",
     "subcategory": "",
-    "citation": "",
+    "citation": "ranjan et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2510.06377",
       "iclr": "https://iclr.cc/virtual/2026/poster/10007116",
@@ -1220,7 +1220,7 @@
     "section": "papers",
     "category": "relational",
     "subcategory": "",
-    "citation": "",
+    "citation": "fey et al. 2025",
     "links": {
       "pdf": "https://kumo.ai/research/kumo_relational_foundation_model.pdf"
     },
@@ -1230,7 +1230,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -1239,7 +1239,7 @@
     "section": "papers",
     "category": "relational",
     "subcategory": "",
-    "citation": "",
+    "citation": "hudovernik et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2604.12596",
       "github": "https://github.com/kumo-ai/kumo-rfm"
@@ -1264,7 +1264,7 @@
     "section": "papers",
     "category": "relational",
     "subcategory": "",
-    "citation": "",
+    "citation": "chen et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2606.04320"
     },
@@ -1288,7 +1288,7 @@
     "section": "papers",
     "category": "relational",
     "subcategory": "",
-    "citation": "",
+    "citation": "kothapalli et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2602.04029",
       "icml": "https://proceedings.mlr.press/v306/kothapalli26a.html"
@@ -1313,7 +1313,7 @@
     "section": "papers",
     "category": "relational",
     "subcategory": "",
-    "citation": "",
+    "citation": "zhang et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2602.13697",
       "github": "https://github.com/HKUSHXLab/rdblearn"
@@ -1338,7 +1338,7 @@
     "section": "papers",
     "category": "relational",
     "subcategory": "",
-    "citation": "",
+    "citation": "hayler et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2608.16319",
       "blog": "https://priorlabs.ai/blog-posts/introducing-relarena",
@@ -1364,7 +1364,7 @@
     "section": "papers",
     "category": "time series",
     "subcategory": "forecasting",
-    "citation": "",
+    "citation": "shchur et al. 2025",
     "links": {
       "arxiv": "https://arxiv.org/abs/2509.26468",
       "github": "https://github.com/autogluon/fev"
@@ -1389,7 +1389,7 @@
     "section": "papers",
     "category": "time series",
     "subcategory": "forecasting",
-    "citation": "",
+    "citation": "aksu et al. 2024",
     "links": {
       "arxiv": "https://arxiv.org/abs/2410.10393",
       "github": "https://github.com/SalesforceAIResearch/gift-eval"
@@ -1414,7 +1414,7 @@
     "section": "papers",
     "category": "time series",
     "subcategory": "forecasting",
-    "citation": "",
+    "citation": "garza et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2603.08707",
       "github": "https://github.com/TimeCopilot/impermanent"
@@ -1439,7 +1439,7 @@
     "section": "papers",
     "category": "time series",
     "subcategory": "forecasting",
-    "citation": "",
+    "citation": "nie et al. 2023",
     "links": {
       "arxiv": "https://arxiv.org/abs/2211.14730",
       "video": "https://www.youtube.com/watch?v=Z3-NrohddJw",
@@ -1465,7 +1465,7 @@
     "section": "papers",
     "category": "time series",
     "subcategory": "forecasting",
-    "citation": "",
+    "citation": "ansari et al. 2025",
     "links": {
       "arxiv": "https://arxiv.org/abs/2510.15821",
       "video": "https://www.youtube.com/watch?v=PeJReI9Sm0U",
@@ -1491,7 +1491,7 @@
     "section": "papers",
     "category": "time series",
     "subcategory": "forecasting",
-    "citation": "",
+    "citation": "ansari et al. 2024",
     "links": {
       "arxiv": "https://arxiv.org/abs/2403.07815",
       "video": "https://www.youtube.com/watch?v=6eDVkNBxURo",
@@ -1518,7 +1518,7 @@
     "section": "papers",
     "category": "time series",
     "subcategory": "forecasting",
-    "citation": "",
+    "citation": "lai et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2505.13755",
       "iclr": "https://iclr.cc/virtual/2026/poster/10010755",
@@ -1544,7 +1544,7 @@
     "section": "papers",
     "category": "time series",
     "subcategory": "forecasting",
-    "citation": "",
+    "citation": "hoo et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2501.02945",
       "tmlr": "https://openreview.net/forum?id=KIkQj8VOUY",
@@ -1570,7 +1570,7 @@
     "section": "papers",
     "category": "time series",
     "subcategory": "forecasting",
-    "citation": "",
+    "citation": "khwaja et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2605.20119",
       "github": "https://github.com/DataDog/toto"
@@ -1595,7 +1595,7 @@
     "section": "papers",
     "category": "time series",
     "subcategory": "forecasting",
-    "citation": "",
+    "citation": "le naour et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2606.05878",
       "github": "https://github.com/EDF-Lab/ts-icl"
@@ -1620,7 +1620,7 @@
     "section": "papers",
     "category": "time series",
     "subcategory": "forecasting",
-    "citation": "",
+    "citation": "birkel 2025",
     "links": {
       "arxiv": "https://arxiv.org/abs/2511.19272"
     },
@@ -1644,7 +1644,7 @@
     "section": "papers",
     "category": "time series",
     "subcategory": "forecasting",
-    "citation": "",
+    "citation": "moroshan et al. 2025",
     "links": {
       "arxiv": "https://arxiv.org/abs/2510.25502",
       "github": "https://github.com/automl/TempoPFN"
@@ -1669,7 +1669,7 @@
     "section": "papers",
     "category": "time series",
     "subcategory": "forecasting",
-    "citation": "",
+    "citation": "auer et al. 2025",
     "links": {
       "arxiv": "https://arxiv.org/abs/2505.23719",
       "neurips": "https://neurips.cc/virtual/2025/poster/115439",
@@ -1695,7 +1695,7 @@
     "section": "papers",
     "category": "time series",
     "subcategory": "forecasting",
-    "citation": "",
+    "citation": "podest et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2607.01204"
     },
@@ -1729,7 +1729,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -1738,7 +1738,7 @@
     "section": "papers",
     "category": "time series",
     "subcategory": "classification",
-    "citation": "",
+    "citation": "k\u00fcken et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2607.07500",
       "github": "https://github.com/automl/timee"
@@ -1763,7 +1763,7 @@
     "section": "papers",
     "category": "time series",
     "subcategory": "classification",
-    "citation": "",
+    "citation": "feofanov et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2502.15637",
       "icml": "https://proceedings.mlr.press/v306/feofanov26a.html",
@@ -1789,7 +1789,7 @@
     "section": "papers",
     "category": "time series",
     "subcategory": "classification",
-    "citation": "",
+    "citation": "o'rourke et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2606.21786"
     },
@@ -1813,7 +1813,7 @@
     "section": "papers",
     "category": "causal",
     "subcategory": "",
-    "citation": "",
+    "citation": "lorch et al. 2022",
     "links": {
       "arxiv": "https://arxiv.org/abs/2205.12934",
       "neurips": "https://proceedings.neurips.cc/paper_files/paper/2022/hash/54f7125dee9b8b3dc798bb9a082b09e2-Abstract-Conference.html",
@@ -1839,7 +1839,7 @@
     "section": "papers",
     "category": "causal",
     "subcategory": "",
-    "citation": "",
+    "citation": "dhir et al. 2025",
     "links": {
       "arxiv": "https://arxiv.org/abs/2412.16577",
       "iclr": "https://iclr.cc/virtual/2025/poster/28913",
@@ -1865,7 +1865,7 @@
     "section": "papers",
     "category": "causal",
     "subcategory": "",
-    "citation": "",
+    "citation": "robertson et al. 2025",
     "links": {
       "arxiv": "https://arxiv.org/abs/2506.06039",
       "video": "https://youtu.be/yTbY4SpPJcE",
@@ -1892,7 +1892,7 @@
     "section": "papers",
     "category": "causal",
     "subcategory": "",
-    "citation": "",
+    "citation": "reuter et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2602.14972",
       "icml": "https://proceedings.mlr.press/v306/reuter26a.html",
@@ -1918,7 +1918,7 @@
     "section": "papers",
     "category": "causal",
     "subcategory": "",
-    "citation": "",
+    "citation": "li et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2605.31156",
       "github": "https://github.com/LAMDA-Tabular/TabCausal"
@@ -1943,7 +1943,7 @@
     "section": "papers",
     "category": "causal",
     "subcategory": "",
-    "citation": "",
+    "citation": "ma et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2506.10914",
       "iclr": "https://iclr.cc/virtual/2026/poster/10008447"
@@ -1968,7 +1968,7 @@
     "section": "papers",
     "category": "causal",
     "subcategory": "",
-    "citation": "",
+    "citation": "guan et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2606.21212"
     },
@@ -1992,7 +1992,7 @@
     "section": "papers",
     "category": "causal",
     "subcategory": "",
-    "citation": "",
+    "citation": "bl\u00f6baum et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2606.17516",
       "github": "https://github.com/amazon-science/foundcause"
@@ -2017,7 +2017,7 @@
     "section": "papers",
     "category": "causal",
     "subcategory": "",
-    "citation": "",
+    "citation": "zhu et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2606.26467"
     },
@@ -2041,7 +2041,7 @@
     "section": "papers",
     "category": "causal",
     "subcategory": "",
-    "citation": "",
+    "citation": "swelam et al. 2025",
     "links": {
       "arxiv": "https://arxiv.org/abs/2511.07236",
       "video": "https://www.youtube.com/watch?v=9_on4JV9zDg"
@@ -2066,7 +2066,7 @@
     "section": "papers",
     "category": "causal",
     "subcategory": "",
-    "citation": "",
+    "citation": "sauter et al. 2025",
     "links": {
       "arxiv": "https://arxiv.org/abs/2503.01290"
     },
@@ -2090,7 +2090,7 @@
     "section": "papers",
     "category": "causal",
     "subcategory": "",
-    "citation": "",
+    "citation": "balazadeh et al. 2025",
     "links": {
       "arxiv": "https://arxiv.org/abs/2506.07918",
       "neurips": "https://neurips.cc/virtual/2025/poster/118013",
@@ -2116,7 +2116,7 @@
     "section": "papers",
     "category": "causal",
     "subcategory": "",
-    "citation": "",
+    "citation": "chen et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2607.11510"
     },
@@ -2140,7 +2140,7 @@
     "section": "papers",
     "category": "other",
     "subcategory": "",
-    "citation": "",
+    "citation": "mcdermott et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2606.25342"
     },
@@ -2164,7 +2164,7 @@
     "section": "papers",
     "category": "other",
     "subcategory": "",
-    "citation": "",
+    "citation": "zighem and vie 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2606.18812",
       "github": "https://github.com/Shika-B/One-Shot-Reinforcement-Learning"
@@ -2189,7 +2189,7 @@
     "section": "papers",
     "category": "other",
     "subcategory": "",
-    "citation": "",
+    "citation": "balestriero and lecun 2025",
     "links": {
       "arxiv": "https://arxiv.org/abs/2511.08544",
       "video": "https://www.youtube.com/watch?v=gVEr2cnDE_8&t=1944s"
@@ -2213,8 +2213,8 @@
     "arxiv_id": "1805.10854",
     "section": "papers",
     "category": "actuarial / loss modelling",
-    "subcategory": "",
-    "citation": "",
+    "subcategory": "severity",
+    "citation": "b\u00f8lviken and haff 2018",
     "links": {
       "arxiv": "https://arxiv.org/abs/1805.10854"
     },
@@ -2237,8 +2237,8 @@
     "arxiv_id": "2103.02089",
     "section": "papers",
     "category": "actuarial / loss modelling",
-    "subcategory": "",
-    "citation": "",
+    "subcategory": "severity",
+    "citation": "chudamani poudyal 2021",
     "links": {
       "arxiv": "https://arxiv.org/abs/2103.02089"
     },
@@ -2261,8 +2261,8 @@
     "arxiv_id": "2202.13000",
     "section": "papers",
     "category": "actuarial / loss modelling",
-    "subcategory": "",
-    "citation": "",
+    "subcategory": "severity",
+    "citation": "poudyal and brazauskas 2022",
     "links": {
       "arxiv": "https://arxiv.org/abs/2202.13000"
     },
@@ -2285,8 +2285,8 @@
     "arxiv_id": "2102.10154",
     "section": "papers",
     "category": "actuarial / loss modelling",
-    "subcategory": "",
-    "citation": "",
+    "subcategory": "severity",
+    "citation": "chudamani poudyal 2021",
     "links": {
       "arxiv": "https://arxiv.org/abs/2102.10154"
     },
@@ -2309,8 +2309,8 @@
     "arxiv_id": "2110.05207",
     "section": "papers",
     "category": "actuarial / loss modelling",
-    "subcategory": "",
-    "citation": "",
+    "subcategory": "severity",
+    "citation": "martin bladt 2021",
     "links": {
       "arxiv": "https://arxiv.org/abs/2110.05207"
     },
@@ -2333,8 +2333,8 @@
     "arxiv_id": "2111.00581",
     "section": "papers",
     "category": "actuarial / loss modelling",
-    "subcategory": "",
-    "citation": "",
+    "subcategory": "severity",
+    "citation": "bladt and yslas 2021",
     "links": {
       "arxiv": "https://arxiv.org/abs/2111.00581"
     },
@@ -2357,8 +2357,8 @@
     "arxiv_id": "2103.07200",
     "section": "papers",
     "category": "actuarial / loss modelling",
-    "subcategory": "",
-    "citation": "",
+    "subcategory": "severity",
+    "citation": "fung et al. 2021",
     "links": {
       "arxiv": "https://arxiv.org/abs/2103.07200"
     },
@@ -2381,8 +2381,8 @@
     "arxiv_id": "2208.01262",
     "section": "papers",
     "category": "actuarial / loss modelling",
-    "subcategory": "",
-    "citation": "",
+    "subcategory": "severity",
+    "citation": "aradhye et al. 2022",
     "links": {
       "arxiv": "https://arxiv.org/abs/2208.01262"
     },
@@ -2405,8 +2405,8 @@
     "arxiv_id": "2210.05091",
     "section": "papers",
     "category": "actuarial / loss modelling",
-    "subcategory": "",
-    "citation": "",
+    "subcategory": "severity",
+    "citation": "aradhye et al. 2022",
     "links": {
       "arxiv": "https://arxiv.org/abs/2210.05091"
     },
@@ -2429,8 +2429,8 @@
     "arxiv_id": "1607.02623",
     "section": "papers",
     "category": "actuarial / loss modelling",
-    "subcategory": "",
-    "citation": "",
+    "subcategory": "severity",
+    "citation": "furman and zitikis 2016",
     "links": {
       "arxiv": "https://arxiv.org/abs/1607.02623"
     },
@@ -2453,8 +2453,8 @@
     "arxiv_id": "1508.06378",
     "section": "papers",
     "category": "actuarial / loss modelling",
-    "subcategory": "",
-    "citation": "",
+    "subcategory": "frequency and count models",
+    "citation": "yang et al. 2015",
     "links": {
       "arxiv": "https://arxiv.org/abs/1508.06378"
     },
@@ -2477,8 +2477,8 @@
     "arxiv_id": "1811.10192",
     "section": "papers",
     "category": "actuarial / loss modelling",
-    "subcategory": "",
-    "citation": "",
+    "subcategory": "frequency and count models",
+    "citation": "zhou et al. 2018",
     "links": {
       "arxiv": "https://arxiv.org/abs/1811.10192"
     },
@@ -2501,8 +2501,8 @@
     "arxiv_id": "0904.1483",
     "section": "papers",
     "category": "actuarial / loss modelling",
-    "subcategory": "",
-    "citation": "",
+    "subcategory": "frequency and count models",
+    "citation": "peters et al. 2009",
     "links": {
       "arxiv": "https://arxiv.org/abs/0904.1483"
     },
@@ -2525,8 +2525,8 @@
     "arxiv_id": "1912.12356",
     "section": "papers",
     "category": "actuarial / loss modelling",
-    "subcategory": "",
-    "citation": "",
+    "subcategory": "frequency and count models",
+    "citation": "halder et al. 2019",
     "links": {
       "arxiv": "https://arxiv.org/abs/1912.12356"
     },
@@ -2549,8 +2549,8 @@
     "arxiv_id": "2311.03222",
     "section": "papers",
     "category": "actuarial / loss modelling",
-    "subcategory": "",
-    "citation": "",
+    "subcategory": "frequency and count models",
+    "citation": "boucher and coulibaly 2023",
     "links": {
       "arxiv": "https://arxiv.org/abs/2311.03222"
     },
@@ -2573,8 +2573,8 @@
     "arxiv_id": "2307.07771",
     "section": "papers",
     "category": "actuarial / loss modelling",
-    "subcategory": "",
-    "citation": "",
+    "subcategory": "frequency and count models",
+    "citation": "banghee so 2023",
     "links": {
       "arxiv": "https://arxiv.org/abs/2307.07771"
     },
@@ -2597,8 +2597,8 @@
     "arxiv_id": "2212.00985",
     "section": "papers",
     "category": "actuarial / loss modelling",
-    "subcategory": "",
-    "citation": "",
+    "subcategory": "frequency and count models",
+    "citation": "zhang et al. 2022",
     "links": {
       "arxiv": "https://arxiv.org/abs/2212.00985"
     },
@@ -2621,8 +2621,8 @@
     "arxiv_id": "1701.05452",
     "section": "papers",
     "category": "actuarial / loss modelling",
-    "subcategory": "",
-    "citation": "",
+    "subcategory": "frequency and count models",
+    "citation": "najafabadi and mohammadpour 2017",
     "links": {
       "arxiv": "https://arxiv.org/abs/1701.05452"
     },
@@ -2645,8 +2645,8 @@
     "arxiv_id": "2608.09725",
     "section": "papers",
     "category": "actuarial / loss modelling",
-    "subcategory": "",
-    "citation": "",
+    "subcategory": "frequency and count models",
+    "citation": "bandreddi et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2608.09725"
     },
@@ -2669,8 +2669,8 @@
     "arxiv_id": "2303.01923",
     "section": "papers",
     "category": "actuarial / loss modelling",
-    "subcategory": "",
-    "citation": "",
+    "subcategory": "frequency and count models",
+    "citation": "zhang et al. 2023",
     "links": {
       "arxiv": "https://arxiv.org/abs/2303.01923"
     },
@@ -2693,8 +2693,8 @@
     "arxiv_id": "2301.03005",
     "section": "papers",
     "category": "actuarial / loss modelling",
-    "subcategory": "",
-    "citation": "",
+    "subcategory": "frequency and count models",
+    "citation": "jiang et al. 2023",
     "links": {
       "arxiv": "https://arxiv.org/abs/2301.03005"
     },
@@ -2717,8 +2717,8 @@
     "arxiv_id": "1208.5384",
     "section": "papers",
     "category": "actuarial / loss modelling",
-    "subcategory": "",
-    "citation": "",
+    "subcategory": "tail metrics, quantiles, reserving",
+    "citation": "spokoiny et al. 2012",
     "links": {
       "arxiv": "https://arxiv.org/abs/1208.5384"
     },
@@ -2741,8 +2741,8 @@
     "arxiv_id": "2411.13822",
     "section": "papers",
     "category": "actuarial / loss modelling",
-    "subcategory": "",
-    "citation": "",
+    "subcategory": "tail metrics, quantiles, reserving",
+    "citation": "tang et al. 2024",
     "links": {
       "arxiv": "https://arxiv.org/abs/2411.13822"
     },
@@ -2765,8 +2765,8 @@
     "arxiv_id": "2608.16137",
     "section": "papers",
     "category": "actuarial / loss modelling",
-    "subcategory": "",
-    "citation": "",
+    "subcategory": "tail metrics, quantiles, reserving",
+    "citation": "chen and zhou 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2608.16137"
     },
@@ -2789,8 +2789,8 @@
     "arxiv_id": "1812.03432",
     "section": "papers",
     "category": "actuarial / loss modelling",
-    "subcategory": "",
-    "citation": "",
+    "subcategory": "tail metrics, quantiles, reserving",
+    "citation": "minkah and wet 2018",
     "links": {
       "arxiv": "https://arxiv.org/abs/1812.03432"
     },
@@ -2813,8 +2813,8 @@
     "arxiv_id": "1804.09253",
     "section": "papers",
     "category": "actuarial / loss modelling",
-    "subcategory": "",
-    "citation": "",
+    "subcategory": "tail metrics, quantiles, reserving",
+    "citation": "kevin kuo 2018",
     "links": {
       "arxiv": "https://arxiv.org/abs/1804.09253"
     },
@@ -2837,8 +2837,8 @@
     "arxiv_id": "2201.13267",
     "section": "papers",
     "category": "actuarial / loss modelling",
-    "subcategory": "",
-    "citation": "",
+    "subcategory": "tail metrics, quantiles, reserving",
+    "citation": "chaoubi et al. 2022",
     "links": {
       "arxiv": "https://arxiv.org/abs/2201.13267"
     },
@@ -2861,8 +2861,8 @@
     "arxiv_id": "2008.05693",
     "section": "papers",
     "category": "actuarial / loss modelling",
-    "subcategory": "",
-    "citation": "",
+    "subcategory": "tail metrics, quantiles, reserving",
+    "citation": "avanzi et al. 2020",
     "links": {
       "arxiv": "https://arxiv.org/abs/2008.05693"
     },
@@ -2886,7 +2886,7 @@
     "section": "queue",
     "category": "general",
     "subcategory": "",
-    "citation": "",
+    "citation": "fong et al. 2023",
     "links": {
       "arxiv": "https://arxiv.org/abs/2103.15671",
       "doi": "https://doi.org/10.1093/jrsssb/qkad005",
@@ -2912,7 +2912,7 @@
     "section": "queue",
     "category": "general",
     "subcategory": "",
-    "citation": "",
+    "citation": "nagler and r\u00fcgamer 2025",
     "links": {
       "arxiv": "https://arxiv.org/abs/2505.11325"
     },
@@ -2936,7 +2936,7 @@
     "section": "queue",
     "category": "general",
     "subcategory": "",
-    "citation": "",
+    "citation": "sutton et al. 2022",
     "links": {
       "arxiv": "https://arxiv.org/abs/2208.11173"
     },
@@ -2970,7 +2970,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -2979,7 +2979,7 @@
     "section": "queue",
     "category": "general",
     "subcategory": "",
-    "citation": "",
+    "citation": "qiu et al. 2025",
     "links": {
       "arxiv": "https://arxiv.org/abs/2505.06708",
       "neurips": "https://neurips.cc/virtual/2025/poster/120216",
@@ -3005,7 +3005,7 @@
     "section": "queue",
     "category": "general",
     "subcategory": "",
-    "citation": "",
+    "citation": "cs\u00e9falvay and imber 2023",
     "links": {
       "arxiv": "https://arxiv.org/abs/2301.13142"
     },
@@ -3029,7 +3029,7 @@
     "section": "queue",
     "category": "general",
     "subcategory": "",
-    "citation": "",
+    "citation": "kang et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2605.26713",
       "icml": "https://proceedings.mlr.press/v306/kang26h.html",
@@ -3055,7 +3055,7 @@
     "section": "queue",
     "category": "general",
     "subcategory": "",
-    "citation": "",
+    "citation": "bae et al. 2025",
     "links": {
       "arxiv": "https://arxiv.org/abs/2507.10524",
       "neurips": "https://neurips.cc/virtual/2025/poster/118085",
@@ -3081,7 +3081,7 @@
     "section": "queue",
     "category": "general",
     "subcategory": "",
-    "citation": "",
+    "citation": "li et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2607.13491",
       "github": "https://github.com/lszshu/DeepLoop"
@@ -3106,7 +3106,7 @@
     "section": "queue",
     "category": "general",
     "subcategory": "",
-    "citation": "",
+    "citation": "kataoka et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2608.25924"
     },
@@ -3130,7 +3130,7 @@
     "section": "queue",
     "category": "general",
     "subcategory": "",
-    "citation": "",
+    "citation": "zhou et al. 2027",
     "links": {
       "doi": "https://doi.org/10.1016/j.patcog.2026.114822"
     },
@@ -3140,7 +3140,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -3149,7 +3149,7 @@
     "section": "queue",
     "category": "general",
     "subcategory": "",
-    "citation": "",
+    "citation": "zhang et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2609.06986"
     },
@@ -3173,7 +3173,7 @@
     "section": "queue",
     "category": "general",
     "subcategory": "",
-    "citation": "",
+    "citation": "kang et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2608.31036"
     },
@@ -3197,7 +3197,7 @@
     "section": "queue",
     "category": "general",
     "subcategory": "",
-    "citation": "",
+    "citation": "mozer et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2608.17981"
     },
@@ -3221,7 +3221,7 @@
     "section": "queue",
     "category": "general",
     "subcategory": "",
-    "citation": "",
+    "citation": "zheng et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2609.14858",
       "github": "https://github.com/zhengkid/Dream-RSI"
@@ -3246,7 +3246,7 @@
     "section": "queue",
     "category": "general",
     "subcategory": "",
-    "citation": "",
+    "citation": "liu et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2609.20519",
       "github": "https://github.com/NVlabs/SoL-Pi"
@@ -3271,7 +3271,7 @@
     "section": "queue",
     "category": "general",
     "subcategory": "",
-    "citation": "",
+    "citation": "siems et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2609.24797",
       "github": "https://github.com/OpenEuroLLM/ComplexKDA"
@@ -3296,7 +3296,7 @@
     "section": "queue",
     "category": "general",
     "subcategory": "",
-    "citation": "",
+    "citation": "cui et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2609.20800",
       "github": "https://github.com/Gen-Verse/JEPA-Anything"
@@ -3321,7 +3321,7 @@
     "section": "queue",
     "category": "general",
     "subcategory": "",
-    "citation": "",
+    "citation": "shulgin et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2603.15958"
     },
@@ -3345,7 +3345,7 @@
     "section": "queue",
     "category": "general",
     "subcategory": "",
-    "citation": "",
+    "citation": "mallik et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2605.13405"
     },
@@ -3369,7 +3369,7 @@
     "section": "queue",
     "category": "general",
     "subcategory": "",
-    "citation": "",
+    "citation": "knupp et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2601.21582"
     },
@@ -3393,7 +3393,7 @@
     "section": "queue",
     "category": "general",
     "subcategory": "",
-    "citation": "",
+    "citation": "hayler et al. 2026",
     "links": {
       "openreview": "https://openreview.net/forum?id=HHPbQlyA7Y"
     },
@@ -3403,7 +3403,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -3422,7 +3422,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -3431,7 +3431,7 @@
     "section": "queue",
     "category": "general",
     "subcategory": "",
-    "citation": "",
+    "citation": "kargi and salinas 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2606.13221",
       "github": "https://github.com/kargibora/SoftElo"
@@ -3456,7 +3456,7 @@
     "section": "queue",
     "category": "general",
     "subcategory": "",
-    "citation": "",
+    "citation": "kang 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2609.28399"
     },
@@ -3490,7 +3490,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -3499,7 +3499,7 @@
     "section": "queue",
     "category": "general",
     "subcategory": "",
-    "citation": "",
+    "citation": "cowsik et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2609.30063"
     },
@@ -3523,7 +3523,7 @@
     "section": "queue",
     "category": "general",
     "subcategory": "",
-    "citation": "",
+    "citation": "csillag et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2606.16926",
       "github": "https://github.com/dccsillag/experiments-adaptive-fgd"
@@ -3548,7 +3548,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "kossen et al. 2021",
     "links": {
       "arxiv": "https://arxiv.org/abs/2106.02584",
       "neurips": "https://proceedings.neurips.cc/paper_files/paper/2021/hash/f1507aba9fc82ffa7cc7373c58f8a613-Abstract.html",
@@ -3574,7 +3574,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "somepalli et al. 2021",
     "links": {
       "arxiv": "https://arxiv.org/abs/2106.01342"
     },
@@ -3598,7 +3598,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "polewczyk et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2606.30336",
       "github": "https://github.com/SAP-samples/flextab"
@@ -3623,7 +3623,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "kim et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2606.30452"
     },
@@ -3647,7 +3647,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "habib et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2606.05441",
       "icml": "https://proceedings.mlr.press/v306/habib26a.html",
@@ -3673,7 +3673,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "merchant et al. 2026",
     "links": {
       "openreview": "https://openreview.net/forum?id=IYnHchzvYB",
       "poster": "https://www.humzahmerchant.com/posters/fmsd%202026%20poster.PNG"
@@ -3684,7 +3684,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -3693,7 +3693,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "jiang et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2605.09424",
       "openreview": "https://openreview.net/forum?id=RcsaxrdpfE"
@@ -3718,7 +3718,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "schambach et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2609.31306",
       "openreview": "https://openreview.net/forum?id=rwtcugrpDq"
@@ -3743,7 +3743,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "cannistraci and vogt 2026",
     "links": {
       "openreview": "https://openreview.net/forum?id=kCnZUf1VYC"
     },
@@ -3753,7 +3753,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -3762,7 +3762,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "klein and hoffart 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2606.29091",
       "openreview": "https://openreview.net/forum?id=TUYc2XUdwz"
@@ -3787,7 +3787,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "thimonier et al. 2025",
     "links": {
       "arxiv": "https://arxiv.org/abs/2410.05016",
       "iclr": "https://iclr.cc/virtual/2025/poster/28793"
@@ -3812,7 +3812,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "luo and xu 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2607.10077"
     },
@@ -3836,7 +3836,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "xing et al. 2026",
     "links": {
       "openreview": "https://openreview.net/pdf?id=3ADqf6jn9r",
       "icml": "https://proceedings.mlr.press/v306/xing26a.html"
@@ -3847,7 +3847,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -3856,7 +3856,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "wang et al. 2026",
     "links": {
       "doi": "https://doi.org/10.1016/j.ins.2026.123925"
     },
@@ -3866,7 +3866,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -3875,7 +3875,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "hu and ghelichi 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2607.17962"
     },
@@ -3899,7 +3899,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "loza et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2607.26000"
     },
@@ -3923,7 +3923,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "yao et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2607.23304",
       "github": "https://github.com/AdaptInfer/context-review"
@@ -3948,7 +3948,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "landsgesell et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2603.29928",
       "github": "https://github.com/jonaslandsgesell/ScoringBench"
@@ -3973,7 +3973,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "habib et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2608.04348",
       "springer": "https://doi.org/10.1007/978-3-032-31404-8_43",
@@ -3999,7 +3999,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "garnelo and czarnecki 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2608.02412"
     },
@@ -4023,7 +4023,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "pan et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2608.02157"
     },
@@ -4047,7 +4047,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "zuo et al. 2026",
     "links": {
       "pdf": "https://tabular-data-analysis.github.io/tada2026/papers/TaDA26_16.pdf"
     },
@@ -4057,7 +4057,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -4066,7 +4066,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "barkov et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2608.00608",
       "github": "https://github.com/slavabarkov/soilscope"
@@ -4091,7 +4091,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "kl\u00f6tergens et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2608.06004"
     },
@@ -4115,7 +4115,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "koshil et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2608.10837",
       "github": "https://github.com/Hebog/tfm_compression"
@@ -4140,7 +4140,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "marsza\u0142ek et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2608.09348",
       "github": "https://github.com/gmum/iced"
@@ -4165,7 +4165,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "ye et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2608.09162"
     },
@@ -4189,7 +4189,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "zhou et al. 2026",
     "links": {
       "doi": "https://doi.org/10.1016/j.knosys.2026.116694"
     },
@@ -4199,7 +4199,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -4208,7 +4208,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "jadid et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2608.12989"
     },
@@ -4232,7 +4232,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "cucumides and geerts 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2608.11431",
       "github": "https://github.com/TamaraCucumides/autoGrable"
@@ -4257,7 +4257,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "kwon et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2607.15606"
     },
@@ -4281,7 +4281,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "arik and pfister 2021",
     "links": {
       "arxiv": "https://arxiv.org/abs/1908.07442",
       "aaai": "https://doi.org/10.1609/aaai.v35i8.16826"
@@ -4306,7 +4306,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "suh et al. 2026",
     "links": {
       "lgresearch": "https://www.lgresearch.ai/publication/view?seq=180",
       "kdd": "https://dl.acm.org/doi/10.1145/3770855.3818128"
@@ -4317,7 +4317,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -4326,7 +4326,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "lee 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2605.04363",
       "icml": "https://proceedings.mlr.press/v306/lee26aw.html",
@@ -4352,7 +4352,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "eo et al. 2024",
     "links": {
       "lgresearch": "https://www.lgresearch.ai/publication/view?seq=117",
       "openreview": "https://openreview.net/forum?id=l5VGHbRVW0"
@@ -4363,7 +4363,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -4372,7 +4372,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "yoon et al. 2026",
     "links": {
       "lgresearch": "https://www.lgresearch.ai/publication/view?seq=158",
       "arxiv": "https://arxiv.org/abs/2510.02060",
@@ -4398,7 +4398,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "eo et al. 2025",
     "links": {
       "lgresearch": "https://www.lgresearch.ai/publication/view?seq=125"
     },
@@ -4408,7 +4408,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -4417,7 +4417,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "suh et al. 2024",
     "links": {
       "lgresearch": "https://www.lgresearch.ai/publication/view?seq=118",
       "openreview": "https://openreview.net/forum?id=UXIjKZwJts"
@@ -4428,7 +4428,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -4437,7 +4437,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "lee et al. 2024",
     "links": {
       "arxiv": "https://arxiv.org/abs/2405.07414",
       "icml": "https://proceedings.mlr.press/v235/lee24v.html",
@@ -4463,7 +4463,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "kang et al. 2025",
     "links": {
       "arxiv": "https://arxiv.org/abs/2501.13905",
       "tmlr": "https://openreview.net/forum?id=GXlsrvOGIK"
@@ -4488,7 +4488,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "luo et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2607.27546"
     },
@@ -4512,7 +4512,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "zhou et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2609.28208"
     },
@@ -4536,7 +4536,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "scassola et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2603.23016",
       "github": "https://github.com/april-tools/tabpc"
@@ -4561,7 +4561,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "jamalidinan et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2608.17856"
     },
@@ -4585,7 +4585,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "vlontzos et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2607.25532"
     },
@@ -4609,7 +4609,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "qi et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2605.15488",
       "github": "https://github.com/rgklab/SurvivalPFN"
@@ -4634,7 +4634,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "ma et al. 2024",
     "links": {
       "arxiv": "https://arxiv.org/abs/2406.05216"
     },
@@ -4658,7 +4658,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "rundel et al. 2024",
     "links": {
       "arxiv": "https://arxiv.org/abs/2403.10923",
       "springer": "https://doi.org/10.1007/978-3-031-63797-1_23",
@@ -4684,7 +4684,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "kenfack et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2608.14211",
       "github": "https://github.com/patrikken/FairTFM-inference"
@@ -4709,7 +4709,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "ma et al. 2025",
     "links": {
       "arxiv": "https://arxiv.org/abs/2511.09665"
     },
@@ -4733,7 +4733,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "shaheen et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2608.17957"
     },
@@ -4757,7 +4757,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "sena and azevedo 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2603.29946",
       "openreview": "https://openreview.net/pdf?id=StSMBSZqxx"
@@ -4782,7 +4782,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "tenachi et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2609.02766"
     },
@@ -4806,7 +4806,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "sergazinov et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2609.16309",
       "github": "https://github.com/yandex-research/agentic-hpset"
@@ -4831,7 +4831,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "wang et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2609.12136"
     },
@@ -4865,7 +4865,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -4874,7 +4874,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "akhter et al. 2027",
     "links": {
       "arxiv": "https://arxiv.org/abs/2608.28209",
       "doi": "https://doi.org/10.1016/j.neunet.2026.109568"
@@ -4899,7 +4899,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "stevanoska et al. 2026",
     "links": {
       "springer": "https://link.springer.com/article/10.1007/s10994-026-07133-8"
     },
@@ -4909,7 +4909,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -4928,7 +4928,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -4937,7 +4937,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "yeom et al. 2026",
     "links": {
       "doi": "https://doi.org/10.1016/j.neucom.2026.135059"
     },
@@ -4947,7 +4947,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -4956,7 +4956,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "nakerst et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2608.22594"
     },
@@ -4980,7 +4980,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "craig et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2608.23538",
       "github": "https://github.com/erincr/local-distillation-benchmark"
@@ -5005,7 +5005,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "kreuer et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2609.07441",
       "github": "https://github.com/not-a-feature/TabBench-Bio"
@@ -5030,7 +5030,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "zhao et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2609.06912"
     },
@@ -5054,7 +5054,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "karabulut et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2602.14622",
       "github": "https://github.com/DiTEC-project/tabprobe"
@@ -5079,7 +5079,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "tajjar et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2606.04876"
     },
@@ -5103,7 +5103,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "arazi et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2605.10616",
       "github": "https://github.com/alanarazi7/MulTaBench"
@@ -5128,7 +5128,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "blayer et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2605.12292",
       "github": "https://github.com/soda-inria/strable"
@@ -5153,7 +5153,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "tschalzev et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2606.02384",
       "github": "https://github.com/atschalz/tabprep"
@@ -5178,7 +5178,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "k\u00fcbler et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2609.13031"
     },
@@ -5202,7 +5202,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "van breugel et al. 2024",
     "links": {
       "arxiv": "https://arxiv.org/abs/2406.17673"
     },
@@ -5226,7 +5226,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "liu et al. 2023",
     "links": {
       "openreview": "https://openreview.net/forum?id=fPVRcJqspu",
       "iclr": "https://iclr.cc/virtual/2023/poster/10916"
@@ -5237,7 +5237,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -5246,7 +5246,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "zhou et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2609.27679"
     },
@@ -5270,7 +5270,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "jeon et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2609.25541"
     },
@@ -5294,7 +5294,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "nava et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2609.28122",
       "github": "https://github.com/ken-r/npboost"
@@ -5319,7 +5319,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "choi et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2609.36968"
     },
@@ -5343,7 +5343,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "balef and eggensperger 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2609.36108",
       "github": "https://github.com/amirbalef/loopicl"
@@ -5368,7 +5368,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "zhao et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2609.36883",
       "github": "https://github.com/Tianqi-Zhao/ArchitecturePriorTFMs"
@@ -5393,7 +5393,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "ye et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2609.33114"
     },
@@ -5417,7 +5417,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "ketata et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2609.39124",
       "github": "https://github.com/ketatam/cdmd"
@@ -5442,7 +5442,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "lee et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2609.38744",
       "github": "https://github.com/nums-ai/MolPAIR"
@@ -5467,7 +5467,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "jeong et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2610.01435",
       "github": "https://github.com/nums-ai/TFM_Distillation"
@@ -5492,7 +5492,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "kim et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2610.01143"
     },
@@ -5516,7 +5516,7 @@
     "section": "queue",
     "category": "relational",
     "subcategory": "",
-    "citation": "",
+    "citation": "abolhasani and ganapathy 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2607.29120"
     },
@@ -5540,7 +5540,7 @@
     "section": "queue",
     "category": "relational",
     "subcategory": "",
-    "citation": "",
+    "citation": "tian et al. 2026",
     "links": {
       "acm": "https://dl.acm.org/doi/10.1145/3770855.3818115"
     },
@@ -5550,7 +5550,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -5559,7 +5559,7 @@
     "section": "queue",
     "category": "relational",
     "subcategory": "",
-    "citation": "",
+    "citation": "lee et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2605.07121",
       "github": "https://github.com/seunghan96/AdaTKG"
@@ -5584,7 +5584,7 @@
     "section": "queue",
     "category": "relational",
     "subcategory": "",
-    "citation": "",
+    "citation": "mahmoudzadeh et al. 2024",
     "links": {
       "arxiv": "https://arxiv.org/abs/2408.04053"
     },
@@ -5608,7 +5608,7 @@
     "section": "queue",
     "category": "relational",
     "subcategory": "",
-    "citation": "",
+    "citation": "yang et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2609.05955"
     },
@@ -5632,7 +5632,7 @@
     "section": "queue",
     "category": "relational",
     "subcategory": "",
-    "citation": "",
+    "citation": "lee et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2609.37057",
       "github": "https://github.com/nums-ai/ephris"
@@ -5657,7 +5657,7 @@
     "section": "queue",
     "category": "relational",
     "subcategory": "",
-    "citation": "",
+    "citation": "upendra et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2609.36417"
     },
@@ -5681,7 +5681,7 @@
     "section": "queue",
     "category": "relational",
     "subcategory": "",
-    "citation": "",
+    "citation": "mohamed and aboulnaga 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2610.00907",
       "github": "https://github.com/lids-lab/steer"
@@ -5706,7 +5706,7 @@
     "section": "queue",
     "category": "relational",
     "subcategory": "",
-    "citation": "",
+    "citation": "forbat and gemulla 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2610.01725",
       "github": "https://github.com/uma-pi1/relicl"
@@ -5731,7 +5731,7 @@
     "section": "queue",
     "category": "time series",
     "subcategory": "",
-    "citation": "",
+    "citation": "yang et al. 2026",
     "links": {
       "openreview": "https://openreview.net/forum?id=xO10rIopwe",
       "icml": "https://proceedings.mlr.press/v306/yang26ac.html"
@@ -5742,7 +5742,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -5751,7 +5751,7 @@
     "section": "queue",
     "category": "time series",
     "subcategory": "",
-    "citation": "",
+    "citation": "ghoroghchian et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2610.02058",
       "openreview": "https://openreview.net/forum?id=iIRdd86Xkr"
@@ -5776,7 +5776,7 @@
     "section": "queue",
     "category": "time series",
     "subcategory": "",
-    "citation": "",
+    "citation": "lee et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2605.03460",
       "github": "https://github.com/seunghan96/FinSTaR"
@@ -5801,7 +5801,7 @@
     "section": "queue",
     "category": "time series",
     "subcategory": "",
-    "citation": "",
+    "citation": "lee et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2603.02702",
       "kdd": "https://doi.org/10.1145/3770855.3817468",
@@ -5827,7 +5827,7 @@
     "section": "queue",
     "category": "time series",
     "subcategory": "",
-    "citation": "",
+    "citation": "fang et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2608.24033",
       "github": "https://github.com/DMIRLAB-Group/ChorusTIC"
@@ -5862,7 +5862,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -5871,7 +5871,7 @@
     "section": "queue",
     "category": "time series",
     "subcategory": "",
-    "citation": "",
+    "citation": "biswas and karoui 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2609.09586",
       "github": "https://github.com/niloyb/sdd"
@@ -5896,7 +5896,7 @@
     "section": "queue",
     "category": "time series",
     "subcategory": "",
-    "citation": "",
+    "citation": "isufaj et al. 2026",
     "links": {
       "ssrn": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6552063"
     },
@@ -5906,7 +5906,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -5915,7 +5915,7 @@
     "section": "queue",
     "category": "time series",
     "subcategory": "",
-    "citation": "",
+    "citation": "zhu et al. 2025",
     "links": {
       "arxiv": "https://arxiv.org/abs/2508.19609",
       "cikm": "https://doi.org/10.1145/3746252.3761261",
@@ -5941,7 +5941,7 @@
     "section": "queue",
     "category": "time series",
     "subcategory": "",
-    "citation": "",
+    "citation": "shi et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2508.02739",
       "aaai": "https://doi.org/10.1609/aaai.v40i30.39730",
@@ -5967,7 +5967,7 @@
     "section": "queue",
     "category": "time series",
     "subcategory": "",
-    "citation": "",
+    "citation": "chaffard et al. 2025",
     "links": {
       "doi": "https://doi.org/10.1016/j.knosys.2025.114449"
     },
@@ -5977,7 +5977,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -5986,7 +5986,7 @@
     "section": "queue",
     "category": "time series",
     "subcategory": "",
-    "citation": "",
+    "citation": "fan et al. 2025",
     "links": {
       "arxiv": "https://arxiv.org/abs/2401.16777",
       "kdd": "https://doi.org/10.1145/3690624.3709260"
@@ -6011,7 +6011,7 @@
     "section": "queue",
     "category": "time series",
     "subcategory": "",
-    "citation": "",
+    "citation": "meyer et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2609.24559",
       "github": "https://github.com/theforecastingcompany/tfc-t0"
@@ -6046,7 +6046,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -6055,7 +6055,7 @@
     "section": "queue",
     "category": "time series",
     "subcategory": "",
-    "citation": "",
+    "citation": "shi et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2610.00405"
     },
@@ -6079,7 +6079,7 @@
     "section": "queue",
     "category": "causal",
     "subcategory": "",
-    "citation": "",
+    "citation": "thumm et al. 2026",
     "links": {
       "openreview": "https://openreview.net/forum?id=CAaTQAfq7c"
     },
@@ -6089,7 +6089,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -6098,7 +6098,7 @@
     "section": "queue",
     "category": "causal",
     "subcategory": "",
-    "citation": "",
+    "citation": "ossen et al. 2026",
     "links": {
       "openreview": "https://openreview.net/forum?id=2yvEiFhNCT"
     },
@@ -6108,7 +6108,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -6117,7 +6117,7 @@
     "section": "queue",
     "category": "causal",
     "subcategory": "",
-    "citation": "",
+    "citation": "bellot and dhir 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2608.20841",
       "openreview": "https://openreview.net/forum?id=jCbehzZBsk"
@@ -6142,7 +6142,7 @@
     "section": "queue",
     "category": "causal",
     "subcategory": "",
-    "citation": "",
+    "citation": "xu et al. 2026",
     "links": {
       "openreview": "https://openreview.net/forum?id=U4KiOBxY1X"
     },
@@ -6152,7 +6152,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -6161,7 +6161,7 @@
     "section": "queue",
     "category": "causal",
     "subcategory": "",
-    "citation": "",
+    "citation": "li et al. 2026",
     "links": {
       "openreview": "https://openreview.net/forum?id=og3UVhP7M1"
     },
@@ -6171,7 +6171,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -6180,7 +6180,7 @@
     "section": "queue",
     "category": "causal",
     "subcategory": "",
-    "citation": "",
+    "citation": "ham et al. 2026",
     "links": {
       "openreview": "https://openreview.net/forum?id=ULoLF1aOo1"
     },
@@ -6190,7 +6190,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -6199,7 +6199,7 @@
     "section": "queue",
     "category": "causal",
     "subcategory": "",
-    "citation": "",
+    "citation": "dhir et al. 2025",
     "links": {
       "arxiv": "https://arxiv.org/abs/2507.05526",
       "neurips": "https://neurips.cc/virtual/2025/poster/118801",
@@ -6225,7 +6225,7 @@
     "section": "queue",
     "category": "causal",
     "subcategory": "",
-    "citation": "",
+    "citation": "qiao et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2607.11508",
       "github": "https://github.com/DMIRLAB-Group/CDFM"
@@ -6250,7 +6250,7 @@
     "section": "queue",
     "category": "causal",
     "subcategory": "",
-    "citation": "",
+    "citation": "guan et al. 2026",
     "links": {
       "acm": "https://dl.acm.org/doi/10.1145/3770855.3818030"
     },
@@ -6260,7 +6260,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -6269,7 +6269,7 @@
     "section": "queue",
     "category": "causal",
     "subcategory": "",
-    "citation": "",
+    "citation": "jacob et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2604.22337",
       "github": "https://github.com/jsve96/TabSCM"
@@ -6294,7 +6294,7 @@
     "section": "queue",
     "category": "causal",
     "subcategory": "",
-    "citation": "",
+    "citation": "lyu et al. 2026",
     "links": {
       "lgresearch": "https://www.lgresearch.ai/publication/view?seq=151"
     },
@@ -6304,7 +6304,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -6313,7 +6313,7 @@
     "section": "queue",
     "category": "causal",
     "subcategory": "",
-    "citation": "",
+    "citation": "kang et al. 2025",
     "links": {
       "arxiv": "https://arxiv.org/abs/2508.12650",
       "neurips": "https://neurips.cc/virtual/2025/poster/117797"
@@ -6338,7 +6338,7 @@
     "section": "queue",
     "category": "causal",
     "subcategory": "",
-    "citation": "",
+    "citation": "berti 2026",
     "links": {
       "doi": "https://doi.org/10.3390/electronics15194397"
     },
@@ -6348,7 +6348,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -6357,7 +6357,7 @@
     "section": "queue",
     "category": "causal",
     "subcategory": "",
-    "citation": "",
+    "citation": "gajewski and olko 2026",
     "links": {
       "pmlr": "https://proceedings.mlr.press/v323/gajewski26a.html"
     },
@@ -6367,7 +6367,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -6376,7 +6376,7 @@
     "section": "queue",
     "category": "causal",
     "subcategory": "",
-    "citation": "",
+    "citation": "melnychuk et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2603.12037",
       "icml": "https://proceedings.mlr.press/v306/melnychuk26a.html",
@@ -6402,7 +6402,7 @@
     "section": "queue",
     "category": "causal",
     "subcategory": "",
-    "citation": "",
+    "citation": "cinelli et al. 2022",
     "links": {
       "pdf": "https://ftp.cs.ucla.edu/pub/stat_ser/r493.pdf",
       "doi": "https://doi.org/10.1177/00491241221099552"
@@ -6413,7 +6413,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -6422,7 +6422,7 @@
     "section": "queue",
     "category": "causal",
     "subcategory": "",
-    "citation": "",
+    "citation": "bing et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2603.08682",
       "github": "https://github.com/simonbing/StructuralCausalBottleneckModels"
@@ -6447,7 +6447,7 @@
     "section": "queue",
     "category": "causal",
     "subcategory": "",
-    "citation": "",
+    "citation": "robertson et al. 2024",
     "links": {
       "arxiv": "https://arxiv.org/abs/2407.05732"
     },
@@ -6471,7 +6471,7 @@
     "section": "queue",
     "category": "causal",
     "subcategory": "",
-    "citation": "",
+    "citation": "zhou 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2609.06941"
     },
@@ -6495,7 +6495,7 @@
     "section": "queue",
     "category": "causal",
     "subcategory": "",
-    "citation": "",
+    "citation": "feuerriegel et al. 2024",
     "links": {
       "arxiv": "https://arxiv.org/abs/2410.08770",
       "doi": "https://doi.org/10.1038/s41591-024-02902-1"
@@ -6520,7 +6520,7 @@
     "section": "queue",
     "category": "causal",
     "subcategory": "",
-    "citation": "",
+    "citation": "van breugel et al. 2021",
     "links": {
       "arxiv": "https://arxiv.org/abs/2110.12884",
       "neurips": "https://proceedings.neurips.cc/paper_files/paper/2021/hash/ba9fab001f67381e56e410575874d967-Abstract.html",
@@ -6546,7 +6546,7 @@
     "section": "queue",
     "category": "causal",
     "subcategory": "",
-    "citation": "",
+    "citation": "zhang 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2609.26290"
     },
@@ -6570,7 +6570,7 @@
     "section": "queue",
     "category": "causal",
     "subcategory": "",
-    "citation": "",
+    "citation": "gao et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2609.39523"
     },
@@ -6604,7 +6604,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -6613,7 +6613,7 @@
     "section": "queue",
     "category": "other",
     "subcategory": "",
-    "citation": "",
+    "citation": "shao et al. 2024",
     "links": {
       "arxiv": "https://arxiv.org/abs/2402.03300",
       "github": "https://github.com/deepseek-ai/DeepSeek-Math"
@@ -6638,7 +6638,7 @@
     "section": "queue",
     "category": "other",
     "subcategory": "",
-    "citation": "",
+    "citation": "franke et al. 2026",
     "links": {
       "openreview": "https://openreview.net/pdf?id=wWKuI35OW7"
     },
@@ -6648,7 +6648,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -6657,7 +6657,7 @@
     "section": "queue",
     "category": "other",
     "subcategory": "",
-    "citation": "",
+    "citation": "toledo et al. 2025",
     "links": {
       "arxiv": "https://arxiv.org/abs/2507.02554",
       "neurips": "https://neurips.cc/virtual/2025/poster/117980",
@@ -6683,7 +6683,7 @@
     "section": "queue",
     "category": "other",
     "subcategory": "",
-    "citation": "",
+    "citation": "hambardzumyan et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2603.26499"
     },
@@ -6707,7 +6707,7 @@
     "section": "queue",
     "category": "other",
     "subcategory": "",
-    "citation": "",
+    "citation": "thorgeirsson et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2603.14133",
       "chi": "https://doi.org/10.1145/3772318.3791666"
@@ -6742,7 +6742,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -6751,7 +6751,7 @@
     "section": "queue",
     "category": "mechanistic interpretability",
     "subcategory": "tabular",
-    "citation": "",
+    "citation": "bilo\u0161 et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2605.21288"
     },
@@ -6775,7 +6775,7 @@
     "section": "queue",
     "category": "mechanistic interpretability",
     "subcategory": "tabular",
-    "citation": "",
+    "citation": "balef et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2605.06510",
       "icml": "https://proceedings.mlr.press/v306/balef26a.html",
@@ -6801,7 +6801,7 @@
     "section": "queue",
     "category": "mechanistic interpretability",
     "subcategory": "tabular",
-    "citation": "",
+    "citation": "gupta et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2601.08181"
     },
@@ -6825,7 +6825,7 @@
     "section": "queue",
     "category": "mechanistic interpretability",
     "subcategory": "tabular",
-    "citation": "",
+    "citation": "gupta et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2606.12917",
       "github": "https://github.com/atharva7-g/tabfm-interp"
@@ -6850,7 +6850,7 @@
     "section": "queue",
     "category": "mechanistic interpretability",
     "subcategory": "tabular",
-    "citation": "",
+    "citation": "miftachov et al. 2026",
     "links": {
       "arxiv": "https://arxiv.org/abs/2602.02162"
     },
@@ -6874,7 +6874,7 @@
     "section": "queue",
     "category": "mechanistic interpretability",
     "subcategory": "tabular",
-    "citation": "",
+    "citation": "balef et al. 2026",
     "links": {
       "openreview": "https://openreview.net/forum?id=9nCMtYGxQt"
     },
@@ -6884,7 +6884,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -6903,7 +6903,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -6912,7 +6912,7 @@
     "section": "queue",
     "category": "mechanistic interpretability",
     "subcategory": "circuits",
-    "citation": "",
+    "citation": "olsson et al. 2022",
     "links": {
       "arxiv": "https://arxiv.org/abs/2209.11895"
     },
@@ -6936,7 +6936,7 @@
     "section": "queue",
     "category": "mechanistic interpretability",
     "subcategory": "circuits",
-    "citation": "",
+    "citation": "wang et al. 2023",
     "links": {
       "arxiv": "https://arxiv.org/abs/2211.00593",
       "iclr": "https://iclr.cc/virtual/2023/poster/11341",
@@ -6962,7 +6962,7 @@
     "section": "queue",
     "category": "mechanistic interpretability",
     "subcategory": "circuits",
-    "citation": "",
+    "citation": "nanda et al. 2023",
     "links": {
       "arxiv": "https://arxiv.org/abs/2301.05217",
       "iclr": "https://iclr.cc/virtual/2023/poster/11385"
@@ -6987,7 +6987,7 @@
     "section": "queue",
     "category": "mechanistic interpretability",
     "subcategory": "representations",
-    "citation": "",
+    "citation": "elhage et al. 2022",
     "links": {
       "arxiv": "https://arxiv.org/abs/2209.10652"
     },
@@ -7021,7 +7021,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   },
   {
@@ -7030,7 +7030,7 @@
     "section": "queue",
     "category": "mechanistic interpretability",
     "subcategory": "representations",
-    "citation": "",
+    "citation": "li et al. 2023",
     "links": {
       "arxiv": "https://arxiv.org/abs/2210.13382",
       "iclr": "https://iclr.cc/virtual/2023/poster/11827",
@@ -7056,7 +7056,7 @@
     "section": "queue",
     "category": "mechanistic interpretability",
     "subcategory": "representations",
-    "citation": "",
+    "citation": "darcet et al. 2024",
     "links": {
       "arxiv": "https://arxiv.org/abs/2309.16588",
       "video": "https://youtu.be/QgH9sr7G13Q?t=1672",
@@ -7082,7 +7082,7 @@
     "section": "queue",
     "category": "mechanistic interpretability",
     "subcategory": "representations",
-    "citation": "",
+    "citation": "jiang et al. 2025",
     "links": {
       "arxiv": "https://arxiv.org/abs/2506.08010",
       "neurips": "https://neurips.cc/virtual/2025/poster/117199",
@@ -7108,7 +7108,7 @@
     "section": "queue",
     "category": "mechanistic interpretability",
     "subcategory": "icl",
-    "citation": "",
+    "citation": "garg et al. 2022",
     "links": {
       "arxiv": "https://arxiv.org/abs/2208.01066",
       "neurips": "https://proceedings.neurips.cc/paper_files/paper/2022/hash/c529dba08a146ea8d6cf715ae8930cbe-Abstract-Conference.html",
@@ -7134,7 +7134,7 @@
     "section": "queue",
     "category": "mechanistic interpretability",
     "subcategory": "icl",
-    "citation": "",
+    "citation": "aky\u00fcrek et al. 2023",
     "links": {
       "arxiv": "https://arxiv.org/abs/2211.15661",
       "iclr": "https://iclr.cc/virtual/2023/poster/10852",
@@ -7160,7 +7160,7 @@
     "section": "queue",
     "category": "mechanistic interpretability",
     "subcategory": "icl",
-    "citation": "",
+    "citation": "von oswald et al. 2023",
     "links": {
       "arxiv": "https://arxiv.org/abs/2212.07677",
       "icml": "https://proceedings.mlr.press/v202/von-oswald23a.html"
@@ -7185,7 +7185,7 @@
     "section": "queue",
     "category": "mechanistic interpretability",
     "subcategory": "icl",
-    "citation": "",
+    "citation": "hendel et al. 2023",
     "links": {
       "arxiv": "https://arxiv.org/abs/2310.15916",
       "emnlp": "https://aclanthology.org/2023.findings-emnlp.624/",
@@ -7211,7 +7211,7 @@
     "section": "queue",
     "category": "mechanistic interpretability",
     "subcategory": "icl",
-    "citation": "",
+    "citation": "todd et al. 2024",
     "links": {
       "arxiv": "https://arxiv.org/abs/2310.15213",
       "iclr": "https://iclr.cc/virtual/2024/poster/19235"
@@ -7246,7 +7246,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "",
+    "fetch_status": "skipped:no-arxiv-id",
     "has_code": false
   }
 ]

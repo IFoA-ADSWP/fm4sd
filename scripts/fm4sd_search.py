@@ -55,6 +55,8 @@ def cmd_list(entries: list[dict], args) -> None:
             continue
         if args.category and e.get("category") != args.category:
             continue
+        if args.subcategory and e.get("subcategory") != args.subcategory:
+            continue
         if args.local and e.get("fetch_status") not in ("ok", "cached"):
             continue
         if args.missing and e.get("fetch_status") in ("ok", "cached"):
@@ -117,6 +119,8 @@ def cmd_grep(entries: list[dict], args) -> None:
         # corpus and the sweep returns noise instead of the papers on topic.
         if args.category and e.get("category") != args.category:
             continue
+        if args.subcategory and e.get("subcategory") != args.subcategory:
+            continue
         if args.section and e.get("section") != args.section:
             continue
         if args.has_code and not e.get("has_code"):
@@ -166,7 +170,12 @@ def cmd_grep(entries: list[dict], args) -> None:
         print("    " + snippet.replace("\n", "\n    ")[: args.max_chars])
         shown += 1
 
-    print(f"\n--- {len(seen_papers)} papers matched, showing {shown} ---")
+    # Counted across every result, not just the ones printed: with --max-results 2
+    # and four matching papers this used to report "1 papers matched, showing 2",
+    # because the paper set was only built inside the capped display loop and
+    # `shown` counted snippets while the label said papers.
+    matched = {t[1]["slug"] for t in found}
+    print(f"\n--- {len(matched)} papers matched, showing {shown} of {len(found)} snippets ---")
     if words:
         print(f"pattern terms: {', '.join(words)}")
 
@@ -181,7 +190,7 @@ def cmd_grep(entries: list[dict], args) -> None:
         print("   - threshold: a concept mentioned once will not survive --min-hits 3")
         if args.min_hits > 1:
             print(f"   - you set --min-hits {args.min_hits}; re-run with 1 to be sure")
-        if args.category or args.section or args.since or args.has_code:
+        if args.category or args.subcategory or args.section or args.since or args.has_code:
             print("   - you scoped the search; re-run unscoped to be sure")
         print("   A null from a scoped or thresholded search is a fact about the")
         print("   query, not about the corpus.")
@@ -226,6 +235,7 @@ def main() -> None:
     p.add_argument("--has-code", action="store_true", help="only entries with released code")
     p.add_argument("--section")
     p.add_argument("--category")
+    p.add_argument("--subcategory", help="restrict to a sub-heading (e.g. forecasting, severity)")
     p.add_argument("--local", action="store_true", help="only fetched locally")
     p.add_argument("--missing", action="store_true", help="only NOT fetched")
     p.add_argument("--since", type=int, help="year >= N")
@@ -238,6 +248,7 @@ def main() -> None:
     p = sub.add_parser("grep", help="full-text search across the local corpus")
     p.add_argument("pattern")
     p.add_argument("--category", help="restrict to a category (e.g. tabular, causal)")
+    p.add_argument("--subcategory", help="restrict to a sub-heading (e.g. forecasting, severity)")
     p.add_argument("--section", help="restrict to papers / queue")
     p.add_argument("--since", type=int, help="only papers from year >= N")
     p.add_argument("--has-code", action="store_true", help="only papers with released code")

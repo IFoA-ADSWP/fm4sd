@@ -16,8 +16,8 @@ the *index* and the *digests*; the paper payload stays on disk.
 ## Layout
 
 ```
-references/manifest.json   COMMITTED — 275 entries: id, title, category, licence,
-                            sha256, fetch status, published date
+references/manifest.json   COMMITTED — 303 entries: id, title, category, subcategory,
+                            citation, licence, sha256, fetch status, published date
 references/summaries/      COMMITTED — digests and sweep findings
 papers/<slug>/text.txt     GITIGNORED — extracted plain text
 scripts/fm4sd_fetch.py     parse the index, fetch, extract
@@ -44,7 +44,7 @@ python3 scripts/fm4sd_search.py grep "zero.inflation" --context 2
 ```
 
 Fetch is resumable (`--force` to refetch) and cached via a `.fetched` marker per
-paper. The corpus is ~26 MB of text for the fetched subset.
+paper. The corpus is ~33 MB of text for the fetched subset.
 
 ## Two design decisions worth knowing
 
@@ -59,7 +59,7 @@ path is implemented with PyMuPDF (`pip install pymupdf`).
 uniformly permissive — individually-checked entries include arXiv non-exclusive-distrib and
 CC-BY-NC-SA. `scripts/fm4sd_licences.py` queries the arXiv API for a per-paper licence, but
 the API omits the licence element entirely (verified: 2511.03634 is CC-BY-4.0 on its abs page
-yet has no `<arxiv:license>` in the API response), so it reports `api-omitted` for all 225.
+yet has no `<arxiv:license>` in the API response), so it reports `api-omitted` for all 253.
 The manifest therefore records the licence as *unreported* rather than guessing, and
 `redistributable` is False everywhere — an unknown licence is not permission. To clear a
 paper for redistribution, read the licence line on its abs page and add it to `PROVENANCE.md`.

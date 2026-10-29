@@ -36,16 +36,36 @@ index's links against arXiv.
 | Not fetchable | 50 entries — `pmlr`, `doi`, `springer`, `blog`, `lgresearch`, or PDF-only links |
 
 `references/manifest.json` is the machine-readable record: id, title, category, section,
-links, sha256, source type, byte counts, fetch status. Its header records which index source was
-used.
+subcategory, citation, links, licence, sha256, source type, byte counts, fetch status. Its
+header records which index source was used.
 
 ### Index source — changed 2026-10-08
 
 `--index` used to read `INDEX_URL`, the **upstream** `raw.githubusercontent.com/.../README.md`.
 This is a fork whose README we took over, so local edits were being silently ignored: 28 papers
 were added, `--index` reported 275 again, and only calling `parse_index()` directly (303) exposed
-the mismatch. It now defaults to the **local** `README.md`; `--remote` reads upstream for
-comparison.
+the mismatch. It now defaults to the **local** `README.md`; `--remote` diffs upstream against
+that local index and prints the result — it writes nothing, since it previously overwrote
+`references/manifest.json` with upstream's index and deleted the actuarial category along with it.
+
+### Parsing — corrected 2026-10-29
+
+Three fields the parser had been getting wrong since the research layer landed, all found by
+reviewing the repo against its own manifest:
+
+| Field | Was | Now |
+|---|---|---|
+| `citation` | empty on **all 303** entries — `CITATION_RE` required an escaped `\[`, and neither this README nor upstream's ever uses one (288 plain `[nie et al. 2023]`, 0 escaped) | 288 populated; links are stripped before matching so `[arxiv]` cannot read as a citation |
+| `subcategory` | empty on the 28 actuarial entries — their `severity` / `frequency` / `tail` groupings are *indented* `##` headings, which a line-anchored `##` pattern and a `- ` bullet pattern both missed | `severity` (10), `frequency and count models` (11), `tail metrics, quantiles, reserving` (7); queryable via `fm4sd_search.py --subcategory` |
+| `fetch_status` | empty on the 50 entries with no arXiv id, so `--status` called them `(pending)` forever | `skipped:no-arxiv-id`, stamped at index time |
+
+Also corrected here: the research-layer counts in `README.md` and `references/README.md` still
+read 275 / 225 / 30.5 MB from before the actuarial category, and the `api-omitted` count below
+still read 225. All four documents now agree with `fm4sd_search.py stats`.
+
+`--index` also now carries forward keys it does not derive — the licence, `published` and
+`arxiv_title` records written by `fm4sd_licences.py` — instead of discarding them on every
+rebuild. Previously the documented setup path (`--index && --fetch`) deleted all 253 of them.
 
 ### Actuarial category — added 2026-10-08
 
@@ -63,7 +83,7 @@ were never fetched.
 ## Licence — recorded as UNKNOWN, deliberately
 
 `scripts/fm4sd_licences.py` queries the arXiv API for a licence per paper. It returns
-**`api-omitted` for all 225**.
+**`api-omitted` for all 253**.
 
 Verified directly rather than assumed: the API omits the `<arxiv:license>` element entirely.
 2511.03634 is CC-BY-4.0 on its `arxiv.org/abs` page, yet carries no licence element in the API
@@ -97,7 +117,9 @@ python3 scripts/fm4sd_search.py stats
 ```
 
 `--index` is safe to re-run: it reconciles against payload already on disk and preserves
-fetch metadata rather than forcing a refetch. `--force` refetches deliberately.
+fetch metadata rather than forcing a refetch, and it carries forward the licence records
+`fm4sd_licences.py` wrote rather than deleting them. `--force` refetches deliberately.
+`--index --remote` only diffs against upstream and writes nothing.
 
 ## Digests
 
