@@ -177,7 +177,8 @@ knowledge gap.**
   defect, not a policy.
 - **"fetch-and-gitignore-more" has a hard ceiling of ~15 entries (5% of the 303).** The other 32
   (27 paywalled/challenge-gated + 4 unknown + 1 dead) are unreachable by *any* plain HTTP fetcher
-  from here — OpenReview alone is 13 of them, and no amount of fetcher work changes that without
+  from here — 15 of the 32 are gated by OpenReview's challenge, 13 of those with no alternative
+  route in the index at all — and no amount of fetcher work changes that without
   credentials or a browser-verification bypass, which are out of scope for this repo. So the
   decision is not "how much more can we get" but "is a multi-source fetcher (Nature, Springer,
   PMLR, OpenAI/DeepMind/CWI/UCLA mirrors, plus publisher politeness and dead-link maintenance)
