@@ -16,10 +16,10 @@ clone. This fork resolves those links against arXiv and builds a local, greppabl
 
 | | |
 |---|---|
-| **303** | entries in the index |
-| **254** | resolvable to arXiv, fetched locally (**248** LaTeX source, **6** PDF fallback) |
-| **33.4 MB** | of extracted plain text |
-| **117** | link released code |
+| **383** | entries in the index |
+| **323** | resolvable to arXiv, fetched locally (**317** LaTeX source, **6** PDF fallback) |
+| **42.4 MB** | of extracted plain text |
+| **138** | link released code |
 | **12** | digest documents (~35 papers read closely), plus 9 corpus sweeps |
 
 Counts above are `python3 scripts/fm4sd_search.py stats` and
