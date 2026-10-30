@@ -20,20 +20,38 @@ index's links against arXiv.
 | Research layer added | 2026-10-07 |
 | Origin of the seminar | [fm4sd seminar, Uni Freiburg, SS 2026](https://ml.informatik.uni-freiburg.de/teaching/summer-semester-2026/seminar-seminar-on-foundation-models-for-structured-data/) |
 
+## Upstream relationship
+
+- **Posture:** this fork **merges** `upstream/main`; it does not re-sync. Replacing the
+  README with upstream's would destroy the 28 local actuarial entries, their manifest
+  records and the three actuarial sub-categories, and buys nothing — no shared entry has
+  been patched. Details: `docs/RESEARCH.md`.
+- **Drift trigger:** merge when upstream is roughly **25 entries ahead** (about two weeks at
+  its current ~3.5/day), or whenever a decision session needs fresher data. No calendar tick.
+- **Local actuarial block:** 28 entries stay in this fork's `README.md` while their upstream
+  PR ([borawhocodess/fm4sd#5](https://github.com/borawhocodess/fm4sd/pull/5), opened
+  2026-10-30) is open. The local category is authoritative here until it lands; acceptance
+  upstream is unknown (no fork PR has ever been merged there).
+- **On landing:** drop the local block from `README.md`, re-run `--index`, and add a row to
+  the corrections log. After that every sync is a pure merge.
+- **Mechanics:** `git merge upstream/main`, then `--index` (fetch metadata is recovered from
+  payload on disk; licence records are carried forward keyed by arXiv id), then `--fetch`
+  the newly added papers. Divergence point: `62382d2` (2026-10-05).
+
 ## Corpus
 
 | Field | Value |
 |---|---|
 | Index parsed | **`README.md` in this fork** since 2026-10-08 (was upstream `main/README.md` at `62382d2`) |
-| Entries parsed | 303 (was 275 before the actuarial category) |
-| With an arXiv id | 254 (84%) |
-| Linking released code | 117 |
-| Fetched locally | 254 — 248 LaTeX source bundles, 6 PDF fallback |
-| Extracted text | 33.4 MB |
+| Entries parsed | 383 (355 upstream + 28 actuarial) |
+| With an arXiv id | 323 (84%) |
+| Linking released code | 138 |
+| Fetched locally | 323 — 317 LaTeX source bundles, 6 PDF fallback |
+| Extracted text | 42.4 MB |
 | Source preference | `arxiv.org/src/<id>`, falling back to `arxiv.org/pdf/<id>` |
 | PDF extractor | PyMuPDF 1.28.2 |
 | Rate limit | 3 req/s, 5 worker threads |
-| Not fetchable | 49 entries — `pmlr`, `doi`, `springer`, `blog`, `lgresearch`, or PDF-only links |
+| Not fetchable | 60 entries — `openreview`, `pmlr`, `doi`, `springer`, `blog`, `lgresearch`, or PDF-only links |
 
 `references/manifest.json` is the machine-readable record: id, title, category, section,
 subcategory, citation, links, licence, sha256, source type, byte counts, fetch status. Its

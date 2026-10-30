@@ -1,7 +1,7 @@
 {
   "source": "LOCAL README.md",
   "note": "Parsed from the fm4sd README. Payload lives in gitignored papers/.",
-  "count": 303
+  "count": 383
 }
 --- entries ---
 [
@@ -25,12 +25,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2021-12-20",
     "arxiv_title": "Transformers Can Do Bayesian Inference",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "priorfitted",
@@ -50,12 +50,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2025-05-29",
     "arxiv_title": "Position: The Future of Bayesian Prediction Is Prior-Fitted",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "sfopfn",
@@ -76,12 +76,31 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2023-05-18",
     "arxiv_title": "Statistical Foundations of Prior-Data Fitted Networks",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
+  },
+  {
+    "slug": "pfn-amortization",
+    "arxiv_id": "2610.13764",
+    "section": "papers",
+    "category": "general",
+    "subcategory": "",
+    "citation": "h\u00fclskamp et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2610.13764"
+    },
+    "source": "tex",
+    "path": "papers/pfn-amortization",
+    "text_bytes": 121941,
+    "pages": 0,
+    "n_tex_files": 1,
+    "sha256": "e79279d7d1a3c93903a808d6eccef9b1feb2d44a6419d25c13269a54285d39fb",
+    "fetch_status": "ok",
+    "has_code": false
   },
   {
     "slug": "gnr",
@@ -104,6 +123,25 @@
     "has_code": false
   },
   {
+    "slug": "principled-datagen",
+    "arxiv_id": "",
+    "section": "papers",
+    "category": "general",
+    "subcategory": "",
+    "citation": "",
+    "links": {
+      "openreview": "https://openreview.net/forum?id=zm8rhu1kzf"
+    },
+    "source": "",
+    "path": "",
+    "text_bytes": 0,
+    "pages": 0,
+    "n_tex_files": 0,
+    "sha256": "",
+    "fetch_status": "skipped:no-arxiv-id",
+    "has_code": false
+  },
+  {
     "slug": "tabpfn",
     "arxiv_id": "2207.01848",
     "section": "papers",
@@ -123,12 +161,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2022-07-05",
     "arxiv_title": "TabPFN: A Transformer That Solves Small Tabular Classification Problems in a Second",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "tabpfnv2",
@@ -169,12 +207,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2025-11-11",
     "arxiv_title": "TabPFN-2.5: Advancing the State of the Art in Tabular Foundation Models",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "tabpfn-3",
@@ -193,12 +231,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-05-13",
     "arxiv_title": "TabPFN-3: Technical Report",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "tabpfn-3-5",
@@ -217,12 +255,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-09-15",
     "arxiv_title": "TabPFN-3.5: Technical Report",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "real-tabpfn",
@@ -241,12 +279,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2025-07-05",
     "arxiv_title": "Real-TabPFN: Improving Tabular Foundation Models via Continued Pre-training With Real-World Data",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "drifttabpfn",
@@ -267,12 +305,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2024-11-15",
     "arxiv_title": "Drift-Resilient TabPFN: In-Context Learning Temporal Distribution Shifts on Tabular Data",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "nanotabpfn",
@@ -292,12 +330,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2025-11-05",
     "arxiv_title": "nanoTabPFN: A Lightweight and Educational Reimplementation of TabPFN",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "modded-nanotabpfn",
@@ -318,12 +356,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-06-02",
     "arxiv_title": "Speedrunning Tabular Foundation Model Pretraining",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "tabpfnv2closerlook",
@@ -343,12 +381,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2025-02-24",
     "arxiv_title": "A Closer Look at TabPFN v2: Understanding Its Strengths and Extending Its Capabilities",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "finetuningtfm",
@@ -368,12 +406,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2025-06-10",
     "arxiv_title": "On Finetuning Tabular Foundation Models",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "tabicl",
@@ -394,12 +432,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2025-02-08",
     "arxiv_title": "TabICL: A Tabular Foundation Model for In-Context Learning on Large Data",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "tabiclv2",
@@ -421,12 +459,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-02-11",
     "arxiv_title": "TabICLv2: A better, faster, scalable, and open tabular foundation model",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "tabfm",
@@ -446,12 +484,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-09-29",
     "arxiv_title": "TabFM: A Zero-Shot Foundation Model for Tabular Data",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "tabfm-auto",
@@ -470,12 +508,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-09-29",
     "arxiv_title": "TabFM-Auto: Self-Evolving Pipelines for Tabular Foundation Models",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "tabdpt",
@@ -496,12 +534,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2024-10-23",
     "arxiv_title": "TabDPT: Scaling Tabular Foundation Models on Real Data",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "tabdptturbo",
@@ -521,12 +559,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-08-02",
     "arxiv_title": "TabDPT-Turbo: Efficient In-Context Learning for Tabular Prediction",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "limix",
@@ -546,12 +584,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2025-09-03",
     "arxiv_title": "LimiX: Unleashing Structured-Data Modeling Capability for Generalist Intelligence",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "limix-2m",
@@ -572,12 +610,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-06-03",
     "arxiv_title": "LimiX-2M: Mitigating Low-Rank Collapse and Attention Bottlenecks in Tabular Foundation Models",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "limix-v2",
@@ -597,12 +635,31 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-09-15",
     "arxiv_title": "LimiX-2: A Contextual Mechanism Network Towards General Structured-Data Intelligence",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
+  },
+  {
+    "slug": "limix2-contamination",
+    "arxiv_id": "",
+    "section": "papers",
+    "category": "tabular",
+    "subcategory": "",
+    "citation": "",
+    "links": {
+      "github": "https://github.com/autogluon/tabarena/issues/648"
+    },
+    "source": "",
+    "path": "",
+    "text_bytes": 0,
+    "pages": 0,
+    "n_tex_files": 0,
+    "sha256": "",
+    "fetch_status": "skipped:no-arxiv-id",
+    "has_code": true
   },
   {
     "slug": "tabh2o",
@@ -621,12 +678,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-05-18",
     "arxiv_title": "TabH2O: A Unified Foundation Model for Tabular Prediction",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "tabm",
@@ -647,12 +704,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2024-10-31",
     "arxiv_title": "TabM: Advancing Tabular Deep Learning with Parameter-Efficient Ensembling",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "mitra",
@@ -672,12 +729,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2025-10-24",
     "arxiv_title": "Mitra: Mixed Synthetic Priors for Enhancing Tabular Foundation Models",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "mitra-v2",
@@ -696,12 +753,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-09-03",
     "arxiv_title": "Mitra-v2 Technical Report",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "tabflex",
@@ -722,12 +779,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2025-06-05",
     "arxiv_title": "TabFlex: Scaling Tabular Learning to Millions with Linear Attention",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "tabstar",
@@ -748,12 +805,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2025-05-23",
     "arxiv_title": "TabSTAR: A Tabular Foundation Model for Tabular Data with Text Fields",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "tabpack",
@@ -774,12 +831,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-07-06",
     "arxiv_title": "TabPack: Efficient Hyperparameter Ensembles for Tabular Deep Learning",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "tfm-retouche",
@@ -798,12 +855,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-05-07",
     "arxiv_title": "TFM-Retouche: A Lightweight Input-Space Adapter for Tabular Foundation Models",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "realmlp",
@@ -825,12 +882,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2024-07-05",
     "arxiv_title": "Better by Default: Strong Pre-Tuned MLPs and Boosted Trees on Tabular Data",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "metafeatures",
@@ -849,12 +906,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-05-27",
     "arxiv_title": "Explaining Tabular Foundation Model Differences Through Meta-Features",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "talent",
@@ -874,12 +931,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2024-07-04",
     "arxiv_title": "TALENT: A Tabular Analytics and Learning Toolbox",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "tabarena",
@@ -900,12 +957,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2025-06-20",
     "arxiv_title": "TabArena: A Living Benchmark for Machine Learning on Tabular Data",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "beyondarena",
@@ -924,12 +981,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-06-29",
     "arxiv_title": "Beyond IID: How General Are Tabular Foundation Models, Really?",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "exaonetabular",
@@ -949,12 +1006,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-08-26",
     "arxiv_title": "EXAONE Tabular 1.0 : Technical Report",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "xiaomi-tabldm",
@@ -974,12 +1031,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-09-03",
     "arxiv_title": "Xiaomi-TabLDM: A Tabular Foundation Model Technical Report",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "causilo",
@@ -999,12 +1056,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-09-19",
     "arxiv_title": "Causilo Technical Report",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "aplr",
@@ -1081,12 +1138,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2025-06-26",
     "arxiv_title": "Early Stopping Tabular In-Context Learning",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "localpfn",
@@ -1106,12 +1163,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2024-06-07",
     "arxiv_title": "Retrieval & Fine-Tuning for In-Context Tabular Models",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "tfm-priority",
@@ -1131,12 +1188,166 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2024-05-02",
     "arxiv_title": "Why Tabular Foundation Models Should Be a Research Priority",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
+  },
+  {
+    "slug": "tfm-systematic-survey",
+    "arxiv_id": "",
+    "section": "papers",
+    "category": "tabular",
+    "subcategory": "",
+    "citation": "archetti et al. 2026",
+    "links": {
+      "ssrn": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7531718"
+    },
+    "source": "",
+    "path": "",
+    "text_bytes": 0,
+    "pages": 0,
+    "n_tex_files": 0,
+    "sha256": "",
+    "fetch_status": "skipped:no-arxiv-id",
+    "has_code": false
+  },
+  {
+    "slug": "dfs",
+    "arxiv_id": "",
+    "section": "papers",
+    "category": "relational",
+    "subcategory": "",
+    "citation": "kanter and veeramachaneni 2015",
+    "links": {
+      "pdf": "https://groups.csail.mit.edu/EVO-DesignOpt/groupWebSite/uploads/Site/DSAA_DSM_2015.pdf"
+    },
+    "source": "",
+    "path": "",
+    "text_bytes": 0,
+    "pages": 0,
+    "n_tex_files": 0,
+    "sha256": "",
+    "fetch_status": "skipped:no-arxiv-id",
+    "has_code": false
+  },
+  {
+    "slug": "graphsage",
+    "arxiv_id": "1706.02216",
+    "section": "papers",
+    "category": "relational",
+    "subcategory": "",
+    "citation": "hamilton et al. 2017",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/1706.02216",
+      "neurips": "https://papers.nips.cc/paper/2017/hash/5dd9db5e033da9c6fb5ba83c7a7ebea9-Abstract.html"
+    },
+    "source": "tex",
+    "path": "papers/graphsage",
+    "text_bytes": 158371,
+    "pages": 0,
+    "n_tex_files": 10,
+    "sha256": "b73325a6e0cc128ed1ae72d84f7437a22d99d64235f8dd66ca06bdd86d0cd5de",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "rdl",
+    "arxiv_id": "2312.04615",
+    "section": "papers",
+    "category": "relational",
+    "subcategory": "",
+    "citation": "fey et al. 2023",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2312.04615"
+    },
+    "source": "tex",
+    "path": "papers/rdl",
+    "text_bytes": 101566,
+    "pages": 0,
+    "n_tex_files": 17,
+    "sha256": "ccf2ed5ca1abb27a53a8c57782ba05024e831017465022b7486e1a03561fa66d",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "relgnn",
+    "arxiv_id": "2502.06784",
+    "section": "papers",
+    "category": "relational",
+    "subcategory": "",
+    "citation": "chen et al. 2025",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2502.06784"
+    },
+    "source": "tex",
+    "path": "papers/relgnn",
+    "text_bytes": 81869,
+    "pages": 0,
+    "n_tex_files": 7,
+    "sha256": "0c05b38b5801d23ad74247f5ca4b667fffce53106f3be1c9eadc62622ddb480e",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "relgt",
+    "arxiv_id": "2505.10960",
+    "section": "papers",
+    "category": "relational",
+    "subcategory": "",
+    "citation": "dwivedi et al. 2025",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2505.10960"
+    },
+    "source": "tex",
+    "path": "papers/relgt",
+    "text_bytes": 118948,
+    "pages": 0,
+    "n_tex_files": 3,
+    "sha256": "8f42c203cc9e207a38c04b0942af96693284296434d63b89e5a4141bc5790152",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "griffin",
+    "arxiv_id": "2505.05568",
+    "section": "papers",
+    "category": "relational",
+    "subcategory": "",
+    "citation": "wang et al. 2025",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2505.05568"
+    },
+    "source": "tex",
+    "path": "papers/griffin",
+    "text_bytes": 123369,
+    "pages": 0,
+    "n_tex_files": 2,
+    "sha256": "2a2db30541e32f2bfc65aa6f91d70ec9006303dda1327792fefd98c7b43c2f3c",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "relbench",
+    "arxiv_id": "2407.20060",
+    "section": "papers",
+    "category": "relational",
+    "subcategory": "",
+    "citation": "robinson et al. 2024",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2407.20060",
+      "github": "https://github.com/snap-stanford/relbench"
+    },
+    "source": "tex",
+    "path": "papers/relbench",
+    "text_bytes": 179651,
+    "pages": 0,
+    "n_tex_files": 34,
+    "sha256": "2610df6dda5c4eda1c650649635967ab4d9a46b76b8c8327826f71814c1aa157",
+    "fetch_status": "ok",
+    "has_code": true
   },
   {
     "slug": "rdbbench",
@@ -1156,12 +1367,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-07-04",
     "arxiv_title": "A Fair Benchmarking of Deep Relational Database Learning Models",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "rdl-survey",
@@ -1181,12 +1392,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2025-06-19",
     "arxiv_title": "Relational Deep Learning: Challenges, Foundations and Next-Generation Architectures",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "rt",
@@ -1207,12 +1418,33 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2025-10-07",
     "arxiv_title": "Relational Transformer: Toward Zero-Shot Foundation Models for Relational Data",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
+  },
+  {
+    "slug": "rt-j",
+    "arxiv_id": "",
+    "section": "papers",
+    "category": "relational",
+    "subcategory": "",
+    "citation": "ranjan et al. 2026",
+    "links": {
+      "openreview": "https://openreview.net/forum?id=oQINTd9din",
+      "site": "https://star-project.stanford.edu/rt-j",
+      "github": "https://github.com/stanford-star/relational-transformer"
+    },
+    "source": "",
+    "path": "",
+    "text_bytes": 0,
+    "pages": 0,
+    "n_tex_files": 0,
+    "sha256": "",
+    "fetch_status": "skipped:no-arxiv-id",
+    "has_code": true
   },
   {
     "slug": "kumorfm",
@@ -1222,7 +1454,8 @@
     "subcategory": "",
     "citation": "fey et al. 2025",
     "links": {
-      "pdf": "https://kumo.ai/research/kumo_relational_foundation_model.pdf"
+      "pdf": "https://kumo.ai/research/kumo_relational_foundation_model.pdf",
+      "archive": "https://web.archive.org/web/20260117003632/https://kumo.ai/research/kumo_relational_foundation_model.pdf"
     },
     "source": "",
     "path": "",
@@ -1251,12 +1484,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-04-14",
     "arxiv_title": "KumoRFM-2: Scaling Foundation Models for Relational Learning",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "openrfm",
@@ -1275,12 +1508,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-06-03",
     "arxiv_title": "OpenRFM: Dissecting Relational In-Context Learning",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "plurel",
@@ -1300,12 +1533,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-02-03",
     "arxiv_title": "PluRel: Synthetic Data unlocks Scaling Laws for Relational Foundation Models",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "rdblearn",
@@ -1325,12 +1558,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-02-14",
     "arxiv_title": "RDBLearn: Simple In-Context Prediction Over Relational Databases",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "relarena-alpha",
@@ -1351,12 +1584,134 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-08-17",
     "arxiv_title": "Advancing Open and Reproducible Relational Learning: RelArena-$\u03b1$, TabPFN-Rel and RPI",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
+  },
+  {
+    "slug": "tabpfn-rel",
+    "arxiv_id": "",
+    "section": "papers",
+    "category": "relational",
+    "subcategory": "",
+    "citation": "",
+    "links": {
+      "github": "https://github.com/PriorLabs/tabpfn-rel"
+    },
+    "source": "",
+    "path": "",
+    "text_bytes": 0,
+    "pages": 0,
+    "n_tex_files": 0,
+    "sha256": "",
+    "fetch_status": "skipped:no-arxiv-id",
+    "has_code": true
+  },
+  {
+    "slug": "relicl",
+    "arxiv_id": "2610.01725",
+    "section": "papers",
+    "category": "relational",
+    "subcategory": "",
+    "citation": "forbat and gemulla 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2610.01725",
+      "github": "https://github.com/uma-pi1/relicl"
+    },
+    "source": "tex",
+    "path": "papers/relicl",
+    "text_bytes": 118184,
+    "pages": 0,
+    "n_tex_files": 0,
+    "sha256": "",
+    "fetch_status": "cached",
+    "licence": "api-omitted",
+    "licence_url": "api-omitted",
+    "published": "2026-10-01",
+    "arxiv_title": "RelICL: Training-free Relational Learning with Tabular Foundation Models",
+    "redistributable": false,
+    "has_code": true
+  },
+  {
+    "slug": "rdb-pfn",
+    "arxiv_id": "2603.03805",
+    "section": "papers",
+    "category": "relational",
+    "subcategory": "",
+    "citation": "wang et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2603.03805",
+      "github": "https://github.com/MuLabPKU/RDBPFN"
+    },
+    "source": "tex",
+    "path": "papers/rdb-pfn",
+    "text_bytes": 240609,
+    "pages": 0,
+    "n_tex_files": 2,
+    "sha256": "4bd1ce12f05e7c1240b19aac5eb0b917f2718c3e3b80f09a4548962059d521bb",
+    "fetch_status": "ok",
+    "has_code": true
+  },
+  {
+    "slug": "plurel-to-rdb-pfn",
+    "arxiv_id": "2607.29129",
+    "section": "papers",
+    "category": "relational",
+    "subcategory": "",
+    "citation": "abolhasani and ganapathy 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2607.29129"
+    },
+    "source": "tex",
+    "path": "papers/plurel-to-rdb-pfn",
+    "text_bytes": 42207,
+    "pages": 0,
+    "n_tex_files": 1,
+    "sha256": "9484c08c747dc0ebade4a1043c11734dd7165c64dd9beed92749b115798ef12d",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "graphpfn",
+    "arxiv_id": "2509.21489",
+    "section": "papers",
+    "category": "relational",
+    "subcategory": "",
+    "citation": "eremeev et al. 2025",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2509.21489"
+    },
+    "source": "tex",
+    "path": "papers/graphpfn",
+    "text_bytes": 80991,
+    "pages": 0,
+    "n_tex_files": 1,
+    "sha256": "490262b5574537112e5bf80bb15b0dd771fe5027ce82394f462ed3294eb36e48",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "modded-nanort",
+    "arxiv_id": "2610.28855",
+    "section": "papers",
+    "category": "relational",
+    "subcategory": "",
+    "citation": "veloso et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2610.28855",
+      "github": "https://github.com/kunumi/nanoRT"
+    },
+    "source": "tex",
+    "path": "papers/modded-nanort",
+    "text_bytes": 52507,
+    "pages": 0,
+    "n_tex_files": 8,
+    "sha256": "094ee39945ee700e9ab5157c5b1cbeb05d3225627a55a8a3b4ac60a8946a20e0",
+    "fetch_status": "ok",
+    "has_code": true
   },
   {
     "slug": "fev-bench",
@@ -1376,12 +1731,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2025-09-30",
     "arxiv_title": "fev-bench: A Realistic Benchmark for Time Series Forecasting",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "gift-eval",
@@ -1401,12 +1756,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2024-10-14",
     "arxiv_title": "GIFT-Eval: A Benchmark For General Time Series Forecasting Model Evaluation",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "impermanent",
@@ -1426,12 +1781,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-03-09",
     "arxiv_title": "Impermanent: A Live Benchmark for Temporal Generalization in Time Series Forecasting",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "patch-tst",
@@ -1452,12 +1807,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2022-11-27",
     "arxiv_title": "A Time Series is Worth 64 Words: Long-term Forecasting with Transformers",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "chronos-2",
@@ -1478,12 +1833,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2025-10-17",
     "arxiv_title": "Chronos-2: From Univariate to Universal Forecasting",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "chronos",
@@ -1505,12 +1860,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2024-03-12",
     "arxiv_title": "Chronos: Learning the Language of Time Series",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "panda",
@@ -1531,12 +1886,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2025-05-19",
     "arxiv_title": "Panda: A pretrained forecast model for chaotic dynamics",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "tabpfn-ts",
@@ -1557,12 +1912,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2025-01-06",
     "arxiv_title": "From Tables to Time: Extending TabPFN-v2 to Time Series Forecasting",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "toto-2",
@@ -1582,12 +1937,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-05-19",
     "arxiv_title": "Toto 2.0: Time Series Forecasting Enters the Scaling Era",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "ts-icl",
@@ -1607,12 +1962,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-06-04",
     "arxiv_title": "TS-ICL: A Flexible Time-Indexed Foundation Model for Time Series via In-Context Learning",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "tiny-tsm",
@@ -1631,12 +1986,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2025-11-24",
     "arxiv_title": "Tiny-TSM: Efficiently Training a Lightweight SOTA Time Series Foundation Model",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "tempopfn",
@@ -1656,12 +2011,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2025-10-29",
     "arxiv_title": "TempoPFN: Synthetic Pre-training of Linear RNNs for Zero-shot Time Series Forecasting",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "tirex",
@@ -1682,12 +2037,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2025-05-29",
     "arxiv_title": "TiRex: Zero-Shot Forecasting Across Long and Short Horizons with Enhanced In-Context Learning",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "tirex-2",
@@ -1706,12 +2061,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-07-01",
     "arxiv_title": "TiRex-2: Generalizing TiRex to Multivariate Data and Streaming",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "timesfm-3",
@@ -1733,6 +2088,26 @@
     "has_code": false
   },
   {
+    "slug": "timersi",
+    "arxiv_id": "2610.19725",
+    "section": "papers",
+    "category": "time series",
+    "subcategory": "forecasting",
+    "citation": "liu et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2610.19725",
+      "github": "https://github.com/haoxin1998/TimeRSI"
+    },
+    "source": "tex",
+    "path": "papers/timersi",
+    "text_bytes": 79162,
+    "pages": 0,
+    "n_tex_files": 13,
+    "sha256": "5316bcacd96768a6632a93049afc439eedcd0ad29989ceffa9ebb6a2c3ad0215",
+    "fetch_status": "ok",
+    "has_code": true
+  },
+  {
     "slug": "timee",
     "arxiv_id": "2607.07500",
     "section": "papers",
@@ -1750,12 +2125,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-07-08",
     "arxiv_title": "TimEE: End-to-end Time Series Classification via In-Context Learning",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "mantis",
@@ -1776,12 +2151,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2025-02-21",
     "arxiv_title": "Mantis: Lightweight Foundation Model for Time Series Classification",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "rocketpfn",
@@ -1800,12 +2175,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-06-19",
     "arxiv_title": "RocketPFN: Accurate Time Series Classification via In-Context Learning",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "avici",
@@ -1826,12 +2201,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2022-05-25",
     "arxiv_title": "Amortized Inference for Causal Structure Learning",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "bcnp",
@@ -1852,12 +2227,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2024-12-21",
     "arxiv_title": "A Meta-Learning Approach to Bayesian Causal Discovery",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "do-pfn",
@@ -1879,12 +2254,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2025-06-06",
     "arxiv_title": "Do-PFN: In-Context Learning for Causal Effect Estimation",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "use-what-you-know",
@@ -1905,12 +2280,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-02-16",
     "arxiv_title": "Use What You Know: Causal Foundation Models with Partial Graphs",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "tabcausal",
@@ -1930,12 +2305,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-05-29",
     "arxiv_title": "TabCausal: Pretraining Across Causal Environments for Tabular Causal Discovery",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "causalfm",
@@ -1955,12 +2330,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2025-06-12",
     "arxiv_title": "Foundation Models for Causal Inference via Prior-Data Fitted Networks",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "dcd-pfn",
@@ -1979,12 +2354,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-06-19",
     "arxiv_title": "DCD-PFN: A Decoupling-Aware Foundation Model for Causal Discovery",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "foundcause",
@@ -2004,12 +2379,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-06-16",
     "arxiv_title": "FoundCause: Causal Discovery with Latent Confounders from Observational Data",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "tabpfn-cfm",
@@ -2028,12 +2403,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-06-25",
     "arxiv_title": "A Causal Foundation Model for Structure and Outcome Prediction",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "tabpfnunderstandcausal",
@@ -2053,12 +2428,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2025-11-10",
     "arxiv_title": "Does TabPFN Understand Causal Structures?",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "activa",
@@ -2077,12 +2452,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2025-03-03",
     "arxiv_title": "ACTIVA: Amortized Causal Effect Estimation via Transformer-based Variational Autoencoder",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "causalpfn",
@@ -2103,12 +2478,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2025-06-09",
     "arxiv_title": "CausalPFN: Amortized Causal Effect Estimation via In-Context Learning",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "dag-fm",
@@ -2127,12 +2502,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-07-13",
     "arxiv_title": "DAG-FM: A Foundation Model for Causal Discovery under Heterogeneous Causal Mechanisms",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "lifelongicl",
@@ -2151,12 +2526,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-06-24",
     "arxiv_title": "Lifelong In-Context Learning with Transformers Requires Parametric Forms of Attention",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "rlfm",
@@ -2176,12 +2551,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-06-17",
     "arxiv_title": "Reinforcement Learning Foundation Models Should Already Be A Thing",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "lejepa",
@@ -2201,12 +2576,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2025-11-11",
     "arxiv_title": "LeJEPA: Provable and Scalable Self-Supervised Learning Without the Heuristics",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "one-family-six-distributions-a-flexible-model-for-insurance",
@@ -2225,12 +2600,12 @@
     "n_tex_files": 9,
     "sha256": "25d6b5ac016f5ed2dbfca692d5c37e16479cf8e4afdaf4f1e2bc16672bdc2e98",
     "fetch_status": "ok",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2018-05-28",
     "arxiv_title": "One family, six distributions -- A flexible model for insurance claim severity",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "robust-estimation-of-loss-models-for-lognormal-insurance-pay",
@@ -2249,12 +2624,12 @@
     "n_tex_files": 1,
     "sha256": "f98b7201829faa83b6409d2fcde50eedb5a38c0bd841d919f271c4e5b1d5d51c",
     "fetch_status": "ok",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2021-03-02",
     "arxiv_title": "Robust Estimation of Loss Models for Lognormal Insurance Payment Severity Data",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "robust-estimation-of-loss-models-for-truncated-and-censored",
@@ -2273,12 +2648,12 @@
     "n_tex_files": 1,
     "sha256": "83daaf11e9b3d64618c0b51784895d07093e026d06620b5aca7a4147630646ec",
     "fetch_status": "ok",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2022-02-25",
     "arxiv_title": "Robust Estimation of Loss Models for Truncated and Censored Severity Data",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "truncated-censored-and-actuarial-payment-type-moments-for-ro",
@@ -2297,12 +2672,12 @@
     "n_tex_files": 1,
     "sha256": "7793c687880a322f46fb400ae735490babe62ef086e33b95c97160722d09c71d",
     "fetch_status": "ok",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2021-02-19",
     "arxiv_title": "Truncated, Censored, and Actuarial Payment-type Moments for Robust Fitting of a Single-parameter Pareto Distribution",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "phase-type-distributions-for-claim-severity-regression-model",
@@ -2321,12 +2696,12 @@
     "n_tex_files": 1,
     "sha256": "a8a9160e80bf7421a0345e2e3c785c9fb0b1881a3049e0f0d7a2c0b89b8c157d",
     "fetch_status": "ok",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2021-10-11",
     "arxiv_title": "Phase-type distributions for claim severity regression modeling",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "phase-type-mixture-of-experts-regression-for-loss-severities",
@@ -2345,12 +2720,12 @@
     "n_tex_files": 1,
     "sha256": "d89b5e8c717557c814f00daa98914605c7b2e8fc05b909063e461911a54c810b",
     "fetch_status": "ok",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2021-10-31",
     "arxiv_title": "Phase-type mixture-of-experts regression for loss severities",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "mixture-composite-regression-models-with-multi-type-feature",
@@ -2369,12 +2744,12 @@
     "n_tex_files": 4,
     "sha256": "c5cc6d0961a04288956e05353c01cdea8d4fbbc9c6bb5dfa82bd2321ce8d42ab",
     "fetch_status": "ok",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2021-03-12",
     "arxiv_title": "Mixture composite regression models with multi-type feature selection",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "composite-lognormal-t-regression-models-with-varying-thresho",
@@ -2393,12 +2768,12 @@
     "n_tex_files": 1,
     "sha256": "4330169f7ccd350ad240e85d49288c1f25de06e9ec1287c2a182dcfdbcc796e9",
     "fetch_status": "ok",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2022-08-02",
     "arxiv_title": "Composite Lognormal-T regression models with varying threshold and its insurance application",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "a-copula-based-family-of-bivariate-composite-models-for-clai",
@@ -2417,12 +2792,12 @@
     "n_tex_files": 1,
     "sha256": "2f8fe5ba81bfae7f64cec4df7896ce404108b2fb92fd480de43df5590ad55426",
     "fetch_status": "ok",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2022-10-11",
     "arxiv_title": "A Copula-Based family of Bivariate Composite Models for Claim Severity Modelling",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "beyond-the-pearson-correlation-heavy-tailed-risks-weighted-g",
@@ -2441,12 +2816,12 @@
     "n_tex_files": 1,
     "sha256": "f9022ea1d80978ab370a692c02289af963a6bd460c0f123f1e6fa21b2abf0cd5",
     "fetch_status": "ok",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2016-07-09",
     "arxiv_title": "Beyond the Pearson correlation: heavy-tailed risks, weighted Gini correlations, and a Gini-type weighted insurance pricing model",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "insurance-premium-prediction-via-gradient-tree-boosted-tweed",
@@ -2465,12 +2840,12 @@
     "n_tex_files": 1,
     "sha256": "575f93573ffa59e29384418d6dc8a10f92784d21ad2f88fc9612b6401f6d0fd5",
     "fetch_status": "ok",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2015-08-26",
     "arxiv_title": "Insurance Premium Prediction via Gradient Tree-Boosted Tweedie Compound Poisson Models",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "tweedie-gradient-boosting-for-extremely-unbalanced-zero-infl",
@@ -2489,12 +2864,12 @@
     "n_tex_files": 2,
     "sha256": "942a21a884ffef8b29c886fb7055fa11129a4213e19679a811c15fc4b3208f8c",
     "fetch_status": "ok",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2018-11-26",
     "arxiv_title": "Tweedie Gradient Boosting for Extremely Unbalanced Zero-inflated Data",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "model-uncertainty-in-claims-reserving-within-tweedie-s-compo",
@@ -2513,12 +2888,12 @@
     "n_tex_files": 1,
     "sha256": "8af857504ce8efd6d1e683f371fb9ee908f51db7b8a74d0677bf8bc5d061e5ad",
     "fetch_status": "ok",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2009-04-09",
     "arxiv_title": "Model uncertainty in claims reserving within Tweedie's compound Poisson models",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "spatial-risk-estimation-in-tweedie-compound-poisson-double-g",
@@ -2537,12 +2912,12 @@
     "n_tex_files": 1,
     "sha256": "2f82a06e3be6087a5829d25b58d1b4ca83d6e8ec0071a4910a86b2d724e9651d",
     "fetch_status": "ok",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2019-12-27",
     "arxiv_title": "Spatial risk estimation in Tweedie compound Poisson double generalized linear models",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "bonus-malus-scale-premiums-for-tweedie-s-compound-poisson-mo",
@@ -2561,12 +2936,12 @@
     "n_tex_files": 1,
     "sha256": "a5cc0e01c25123657b67f1a0182896c33e2361a06d04dab15d716928d7e1b5da",
     "fetch_status": "ok",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2023-11-06",
     "arxiv_title": "Bonus-Malus scale premiums for tweedie's compound poisson models",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "enhanced-gradient-boosting-for-zero-inflated-insurance-claim",
@@ -2585,12 +2960,12 @@
     "n_tex_files": 1,
     "sha256": "1038d0acfe746a8b79eda88eba61d13f93eb10180974334139b43d113481292c",
     "fetch_status": "ok",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2023-07-15",
     "arxiv_title": "Enhanced Gradient Boosting for Zero-Inflated Insurance Claims and Comparative Analysis of CatBoost, XGBoost, and LightGBM",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "a-comparative-analysis-of-several-multivariate-zero-inflated",
@@ -2609,12 +2984,12 @@
     "n_tex_files": 0,
     "sha256": "96aef0d13370ca7e8259eea4a5c0c51d9ac88f33c711b86eaad88c02647c60c2",
     "fetch_status": "ok",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2022-12-02",
     "arxiv_title": "A comparative analysis of several multivariate zero-inflated and zero-modified models with applications in insurance",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "a-k-inflated-negative-binomial-mixture-regression-model-appl",
@@ -2633,12 +3008,12 @@
     "n_tex_files": 0,
     "sha256": "aeebb1ff84e96cd9701324043993107a6e4ae8e98f9ebc91bb047b7b87f8b042",
     "fetch_status": "ok",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2017-01-19",
     "arxiv_title": "A k-Inflated Negative Binomial Mixture Regression Model: Application to Rate--Making Systems",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "comparing-tobit-and-two-part-hurdle-models-for-semi-continuo",
@@ -2657,12 +3032,12 @@
     "n_tex_files": 1,
     "sha256": "f32d2d345c8aff4857e3cb7d6bfadb0865c29b107a84bfaf789626c302ba8699",
     "fetch_status": "ok",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-08-10",
     "arxiv_title": "Comparing Tobit and Two-Part Hurdle Models for Semi-Continuous Longitudinal Data with an Application to Clonal Hematopoiesis",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "bayesian-cart-models-for-insurance-claims-frequency",
@@ -2681,12 +3056,12 @@
     "n_tex_files": 1,
     "sha256": "c9e0f395597298251a293dc072dad183a0ea412d5f303a407762f9cee4604903",
     "fetch_status": "ok",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2023-03-03",
     "arxiv_title": "Bayesian CART models for insurance claims frequency",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "dynamic-online-prediction-model-and-its-application-to-autom",
@@ -2705,12 +3080,12 @@
     "n_tex_files": 1,
     "sha256": "6eb315daef76453f704d7a488dc342cded7ac723a6cb3c9a11636073ec886372",
     "fetch_status": "ok",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2023-01-08",
     "arxiv_title": "Dynamic online prediction model and its application to automobile claim frequency data",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "local-quantile-regression",
@@ -2729,12 +3104,12 @@
     "n_tex_files": 3,
     "sha256": "7f52bdbb4682a6d5461ce8482f6c8182e703020115e54953f24144edc1279a58",
     "fetch_status": "ok",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2012-08-27",
     "arxiv_title": "Local Quantile Regression",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "high-dimensional-extreme-quantile-regression",
@@ -2753,12 +3128,12 @@
     "n_tex_files": 2,
     "sha256": "c5fbbe4cf3611d8365a7e0fda8849da265369f2624d30e29b22c5c195cc89b77",
     "fetch_status": "ok",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2024-11-21",
     "arxiv_title": "High-Dimensional Extreme Quantile Regression",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "generalized-linear-models-for-extremes-estimation-and-infere",
@@ -2777,12 +3152,12 @@
     "n_tex_files": 1,
     "sha256": "699d249b1502598abd8758b43c53ab914fd410f065e3311deb3fb295797e012b",
     "fetch_status": "ok",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-08-17",
     "arxiv_title": "Generalized Linear Models for Extremes: Estimation and Inference in High Dimensions",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "constant-versus-covariate-dependent-threshold-in-the-peaks-o",
@@ -2801,12 +3176,12 @@
     "n_tex_files": 1,
     "sha256": "ebfa4dce532ed72b0baf0578d92853601242467a48bc20b12ddbb6ad5f336792",
     "fetch_status": "ok",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2018-12-09",
     "arxiv_title": "Constant versus Covariate Dependent Threshold in the Peaks-Over Threshold Method",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "deeptriangle-a-deep-learning-approach-to-loss-reserving",
@@ -2825,12 +3200,12 @@
     "n_tex_files": 2,
     "sha256": "55a1e3a15186a165a941afda23e44529a4c2913746c109f9a8d3846c33e3ce28",
     "fetch_status": "ok",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2018-04-24",
     "arxiv_title": "DeepTriangle: A Deep Learning Approach to Loss Reserving",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "micro-level-reserving-for-general-insurance-claims-using-a-l",
@@ -2849,12 +3224,12 @@
     "n_tex_files": 1,
     "sha256": "a236ee398d6c529387374ceaa37c9f349f995a0378baf6b8cf5a7beecabaea2e",
     "fetch_status": "ok",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2022-01-27",
     "arxiv_title": "Micro-level Reserving for General Insurance Claims using a Long Short-Term Memory Network",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "synthetic-an-individual-insurance-claim-simulator-with-featu",
@@ -2873,12 +3248,12 @@
     "n_tex_files": 1,
     "sha256": "06241faedf6bd7a23732e81fd18dc57d140eb55bff671172d4c2fd5d76197810",
     "fetch_status": "ok",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2020-08-13",
     "arxiv_title": "SynthETIC: an individual insurance claim simulator with feature control",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "martingale",
@@ -2899,12 +3274,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2021-03-29",
     "arxiv_title": "Martingale posterior distributions",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "pfnuq",
@@ -2923,12 +3298,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2025-05-16",
     "arxiv_title": "Uncertainty Quantification for Prior-Data Fitted Networks using Martingale Posteriors",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "alberta-plan",
@@ -2947,12 +3322,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2022-08-23",
     "arxiv_title": "The Alberta Plan for AI Research",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "era-of-experience",
@@ -2992,12 +3367,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2025-05-10",
     "arxiv_title": "Gated Attention for Large Language Models: Non-linearity, Sparsity, and Attention-Sink-Free",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "scnn",
@@ -3016,12 +3391,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2023-01-30",
     "arxiv_title": "Self-Compressing Neural Networks",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "pfnppd",
@@ -3042,12 +3417,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-05-26",
     "arxiv_title": "Transformers Can Learn Posterior Predictive Distributions In-Context",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "mixture-of-recursions",
@@ -3068,12 +3443,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2025-07-14",
     "arxiv_title": "Mixture-of-Recursions: Learning Dynamic Recursive Depths for Adaptive Token-Level Computation",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "deeploop",
@@ -3093,12 +3468,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-07-15",
     "arxiv_title": "DeepLoop: Depth Scaling for Looped Transformers",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "vgi",
@@ -3117,12 +3492,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-08-26",
     "arxiv_title": "Visual General Intelligence: A White Paper",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "sdi",
@@ -3160,12 +3535,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-09-07",
     "arxiv_title": "Continual Learning Mechanisms Compose for Long-Horizon Memorization",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "nora",
@@ -3184,12 +3559,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-08-31",
     "arxiv_title": "Normalized Low-Rank Adaptation",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "recirculation",
@@ -3208,12 +3583,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-08-18",
     "arxiv_title": "Recirculation",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "dream-rsi",
@@ -3233,12 +3608,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-09-14",
     "arxiv_title": "Dream-RSI: Recursive Self-Improvement through Evolving Worlds",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "sol-pi",
@@ -3258,12 +3633,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-09-17",
     "arxiv_title": "SoL-Pi: Recursively Scaling Auto-Research Loops for Efficient Agent Harness",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "ckda",
@@ -3283,12 +3658,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-09-21",
     "arxiv_title": "Complex KDA: Understanding and Enhancing the Expressivity of Kimi Delta Attention",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "jepa-anything",
@@ -3308,12 +3683,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-09-17",
     "arxiv_title": "JEPA-Anything: Learning Predictive Models across Different Worlds",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "hp-scaling-laws-lmo",
@@ -3332,12 +3707,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-03-16",
     "arxiv_title": "Deriving Hyperparameter Scaling Laws via Modern Optimization Theory",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "warmstarting-scaling",
@@ -3356,12 +3731,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-05-13",
     "arxiv_title": "When is Warmstarting Effective for Scaling Language Models?",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "depth-recurrent-attention-mixtures",
@@ -3380,12 +3755,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-01-29",
     "arxiv_title": "Depth-Recurrent Attention Mixtures: Giving Latent Reasoning the Attention it Deserves",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "zeroshot-coordination-llm-agents",
@@ -3443,12 +3818,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-06-11",
     "arxiv_title": "From Uncertain Judgments to Calibrated Rankings: Conformal Elo Estimation for LLM Evaluation",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "memory-attention",
@@ -3467,12 +3842,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-09-23",
     "arxiv_title": "Memory Attention",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "ensemble-inference",
@@ -3510,12 +3885,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-09-24",
     "arxiv_title": "Self-Play Pretraining with Zero Data",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "adaptive-fgd",
@@ -3535,12 +3910,128 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-06-15",
     "arxiv_title": "Functional Gradient Descent with Adaptive Representations",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
+  },
+  {
+    "slug": "fim-pp",
+    "arxiv_id": "2509.24762",
+    "section": "queue",
+    "category": "general",
+    "subcategory": "",
+    "citation": "berghaus et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2509.24762"
+    },
+    "source": "tex",
+    "path": "papers/fim-pp",
+    "text_bytes": 175458,
+    "pages": 0,
+    "n_tex_files": 2,
+    "sha256": "b70a6f3c675f7abb00a74951f7c0fd68832fda6f680851f3ce0340c9514f6d1b",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "retrieval-icl",
+    "arxiv_id": "2610.05717",
+    "section": "queue",
+    "category": "general",
+    "subcategory": "",
+    "citation": "zhu et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2610.05717"
+    },
+    "source": "tex",
+    "path": "papers/retrieval-icl",
+    "text_bytes": 173228,
+    "pages": 0,
+    "n_tex_files": 2,
+    "sha256": "479faae957077bccf00e83eafeab03d27a2c91962659ecba7640017c46139c2b",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "adaptive-mean-icl",
+    "arxiv_id": "2610.07804",
+    "section": "queue",
+    "category": "general",
+    "subcategory": "",
+    "citation": "eppert et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2610.07804"
+    },
+    "source": "tex",
+    "path": "papers/adaptive-mean-icl",
+    "text_bytes": 222254,
+    "pages": 0,
+    "n_tex_files": 4,
+    "sha256": "a5ee13138eb1d245db44c188b0d645a1191f3c36d3e7aac2234f1531302ab87b",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "illusion-of-replacement",
+    "arxiv_id": "2608.28980",
+    "section": "queue",
+    "category": "general",
+    "subcategory": "",
+    "citation": "rezaee 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2608.28980",
+      "github": "https://github.com/kiyan-rezaee/language-vs-structure"
+    },
+    "source": "tex",
+    "path": "papers/illusion-of-replacement",
+    "text_bytes": 227233,
+    "pages": 0,
+    "n_tex_files": 1,
+    "sha256": "9f494d7373217ef469a11051a7ae587cb10f15a2501da6191f87397e9a70cfe4",
+    "fetch_status": "ok",
+    "has_code": true
+  },
+  {
+    "slug": "dust",
+    "arxiv_id": "",
+    "section": "queue",
+    "category": "general",
+    "subcategory": "",
+    "citation": "dahal et al. 2026",
+    "links": {
+      "site": "https://qlabs.sh/research/dust",
+      "github": "https://github.com/qlabs-eng/dust"
+    },
+    "source": "",
+    "path": "",
+    "text_bytes": 0,
+    "pages": 0,
+    "n_tex_files": 0,
+    "sha256": "",
+    "fetch_status": "skipped:no-arxiv-id",
+    "has_code": true
+  },
+  {
+    "slug": "softmax-ce-fix",
+    "arxiv_id": "2610.31642",
+    "section": "queue",
+    "category": "general",
+    "subcategory": "",
+    "citation": "barron et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2610.31642"
+    },
+    "source": "tex",
+    "path": "papers/softmax-ce-fix",
+    "text_bytes": 49290,
+    "pages": 0,
+    "n_tex_files": 2,
+    "sha256": "873ba119ac4a1c445c9db3023ebcf18a6c035bed0a353e32c02611584a31458c",
+    "fetch_status": "ok",
+    "has_code": false
   },
   {
     "slug": "npt",
@@ -3561,12 +4052,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2021-06-04",
     "arxiv_title": "Self-Attention Between Datapoints: Going Beyond Individual Input-Output Pairs in Deep Learning",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "saint",
@@ -3585,12 +4076,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2021-06-02",
     "arxiv_title": "SAINT: Improved Neural Networks for Tabular Data via Row Attention and Contrastive Pre-Training",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "flextab",
@@ -3610,12 +4101,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-06-29",
     "arxiv_title": "FlexTab: A Flexible Encoder-Decoder Architecture for In-Context Learning Across Diverse Tabular Tasks",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "enterprisetabgap",
@@ -3634,12 +4125,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-06-29",
     "arxiv_title": "Exploring Differences Between Tabular Enterprise Data and Public Benchmarks",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "gotabpfn",
@@ -3660,12 +4151,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-06-03",
     "arxiv_title": "GOTabPFN: From Feature Ordering to Compact Tokenization for Tabular Foundation Models on High-Dimensional Data",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "shapinggeometry",
@@ -3705,12 +4196,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-05-10",
     "arxiv_title": "Tabular Foundation Model for Generative Modelling",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "tabattnbench",
@@ -3730,30 +4221,31 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-09-25",
     "arxiv_title": "Benchmarking Attention for Tabular Foundation Models",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "tabshallow",
-    "arxiv_id": "",
+    "arxiv_id": "2610.13253",
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
     "citation": "cannistraci and vogt 2026",
     "links": {
+      "arxiv": "https://arxiv.org/abs/2610.13253",
       "openreview": "https://openreview.net/forum?id=kCnZUf1VYC"
     },
-    "source": "",
-    "path": "",
-    "text_bytes": 0,
+    "source": "tex",
+    "path": "papers/tabshallow",
+    "text_bytes": 144024,
     "pages": 0,
-    "n_tex_files": 0,
-    "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "n_tex_files": 2,
+    "sha256": "dcc7d38eebca3e9b3c78cefbe3bf0e9ae958507f6ff2513914f0d51d09dc5c32",
+    "fetch_status": "ok",
     "has_code": false
   },
   {
@@ -3774,12 +4266,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-06-27",
     "arxiv_title": "Statistically Indistinguishable, Operationally Distinct: A Formal Barrier for Tabular Foundation Models",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "tjepa",
@@ -3799,12 +4291,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2024-10-07",
     "arxiv_title": "T-JEPA: Augmentation-Free Self-Supervised Learning for Tabular Data",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "tablora",
@@ -3823,12 +4315,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-07-11",
     "arxiv_title": "TabLoRA: Parameter-Efficient Low-Rank Ensemble Learning for Large-Scale Tabular Data",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "ptnas",
@@ -3886,12 +4378,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-07-20",
     "arxiv_title": "Topological Signatures of Context-Level Reliability in TabPFN",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "oodtabfm",
@@ -3910,12 +4402,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-07-28",
     "arxiv_title": "Empirical Evaluation of Out-Of-Distribution Performance of Tabular Foundation Models",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "contextadaptiveinference",
@@ -3935,12 +4427,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-07-25",
     "arxiv_title": "Context-Adaptive Inference: A Unified Statistical and Foundation-Model View",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "scoringbench",
@@ -3960,12 +4452,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-03-31",
     "arxiv_title": "ScoringBench: A Benchmark for Evaluating Tabular Foundation Models with Proper Scoring Rules",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "istructtab",
@@ -3986,12 +4478,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-08-05",
     "arxiv_title": "iStructTab: Structured Feature Sequencing for Multimodal Learning of Image and Tabular Data",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "whyllmsfail",
@@ -4010,12 +4502,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-08-03",
     "arxiv_title": "Why Large Language Models Fail at Tabular Prediction",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "ramanpfn",
@@ -4034,12 +4526,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-08-03",
     "arxiv_title": "RamanPFN: learning from Raman spectral structure with a tabular foundation model",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "pfnsyn",
@@ -4078,12 +4570,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-08-01",
     "arxiv_title": "From field-scale to large-scale spectral libraries: Tabular foundation models in soil spectroscopy",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "tfmselfconsistency",
@@ -4102,12 +4594,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-08-06",
     "arxiv_title": "Do Tabular Foundation Models Agree with Themselves?",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "tacticl",
@@ -4127,12 +4619,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-08-11",
     "arxiv_title": "TACTICL: Task-Aware Compression of Tabular ICL Models",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "iced",
@@ -4152,12 +4644,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-08-10",
     "arxiv_title": "In-Context Density Estimation for Tabular Data",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "numstretch",
@@ -4176,12 +4668,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-08-10",
     "arxiv_title": "Tabular Numeric Stretch Transformation",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "qdhgan",
@@ -4219,12 +4711,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-08-13",
     "arxiv_title": "Balanced Adaptive Prototype Selection for Scalable TabPFN Inference on Large-Scale Tabular Data",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "autograble",
@@ -4244,12 +4736,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-08-11",
     "arxiv_title": "AutoGrable: What Is a Good Graph for a Table?",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "seq2synth",
@@ -4268,12 +4760,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-07-17",
     "arxiv_title": "Seq2Synth: Benchmarking Temporal Fidelity in Synthetic Sequential Tabular Data",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "tabnet",
@@ -4293,12 +4785,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2019-08-20",
     "arxiv_title": "TabNet: Attentive Interpretable Tabular Learning",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "ggpl",
@@ -4339,12 +4831,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-05-06",
     "arxiv_title": "Mitigating Label Shift in Tabular In-Context Learning via Test-Time Posterior Adjustment",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "agata",
@@ -4385,12 +4877,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2025-10-02",
     "arxiv_title": "ReTabAD: A Benchmark for Restoring Semantic Context in Tabular Anomaly Detection",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "ratab",
@@ -4450,12 +4942,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2024-05-13",
     "arxiv_title": "Binning as a Pretext Task: Improving Self-Supervised Learning in Tabular Domains",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "tdcoler",
@@ -4475,12 +4967,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2025-01-23",
     "arxiv_title": "On Learning Representations for Tabular Data Distillation",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "memoryefficienttfms",
@@ -4499,12 +4991,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-07-30",
     "arxiv_title": "Memory Efficient Tabular Foundation Models",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "scff",
@@ -4523,12 +5015,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-09-23",
     "arxiv_title": "Support-Compiled Feature Folding: More Evidence at Lower Memory Across Tabular Foundation Models",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "probcircuittabgen",
@@ -4548,12 +5040,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-03-24",
     "arxiv_title": "A Sobering Look at Tabular Data Generation via Probabilistic Circuits",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "arash",
@@ -4572,12 +5064,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-08-18",
     "arxiv_title": "ARASH: Adaptive Retrieval And Shot Selection for Tabular Prediction",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "entangledbydesign",
@@ -4596,12 +5088,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-07-28",
     "arxiv_title": "Entangled by Design: Spurious Intra-Variable Signal Routing in Tabular In-Context Learners",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "survivalpfn",
@@ -4621,12 +5113,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-05-15",
     "arxiv_title": "SurvivalPFN: Amortizing Survival Prediction via In-Context Bayesian Inference",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "tabpfgen",
@@ -4645,12 +5137,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2024-06-07",
     "arxiv_title": "TabPFGen -- Tabular Data Generation with TabPFN",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "interpretabletabpfn",
@@ -4671,12 +5163,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2024-03-16",
     "arxiv_title": "Interpretable Machine Learning for TabPFN",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "fairtfm",
@@ -4696,12 +5188,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-08-14",
     "arxiv_title": "Training Fair Tabular Foundation Models",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "singletablegen",
@@ -4720,12 +5212,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2025-11-12",
     "arxiv_title": "Generalization Can Emerge in Tabular Foundation Models From a Single Table",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "tfmgeneralization",
@@ -4744,12 +5236,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-08-18",
     "arxiv_title": "Understanding the Surprising Generalization Properties of Tabular Foundation Models",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "shappfn",
@@ -4769,12 +5261,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-03-31",
     "arxiv_title": "Real-Time Explanations for Tabular Foundation Models",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "tfmphysics",
@@ -4793,12 +5285,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-09-02",
     "arxiv_title": "Do Tabular Foundation Models Know Physics? Contamination, Units, and the Deterministic Limit",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "agentic-search-spaces",
@@ -4818,12 +5310,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-09-14",
     "arxiv_title": "Agentic Search Spaces for Tabular Machine Learning",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "temporal-tabular-shift",
@@ -4842,12 +5334,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-09-10",
     "arxiv_title": "The Anatomy and Boundary of Adaptation under Temporal Tabular Shift",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "icl-order",
@@ -4855,7 +5347,7 @@
     "section": "queue",
     "category": "tabular",
     "subcategory": "",
-    "citation": "",
+    "citation": "owoeye 2026",
     "links": {
       "researchgate": "https://www.researchgate.net/publication/414216215_Investigating_the_role_of_Order_for_In-Context_Learning_in_Tabular_Foundation_Models"
     },
@@ -4886,12 +5378,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-08-28",
     "arxiv_title": "Generalized Context in Cross Attention for Transfer Learning of Disjoint Tabular Data",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "tabssldataselect",
@@ -4967,12 +5459,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-08-23",
     "arxiv_title": "Tabular foundation models for non-tabular tasks",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "localdistillation",
@@ -4992,12 +5484,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-08-24",
     "arxiv_title": "Interpretable AI with Local Distillation",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "tabbench-bio",
@@ -5017,12 +5509,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-09-07",
     "arxiv_title": "TabBench-Bio: A Living Benchmark for Machine Learning on High-Dimensional Biomedical Tables",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "structuralcoverage",
@@ -5041,12 +5533,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-09-07",
     "arxiv_title": "From Synthetic Priors to Model Behavior: Structural Coverage in Tabular Foundation Models",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "tabprobe",
@@ -5066,12 +5558,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-02-16",
     "arxiv_title": "Tabular Foundation Models Can Learn Association Rules",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "tabpfn-text-adapter",
@@ -5090,12 +5582,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-06-03",
     "arxiv_title": "Towards Pretraining Text Encoders for TabPFN",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "multabench",
@@ -5115,12 +5607,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-05-11",
     "arxiv_title": "MulTaBench: Benchmarking Multimodal Tabular Learning with Text and Image",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "strable",
@@ -5140,12 +5632,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-05-12",
     "arxiv_title": "STRABLE: Benchmarking Tabular Machine Learning with Strings",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "tabprep",
@@ -5165,12 +5657,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-06-01",
     "arxiv_title": "TabPrep: Closing the Feature Engineering Gap in Tabular Benchmarks",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "attention-quantization-tfm",
@@ -5189,12 +5681,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-09-11",
     "arxiv_title": "Attention Quantization for Tabular Foundation Models",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "latable",
@@ -5213,12 +5705,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2024-06-25",
     "arxiv_title": "LaTable: Towards Large Tabular Models",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "goggle",
@@ -5257,12 +5749,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-09-23",
     "arxiv_title": "What Do Tabular Foundation Models Compute In Context? In-Situ Representation Refinement through Attention-Gated Updates",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "tabjepa-recipe",
@@ -5281,12 +5773,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-09-22",
     "arxiv_title": "A JEPA Recipe for Tabular Foundation Models",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "npboost",
@@ -5306,12 +5798,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-09-23",
     "arxiv_title": "NPBoost: Neural Processes with Gradient-Boosted Fixed Effects",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "taskbridge",
@@ -5330,12 +5822,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-09-29",
     "arxiv_title": "TaskBridge: Bridging Unsupervised Tabular Anomaly Detection and In-Context Learning via Virtual Tasks",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "loopicl",
@@ -5355,12 +5847,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-09-28",
     "arxiv_title": "LoopICL: Looping a single transformer block to solve tabular tasks",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "architecturealignment",
@@ -5380,12 +5872,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-09-29",
     "arxiv_title": "Architecture Alignment With Sparse Priors in Tabular Foundation Models",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "tabcon",
@@ -5404,12 +5896,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-09-27",
     "arxiv_title": "Can Tabular Foundation Models Amortize Statistical Inference?",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "cdmd",
@@ -5429,12 +5921,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-09-30",
     "arxiv_title": "CDMD: A Cross-Dataset Mixed-Type Diffusion Model for Tabular Data",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "molecular-shift-tfm",
@@ -5454,12 +5946,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-09-30",
     "arxiv_title": "Molecular Property Prediction under Structural Shift with Tabular Foundation Models",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "tfm-distillation",
@@ -5479,12 +5971,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-10-01",
     "arxiv_title": "Distillation of Tabular Foundation Models into Efficient Predictors",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "dr-tfm",
@@ -5503,12 +5995,609 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-10-01",
     "arxiv_title": "Parameter-Efficient Distributionally Robust Adaptation of Tabular Foundation Models under Subpopulation Shift",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
+  },
+  {
+    "slug": "contextgap",
+    "arxiv_id": "2610.06679",
+    "section": "queue",
+    "category": "tabular",
+    "subcategory": "",
+    "citation": "zeldes 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2610.06679"
+    },
+    "source": "tex",
+    "path": "papers/contextgap",
+    "text_bytes": 79769,
+    "pages": 0,
+    "n_tex_files": 4,
+    "sha256": "c76d802cd33b46c6af9cdabfe5a0b656481609fcd58f436048a65195ed5d2e78",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "tfm-provenance",
+    "arxiv_id": "2610.02347",
+    "section": "queue",
+    "category": "tabular",
+    "subcategory": "",
+    "citation": "bouadi et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2610.02347"
+    },
+    "source": "tex",
+    "path": "papers/tfm-provenance",
+    "text_bytes": 39456,
+    "pages": 0,
+    "n_tex_files": 5,
+    "sha256": "b08ee048686e2a59b22e734a7ad3898c52fcc30cdfba5e40d7634834078f3593",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "tfm-streams",
+    "arxiv_id": "2610.05352",
+    "section": "queue",
+    "category": "tabular",
+    "subcategory": "",
+    "citation": "verma et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2610.05352"
+    },
+    "source": "tex",
+    "path": "papers/tfm-streams",
+    "text_bytes": 129523,
+    "pages": 0,
+    "n_tex_files": 6,
+    "sha256": "edbcdfa85d45d7fe07fc4e47c6fccc5f2ad0cb6ebe88bd2968bb8acdc6519016",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "pfn-anomaly",
+    "arxiv_id": "2610.06693",
+    "section": "queue",
+    "category": "tabular",
+    "subcategory": "",
+    "citation": "bershtman and cohen 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2610.06693"
+    },
+    "source": "tex",
+    "path": "papers/pfn-anomaly",
+    "text_bytes": 134645,
+    "pages": 0,
+    "n_tex_files": 2,
+    "sha256": "88ed8700dea0a349d4166ae0770c5d052114d146b4880440fced7b484934efcb",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "geneicl",
+    "arxiv_id": "2610.08694",
+    "section": "queue",
+    "category": "tabular",
+    "subcategory": "",
+    "citation": "bohl et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2610.08694"
+    },
+    "source": "tex",
+    "path": "papers/geneicl",
+    "text_bytes": 104317,
+    "pages": 0,
+    "n_tex_files": 9,
+    "sha256": "f2994c0cf6a0ccdcbf0e886bc899f5b02dbb8c0bcad086e113762799b5dc9de4",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "test-time-compute",
+    "arxiv_id": "2610.12005",
+    "section": "queue",
+    "category": "tabular",
+    "subcategory": "",
+    "citation": "ning et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2610.12005",
+      "github": "https://github.com/kanghui-learning/test-time-compute-for-tabular-foundation-models"
+    },
+    "source": "tex",
+    "path": "papers/test-time-compute",
+    "text_bytes": 182414,
+    "pages": 0,
+    "n_tex_files": 20,
+    "sha256": "b96192ecc50a5c2201f465accfb55d3d416aac44e0aca47e4956c3c3264d7d1c",
+    "fetch_status": "ok",
+    "has_code": true
+  },
+  {
+    "slug": "tabrelibench",
+    "arxiv_id": "2610.13654",
+    "section": "queue",
+    "category": "tabular",
+    "subcategory": "",
+    "citation": "zhao et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2610.13654"
+    },
+    "source": "tex",
+    "path": "papers/tabrelibench",
+    "text_bytes": 173493,
+    "pages": 0,
+    "n_tex_files": 29,
+    "sha256": "91b6cc564092629f2612c84d1cd414bf29424ed26287192824a96a43d0085762",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "retrospective-inference",
+    "arxiv_id": "2610.10317",
+    "section": "queue",
+    "category": "tabular",
+    "subcategory": "",
+    "citation": "cai et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2610.10317"
+    },
+    "source": "tex",
+    "path": "papers/retrospective-inference",
+    "text_bytes": 87932,
+    "pages": 0,
+    "n_tex_files": 25,
+    "sha256": "d3c3450bd1a35290644782742f53eb7865d7831f6e2faacc3accb16632e1abe9",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "privtab",
+    "arxiv_id": "2610.10068",
+    "section": "queue",
+    "category": "tabular",
+    "subcategory": "",
+    "citation": "alrawajfeh et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2610.10068"
+    },
+    "source": "tex",
+    "path": "papers/privtab",
+    "text_bytes": 317256,
+    "pages": 0,
+    "n_tex_files": 34,
+    "sha256": "c50f30f48349118c4586c07c408de20683febf8a077a1957b43cb3e5d296878e",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "recurrent-icl",
+    "arxiv_id": "2610.14998",
+    "section": "queue",
+    "category": "tabular",
+    "subcategory": "",
+    "citation": "vaidhya et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2610.14998"
+    },
+    "source": "tex",
+    "path": "papers/recurrent-icl",
+    "text_bytes": 49706,
+    "pages": 0,
+    "n_tex_files": 4,
+    "sha256": "ded2f5ccffa765173a648c167c63cd5fcc1a09af97186a090f7f1222b1a09f6f",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "orionmoe",
+    "arxiv_id": "2610.20418",
+    "section": "queue",
+    "category": "tabular",
+    "subcategory": "",
+    "citation": "bouadi et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2610.20418",
+      "github": "https://github.com/Lexsi-Labs/OrionMoE"
+    },
+    "source": "tex",
+    "path": "papers/orionmoe",
+    "text_bytes": 107479,
+    "pages": 0,
+    "n_tex_files": 7,
+    "sha256": "b1e6be2ae3ae5a9c072efc66c71a9d577d1c897567a31d14b54f302942a51bd8",
+    "fetch_status": "ok",
+    "has_code": true
+  },
+  {
+    "slug": "tabgift",
+    "arxiv_id": "2610.16990",
+    "section": "queue",
+    "category": "tabular",
+    "subcategory": "",
+    "citation": "li et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2610.16990"
+    },
+    "source": "tex",
+    "path": "papers/tabgift",
+    "text_bytes": 86039,
+    "pages": 0,
+    "n_tex_files": 8,
+    "sha256": "4d3e1c6586cf7fb51477f5ce95683a6ffa792bb41ccf2b276f5895fff73c6caf",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "tabmosaic",
+    "arxiv_id": "2610.15699",
+    "section": "queue",
+    "category": "tabular",
+    "subcategory": "",
+    "citation": "kim et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2610.15699"
+    },
+    "source": "tex",
+    "path": "papers/tabmosaic",
+    "text_bytes": 126509,
+    "pages": 0,
+    "n_tex_files": 5,
+    "sha256": "e472fe7d1644915b4897e1227405cd6be14eec3fa8ac643795f1aa36a82cea15",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "survicl",
+    "arxiv_id": "2610.22242",
+    "section": "queue",
+    "category": "tabular",
+    "subcategory": "",
+    "citation": "alberge et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2610.22242"
+    },
+    "source": "tex",
+    "path": "papers/survicl",
+    "text_bytes": 117918,
+    "pages": 0,
+    "n_tex_files": 3,
+    "sha256": "d959c8ccf5bef472cf32ded884bc48971729936cd4155a47c7ddb7636f8aecff",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "tabregobjectives",
+    "arxiv_id": "2610.13909",
+    "section": "queue",
+    "category": "tabular",
+    "subcategory": "",
+    "citation": "rudenko et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2610.13909",
+      "github": "https://github.com/yandex-research/tabular-regression"
+    },
+    "source": "tex",
+    "path": "papers/tabregobjectives",
+    "text_bytes": 218060,
+    "pages": 0,
+    "n_tex_files": 2,
+    "sha256": "e12a70b626e08e09123f24c297a35161487e6b4ee41ee8b511928cce1a316e76",
+    "fetch_status": "ok",
+    "has_code": true
+  },
+  {
+    "slug": "ftfm",
+    "arxiv_id": "2610.25558",
+    "section": "queue",
+    "category": "tabular",
+    "subcategory": "",
+    "citation": "grabocka 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2610.25558",
+      "github": "https://github.com/machinelearningnuremberg/ftfm-official"
+    },
+    "source": "tex",
+    "path": "papers/ftfm",
+    "text_bytes": 77410,
+    "pages": 0,
+    "n_tex_files": 2,
+    "sha256": "68e2e5b607d686db8d6ffcb574dac5bf95b243c9fc3423db4ded430096bc34b0",
+    "fetch_status": "ok",
+    "has_code": true
+  },
+  {
+    "slug": "apt",
+    "arxiv_id": "2502.04573",
+    "section": "queue",
+    "category": "tabular",
+    "subcategory": "",
+    "citation": "wu and bergman 2025",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2502.04573"
+    },
+    "source": "tex",
+    "path": "papers/apt",
+    "text_bytes": 83041,
+    "pages": 0,
+    "n_tex_files": 1,
+    "sha256": "83016091cbcaa73e8fa3c1f509f1b3f6f919323bdc43737fdf81007e7e1a7be4",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "tabiclr",
+    "arxiv_id": "",
+    "section": "queue",
+    "category": "tabular",
+    "subcategory": "",
+    "citation": "",
+    "links": {
+      "github": "https://github.com/s-marton/TabICLR"
+    },
+    "source": "",
+    "path": "",
+    "text_bytes": 0,
+    "pages": 0,
+    "n_tex_files": 0,
+    "sha256": "",
+    "fetch_status": "skipped:no-arxiv-id",
+    "has_code": true
+  },
+  {
+    "slug": "ramanbench",
+    "arxiv_id": "2605.02003",
+    "section": "queue",
+    "category": "tabular",
+    "subcategory": "",
+    "citation": "koddenbrock et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2605.02003",
+      "github": "https://github.com/ml-lab-htw/RamanBench"
+    },
+    "source": "tex",
+    "path": "papers/ramanbench",
+    "text_bytes": 326932,
+    "pages": 0,
+    "n_tex_files": 76,
+    "sha256": "9c62e03d2aad0c9c6269d715d5ab73c76915eeda7b4405769d0fbfb93dff5a7b",
+    "fetch_status": "ok",
+    "has_code": true
+  },
+  {
+    "slug": "depth-help",
+    "arxiv_id": "2610.19814",
+    "section": "queue",
+    "category": "tabular",
+    "subcategory": "",
+    "citation": "gong et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2610.19814"
+    },
+    "source": "tex",
+    "path": "papers/depth-help",
+    "text_bytes": 155439,
+    "pages": 0,
+    "n_tex_files": 3,
+    "sha256": "1ca69e312bcb58877af617bdc7d8f3af07f61f65e900f7d8ab30c96cc2875d89",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "taffy",
+    "arxiv_id": "2610.07559",
+    "section": "queue",
+    "category": "tabular",
+    "subcategory": "",
+    "citation": "li et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2610.07559"
+    },
+    "source": "tex",
+    "path": "papers/taffy",
+    "text_bytes": 94763,
+    "pages": 0,
+    "n_tex_files": 11,
+    "sha256": "4fca69a5959a188ff981249ad92893b0ea4ef24868333b8a19f2326dae66ad05",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "separability-gap",
+    "arxiv_id": "2610.14989",
+    "section": "queue",
+    "category": "tabular",
+    "subcategory": "",
+    "citation": "kobialka et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2610.14989"
+    },
+    "source": "tex",
+    "path": "papers/separability-gap",
+    "text_bytes": 101952,
+    "pages": 0,
+    "n_tex_files": 2,
+    "sha256": "e9b7451a21f43745b851b453ba6d89e66201e3e168cd056f17ad4ea730ad1784",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "shaping-prior",
+    "arxiv_id": "2605.18971",
+    "section": "queue",
+    "category": "tabular",
+    "subcategory": "",
+    "citation": "bouadi et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2605.18971"
+    },
+    "source": "tex",
+    "path": "papers/shaping-prior",
+    "text_bytes": 81565,
+    "pages": 0,
+    "n_tex_files": 7,
+    "sha256": "1cba6f5611065fac1f280ef3168722c3e4d42d9a0f25148ecb6e54d47d7032af",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "one-model-rule",
+    "arxiv_id": "2505.20003",
+    "section": "queue",
+    "category": "tabular",
+    "subcategory": "",
+    "citation": "zhang et al. 2025",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2505.20003",
+      "github": "https://github.com/qinglong-tian/tabpfn_study"
+    },
+    "source": "tex",
+    "path": "papers/one-model-rule",
+    "text_bytes": 146339,
+    "pages": 0,
+    "n_tex_files": 11,
+    "sha256": "0b5f3e9cfbbaa4819a6e314586f2098cfd935af767235950c399bd7aadfe7eb0",
+    "fetch_status": "ok",
+    "has_code": true
+  },
+  {
+    "slug": "survival-icl",
+    "arxiv_id": "2603.29475",
+    "section": "queue",
+    "category": "tabular",
+    "subcategory": "",
+    "citation": "seletkov et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2603.29475"
+    },
+    "source": "tex",
+    "path": "papers/survival-icl",
+    "text_bytes": 77359,
+    "pages": 0,
+    "n_tex_files": 1,
+    "sha256": "8d17348d7693a93bd7a7d277cf0ec2673976e81780ef50d525672d5917669fd4",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "active-feature-acq",
+    "arxiv_id": "2610.07406",
+    "section": "queue",
+    "category": "tabular",
+    "subcategory": "",
+    "citation": "kobayashi et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2610.07406"
+    },
+    "source": "tex",
+    "path": "papers/active-feature-acq",
+    "text_bytes": 135042,
+    "pages": 0,
+    "n_tex_files": 4,
+    "sha256": "64650083dda350ec90e2e2a1f973ca6fbc9bf106ad219769d2016d1607c41fee",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "strategic-tabular",
+    "arxiv_id": "2605.19662",
+    "section": "queue",
+    "category": "tabular",
+    "subcategory": "",
+    "citation": "lv et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2605.19662"
+    },
+    "source": "tex",
+    "path": "papers/strategic-tabular",
+    "text_bytes": 118504,
+    "pages": 0,
+    "n_tex_files": 1,
+    "sha256": "2fd6595a767d25243442dfe4e5c77ff119e0abbd7a8a4a3667eb824ba24b12ac",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "tfm-evo-surrogate",
+    "arxiv_id": "2609.18130",
+    "section": "queue",
+    "category": "tabular",
+    "subcategory": "",
+    "citation": "han et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2609.18130"
+    },
+    "source": "tex",
+    "path": "papers/tfm-evo-surrogate",
+    "text_bytes": 154053,
+    "pages": 0,
+    "n_tex_files": 2,
+    "sha256": "9d5770a633c33f603137d2b3d09220c5de0546ff1726f34e01d86a7f47bb3096",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "crash-kumo",
+    "arxiv_id": "2610.10321",
+    "section": "queue",
+    "category": "tabular",
+    "subcategory": "",
+    "citation": "rafe and das 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2610.10321",
+      "github": "https://github.com/pozapas/kumo-jev-crash-records"
+    },
+    "source": "tex",
+    "path": "papers/crash-kumo",
+    "text_bytes": 142959,
+    "pages": 0,
+    "n_tex_files": 20,
+    "sha256": "2be5f09d5458125fecf2875079d3943a40e19ccf8c5c6b51e26c4213058af850",
+    "fetch_status": "ok",
+    "has_code": true
+  },
+  {
+    "slug": "powergrid-tfm",
+    "arxiv_id": "2610.20462",
+    "section": "queue",
+    "category": "tabular",
+    "subcategory": "",
+    "citation": "arowolo et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2610.20462"
+    },
+    "source": "tex",
+    "path": "papers/powergrid-tfm",
+    "text_bytes": 59432,
+    "pages": 0,
+    "n_tex_files": 1,
+    "sha256": "1faea498ef6863afe40966a65abd0a308eb5cf2874a1c4777eb4bd5e90a546b5",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "tabular-data-scaling",
+    "arxiv_id": "2610.26794",
+    "section": "queue",
+    "category": "tabular",
+    "subcategory": "",
+    "citation": "rubachev et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2610.26794",
+      "github": "https://github.com/yandex-research/tabular-dl-more-data"
+    },
+    "source": "tex",
+    "path": "papers/tabular-data-scaling",
+    "text_bytes": 233634,
+    "pages": 0,
+    "n_tex_files": 11,
+    "sha256": "c4de557e0e15ee61fc5f601519db887e26196cbba6c465148caecdc39cf1f406",
+    "fetch_status": "ok",
+    "has_code": true
   },
   {
     "slug": "curriculummatters",
@@ -5527,12 +6616,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-07-31",
     "arxiv_title": "Curriculum Matters: Data-Efficient Relational PFN Pretraining with Synthetic Data",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "zerorel",
@@ -5571,12 +6660,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-05-08",
     "arxiv_title": "AdaTKG: Adaptive Memory for Temporal Knowledge Graph Reasoning",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "subgraphvgae",
@@ -5595,12 +6684,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2024-08-07",
     "arxiv_title": "Deep Generative Models for Subgraph Prediction",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "logic",
@@ -5619,12 +6708,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-09-05",
     "arxiv_title": "LoGIC: Budgeted Context Construction for Node-Level Graph In-Context Learning with Tabular Foundation Models",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "ephris",
@@ -5644,12 +6733,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-09-29",
     "arxiv_title": "Message Passing Does More with Less for In-Context Learning on Graphs",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "supportsetleakage",
@@ -5668,12 +6757,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-09-29",
     "arxiv_title": "Support-Set Target Leakage in Relational Foundation Models during In-Context Learning: Model Dependence and Evaluation Reliability",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "steer",
@@ -5693,37 +6782,244 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-10-01",
     "arxiv_title": "STEER: Reducing Inference Cost in Relational Foundation Models through Semantically Informed Sampling",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
-    "slug": "relicl",
-    "arxiv_id": "2610.01725",
+    "slug": "g2t-fm",
+    "arxiv_id": "2508.20906",
     "section": "queue",
     "category": "relational",
     "subcategory": "",
-    "citation": "forbat and gemulla 2026",
+    "citation": "eremeev et al. 2025",
     "links": {
-      "arxiv": "https://arxiv.org/abs/2610.01725",
-      "github": "https://github.com/uma-pi1/relicl"
+      "arxiv": "https://arxiv.org/abs/2508.20906"
     },
     "source": "tex",
-    "path": "papers/relicl",
-    "text_bytes": 118184,
+    "path": "papers/g2t-fm",
+    "text_bytes": 71422,
+    "pages": 0,
+    "n_tex_files": 1,
+    "sha256": "e5e7407f20c4efceb68c426bca145943cafc7f80f851a825f75b246bb32a7555",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "parameterfreeencoders",
+    "arxiv_id": "2607.05476",
+    "section": "queue",
+    "category": "relational",
+    "subcategory": "",
+    "citation": "xu and wipf 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2607.05476"
+    },
+    "source": "tex",
+    "path": "papers/parameterfreeencoders",
+    "text_bytes": 77018,
+    "pages": 0,
+    "n_tex_files": 1,
+    "sha256": "9a98a56e62e512ede5f98b1de8bf3e6c2441c47714ab6ac792b9340fac745721",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "relagent",
+    "arxiv_id": "2605.07840",
+    "section": "queue",
+    "category": "relational",
+    "subcategory": "",
+    "citation": "huang et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2605.07840"
+    },
+    "source": "tex",
+    "path": "papers/relagent",
+    "text_bytes": 168225,
+    "pages": 0,
+    "n_tex_files": 3,
+    "sha256": "f1a236153d6b58e186e5ddbb0d427c86e4eaa0c8d06deb56a0b68f4cdaf4f67a",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "rtgl",
+    "arxiv_id": "2609.01292",
+    "section": "queue",
+    "category": "relational",
+    "subcategory": "",
+    "citation": "kolesnichenko et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2609.01292"
+    },
+    "source": "tex",
+    "path": "papers/rtgl",
+    "text_bytes": 44607,
+    "pages": 0,
+    "n_tex_files": 3,
+    "sha256": "e861f70d1daa8c5c97b4dfae60aadc7d48f321720f6ae6974711cd52046863d5",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "relbench-v2",
+    "arxiv_id": "2602.12606",
+    "section": "queue",
+    "category": "relational",
+    "subcategory": "",
+    "citation": "gu et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2602.12606"
+    },
+    "source": "tex",
+    "path": "papers/relbench-v2",
+    "text_bytes": 197762,
+    "pages": 0,
+    "n_tex_files": 27,
+    "sha256": "e702d01762664d8dbca8d78e601fdeb143d97c46a12ab68e192e00cff611eb64",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "reldiff",
+    "arxiv_id": "2506.00710",
+    "section": "queue",
+    "category": "relational",
+    "subcategory": "",
+    "citation": "hudovernik et al. 2025",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2506.00710"
+    },
+    "source": "tex",
+    "path": "papers/reldiff",
+    "text_bytes": 93201,
+    "pages": 0,
+    "n_tex_files": 6,
+    "sha256": "5aef6e0687cf2fd3211e76199738ea6a912403fd77ad21f3a926c3bb3b02bf9f",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "grdm",
+    "arxiv_id": "2505.16527",
+    "section": "queue",
+    "category": "relational",
+    "subcategory": "",
+    "citation": "ketata et al. 2025",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2505.16527"
+    },
+    "source": "tex",
+    "path": "papers/grdm",
+    "text_bytes": 170708,
+    "pages": 0,
+    "n_tex_files": 23,
+    "sha256": "9c61453c44f53a117aed3e3cb293681355385ebba56f95478bcb7bbe7ca25468",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "clavaddpm",
+    "arxiv_id": "2405.17724",
+    "section": "queue",
+    "category": "relational",
+    "subcategory": "",
+    "citation": "pang et al. 2024",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2405.17724",
+      "neurips": "https://proceedings.neurips.cc/paper_files/paper/2024/file/983876577ec81db17ecfae1521df9208-Paper-Conference.pdf"
+    },
+    "source": "tex",
+    "path": "papers/clavaddpm",
+    "text_bytes": 190353,
+    "pages": 0,
+    "n_tex_files": 13,
+    "sha256": "b49911f386c13f2eceebfdf0d2f2d6f70d0a70fa0559b79310528eb5bf5260e6",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "syntherela",
+    "arxiv_id": "2410.03411",
+    "section": "queue",
+    "category": "relational",
+    "subcategory": "",
+    "citation": "hudovernik et al. 2025",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2410.03411",
+      "iclr": "https://iclr.cc/virtual/2025/32181",
+      "github": "https://github.com/martinjurkovic/syntherela"
+    },
+    "source": "tex",
+    "path": "papers/syntherela",
+    "text_bytes": 133140,
+    "pages": 0,
+    "n_tex_files": 9,
+    "sha256": "153045829ffc7f94607c290ce24a5712d23dbae497a1c8789486ce8995749499",
+    "fetch_status": "ok",
+    "has_code": true
+  },
+  {
+    "slug": "schemapile",
+    "arxiv_id": "",
+    "section": "queue",
+    "category": "relational",
+    "subcategory": "",
+    "citation": "d\u00f6hmen et al. 2024",
+    "links": {
+      "doi": "https://doi.org/10.1145/3654975",
+      "pdf": "https://ir.cwi.nl/pub/34763/34763.pdf"
+    },
+    "source": "",
+    "path": "",
+    "text_bytes": 0,
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "cached",
-    "has_code": true,
-    "licence": "api-omitted",
-    "licence_url": "api-omitted",
-    "published": "2026-10-01",
-    "arxiv_title": "RelICL: Training-free Relational Learning with Tabular Foundation Models",
-    "redistributable": false
+    "fetch_status": "skipped:no-arxiv-id",
+    "has_code": false
+  },
+  {
+    "slug": "wikidbs",
+    "arxiv_id": "",
+    "section": "queue",
+    "category": "relational",
+    "subcategory": "",
+    "citation": "vogel et al. 2024",
+    "links": {
+      "neurips": "https://proceedings.neurips.cc/paper_files/paper/2024/file/4847447cae911dde321ca19afe7d8707-Paper-Datasets_and_Benchmarks_Track.pdf"
+    },
+    "source": "",
+    "path": "",
+    "text_bytes": 0,
+    "pages": 0,
+    "n_tex_files": 0,
+    "sha256": "",
+    "fetch_status": "skipped:no-arxiv-id",
+    "has_code": false
+  },
+  {
+    "slug": "path-to-pfrm",
+    "arxiv_id": "2610.23073",
+    "section": "queue",
+    "category": "relational",
+    "subcategory": "",
+    "citation": "abolhasani and ganapathy 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2610.23073"
+    },
+    "source": "tex",
+    "path": "papers/path-to-pfrm",
+    "text_bytes": 53150,
+    "pages": 0,
+    "n_tex_files": 1,
+    "sha256": "06a0c4425abd18a6a3915e226d2b5afbb8feebde1114d5ba118c4142185060d8",
+    "fetch_status": "ok",
+    "has_code": false
   },
   {
     "slug": "baguan-ts",
@@ -5763,12 +7059,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-10-01",
     "arxiv_title": "Foundations without Fundamentals: Zero-Shot Blind Spots in Time Series FMs",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "finstar",
@@ -5788,12 +7084,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-05-05",
     "arxiv_title": "FinSTaR: Towards Financial Reasoning with Time Series Reasoning Models",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "fintexts",
@@ -5814,12 +7110,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-03-03",
     "arxiv_title": "FinTexTS: Financial Text-Paired Time-Series Dataset via Semantic-Based and Multi-Level Pairing",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "chorustic",
@@ -5839,12 +7135,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-08-25",
     "arxiv_title": "ChorusTIC: Training-Free Multivariate Time Series Classification via Chorus In-Context Learning",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "mmda",
@@ -5883,12 +7179,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-09-09",
     "arxiv_title": "Distillation of Synthetic Data for Time Series Foundation Models",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "twostagefinance",
@@ -5928,12 +7224,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2025-08-27",
     "arxiv_title": "FinCast: A Foundation Model for Financial Time-Series Forecasting",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "kronos",
@@ -5954,12 +7250,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2025-08-02",
     "arxiv_title": "Kronos: A Foundation Model for the Language of Financial Markets",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "bitcoinllmforecast",
@@ -5998,12 +7294,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2024-01-30",
     "arxiv_title": "IN-Flow: Instance Normalization Flow for Non-stationary Time Series Forecasting",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "t0",
@@ -6023,12 +7319,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-09-21",
     "arxiv_title": "$t_0$: A Time-Series Foundation Model for Forecasting with Context",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "exo-zeroshot-tsfm",
@@ -6066,12 +7362,127 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-09-30",
     "arxiv_title": "RACE: Residual-Aware Test-Time Adaptation for Neighbor-Rich Time-Series Foundation Model Forecasting",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
+  },
+  {
+    "slug": "kit",
+    "arxiv_id": "2609.34507",
+    "section": "queue",
+    "category": "time series",
+    "subcategory": "",
+    "citation": "zhang and li 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2609.34507",
+      "github": "https://github.com/Luciferbobo/KiT"
+    },
+    "source": "tex",
+    "path": "papers/kit",
+    "text_bytes": 83745,
+    "pages": 0,
+    "n_tex_files": 1,
+    "sha256": "51a1cd17fe6e72b049514d92180446c76110d8c18f749eb2dc13255fa704363b",
+    "fetch_status": "ok",
+    "has_code": true
+  },
+  {
+    "slug": "timer-m1",
+    "arxiv_id": "2610.11734",
+    "section": "queue",
+    "category": "time series",
+    "subcategory": "",
+    "citation": "zhang et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2610.11734"
+    },
+    "source": "tex",
+    "path": "papers/timer-m1",
+    "text_bytes": 73984,
+    "pages": 0,
+    "n_tex_files": 1,
+    "sha256": "cf8f3080b5ee58b8da8c694e71af44a556e4ab172c45ab9aec5204d91fc981b4",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "morpheus-2",
+    "arxiv_id": "2610.24321",
+    "section": "queue",
+    "category": "time series",
+    "subcategory": "",
+    "citation": "aakriti et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2610.24321"
+    },
+    "source": "tex",
+    "path": "papers/morpheus-2",
+    "text_bytes": 102520,
+    "pages": 0,
+    "n_tex_files": 3,
+    "sha256": "6bc4e71acd16f1e7e6d8fd162654b7757d1265ba42a28fa468714fc4f78a3a3a",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "timestral",
+    "arxiv_id": "",
+    "section": "queue",
+    "category": "time series",
+    "subcategory": "",
+    "citation": "",
+    "links": {
+      "site": "https://timestral.org"
+    },
+    "source": "",
+    "path": "",
+    "text_bytes": 0,
+    "pages": 0,
+    "n_tex_files": 0,
+    "sha256": "",
+    "fetch_status": "skipped:no-arxiv-id",
+    "has_code": false
+  },
+  {
+    "slug": "turkforecast",
+    "arxiv_id": "",
+    "section": "queue",
+    "category": "time series",
+    "subcategory": "",
+    "citation": "",
+    "links": {
+      "github": "https://github.com/Verm1lion/turkforecast-fm-chronos2-lora-v1"
+    },
+    "source": "",
+    "path": "",
+    "text_bytes": 0,
+    "pages": 0,
+    "n_tex_files": 0,
+    "sha256": "",
+    "fetch_status": "skipped:no-arxiv-id",
+    "has_code": true
+  },
+  {
+    "slug": "tsfm-identification",
+    "arxiv_id": "2610.08118",
+    "section": "queue",
+    "category": "time series",
+    "subcategory": "",
+    "citation": "won 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2610.08118"
+    },
+    "source": "tex",
+    "path": "papers/tsfm-identification",
+    "text_bytes": 67276,
+    "pages": 0,
+    "n_tex_files": 11,
+    "sha256": "59f20d8acad9037c84d5f199694922b1653ae089df77fa06f482a571d09f0c98",
+    "fetch_status": "ok",
+    "has_code": false
   },
   {
     "slug": "tscausalfm",
@@ -6129,12 +7540,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-08-21",
     "arxiv_title": "Foundation Models for Partial Causal Identification",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "causalorder",
@@ -6212,12 +7623,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2025-07-07",
     "arxiv_title": "Estimating Interventional Distributions with Uncertain Causal Graphs through Meta-Learning",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "cdfm",
@@ -6237,12 +7648,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-07-13",
     "arxiv_title": "CDFM: Towards a General-Purpose Causal Discovery Foundation Model",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "stablepfn",
@@ -6281,12 +7692,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-04-24",
     "arxiv_title": "TabSCM: A practical Framework for Generating Realistic Tabular Data",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "orchecause",
@@ -6325,12 +7736,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2025-08-18",
     "arxiv_title": "Score-informed Neural Operator for Enhancing Ordering-based Causal Discovery",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "cwfm",
@@ -6389,12 +7800,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-03-12",
     "arxiv_title": "Frequentist Consistency of Prior-Data Fitted Networks for Causal Inference",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "good-bad-controls",
@@ -6434,12 +7845,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-03-09",
     "arxiv_title": "Structural Causal Bottleneck Models",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "fairpfn",
@@ -6458,12 +7869,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2024-07-08",
     "arxiv_title": "FairPFN: Transformers Can do Counterfactual Fairness",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "closedloop-priorselect",
@@ -6482,12 +7893,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-09-07",
     "arxiv_title": "When and Why LLM Causal Priors Help: Closed-Loop Prior Selection for Amortized Causal Inference",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "causalml-treatment",
@@ -6507,12 +7918,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2024-10-11",
     "arxiv_title": "Causal machine learning for predicting treatment outcomes",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "decaf",
@@ -6533,12 +7944,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2021-10-25",
     "arxiv_title": "DECAF: Generating Fair Synthetic Data Using Causally-Aware Generative Networks",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "causal-fluctuate",
@@ -6557,12 +7968,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-09-22",
     "arxiv_title": "Learning to Fluctuate: Statistical Foundations for Causal Tabular Pretraining",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "cider-fm",
@@ -6581,12 +7992,69 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-09-30",
     "arxiv_title": "CIDER-FM: Foundation Models for Causal Inference from Diverse Experimental Regimes",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
+  },
+  {
+    "slug": "tiger",
+    "arxiv_id": "2610.06156",
+    "section": "queue",
+    "category": "causal",
+    "subcategory": "",
+    "citation": "faouzi 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2610.06156"
+    },
+    "source": "tex",
+    "path": "papers/tiger",
+    "text_bytes": 163764,
+    "pages": 0,
+    "n_tex_files": 1,
+    "sha256": "c05b4ebbcae406ee50fcb39404f47626950ae0a416ea0414fe06c4159c505dd9",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "proximalfm",
+    "arxiv_id": "2610.08078",
+    "section": "queue",
+    "category": "causal",
+    "subcategory": "",
+    "citation": "muller et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2610.08078"
+    },
+    "source": "tex",
+    "path": "papers/proximalfm",
+    "text_bytes": 292253,
+    "pages": 0,
+    "n_tex_files": 31,
+    "sha256": "f61e38283d1ec1ed9596c4f223698a63566b75642f8738cf79a196a368ca6cf2",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "market-impact-cfm",
+    "arxiv_id": "2610.12537",
+    "section": "queue",
+    "category": "causal",
+    "subcategory": "",
+    "citation": "thumm and chen 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2610.12537"
+    },
+    "source": "tex",
+    "path": "papers/market-impact-cfm",
+    "text_bytes": 58406,
+    "pages": 0,
+    "n_tex_files": 1,
+    "sha256": "036b518f654cad71d57bf8130835500eb3624af7fcad837a749be8a849239e8a",
+    "fetch_status": "ok",
+    "has_code": false
   },
   {
     "slug": "cdc-prompt",
@@ -6625,12 +8093,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2024-02-05",
     "arxiv_title": "DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "rna-topology-encoding",
@@ -6670,12 +8138,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2025-07-03",
     "arxiv_title": "AI Research Agents for Machine Learning: Search, Exploration, and Generalization in MLE-bench",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "aira2",
@@ -6694,12 +8162,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-03-27",
     "arxiv_title": "AIRA_2: Overcoming Bottlenecks in AI Research Agents",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "vibecoding",
@@ -6719,12 +8187,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-03-14",
     "arxiv_title": "Computer Science Achievement and Writing Skills Predict Vibe Coding Proficiency",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "mit-ai-report",
@@ -6746,6 +8214,63 @@
     "has_code": false
   },
   {
+    "slug": "diffusion-curriculum",
+    "arxiv_id": "2609.01449",
+    "section": "queue",
+    "category": "other",
+    "subcategory": "",
+    "citation": "drozdova et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2609.01449"
+    },
+    "source": "tex",
+    "path": "papers/diffusion-curriculum",
+    "text_bytes": 52086,
+    "pages": 0,
+    "n_tex_files": 1,
+    "sha256": "52dbee0040284bd5d7c8e0274fc9e50db84fd41962739b0a1b6865a09af253c1",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "byte-distill",
+    "arxiv_id": "2609.12303",
+    "section": "queue",
+    "category": "other",
+    "subcategory": "",
+    "citation": "marathe et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2609.12303"
+    },
+    "source": "tex",
+    "path": "papers/byte-distill",
+    "text_bytes": 127418,
+    "pages": 0,
+    "n_tex_files": 10,
+    "sha256": "aa987cef6f3becbb5932d64e340cc0f50e5dc47edf83deb176545e71fcc996fd",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "pde-pfn",
+    "arxiv_id": "2610.13334",
+    "section": "queue",
+    "category": "other",
+    "subcategory": "",
+    "citation": "park et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2610.13334"
+    },
+    "source": "tex",
+    "path": "papers/pde-pfn",
+    "text_bytes": 201366,
+    "pages": 0,
+    "n_tex_files": 1,
+    "sha256": "08061c83dc2aa737bd7850e1fa374c04333a4def67fe8e707e27b468991e6aab",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
     "slug": "tabfmmechanistic",
     "arxiv_id": "2605.21288",
     "section": "queue",
@@ -6762,12 +8287,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-05-20",
     "arxiv_title": "A Mechanistic Study of Tabular Foundation Models",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "onelayerenough",
@@ -6788,12 +8313,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-05-07",
     "arxiv_title": "Is One Layer Enough? Understanding Inference Dynamics in Tabular Foundation Models",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "looking-glass",
@@ -6812,12 +8337,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-01-13",
     "arxiv_title": "TabPFN Through The Looking Glass: An interpretability study of TabPFN and its internal representations",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "where-computation",
@@ -6837,12 +8362,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-06-11",
     "arxiv_title": "Where Computation Lives Inside TabPFN: Causal Localisation of Attention Head Function",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "kernelicl",
@@ -6861,12 +8386,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2026-02-02",
     "arxiv_title": "Interpretable Tabular Foundation Models via In-Context Kernel Regression",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "rules-or-exemplars",
@@ -6885,6 +8410,25 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "skipped:no-arxiv-id",
+    "has_code": false
+  },
+  {
+    "slug": "standardization-trap",
+    "arxiv_id": "2610.08314",
+    "section": "queue",
+    "category": "mechanistic interpretability",
+    "subcategory": "tabular",
+    "citation": "nguyen et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2610.08314"
+    },
+    "source": "tex",
+    "path": "papers/standardization-trap",
+    "text_bytes": 133829,
+    "pages": 0,
+    "n_tex_files": 13,
+    "sha256": "c251cbb49fc6b9f36471c87a6a91edc249fa5b849ad1838f7222c20cf311ecd5",
+    "fetch_status": "ok",
     "has_code": false
   },
   {
@@ -6923,12 +8467,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2022-09-24",
     "arxiv_title": "In-context Learning and Induction Heads",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "ioi",
@@ -6949,12 +8493,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2022-11-01",
     "arxiv_title": "Interpretability in the Wild: a Circuit for Indirect Object Identification in GPT-2 small",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "grokking",
@@ -6974,12 +8518,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2023-01-12",
     "arxiv_title": "Progress measures for grokking via mechanistic interpretability",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "superposition",
@@ -6998,12 +8542,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2022-09-21",
     "arxiv_title": "Toy Models of Superposition",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "monosemanticity",
@@ -7043,12 +8587,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2022-10-24",
     "arxiv_title": "Emergent World Representations: Exploring a Sequence Model Trained on a Synthetic Task",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "vit-registers",
@@ -7069,12 +8613,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2023-09-28",
     "arxiv_title": "Vision Transformers Need Registers",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "test-time-registers",
@@ -7095,12 +8639,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2025-06-09",
     "arxiv_title": "Vision Transformers Don't Need Trained Registers",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "icl-regression",
@@ -7121,12 +8665,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2022-08-01",
     "arxiv_title": "What Can Transformers Learn In-Context? A Case Study of Simple Function Classes",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "icl-learning-alg",
@@ -7147,12 +8691,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2022-11-28",
     "arxiv_title": "What learning algorithm is in-context learning? Investigations with linear models",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "icl-gd",
@@ -7172,12 +8716,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2022-12-15",
     "arxiv_title": "Transformers learn in-context by gradient descent",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "task-vectors",
@@ -7198,12 +8742,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": true,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2023-10-24",
     "arxiv_title": "In-Context Learning Creates Task Vectors",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": true
   },
   {
     "slug": "function-vectors",
@@ -7223,12 +8767,12 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "cached",
-    "has_code": false,
     "licence": "api-omitted",
     "licence_url": "api-omitted",
     "published": "2023-10-23",
     "arxiv_title": "Function Vectors in Large Language Models",
-    "redistributable": false
+    "redistributable": false,
+    "has_code": false
   },
   {
     "slug": "nonergodic-geometry",
