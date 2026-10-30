@@ -16,7 +16,7 @@ Audit D2 had already recorded this void. These papers exist to fill it.
 
 **Scope limit, stated plainly:** arXiv-only. A large share of actuarial work lives in
 paywalled venues (*Insurance: Mathematics and Economics*, *ASTIN Bulletin*) that this fetcher
-cannot reach — and `fm4sd_fetch.py` skips anything without an arXiv ID, which is also why 50
+cannot reach — and `fm4sd_fetch.py` skips anything without an arXiv ID, which is also why 49
 pre-existing index entries (`pmlr`, `doi`, `springer`) were never fetched. Classic references
 may be absent entirely.
 

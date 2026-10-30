@@ -65,7 +65,7 @@ positive.**
 
 ## Coverage
 
-12 digest documents covering ~35 papers, of **253 fetched** (corpus grew 275 → 303 entries on
+12 digest documents covering ~35 papers, of **254 fetched** (corpus grew 275 → 303 entries on
 2026-10-08). The rest are corpus for sweeping — see `../manifest.json` and
 `../README.md`.
 

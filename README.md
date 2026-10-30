@@ -17,8 +17,8 @@ clone. This fork resolves those links against arXiv and builds a local, greppabl
 | | |
 |---|---|
 | **303** | entries in the index |
-| **253** | resolvable to arXiv, fetched locally (**247** LaTeX source, **6** PDF fallback) |
-| **33.3 MB** | of extracted plain text |
+| **254** | resolvable to arXiv, fetched locally (**248** LaTeX source, **6** PDF fallback) |
+| **33.4 MB** | of extracted plain text |
 | **117** | link released code |
 | **12** | digest documents (~35 papers read closely), plus 9 corpus sweeps |
 
