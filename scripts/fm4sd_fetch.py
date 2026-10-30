@@ -60,9 +60,26 @@ KEEP_SRC = bool(os.environ.get("FM4SD_KEEP_SRC"))
 # Entry shape in the README, e.g.
 #   - tabpfn — [arxiv](https://arxiv.org/abs/2207.01848) · [iclr](...) — \[hollmann et al. 2023\]
 ENTRY_RE = re.compile(r"^\s*-\s+(?P<slug>[^\n—]+?)\s+—\s+(?P<rest>.*)$")
-ARXIV_RE = re.compile(r"https?://arxiv\.org/(?:abs|pdf)/(?P<id>\d{4}\.\d{4,5})")
-ARXIV_PDF_RE = re.compile(r"https?://arxiv\.org/pdf/(?P<id>\d{4}\.\d{4,5})")
-ARXIV_ABS_RE = re.compile(r"https?://arxiv\.org/abs/(?P<id>\d{4}\.\d{4,5})")
+# One id fragment shared by the three arXiv URL patterns, so they cannot drift:
+#   modern (post-2007):  2207.01848          \d{4}.\d{4,5}
+#   legacy (pre-2007):   cond-mat/0011094    archive[/subclass]/yymmnnn
+# The legacy subclass is case-preserving because arXiv ids are case-sensitive on
+# the page (`math.GT/0309136`), though the site tolerates any case in URLs.
+ARXIV_ID = r"\d{4}\.\d{4,5}|[a-z-]+(?:\.[A-Za-z][A-Za-z-]*)?/\d{7}"
+ARXIV_RE = re.compile(rf"https?://arxiv\.org/(?:abs|pdf)/(?P<id>{ARXIV_ID})")
+ARXIV_PDF_RE = re.compile(rf"https?://arxiv\.org/pdf/(?P<id>{ARXIV_ID})")
+ARXIV_ABS_RE = re.compile(rf"https?://arxiv\.org/abs/(?P<id>{ARXIV_ID})")
+
+
+def normalise_arxiv_id(raw: str) -> str:
+    """Canonicalise a matched id so every URL builder works from the stored form.
+
+    Strip a trailing version suffix (`...v2`), keeping the archive/subclass case
+    as published. The stored id is always unversioned, which is what makes
+    `arxiv.org/src/<id>`, `arxiv.org/abs/<id>` and version-suffixed variants
+    (`<id>v1`) resolve from one value, modern or legacy alike.
+    """
+    return re.sub(r"v\d+$", "", raw.strip())
 LINK_RE = re.compile(r"\[(?P<text>[^\]]+)\]\((?P<url>[^)]+)\)")
 # Optional backslashes: this README and upstream's both write `— [nie et al. 2023]`
 # unescaped, so requiring `\[` matched nothing and citation was empty on every entry
@@ -227,7 +244,7 @@ def parse_index(markdown: str) -> list[Paper]:
         for pattern in (ARXIV_RE, ARXIV_PDF_RE, ARXIV_ABS_RE):
             m = pattern.search(rest)
             if m:
-                arxiv = m.group("id")
+                arxiv = normalise_arxiv_id(m.group("id"))
                 break
 
         # Entries with no arXiv id are either benchmarks, blogs, or a link to

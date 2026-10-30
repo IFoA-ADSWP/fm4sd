@@ -85,7 +85,7 @@
   },
   {
     "slug": "gnr",
-    "arxiv_id": "",
+    "arxiv_id": "cond-mat/0011094",
     "section": "papers",
     "category": "general",
     "subcategory": "",
@@ -94,13 +94,13 @@
       "arxiv": "https://arxiv.org/abs/cond-mat/0011094",
       "doi": "https://doi.org/10.1103/PhysRevE.63.066123"
     },
-    "source": "",
-    "path": "",
-    "text_bytes": 0,
+    "source": "tex",
+    "path": "papers/gnr",
+    "text_bytes": 80038,
     "pages": 0,
-    "n_tex_files": 0,
-    "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "n_tex_files": 1,
+    "sha256": "f9ce05f45d4c1d533bced1537268579ea802b6f933dad6b50984e7adfbd40cdb",
+    "fetch_status": "ok",
     "has_code": false
   },
   {
