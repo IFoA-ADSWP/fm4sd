@@ -251,23 +251,6 @@ def parse_index(markdown: str) -> list[Paper]:
     return papers
 
 
-def dedupe(papers: list[Paper]) -> list[Paper]:
-    """Collapse entries that resolve to the same arXiv id.
-
-    The index repeats a few papers across sections (e.g. tabpfnv2 closer look
-    appears in both papers and queue). Keep the first, which is the curated one.
-    """
-    seen: set[str] = set()
-    out: list[Paper] = []
-    for p in papers:
-        key = p.arxiv_id or p.slug
-        if key in seen:
-            continue
-        seen.add(key)
-        out.append(p)
-    return out
-
-
 # --------------------------------------------------------------------------
 # Fetch
 # --------------------------------------------------------------------------
@@ -500,12 +483,12 @@ def compare_remote() -> None:
     """
     limiter = RateLimiter()
     md = http_get(INDEX_URL, limiter).decode("utf-8", "replace")
-    up = dedupe(parse_index(md))
+    up = parse_index(md)
 
     local: list[Paper] = []
     local_path = REPO / "README.md"
     if local_path.exists():
-        local = dedupe(parse_index(local_path.read_text(encoding="utf-8", errors="replace")))
+        local = parse_index(local_path.read_text(encoding="utf-8", errors="replace"))
     elif MANIFEST.exists():
         local = [Paper(**{k: v for k, v in e.items() if k in Paper.__annotations__})
                  for e in load_prior().values()]
@@ -546,7 +529,7 @@ def cmd_index(remote: bool = False) -> None:
         sys.exit("no local README.md; use --remote to compare against upstream")
     source = "LOCAL README.md"
     md = local.read_text(encoding="utf-8", errors="replace")
-    papers = dedupe(parse_index(md))
+    papers = parse_index(md)
     # No arXiv id means no payload: stamp it now, while the reason is in hand, rather
     # than leaving cmd_status() to call these "(pending)" forever. reconcile() below
     # still overrides it to "ok" if a payload turns up on disk anyway.
