@@ -2,8 +2,16 @@
 """Fill in per-paper licence metadata from the arXiv API.
 
 Licence is the reason the corpus payload stays out of git, so it needs to be a
-recorded fact rather than a recollection. The arXiv API returns licence per
-entry, which is authoritative and cheap -- one request per batch of ids.
+recorded fact rather than a recollection. A licence is *expected* per entry --
+the query is cheap, one request per batch of ids -- but the API frequently
+omits it: the <arxiv:license> element is commonly absent from the response even
+when the abs page carries one (verified: 2511.03634 is CC-BY-4.0 on
+arxiv.org/abs with no licence element in the API reply). All 253 arXiv entries
+therefore come back "api-omitted", which is the normal answer here, not a
+failure: it means the API did not report a licence, so the record stays
+"unknown" rather than "absent". The authority for a paper's licence is the
+licence line on its arxiv.org/abs page; this script only takes the cheap first
+pass and records what the API actually said.
 
 Writes back into references/manifest.json, adding a "licence" key to each entry
 that has an arXiv id. Entries the API cannot resolve are marked explicitly
