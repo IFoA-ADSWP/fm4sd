@@ -31,9 +31,16 @@ deliberately no build step — the "gate" is **reproducibility**, not tests.
   `PROVENANCE.md` in the same change. This is the repo's `check-docs` equivalent.
 
 **Fork lineage.** This is a fork of `borawhocodess/fm4sd`; upstream's index is preserved
-verbatim in `README.md`. An `upstream` remote exists so `git diff upstream/main` still works
-and index-only improvements can be PRed back. **Do not rewrite the upstream index** — the
-divergence 2026-10-07 was the research layer only.
+verbatim in `README.md`. Remotes are machine-local, so a fresh clone has only `origin` —
+add the upstream remote as a setup step:
+
+```bash
+git remote add upstream https://github.com/borawhocodess/fm4sd.git && git fetch upstream
+```
+
+With it in place, `git diff upstream/main` still works and index-only improvements can be
+PRed back. **Do not rewrite the upstream index** — the divergence 2026-10-07 was the
+research layer only.
 
 **Verification for a change here:** re-run the relevant script and confirm the manifest,
 summaries and `PROVENANCE.md` still agree. State which of those you checked.
