@@ -75,7 +75,9 @@ rm <id>.tar.gz
   - pfns — [arxiv](https://arxiv.org/abs/2112.10510) · [video](https://youtu.be/XnngBWe2WYE) · [video](https://www.youtube.com/watch?v=0Pi9ARZjIGg) · [iclr](https://iclr.cc/virtual/2022/poster/6595) · [github](https://github.com/automl/TransformersCanDoBayesianInference) — [müller et al. 2022]
   - priorfitted — [arxiv](https://arxiv.org/abs/2505.23947) · [icml](https://proceedings.mlr.press/v267/muller25d.html) — [müller et al. 2025]
   - sfopfn — [arxiv](https://arxiv.org/abs/2305.11097) · [icml](https://proceedings.mlr.press/v202/nagler23a) · [gist](https://gist.github.com/tnagler/62f6ce1f996333c799c81f1aef147e72) — [nagler 2023]
+  - pfn-amortization — [arxiv](https://arxiv.org/abs/2610.13764) — [hülskamp et al. 2026]
   - gnr — [arxiv](https://arxiv.org/abs/cond-mat/0011094) · [doi](https://doi.org/10.1103/PhysRevE.63.066123) — [krapivsky and redner 2001]
+  - principled-datagen — [openreview](https://openreview.net/forum?id=zm8rhu1kzf)
 - tabular
   - tabpfn — [arxiv](https://arxiv.org/abs/2207.01848) · [video](https://www.youtube.com/watch?v=9cE8lqQiLyM) · [iclr](https://iclr.cc/virtual/2023/poster/12113) · [github](https://github.com/automl/TabPFN) — [hollmann et al. 2023]
   - tabpfnv2 — [nature](https://www.nature.com/articles/s41586-024-08328-6) · [pmc](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11711098/) · [video](https://youtu.be/qFnYgM2Yvfs) · [video](https://www.youtube.com/watch?v=SOXK7AJLOY4) · [video](https://www.youtube.com/watch?v=9IkwXGe2Gaw) — [hollmann et al. 2025]
@@ -97,6 +99,7 @@ rm <id>.tar.gz
   - limix — [arxiv](https://arxiv.org/abs/2509.03505) · [github](https://github.com/limix-ldm/LimiX) — [zhang et al. 2025]
   - limix-2m — [arxiv](https://arxiv.org/abs/2606.04485) · [icml](https://proceedings.mlr.press/v306/wang26kw.html) · [github](https://github.com/limix-ldm-ai/LimiX) — [wang et al. 2026]
   - limix-v2 — [arxiv](https://arxiv.org/abs/2609.17488) · [github](https://github.com/limix-ldm/LimiX) — [zhang et al. 2026]
+  - limix2-contamination — [github](https://github.com/autogluon/tabarena/issues/648)
   - tabh2o — [arxiv](https://arxiv.org/abs/2605.18383) — [pfeiffer et al. 2026]
   - tabm — [arxiv](https://arxiv.org/abs/2410.24210) · [iclr](https://iclr.cc/virtual/2025/poster/29590) · [github](https://github.com/yandex-research/tabm) — [gorishniy et al. 2025]
   - mitra — [arxiv](https://arxiv.org/abs/2510.21204) · [neurips](https://neurips.cc/virtual/2025/poster/115625) — [zhang et al. 2025]
@@ -119,16 +122,31 @@ rm <id>.tar.gz
   - earlystoppingicl — [arxiv](https://arxiv.org/abs/2506.21387) — [küken et al. 2025]
   - localpfn — [arxiv](https://arxiv.org/abs/2406.05207) · [neurips](https://proceedings.neurips.cc/paper_files/paper/2024/file/c40daf14d7a6469e65116507c21faeb7-Paper-Conference.pdf) — [thomas et al. 2024]
   - tfm-priority — [arxiv](https://arxiv.org/abs/2405.01147) · [icml](https://proceedings.mlr.press/v235/van-breugel24a.html) — [van breugel and van der schaar 2024]
+  - tfm-systematic-survey — [ssrn](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7531718) — [archetti et al. 2026]
 - relational
+  - dfs — [pdf](https://groups.csail.mit.edu/EVO-DesignOpt/groupWebSite/uploads/Site/DSAA_DSM_2015.pdf) — [kanter and veeramachaneni 2015]
+  - graphsage — [arxiv](https://arxiv.org/abs/1706.02216) · [neurips](https://papers.nips.cc/paper/2017/hash/5dd9db5e033da9c6fb5ba83c7a7ebea9-Abstract.html) — [hamilton et al. 2017]
+  - rdl — [arxiv](https://arxiv.org/abs/2312.04615) — [fey et al. 2023]
+  - relgnn — [arxiv](https://arxiv.org/abs/2502.06784) — [chen et al. 2025]
+  - relgt — [arxiv](https://arxiv.org/abs/2505.10960) — [dwivedi et al. 2025]
+  - griffin — [arxiv](https://arxiv.org/abs/2505.05568) — [wang et al. 2025]
+  - relbench — [arxiv](https://arxiv.org/abs/2407.20060) · [github](https://github.com/snap-stanford/relbench) — [robinson et al. 2024]
   - rdbbench — [arxiv](https://arxiv.org/abs/2607.03659) · [github](https://github.com/mdsamad001/Benchmarking-Deep-Relational-Database-Models) — [akhter et al. 2026]
   - rdl-survey — [arxiv](https://arxiv.org/abs/2506.16654) · [kdd](https://doi.org/10.1145/3711896.3736558) — [dwivedi et al. 2025]
   - rt — [arxiv](https://arxiv.org/abs/2510.06377) · [iclr](https://iclr.cc/virtual/2026/poster/10007116) · [github](https://github.com/snap-stanford/relational-transformer) — [ranjan et al. 2026]
-  - kumorfm — [pdf](https://kumo.ai/research/kumo_relational_foundation_model.pdf) — [fey et al. 2025]
+  - rt-j — [openreview](https://openreview.net/forum?id=oQINTd9din) · [site](https://star-project.stanford.edu/rt-j) · [github](https://github.com/stanford-star/relational-transformer) — [ranjan et al. 2026]
+  - kumorfm — [pdf](https://kumo.ai/research/kumo_relational_foundation_model.pdf) · [archive](https://web.archive.org/web/20260117003632/https://kumo.ai/research/kumo_relational_foundation_model.pdf) — [fey et al. 2025]
   - kumorfm-2 — [arxiv](https://arxiv.org/abs/2604.12596) · [github](https://github.com/kumo-ai/kumo-rfm) — [hudovernik et al. 2026]
   - openrfm — [arxiv](https://arxiv.org/abs/2606.04320) — [chen et al. 2026]
   - plurel — [arxiv](https://arxiv.org/abs/2602.04029) · [icml](https://proceedings.mlr.press/v306/kothapalli26a.html) — [kothapalli et al. 2026]
   - rdblearn — [arxiv](https://arxiv.org/abs/2602.18495) · [arxiv](https://arxiv.org/abs/2602.13697) · [github](https://github.com/HKUSHXLab/rdblearn) — [zhang et al. 2026]
   - relarena-alpha — [arxiv](https://arxiv.org/abs/2608.16319) · [blog](https://priorlabs.ai/blog-posts/introducing-relarena) · [github](https://github.com/PriorLabs/relarena) — [hayler et al. 2026]
+  - tabpfn-rel — [github](https://github.com/PriorLabs/tabpfn-rel)
+  - relicl — [arxiv](https://arxiv.org/abs/2610.01725) · [github](https://github.com/uma-pi1/relicl) — [forbat and gemulla 2026]
+  - rdb-pfn — [arxiv](https://arxiv.org/abs/2603.03805) · [github](https://github.com/MuLabPKU/RDBPFN) — [wang et al. 2026]
+  - plurel-to-rdb-pfn — [arxiv](https://arxiv.org/abs/2607.29129) — [abolhasani and ganapathy 2026]
+  - graphpfn — [arxiv](https://arxiv.org/abs/2509.21489) — [eremeev et al. 2025]
+  - modded-nanort — [arxiv](https://arxiv.org/abs/2610.28855) · [github](https://github.com/kunumi/nanoRT) — [veloso et al. 2026]
 - time series
   - forecasting
     - fev-bench — [arxiv](https://arxiv.org/abs/2509.26468) · [github](https://github.com/autogluon/fev) — [shchur et al. 2025]
@@ -146,6 +164,7 @@ rm <id>.tar.gz
     - tirex — [arxiv](https://arxiv.org/abs/2505.23719) · [neurips](https://neurips.cc/virtual/2025/poster/115439) · [github](https://github.com/NX-AI/tirex) — [auer et al. 2025]
     - tirex-2 — [arxiv](https://arxiv.org/abs/2607.01204) — [podest et al. 2026]
     - timesfm-3 — [blog](https://research.google/blog/timesfm-3-a-zero-shot-foundation-model-for-multivariate-forecasting/)
+    - timersi — [arxiv](https://arxiv.org/abs/2610.19725) · [github](https://github.com/haoxin1998/TimeRSI) — [liu et al. 2026]
   - classification
     - timee — [arxiv](https://arxiv.org/abs/2607.07500) · [github](https://github.com/automl/timee) — [küken et al. 2026]
     - mantis — [arxiv](https://arxiv.org/abs/2502.15637) · [icml](https://proceedings.mlr.press/v306/feofanov26a.html) · [github](https://github.com/vfeofanov/mantis) — [feofanov et al. 2026]
@@ -244,6 +263,12 @@ not placed yet:
   - ensemble-inference — [openreview](https://openreview.net/forum?id=rMYJG9mzn5)
   - self-play-zero-data — [arxiv](https://arxiv.org/abs/2609.30063) — [cowsik et al. 2026]
   - adaptive-fgd — [arxiv](https://arxiv.org/abs/2606.16926) · [github](https://github.com/dccsillag/experiments-adaptive-fgd) — [csillag et al. 2026]
+  - fim-pp — [arxiv](https://arxiv.org/abs/2509.24762) — [berghaus et al. 2026]
+  - retrieval-icl — [arxiv](https://arxiv.org/abs/2610.05717) — [zhu et al. 2026]
+  - adaptive-mean-icl — [arxiv](https://arxiv.org/abs/2610.07804) — [eppert et al. 2026]
+  - illusion-of-replacement — [arxiv](https://arxiv.org/abs/2608.28980) · [github](https://github.com/kiyan-rezaee/language-vs-structure) — [rezaee 2026]
+  - dust — [site](https://qlabs.sh/research/dust) · [github](https://github.com/qlabs-eng/dust) — [dahal et al. 2026]
+  - softmax-ce-fix — [arxiv](https://arxiv.org/abs/2610.31642) — [barron et al. 2026]
 - tabular
   - npt — [arxiv](https://arxiv.org/abs/2106.02584) · [neurips](https://proceedings.neurips.cc/paper_files/paper/2021/hash/f1507aba9fc82ffa7cc7373c58f8a613-Abstract.html) · [github](https://github.com/OATML/Non-Parametric-Transformers) — [kossen et al. 2021]
   - saint — [arxiv](https://arxiv.org/abs/2106.01342) — [somepalli et al. 2021]
@@ -253,7 +278,7 @@ not placed yet:
   - shapinggeometry — [openreview](https://openreview.net/forum?id=IYnHchzvYB) · [poster](https://www.humzahmerchant.com/posters/fmsd%202026%20poster.PNG) — [merchant et al. 2026]
   - tabgenfm — [arxiv](https://arxiv.org/abs/2605.09424) · [openreview](https://openreview.net/forum?id=RcsaxrdpfE) — [jiang et al. 2026]
   - tabattnbench — [arxiv](https://arxiv.org/abs/2609.31306) · [openreview](https://openreview.net/forum?id=rwtcugrpDq) — [schambach et al. 2026]
-  - tabshallow — [openreview](https://openreview.net/forum?id=kCnZUf1VYC) — [cannistraci and vogt 2026]
+  - tabshallow — [arxiv](https://arxiv.org/abs/2610.13253) · [openreview](https://openreview.net/forum?id=kCnZUf1VYC) — [cannistraci and vogt 2026]
   - tabbarrier — [arxiv](https://arxiv.org/abs/2606.29091) · [openreview](https://openreview.net/forum?id=TUYc2XUdwz) — [klein and hoffart 2026]
   - tjepa — [arxiv](https://arxiv.org/abs/2410.05016) · [iclr](https://iclr.cc/virtual/2025/poster/28793) — [thimonier et al. 2025]
   - tablora — [arxiv](https://arxiv.org/abs/2607.10077) — [luo and xu 2026]
@@ -300,7 +325,7 @@ not placed yet:
   - tfmphysics — [arxiv](https://arxiv.org/abs/2609.02766) — [tenachi et al. 2026]
   - agentic-search-spaces — [arxiv](https://arxiv.org/abs/2609.16309) · [github](https://github.com/yandex-research/agentic-hpset) — [sergazinov et al. 2026]
   - temporal-tabular-shift — [arxiv](https://arxiv.org/abs/2609.12136) — [wang et al. 2026]
-  - icl-order — [researchgate](https://www.researchgate.net/publication/414216215_Investigating_the_role_of_Order_for_In-Context_Learning_in_Tabular_Foundation_Models)
+  - icl-order — [researchgate](https://www.researchgate.net/publication/414216215_Investigating_the_role_of_Order_for_In-Context_Learning_in_Tabular_Foundation_Models) — [owoeye 2026]
   - cattle — [arxiv](https://arxiv.org/abs/2608.28209) · [doi](https://doi.org/10.1016/j.neunet.2026.109568) — [akhter et al. 2027]
   - tabssldataselect — [springer](https://link.springer.com/article/10.1007/s10994-026-07133-8) — [stevanoska et al. 2026]
   - augtab — [springer](https://link.springer.com/chapter/10.1007/978-3-032-37670-1_24)
@@ -328,6 +353,37 @@ not placed yet:
   - molecular-shift-tfm — [arxiv](https://arxiv.org/abs/2609.38744) · [github](https://github.com/nums-ai/MolPAIR) — [lee et al. 2026]
   - tfm-distillation — [arxiv](https://arxiv.org/abs/2610.01435) · [github](https://github.com/nums-ai/TFM_Distillation) — [jeong et al. 2026]
   - dr-tfm — [arxiv](https://arxiv.org/abs/2610.01143) — [kim et al. 2026]
+  - contextgap — [arxiv](https://arxiv.org/abs/2610.06679) — [zeldes 2026]
+  - tfm-provenance — [arxiv](https://arxiv.org/abs/2610.02347) — [bouadi et al. 2026]
+  - tfm-streams — [arxiv](https://arxiv.org/abs/2610.05352) — [verma et al. 2026]
+  - pfn-anomaly — [arxiv](https://arxiv.org/abs/2610.06693) — [bershtman and cohen 2026]
+  - geneicl — [arxiv](https://arxiv.org/abs/2610.08694) — [bohl et al. 2026]
+  - test-time-compute — [arxiv](https://arxiv.org/abs/2610.12005) · [github](https://github.com/kanghui-learning/test-time-compute-for-tabular-foundation-models) — [ning et al. 2026]
+  - tabrelibench — [arxiv](https://arxiv.org/abs/2610.13654) — [zhao et al. 2026]
+  - retrospective-inference — [arxiv](https://arxiv.org/abs/2610.10317) — [cai et al. 2026]
+  - privtab — [arxiv](https://arxiv.org/abs/2610.10068) — [alrawajfeh et al. 2026]
+  - recurrent-icl — [arxiv](https://arxiv.org/abs/2610.14998) — [vaidhya et al. 2026]
+  - orionmoe — [arxiv](https://arxiv.org/abs/2610.20418) · [github](https://github.com/Lexsi-Labs/OrionMoE) — [bouadi et al. 2026]
+  - tabgift — [arxiv](https://arxiv.org/abs/2610.16990) — [li et al. 2026]
+  - tabmosaic — [arxiv](https://arxiv.org/abs/2610.15699) — [kim et al. 2026]
+  - survicl — [arxiv](https://arxiv.org/abs/2610.22242) — [alberge et al. 2026]
+  - tabregobjectives — [arxiv](https://arxiv.org/abs/2610.13909) · [github](https://github.com/yandex-research/tabular-regression) — [rudenko et al. 2026]
+  - ftfm — [arxiv](https://arxiv.org/abs/2610.25558) · [github](https://github.com/machinelearningnuremberg/ftfm-official) — [grabocka 2026]
+  - apt — [arxiv](https://arxiv.org/abs/2502.04573) — [wu and bergman 2025]
+  - tabiclr — [github](https://github.com/s-marton/TabICLR)
+  - ramanbench — [arxiv](https://arxiv.org/abs/2605.02003) · [github](https://github.com/ml-lab-htw/RamanBench) — [koddenbrock et al. 2026]
+  - depth-help — [arxiv](https://arxiv.org/abs/2610.19814) — [gong et al. 2026]
+  - taffy — [arxiv](https://arxiv.org/abs/2610.07559) — [li et al. 2026]
+  - separability-gap — [arxiv](https://arxiv.org/abs/2610.14989) — [kobialka et al. 2026]
+  - shaping-prior — [arxiv](https://arxiv.org/abs/2605.18971) — [bouadi et al. 2026]
+  - one-model-rule — [arxiv](https://arxiv.org/abs/2505.20003) · [github](https://github.com/qinglong-tian/tabpfn_study) — [zhang et al. 2025]
+  - survival-icl — [arxiv](https://arxiv.org/abs/2603.29475) — [seletkov et al. 2026]
+  - active-feature-acq — [arxiv](https://arxiv.org/abs/2610.07406) — [kobayashi et al. 2026]
+  - strategic-tabular — [arxiv](https://arxiv.org/abs/2605.19662) — [lv et al. 2026]
+  - tfm-evo-surrogate — [arxiv](https://arxiv.org/abs/2609.18130) — [han et al. 2026]
+  - crash-kumo — [arxiv](https://arxiv.org/abs/2610.10321) · [github](https://github.com/pozapas/kumo-jev-crash-records) — [rafe and das 2026]
+  - powergrid-tfm — [arxiv](https://arxiv.org/abs/2610.20462) — [arowolo et al. 2026]
+  - tabular-data-scaling — [arxiv](https://arxiv.org/abs/2610.26794) · [github](https://github.com/yandex-research/tabular-dl-more-data) — [rubachev et al. 2026]
 - relational
   - curriculummatters — [arxiv](https://arxiv.org/abs/2607.29120) — [abolhasani and ganapathy 2026]
   - zerorel — [acm](https://dl.acm.org/doi/10.1145/3770855.3818115) — [tian et al. 2026]
@@ -337,7 +393,18 @@ not placed yet:
   - ephris — [arxiv](https://arxiv.org/abs/2609.37057) · [github](https://github.com/nums-ai/ephris) — [lee et al. 2026]
   - supportsetleakage — [arxiv](https://arxiv.org/abs/2609.36417) — [upendra et al. 2026]
   - steer — [arxiv](https://arxiv.org/abs/2610.00907) · [github](https://github.com/lids-lab/steer) — [mohamed and aboulnaga 2026]
-  - relicl — [arxiv](https://arxiv.org/abs/2610.01725) · [github](https://github.com/uma-pi1/relicl) — [forbat and gemulla 2026]
+  - g2t-fm — [arxiv](https://arxiv.org/abs/2508.20906) — [eremeev et al. 2025]
+  - parameterfreeencoders — [arxiv](https://arxiv.org/abs/2607.05476) — [xu and wipf 2026]
+  - relagent — [arxiv](https://arxiv.org/abs/2605.07840) — [huang et al. 2026]
+  - rtgl — [arxiv](https://arxiv.org/abs/2609.01292) — [kolesnichenko et al. 2026]
+  - relbench-v2 — [arxiv](https://arxiv.org/abs/2602.12606) — [gu et al. 2026]
+  - reldiff — [arxiv](https://arxiv.org/abs/2506.00710) — [hudovernik et al. 2025]
+  - grdm — [arxiv](https://arxiv.org/abs/2505.16527) — [ketata et al. 2025]
+  - clavaddpm — [arxiv](https://arxiv.org/abs/2405.17724) · [neurips](https://proceedings.neurips.cc/paper_files/paper/2024/file/983876577ec81db17ecfae1521df9208-Paper-Conference.pdf) — [pang et al. 2024]
+  - syntherela — [arxiv](https://arxiv.org/abs/2410.03411) · [iclr](https://iclr.cc/virtual/2025/32181) · [github](https://github.com/martinjurkovic/syntherela) — [hudovernik et al. 2025]
+  - schemapile — [doi](https://doi.org/10.1145/3654975) · [pdf](https://ir.cwi.nl/pub/34763/34763.pdf) — [döhmen et al. 2024]
+  - wikidbs — [neurips](https://proceedings.neurips.cc/paper_files/paper/2024/file/4847447cae911dde321ca19afe7d8707-Paper-Datasets_and_Benchmarks_Track.pdf) — [vogel et al. 2024]
+  - path-to-pfrm — [arxiv](https://arxiv.org/abs/2610.23073) — [abolhasani and ganapathy 2026]
 - time series
   - baguan-ts — [openreview](https://openreview.net/forum?id=xO10rIopwe) · [icml](https://proceedings.mlr.press/v306/yang26ac.html) — [yang et al. 2026]
   - simpletimebench — [arxiv](https://arxiv.org/abs/2610.02058) · [openreview](https://openreview.net/forum?id=iIRdd86Xkr) — [ghoroghchian et al. 2026]
@@ -354,6 +421,12 @@ not placed yet:
   - t0 — [arxiv](https://arxiv.org/abs/2609.24559) · [github](https://github.com/theforecastingcompany/tfc-t0) — [meyer et al. 2026]
   - exo-zeroshot-tsfm — [ieee](https://ieeexplore.ieee.org/abstract/document/11711112/)
   - race — [arxiv](https://arxiv.org/abs/2610.00405) — [shi et al. 2026]
+  - kit — [arxiv](https://arxiv.org/abs/2609.34507) · [github](https://github.com/Luciferbobo/KiT) — [zhang and li 2026]
+  - timer-m1 — [arxiv](https://arxiv.org/abs/2610.11734) — [zhang et al. 2026]
+  - morpheus-2 — [arxiv](https://arxiv.org/abs/2610.24321) — [aakriti et al. 2026]
+  - timestral — [site](https://timestral.org)
+  - turkforecast — [github](https://github.com/Verm1lion/turkforecast-fm-chronos2-lora-v1)
+  - tsfm-identification — [arxiv](https://arxiv.org/abs/2610.08118) — [won 2026]
 - causal
   - tscausalfm — [openreview](https://openreview.net/forum?id=CAaTQAfq7c) — [thumm et al. 2026]
   - causalfewshot — [openreview](https://openreview.net/forum?id=2yvEiFhNCT) — [ossen et al. 2026]
@@ -378,6 +451,9 @@ not placed yet:
   - decaf — [arxiv](https://arxiv.org/abs/2110.12884) · [neurips](https://proceedings.neurips.cc/paper_files/paper/2021/hash/ba9fab001f67381e56e410575874d967-Abstract.html) · [github](https://github.com/vanderschaarlab/DECAF) — [van breugel et al. 2021]
   - causal-fluctuate — [arxiv](https://arxiv.org/abs/2609.26290) — [zhang 2026]
   - cider-fm — [arxiv](https://arxiv.org/abs/2609.39523) — [gao et al. 2026]
+  - tiger — [arxiv](https://arxiv.org/abs/2610.06156) — [faouzi 2026]
+  - proximalfm — [arxiv](https://arxiv.org/abs/2610.08078) — [muller et al. 2026]
+  - market-impact-cfm — [arxiv](https://arxiv.org/abs/2610.12537) — [thumm and chen 2026]
 - other
   - cdc-prompt — [pdf](https://cdn.openai.com/pdf/04d1d1e4-bc75-476a-97cf-49055cd98d31/cdc_prompt.pdf)
   - grpo — [arxiv](https://arxiv.org/abs/2402.03300) · [github](https://github.com/deepseek-ai/DeepSeek-Math) — [shao et al. 2024]
@@ -386,6 +462,9 @@ not placed yet:
   - aira2 — [arxiv](https://arxiv.org/abs/2603.26499) — [hambardzumyan et al. 2026]
   - vibecoding — [arxiv](https://arxiv.org/abs/2603.14133) · [chi](https://doi.org/10.1145/3772318.3791666) — [thorgeirsson et al. 2026]
   - mit-ai-report — [pdf](https://bpb-us-e1.wpmucdn.com/sites.mit.edu/dist/d/2418/files/2026/09/AI-Committee-Final-Report-Aug-13.pdf)
+  - diffusion-curriculum — [arxiv](https://arxiv.org/abs/2609.01449) — [drozdova et al. 2026]
+  - byte-distill — [arxiv](https://arxiv.org/abs/2609.12303) — [marathe et al. 2026]
+  - pde-pfn — [arxiv](https://arxiv.org/abs/2610.13334) — [park et al. 2026]
 - mechanistic interpretability
   - tabular
     - tabfmmechanistic — [arxiv](https://arxiv.org/abs/2605.21288) — [biloš et al. 2026]
@@ -394,6 +473,7 @@ not placed yet:
     - where-computation — [arxiv](https://arxiv.org/abs/2606.12917) · [github](https://github.com/atharva7-g/tabfm-interp) — [gupta et al. 2026]
     - kernelicl — [arxiv](https://arxiv.org/abs/2602.02162) — [miftachov et al. 2026]
     - rules-or-exemplars — [openreview](https://openreview.net/forum?id=9nCMtYGxQt) — [balef et al. 2026]
+    - standardization-trap — [arxiv](https://arxiv.org/abs/2610.08314) — [nguyen et al. 2026]
   - circuits
     - circuits-framework — [blog](https://transformer-circuits.pub/2021/framework/index.html)
     - induction-heads — [arxiv](https://arxiv.org/abs/2209.11895) — [olsson et al. 2022]
@@ -421,4 +501,7 @@ not placed yet:
 - fsml2026 — [site](https://fsml-ims-workshop.org)
 - tfm-survey — [site](https://tfm-survey.com)
 - tabularfoundationmodels-guide — [site](https://tabularfoundationmodels.com)
+- tfms-under-the-hood — [blog](https://www.dennisloevlie.com/blog/tabular-foundation-models-under-the-hood/) — [loevlie 2026]
 - awesome-tfms — [github](https://github.com/jxucoder/Awesome-Tabular-Foundation-Models)
+- paperswithcode-tabular — [site](https://paperswithcode.co/tasks/tabular-learning)
+- data-foundry — [site](https://tabarena.github.io/data-foundry/) · [skills](https://github.com/TabArena/data-foundry/tree/main/.claude/skills)
