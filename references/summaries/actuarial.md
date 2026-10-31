@@ -62,7 +62,7 @@ is a different object, evaluated on synthetic zero-inflated auto-insurance claim
 than the wording implies, and it is the cheapest untested variant in the repo: a Tweedie
 *objective inside a GBDT* rather than a linear fit.
 
-*Corrected 2026-10-31 (#53): "untested" is true of us, not of the literature.* The variant has
+*Note 2026-10-31 (#53):* "untested" is true of us, not of the literature. The variant has
 been in this corpus since 2026-10-08 — `insurance-premium-prediction-via-gradient-tree-boosted-tweed`
 (1508.06378, Yang et al. 2015) is a gradient-tree-boosted Tweedie premium model — and the
 distributional-boosting arm is published in
@@ -151,7 +151,7 @@ of the kind this repo measures. Audit 2's finding stands: the TFM literature doe
 tail-accuracy numbers, and the actuarial literature does not evaluate TFMs. **The seam W1
 targets sits in the gap between them.**
 
-*Narrowed 2026-10-31 (#53):* the second half of that no longer holds as written —
+*Note 2026-10-31 (#53):* the second half of that no longer holds as written —
 `towards-foundation-models-for-insurance-risk-modelling` (2609.14576) reviews tabular foundation
 models for insurance risk modelling, so the actuarial literature now *reviews* TFMs. It still
 publishes no tail-accuracy evaluation. The claim narrows to **the actuarial literature reviews

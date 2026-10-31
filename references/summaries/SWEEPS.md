@@ -100,11 +100,11 @@ Current: **0.76 min vs the 74.32 min baseline ≈ 98×**, on 4,096 synthetic dat
    not be a real separation. Record 11's own numbers also show the trade-off honestly: epochs got
    *faster* per epoch (0.84s → 0.72s) but it needs *more* of them (57 → 64).
 
-   *Named 2026-10-31 (#53):* "roughly half a standard deviation — it may not be a real
-   separation" is the right doubt, and the instrument for it is a mixed-effects model over
-   per-task results, not two medians — `lmem-for-post-hoc-analysis-of-hpo-benchmarking`
-   (2408.02533). Comparing medians of aggregated runs is the weaker test the paper exists to
-   replace.
+   *Note 2026-10-31 (#53):* "roughly half a standard deviation — it may not be a real
+   separation" is the right doubt. The record already reports bootstrap 95% CIs; what it lacks is
+   a per-task significance test, which is what
+   `lmem-for-post-hoc-analysis-of-hpo-benchmarking` (2408.02533) supplies — a mixed-effects model
+   over per-task results rather than a comparison of run-level aggregates.
 2. **Sub-minute timings assume a warm `torch.compile` cache** — the record's README says so
    explicitly. First-run wallclock will not match.
 
@@ -155,7 +155,7 @@ Relevant caveat: the speedrun evaluates on **subsampled** TabArena. `beyondarena
 (2606.30410) exists because TabArena itself was found to saturate — worth checking before
 treating a TabArena AUC as a meaningful target.
 
-*Cited 2026-10-31 (#53):* that saturation caution is the **benchmark lottery**
+*Note 2026-10-31 (#53):* that saturation caution is the **benchmark lottery**
 (`the-benchmark-lottery`, 2107.07002) — a leaderboard position on one suite need not survive a
 resample of tasks and metrics. The comparison that is not a lottery draw is a tuned evaluation
 across many suites, which is what `tabrepo-a-large-scale-repository-of-tabular-model-evaluations`
@@ -261,7 +261,7 @@ arrived at from first principles (F30/F31) has **no published counterpart** in t
 is either novelty or a sign it is not considered an interesting angle. The sweep cannot
 distinguish those.
 
-*Narrowed 2026-10-31 (#53):* read "no published counterpart" as **no _ICL_ counterpart**. The
+*Note 2026-10-31 (#53):* read "no published counterpart" as **no _ICL_ counterpart**. The
 canonical hurdle and zero-inflated models are now indexed, citation-only because both are
 paywalled: `zero-inflated-poisson-regression-with-an-application-to-defects` (Lambert 1992) and
 `specification-and-testing-of-some-modified-count-data-models` (Mullahy 1986). What is still
@@ -331,7 +331,8 @@ the metric question stays a business decision rather than a literature question.
 > **NARROWED AGAIN 2026-10-31 (#53), on the #47 block.** Two sentences of the 2026-10-08 note
 > above are overtaken by the 48 comparison entries added in #47 — the `probabilistic` block and
 > the nine new `actuarial / loss modelling` entries. The sweep result itself still stands; what
-> follows is what the reading no longer covers.
+> follows is what the reading no longer covers. The two sentences below are one from the
+> 2026-10-08 note and one from the sweep body that note annotates.
 >
 > - "there is **no actuarial / reserving / tail-calibration literature in this corpus at all**"
 >   — **false as written**, and it is the tail-calibration half that moved. Reserving now has

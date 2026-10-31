@@ -4,7 +4,7 @@ Plan written 2026-10-31, before the first edit to `references/summaries/`.
 
 ## What this lands
 
-Nine corrections to six digests, taken from the research review
+Nine research findings, landed as seventeen edits across six digests, taken from the research review
 `research/digest-impact-2026-10-31.md` on `research/digest-impact` (#52, never merged). The #47
 block of 48 comparison entries is now indexed; this change makes the digests read it.
 

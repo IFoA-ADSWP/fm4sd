@@ -43,10 +43,11 @@ Measured instantiation of the paper's own config gives **356,066 parameters**. T
 Matches k-NN / decision tree / random forest (default scikit-learn config) within **1 minute**
 of pretraining on a single GPU. Claimed **160,000× faster** than TabPFN v2 pretraining.
 
-Cited 2026-10-31 (#53): those are **default-config baselines**, and default-config baselines are
-not the literature's standard. `tabular-data-deep-learning-is-not-all-you-need` (2106.03253) and
-`why-do-tree-based-models-still-outperform-deep-learning` (2207.08815) both compare after tuning,
-and the second explicitly accounts for both fitting models and finding good hyperparameters. So
+*Note 2026-10-31 (#53):* those are **default-config baselines**, and default-config baselines are
+not the literature's standard. `why-do-tree-based-models-still-outperform-deep-learning` (2207.08815) compares at tuning parity,
+explicitly accounting for both fitting models and finding good hyperparameters; the earlier
+`tabular-data-deep-learning-is-not-all-you-need` (2106.03253) is the comparison whose deep
+baselines were tuned far less. So
 "matches k-NN / DT / RF" is a comparison against untuned scikit-learn defaults, not against the
 trees a benchmark would field.
 
