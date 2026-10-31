@@ -46,6 +46,12 @@ apply or verify, so it stays a setup step.
 Write docs/plans/<task>.md before non-trivial work: what you intend to change and
 why. Commit it with the change.
 
+## Research layer
+
+Research findings live on `research/<gap>` branches and never merge: the ticket closes
+with its finding cited from the branch, so `main` has no `research/` directory. Read
+`docs/RESEARCH.md` before proposing a PR for a research branch.
+
 ## Conventions
 
 This is a **research/corpus repo**, not an application. There is no test suite and there is

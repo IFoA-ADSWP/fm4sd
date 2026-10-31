@@ -49,7 +49,10 @@ If a call returns a 404, the endpoints may have moved; inspect with
 nominates. Sub-issue/blocking ids are the child issue's numeric id, not its `#`-number's URL
 form.
 
-Issue reference resolution: bare `#N` resolves against `IFoA-ADSWP/fm4sd` by default.
+Issue reference resolution: bare `#N` **in prose** resolves against `IFoA-ADSWP/fm4sd`.
+`gh` does not: this repo is a fork, so `gh` resolves the `upstream` remote
+(`borawhocodess/fm4sd`) and bare `gh issue view 42` answers "Could not resolve to an
+issue". Always pass `-R IFoA-ADSWP/fm4sd`.
 
 ## Wayfinding operations
 
