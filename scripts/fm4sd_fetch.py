@@ -141,6 +141,10 @@ ARXIV_ABS_RE = re.compile(rf"https?://arxiv\.org/abs/(?P<id>{ARXIV_ID})")
 POLITE_REQS_PER_SECOND = 1.0
 
 
+ABSENCE_REASONS = frozenset({"not-paper", "captcha", "paywall", "dead", "unknown"})
+SHAREABLE_VALUES = frozenset({"yes", "no", "unknown"})
+
+
 @dataclass(frozen=True)
 class RouteSpec:
     """Everything the static audit knows about one id-less entry.
@@ -159,6 +163,14 @@ class RouteSpec:
     licence: str = ""         # what the source declares
     licence_source: str = ""  # URL the licence claim was read from
     shareable: str = ""       # "yes" | "no" | "unknown"; unknown is never permission
+
+    def __post_init__(self) -> None:
+        # GLOSSARY.md fixes both vocabularies; a typo would otherwise mint a
+        # status or a permission value the docs do not define.
+        if self.absence and self.absence not in ABSENCE_REASONS:
+            raise ValueError(f"unknown absence reason: {self.absence!r}")
+        if self.shareable and self.shareable not in SHAREABLE_VALUES:
+            raise ValueError(f"unknown shareable value: {self.shareable!r}")
 
     @property
     def status(self) -> str:
@@ -1258,6 +1270,8 @@ def corpus_figures(entries: list[dict]) -> dict[str, int | float]:
         "code": sum(1 for e in entries if e.get("has_code")),
         "text_bytes": sum(int(e.get("text_bytes") or 0) for e in fetched),
         "licences": sum(1 for e in entries if e.get("licence") == "api-omitted"),
+        "licence_url_rows": sum(1 for e in entries if e.get("licence_url")),
+        "licence_source_rows": sum(1 for e in entries if e.get("licence_source")),
         "skipped_total": sum(
             1 for e in entries if str(e.get("fetch_status") or "").startswith("skipped:")
         ),

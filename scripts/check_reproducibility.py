@@ -186,7 +186,9 @@ def make_scratch() -> Path:
     scratch/scripts/ makes the scratch directory the repo root. Nothing outside
     the copy is touched, and no payload is carried across.
 
-    The files copied are the fetcher's declared `INDEX_INPUTS`. The check after
+    The list is checked before copying: a declared input that is missing fails
+    loudly. It is a declaration, not the code that reads, so an input `--index`
+    gains without a matching entry here can still go unnoticed. The check after
     the copy is what keeps that declaration honest: if `--index` gains an input,
     the gate fails here and names it, instead of comparing a manifest built
     without it (#38).
@@ -434,6 +436,10 @@ CLAIMS = (
           r"\|\s*Fetched locally\s*\|\s*(?P<fetched>\d+)\s*[—-]\s*(?P<tex>\d+)\s+LaTeX"
           r" source bundles,\s*(?P<pdf>\d+)\s+PDF(?:,\s*\d+\s+HTML/XML)?",
           ("fetched", "tex", "pdf")),
+    Claim("PROVENANCE.md", "licence_url row count",
+          r"`licence_url`\s+on\s+the\s+(?P<licence_url_rows>\d+)\s+arXiv\s+rows", ("licence_url_rows",)),
+    Claim("PROVENANCE.md", "licence_source row count",
+          r"`licence_source`\s+on\s+the\s+(?P<licence_source_rows>\d+)\s+route\s+rows", ("licence_source_rows",)),
     Claim("PROVENANCE.md", "Extracted text",
           r"\|\s*Extracted text\s*\|\s*(?P<text_mb>[\d.]+)\s*MB", ("text_mb",)),
 )
