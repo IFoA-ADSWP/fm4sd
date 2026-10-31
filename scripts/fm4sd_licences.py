@@ -74,13 +74,29 @@ def parse_response(xml: bytes) -> dict[str, dict]:
     return out
 
 
+class _Every:
+    """A pace for retries: arXiv asks for >=3 s between API calls."""
+
+    def __init__(self, seconds: float = 3.0) -> None:
+        self.seconds = seconds
+        self._first = True
+
+    def wait(self) -> None:
+        if self._first:  # the first call needs no wait
+            self._first = False
+            return
+        time.sleep(self.seconds)
+
+
 def fetch_batch(ids: list[str], retries: int = 3) -> dict[str, dict]:
     """Return {canonical id: {licence, published, title}} for one batch.
 
-    The retry policy is the shared client's; the batch pause stays in main().
+    The retry policy is the shared client's; spacing between attempts is this
+    script's 3 s floor, and the batch pause stays in main(). Note the shared
+    policy's status set differs from the old blanket retry: 4xx is final.
     """
     url = f"{API}?id_list={','.join(ids)}&max_results={len(ids)}"
-    xml = net.get(url, user_agent=USER_AGENT, attempts=retries)
+    xml = net.get(url, user_agent=USER_AGENT, attempts=retries, pace=_Every())
     return parse_response(xml)
 
 
@@ -122,7 +138,7 @@ def main() -> None:
             resolved.update(got)
             print(f"  [{i + len(batch):3d}/{len(ids)}] resolved {len(got)}/{len(batch)}")
         except Exception as e:  # noqa: BLE001
-            print(f"  [{i + len(batch):3d}/{len(ids)}] batch failed: {type(e).__name__}")
+            print(f"  [{i + len(batch):3d}/{len(ids)}] batch failed: {e}")
         time.sleep(3)  # arXiv asks for >=3s between API calls
 
     for e in entries:

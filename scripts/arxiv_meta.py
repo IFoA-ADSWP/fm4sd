@@ -92,7 +92,7 @@ def human_age(seconds: float) -> str:
 def fetch(url: str) -> bytes:
     """GET through the shared client, with this tool's user agent and patience."""
     return net.get(url, user_agent=UA, timeout=TIMEOUT, attempts=RETRIES,
-                   log=lambda message: print(message, file=sys.stderr))
+                   log=lambda message: print(f"arxiv_meta: {message}", file=sys.stderr))
 
 
 def parse_feed(xml: str) -> dict[str, dict]:
