@@ -25,7 +25,13 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 PAPERS = REPO / "papers"
 MANIFEST = REPO / "references" / "manifest.json"
-DELIM = "\n--- entries ---\n"
+
+# The fetcher owns the manifest format and the published-figure definitions, so
+# `stats` prints from them rather than restating them (#38). Resolved from REPO
+# so the import works however this script is launched.
+if str(REPO / "scripts") not in sys.path:
+    sys.path.insert(0, str(REPO / "scripts"))
+from fm4sd_fetch import FETCHED_STATUSES, MANIFEST_DELIM, corpus_figures  # noqa: E402
 
 # Sentence-ish split for --context. Avoids depending on nltk/spacy.
 SENT_SPLIT = re.compile(r"(?<=[.!?])\s+(?=[A-Z(\[])")
@@ -33,9 +39,9 @@ SENT_SPLIT = re.compile(r"(?<=[.!?])\s+(?=[A-Z(\[])")
 
 def load() -> list[dict]:
     raw = MANIFEST.read_text()
-    if DELIM not in raw:
+    if MANIFEST_DELIM not in raw:
         sys.exit("manifest malformed; rerun fm4sd_fetch.py --index")
-    return json.loads(raw.split(DELIM, 1)[1])
+    return json.loads(raw.split(MANIFEST_DELIM, 1)[1])
 
 
 def text_path(entry: dict) -> Path | None:
@@ -57,9 +63,9 @@ def cmd_list(entries: list[dict], args) -> None:
             continue
         if args.subcategory and e.get("subcategory") != args.subcategory:
             continue
-        if args.local and e.get("fetch_status") not in ("ok", "cached"):
+        if args.local and e.get("fetch_status") not in FETCHED_STATUSES:
             continue
-        if args.missing and e.get("fetch_status") in ("ok", "cached"):
+        if args.missing and e.get("fetch_status") in FETCHED_STATUSES:
             continue
         year = match_year(e.get("arxiv_id", ""))
         if args.since and (year is None or year < args.since):
@@ -71,7 +77,7 @@ def cmd_list(entries: list[dict], args) -> None:
     for e in rows:
         flags = "".join([
             "C" if e.get("has_code") else " ",
-            "L" if e.get("fetch_status") in ("ok", "cached") else " ",
+            "L" if e.get("fetch_status") in FETCHED_STATUSES else " ",
         ])
         print(f"{flags} {e['arxiv_id'] or '--------':>12}  {e['slug'][:38]:<38}  "
               f"{e.get('section', ''):<7} {e.get('category', ''):<14} {e.get('citation', '')}")
@@ -202,15 +208,13 @@ def cmd_grep(entries: list[dict], args) -> None:
 
 
 def cmd_stats(entries: list[dict]) -> None:
-    ok = [e for e in entries if e.get("fetch_status") in ("ok", "cached")]
-    tex = [e for e in ok if e.get("source") == "tex"]
-    pdf = [e for e in ok if e.get("source") == "pdf"]
-    html = [e for e in ok if e.get("source") in ("html", "xml")]
-    total_bytes = sum(e.get("text_bytes", 0) for e in ok)
+    # One definition of the figures, shared with the reproducibility gate.
+    figures = corpus_figures(entries)
 
-    print(f"entries        {len(entries)}")
-    print(f"fetched        {len(ok)}  ({len(tex)} latex, {len(pdf)} pdf, {len(html)} html/xml)")
-    print(f"text on disk   {total_bytes / 1e6:.1f} MB")
+    print(f"entries        {figures['entries']}")
+    print(f"fetched        {figures['fetched']}  ({figures['tex']} latex, "
+          f"{figures['pdf']} pdf, {figures['html']} html/xml)")
+    print(f"text on disk   {figures['text_bytes'] / 1e6:.1f} MB")
 
     # Status is the reason vocabulary, not just "missing": the corpus counts in
     # README/PROVENANCE are checked against this block, and `skipped:no-arxiv-id`

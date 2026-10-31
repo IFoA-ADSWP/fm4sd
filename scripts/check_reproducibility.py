@@ -58,7 +58,18 @@ SEARCH = REPO / "scripts" / "fm4sd_search.py"
 README = REPO / "README.md"
 MANIFEST = REPO / "references" / "manifest.json"
 
-DELIM = "\n--- entries ---\n"
+# The fetcher owns the manifest's format, the "fetched" pair of statuses, the
+# licence-URL field mapping and the figure definitions. Importing them is what
+# stops this gate from restating contracts that can drift (#38): the delimiter,
+# `manifest_figures()` and a hardcoded `licence_url` all used to be copies here.
+sys.path.insert(0, str(FETCH.parent))
+from fm4sd_fetch import (  # noqa: E402
+    FETCHED_STATUSES,
+    INDEX_INPUTS,
+    LICENCE_URL_FIELDS,
+    MANIFEST_DELIM,
+    corpus_figures,
+)
 
 # Fields a fresh `--index` derives from README.md alone. These must match the
 # committed manifest exactly, values and order.
@@ -87,12 +98,14 @@ PAYLOAD_FIELDS = (
     "arxiv_rev",  # pinned from the export API at fetch time (#33)
 )
 
-# Fields written by fm4sd_licences.py and carried forward by --index. Not
-# derivable from the README, and the scratch copy starts from the committed
-# manifest, so a comparison would be circular.
+# Fields written by fm4sd_licences.py and the fetcher's route records, carried
+# forward by --index. Not derivable from the README, and the scratch copy starts
+# from the committed manifest, so a comparison would be circular. `licence_url`
+# and `licence_source` are one fact under two names; the mapping is the fetcher's.
 CARRIED_FIELDS = (
     "licence",
-    "licence_url",
+    *LICENCE_URL_FIELDS,
+    "shareable",
     "published",
     "redistributable",
     "arxiv_title",
@@ -122,9 +135,9 @@ class Failure(Exception):
 def load_manifest(path: Path) -> tuple[dict, list[dict], str]:
     """Return (header, entries, raw_text) for a manifest file."""
     raw = path.read_text(encoding="utf-8")
-    if DELIM not in raw:
-        raise Failure(f"{path} is malformed: no {DELIM.strip()!r} delimiter")
-    head, body = raw.split(DELIM, 1)
+    if MANIFEST_DELIM not in raw:
+        raise Failure(f"{path} is malformed: no {MANIFEST_DELIM.strip()!r} delimiter")
+    head, body = raw.split(MANIFEST_DELIM, 1)
     try:
         header = json.loads(head)
         entries = json.loads(body)
@@ -162,44 +175,6 @@ def stats_numbers(out: str) -> dict[str, float]:
     return found
 
 
-def manifest_figures(entries: list[dict]) -> dict[str, float]:
-    """Every corpus figure the documents publish, derived from the manifest."""
-    fetched = [e for e in entries if e.get("fetch_status") in ("ok", "cached")]
-    return {
-        "entries": len(entries),
-        "with_id": sum(1 for e in entries if e.get("arxiv_id")),
-        "without_id": sum(1 for e in entries if not e.get("arxiv_id")),
-        "fetched": len(fetched),
-        "tex": sum(1 for e in fetched if e.get("source") == "tex"),
-        "pdf": sum(1 for e in fetched if e.get("source") == "pdf"),
-        "code": sum(1 for e in entries if e.get("has_code")),
-        "text_bytes": sum(int(e.get("text_bytes") or 0) for e in fetched),
-        "licences": sum(1 for e in entries if e.get("licence") == "api-omitted"),
-        "skipped_total": sum(
-            1 for e in entries if str(e.get("fetch_status") or "").startswith("skipped:")
-        ),
-        "skip_captcha": sum(
-            1 for e in entries
-            if e.get("fetch_status") == "skipped:unreachable:captcha"
-        ),
-        "skip_paywall": sum(
-            1 for e in entries
-            if e.get("fetch_status") == "skipped:unreachable:paywall"
-        ),
-        "skip_unknown": sum(
-            1 for e in entries
-            if e.get("fetch_status") == "skipped:unreachable:unknown"
-        ),
-        "skip_dead": sum(
-            1 for e in entries
-            if e.get("fetch_status") == "skipped:unreachable:dead"
-        ),
-        "not_paper": sum(
-            1 for e in entries if e.get("fetch_status") == "skipped:not-paper"
-        ),
-    }
-
-
 # --------------------------------------------------------------------------
 # Scratch copies
 # --------------------------------------------------------------------------
@@ -210,6 +185,13 @@ def make_scratch() -> Path:
     `fm4sd_fetch.py` resolves the repo from its own path, so placing it at
     scratch/scripts/ makes the scratch directory the repo root. Nothing outside
     the copy is touched, and no payload is carried across.
+
+    The list is checked before copying: a declared input that is missing fails
+    loudly. It is a declaration, not the code that reads, so an input `--index`
+    gains without a matching entry here can still go unnoticed. The check after
+    the copy is what keeps that declaration honest: if `--index` gains an input,
+    the gate fails here and names it, instead of comparing a manifest built
+    without it (#38).
     """
     root = Path(tempfile.mkdtemp(prefix="fm4sd-repro-"))
     shutil.copy2(README, root / "README.md")
@@ -217,6 +199,15 @@ def make_scratch() -> Path:
     shutil.copy2(FETCH, root / "scripts" / "fm4sd_fetch.py")
     (root / "references").mkdir()
     shutil.copy2(MANIFEST, root / "references" / "manifest.json")
+
+    missing = [rel for rel, _ in INDEX_INPUTS
+               if (REPO / rel).exists() and not (root / rel).exists()]
+    if missing:
+        raise Failure(
+            "make_scratch() did not copy every input --index declares",
+            [f"missing from the scratch copy: {', '.join(missing)}",
+             "fix: copy it here, keeping fm4sd_fetch.INDEX_INPUTS in step"],
+        )
     return root
 
 
@@ -376,8 +367,10 @@ class Claim:
 
     `pattern` is phrase-anchored rather than a bare number search: prose is full
     of numbers that are *not* corpus counts (dates, "225 papers" in a historical
-    sweep note, "~33 MB" of download). Each named group is a figure name from
-    `manifest_figures()`.
+    sweep note, "~33 MB" of download). Every capture group is named after the
+    figure it carries from `corpus_figures()`, and the comparison reads the group
+    by that name -- a positional binding silently mislabels the figures when a
+    pattern gains a group (#38).
     """
 
     doc: str
@@ -389,57 +382,72 @@ class Claim:
 CLAIMS = (
     # README.md — the research-layer table a reader lands on first.
     Claim("README.md", "entries in the index",
-          r"\|\s*\*\*(\d+)\*\*\s*\|\s*entries in the index", ("entries",)),
+          r"\|\s*\*\*(?P<entries>\d+)\*\*\s*\|\s*entries in the index",
+          ("entries",)),
     Claim("README.md", "resolvable to arXiv",
-          r"\|\s*\*\*(\d+)\*\*\s*\|\s*resolvable to arXiv\s*\|", ("with_id",)),
+          r"\|\s*\*\*(?P<with_id>\d+)\*\*\s*\|\s*resolvable to arXiv\s*\|",
+          ("with_id",)),
     Claim("README.md", "fetched locally",
-          r"\|\s*\*\*(\d+)\*\*\s*\|\s*fetched locally"
-          r"\s*\(\*\*(\d+)\*\*\s*LaTeX source,\s*\*\*(\d+)\*\*\s*PDF"
+          r"\|\s*\*\*(?P<fetched>\d+)\*\*\s*\|\s*fetched locally"
+          r"\s*\(\*\*(?P<tex>\d+)\*\*\s*LaTeX source,\s*\*\*(?P<pdf>\d+)\*\*\s*PDF"
           r"(?:,\s*\*\*\d+\*\*\s*HTML/XML)?\)",
           ("fetched", "tex", "pdf")),
     Claim("README.md", "of extracted plain text",
-          r"\|\s*\*\*([\d.]+)\s*MB\*\*\s*\|\s*of extracted plain text", ("text_mb",)),
+          r"\|\s*\*\*(?P<text_mb>[\d.]+)\s*MB\*\*\s*\|\s*of extracted plain text",
+          ("text_mb",)),
     Claim("README.md", "link released code",
-          r"\|\s*\*\*(\d+)\*\*\s*\|\s*link released code", ("code",)),
+          r"\|\s*\*\*(?P<code>\d+)\*\*\s*\|\s*link released code", ("code",)),
 
     # references/README.md — the layout block and the licence note.
     Claim("references/README.md", "manifest layout entry count",
-          r"COMMITTED\s*[—-]\s*(\d+)\s+entries", ("entries",)),
+          r"COMMITTED\s*[—-]\s*(?P<entries>\d+)\s+entries", ("entries",)),
     Claim("references/README.md", "corpus text size",
-          r"corpus is\s*~?\s*([\d.]+)\s*MB of text", ("text_mb",)),
+          r"corpus is\s*~?\s*(?P<text_mb>[\d.]+)\s*MB of text", ("text_mb",)),
     Claim("references/README.md", "api-omitted licence count",
-          r"`api-omitted` for all\s+(\d+)", ("licences",)),
+          r"`api-omitted` for all\s+(?P<licences>\d+)", ("licences",)),
     Claim("references/README.md", "entries not in the corpus",
-          r"Why\s+(\d+)\s+entries are not in the corpus", ("skipped_total",)),
+          r"Why\s+(?P<skipped_total>\d+)\s+entries are not in the corpus",
+          ("skipped_total",)),
     Claim("references/README.md", "captcha tally",
-          r"\|\s*`skipped:unreachable:captcha`\s*\|\s*(\d+)", ("skip_captcha",)),
+          r"\|\s*`skipped:unreachable:captcha`\s*\|\s*(?P<skip_captcha>\d+)",
+          ("skip_captcha",)),
     Claim("references/README.md", "paywall tally",
-          r"\|\s*`skipped:unreachable:paywall`\s*\|\s*(\d+)", ("skip_paywall",)),
+          r"\|\s*`skipped:unreachable:paywall`\s*\|\s*(?P<skip_paywall>\d+)",
+          ("skip_paywall",)),
     Claim("references/README.md", "unknown tally",
-          r"\|\s*`skipped:unreachable:unknown`\s*\|\s*(\d+)", ("skip_unknown",)),
+          r"\|\s*`skipped:unreachable:unknown`\s*\|\s*(?P<skip_unknown>\d+)",
+          ("skip_unknown",)),
     Claim("references/README.md", "dead tally",
-          r"\|\s*`skipped:unreachable:dead`\s*\|\s*(\d+)", ("skip_dead",)),
+          r"\|\s*`skipped:unreachable:dead`\s*\|\s*(?P<skip_dead>\d+)",
+          ("skip_dead",)),
     Claim("references/README.md", "not-paper tally",
-          r"\|\s*`skipped:not-paper`\s*\|\s*(\d+)", ("not_paper",)),
+          r"\|\s*`skipped:not-paper`\s*\|\s*(?P<not_paper>\d+)",
+          ("not_paper",)),
 
     # PROVENANCE.md — the Corpus table, the enforcement record.
     Claim("PROVENANCE.md", "Entries parsed",
-          r"\|\s*Entries parsed\s*\|\s*(\d+)", ("entries",)),
+          r"\|\s*Entries parsed\s*\|\s*(?P<entries>\d+)", ("entries",)),
     Claim("PROVENANCE.md", "With an arXiv id",
-          r"\|\s*With an arXiv id\s*\|\s*(\d+)\s*\((\d+)%\)", ("with_id", "with_id_pct")),
+          r"\|\s*With an arXiv id\s*\|\s*(?P<with_id>\d+)\s*\((?P<with_id_pct>\d+)%\)",
+          ("with_id", "with_id_pct")),
     Claim("PROVENANCE.md", "Linking released code",
-          r"\|\s*Linking released code\s*\|\s*(\d+)", ("code",)),
+          r"\|\s*Linking released code\s*\|\s*(?P<code>\d+)", ("code",)),
     Claim("PROVENANCE.md", "Fetched locally",
-          r"\|\s*Fetched locally\s*\|\s*(\d+)\s*[—-]\s*(\d+)\s+LaTeX source bundles,"
-          r"\s*(\d+)\s+PDF(?:,\s*\d+\s+HTML/XML)?", ("fetched", "tex", "pdf")),
+          r"\|\s*Fetched locally\s*\|\s*(?P<fetched>\d+)\s*[—-]\s*(?P<tex>\d+)\s+LaTeX"
+          r" source bundles,\s*(?P<pdf>\d+)\s+PDF(?:,\s*\d+\s+HTML/XML)?",
+          ("fetched", "tex", "pdf")),
+    Claim("PROVENANCE.md", "licence_url row count",
+          r"`licence_url`\s+on\s+the\s+(?P<licence_url_rows>\d+)\s+arXiv\s+rows", ("licence_url_rows",)),
+    Claim("PROVENANCE.md", "licence_source row count",
+          r"`licence_source`\s+on\s+the\s+(?P<licence_source_rows>\d+)\s+route\s+rows", ("licence_source_rows",)),
     Claim("PROVENANCE.md", "Extracted text",
-          r"\|\s*Extracted text\s*\|\s*([\d.]+)\s*MB", ("text_mb",)),
+          r"\|\s*Extracted text\s*\|\s*(?P<text_mb>[\d.]+)\s*MB", ("text_mb",)),
 )
 
 
 def check_published_counts(verbose: bool) -> str:
     _, entries, _ = load_manifest(MANIFEST)
-    figures = manifest_figures(entries)
+    figures = corpus_figures(entries)
     figures["text_mb"] = figures["text_bytes"] / 1e6
     figures["with_id_pct"] = (
         round(100 * figures["with_id"] / figures["entries"]) if figures["entries"] else 0
@@ -462,7 +470,7 @@ def check_published_counts(verbose: bool) -> str:
             problems.append(
                 f"manifest: {e['slug']} has an arXiv id but no pinned revision"
             )
-        if e.get("fetch_status") in ("ok", "cached"):
+        if e.get("fetch_status") in FETCHED_STATUSES:
             sha = str(e.get("sha256") or "").lower()
             if len(sha) != 64 or any(c not in "0123456789abcdef" for c in sha):
                 problems.append(
@@ -484,9 +492,19 @@ def check_published_counts(verbose: bool) -> str:
                 f"scripts/check_reproducibility.py in the same commit"
             )
             continue
-        for name, raw in zip(claim.figures, m.groups()):
+        names = set(m.re.groupindex)
+        if names != set(claim.figures):
+            problems.append(
+                f"{claim.doc}: pattern for {claim.label!r} captures {sorted(names)}, "
+                f"expected {sorted(claim.figures)} — name every group after its figure"
+            )
+            continue
+        for name in claim.figures:
+            raw = m.group(name)
             want = figures[name]
-            got = float(raw) if "." in raw else int(raw)
+            # Everything is compared as a number: the figure types are ints and
+            # MB floats, and guessing which from the prose was a source of noise.
+            got = float(raw)
             if name == "text_mb":
                 if abs(got - want) > MB_TOLERANCE:
                     problems.append(
@@ -494,10 +512,10 @@ def check_published_counts(verbose: bool) -> str:
                         f"{want:.1f} MB (tolerance {MB_TOLERANCE:g} MB)"
                     )
             elif got != want:
-                problems.append(f"{claim.doc}: {name} says {got}, manifest says {want}")
+                problems.append(f"{claim.doc}: {name} says {got:g}, manifest says {want}")
             checked += 1
             if verbose:
-                print(f"       {claim.doc}: {name} = {got}")
+                print(f"       {claim.doc}: {name} = {got:g}")
 
     # `stats` is what those documents cite as the source of their numbers, so
     # it has to agree with the manifest as well.
