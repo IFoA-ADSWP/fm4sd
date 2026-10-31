@@ -536,6 +536,23 @@ the recipes are notebooks and prose, and the repo carries no licence.
 - time_series_interpretability — [cookbook](https://docs.priorlabs.ai/cookbook/time_series_interpretability) — Interpreting Time-Series Forecasts with TabPFN-TS
 - zomato_model_comparison — [cookbook](https://docs.priorlabs.ai/cookbook/zomato_model_comparison) — Predict Restaurant Ratings with TabPFN 3.5
 
+## blog
+
+Posts from [priorlabs.ai/blog](https://priorlabs.ai/blog) that bear on the corpus
+(benchmarks, models, use cases). Company announcements are omitted.
+
+- why-are-llms-missing-on-tabular-benchmark-leaderboards — [blog](https://priorlabs.ai/blog-posts/why-are-llms-missing-on-tabular-benchmark-leaderboards)
+- tabpfn-3-5-thinking-upgrade — [blog](https://priorlabs.ai/blog-posts/tabpfn-3-5-thinking-upgrade)
+- machine-learning-interpretability-in-proteomics — [blog](https://priorlabs.ai/blog-posts/machine-learning-interpretability-in-proteomics)
+- look-into-the-future-with-tabpfn-rel — [blog](https://priorlabs.ai/blog-posts/look-into-the-future-with-tabpfn-rel)
+- predicting-a-world-cup-winner-with-tabpfn — [blog](https://priorlabs.ai/blog-posts/predicting-a-world-cup-winner-with-tabpfn)
+- how-tabpfn-helps-with-robust-planning-use-cases-at-tulana — [blog](https://priorlabs.ai/blog-posts/how-tabpfn-helps-with-robust-planning-use-cases-at-tulana)
+- aws-sagemaker — [blog](https://priorlabs.ai/blog-posts/aws-sagemaker)
+- tabpfn-on-azure — [blog](https://priorlabs.ai/blog-posts/tabpfn-on-azure)
+- tabpfn-on-databricks — [blog](https://priorlabs.ai/blog-posts/tabpfn-on-databricks)
+- extensions — [blog](https://priorlabs.ai/blog-posts/extensions)
+- priorlabs-sap — [blog](https://priorlabs.ai/blog-posts/priorlabs-sap)
+
 ## extras
 
 - icml-structured-fm-workshop — [site](https://icml-structured-fm-workshop.github.io)
@@ -548,3 +565,7 @@ the recipes are notebooks and prose, and the repo carries no licence.
 - awesome-tfms — [github](https://github.com/jxucoder/Awesome-Tabular-Foundation-Models)
 - paperswithcode-tabular — [site](https://paperswithcode.co/tasks/tabular-learning)
 - data-foundry — [site](https://tabarena.github.io/data-foundry/) · [skills](https://github.com/TabArena/data-foundry/tree/main/.claude/skills)
+- awesome-tabpfn — [github](https://github.com/PriorLabs/awesome-tabpfn)
+- tabpfn-extensions — [github](https://github.com/PriorLabs/tabpfn-extensions)
+- tabpfn-client — [github](https://github.com/PriorLabs/tabpfn-client)
+- r-tabpfn — [github](https://github.com/PriorLabs/R-tabpfn)
