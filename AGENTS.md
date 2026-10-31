@@ -13,7 +13,8 @@ checks:
 1. `--index` regenerated in a scratch copy equals `references/manifest.json` on every
    README-derived field — `slug`, `arxiv_id`, `section`, `category`, `subcategory`,
    `citation`, `links`, `has_code`, the header and entry order. Payload-derived fields
-   (`source`, `path`, `text_bytes`, `pages`, `n_tex_files`, `sha256`, `fetch_status`) and the
+   (`source`, `path`, `text_bytes`, `pages`, `n_tex_files`, `sha256`, `arxiv_rev`,
+   `fetch_status`) and the
    licence/title/date records `fm4sd_licences.py` writes are excluded by construction: a
    payload-less `--index` cannot reproduce them (that wipe is #33, not this gate).
 2. `--index --remote` leaves the manifest byte-identical — it must only compare upstream.

@@ -16,9 +16,10 @@ Three checks, each independent:
 
    The comparison is a projection, not a file diff, because `--index` on a
    payload-less tree discards fetch metadata: `reconcile()` recovers nothing
-   without `papers/`, so `source`, `text_bytes`, `sha256` and `fetch_status`
-   come back empty. That is issue #33's bug, not this gate's, so those fields
-   are excluded by construction rather than allowed to paint every CI run red.
+   without `papers/`, so `source`, `text_bytes`, `sha256`, the pinned
+   `arxiv_rev` and `fetch_status` come back empty. That is issue #33's bug, not
+   this gate's, so those fields are excluded by construction rather than allowed
+   to paint every CI run red.
    The same goes for the licence/title/date records `fm4sd_licences.py` writes:
    `--index` carries them forward from the manifest it is replacing, so
    comparing them would only re-read the values under test.
@@ -83,6 +84,7 @@ PAYLOAD_FIELDS = (
     "n_tex_files",
     "sha256",
     "fetch_status",
+    "arxiv_rev",  # pinned from the export API at fetch time (#33)
 )
 
 # Fields written by fm4sd_licences.py and carried forward by --index. Not
@@ -451,6 +453,22 @@ def check_published_counts(verbose: bool) -> str:
     texts: dict[str, str] = {}
     problems: list[str] = []
     checked = 0
+
+    # #33's headline invariant. `arxiv_rev` is payload-derived, so check 1 cannot
+    # see a regression that drops every pin; without this, deleting all 323
+    # revisions would leave the gate green.
+    for e in entries:
+        if e.get("arxiv_id") and int(e.get("arxiv_rev") or 0) <= 0:
+            problems.append(
+                f"manifest: {e['slug']} has an arXiv id but no pinned revision"
+            )
+        if e.get("fetch_status") in ("ok", "cached"):
+            sha = str(e.get("sha256") or "").lower()
+            if len(sha) != 64 or any(c not in "0123456789abcdef" for c in sha):
+                problems.append(
+                    f"manifest: {e['slug']} is fetched but its sha256 is not a "
+                    f"64-hex digest"
+                )
 
     for claim in CLAIMS:
         if claim.doc not in texts:

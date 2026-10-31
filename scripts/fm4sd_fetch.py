@@ -27,6 +27,7 @@ Usage:
     python3 scripts/fm4sd_fetch.py --fetch          # fetch + extract, all missing
     python3 scripts/fm4sd_fetch.py --fetch --only nanotabpfn tabpfnv2 wikidbs
     python3 scripts/fm4sd_fetch.py --status         # what is on disk, and why not
+    python3 scripts/fm4sd_fetch.py --check-revisions  # pins that have moved upstream
 """
 
 from __future__ import annotations
@@ -45,6 +46,7 @@ import threading
 import time
 import traceback
 import urllib.error
+import urllib.parse
 import urllib.request
 from dataclasses import dataclass, field, asdict
 from html.parser import HTMLParser
@@ -57,6 +59,13 @@ REFERENCES = REPO / "references"
 MANIFEST = REFERENCES / "manifest.json"
 
 INDEX_URL = "https://raw.githubusercontent.com/borawhocodess/fm4sd/main/README.md"
+# Version resolution (#33). `id_list=<unversioned id>` returns the paper's current
+# revision in the Atom entry's <id>: `.../abs/2102.10154v3`. The version is read
+# off that response, never constructed.
+ARXIV_API = "https://export.arxiv.org/api/query?id_list="
+# Ids per export-API query. The API accepts a comma-separated `id_list`; batches
+# of 50 keep each URL modest and the whole corpus to ~7 calls.
+ARXIV_API_BATCH = 50
 USER_AGENT = "fm4sd-corpus/1.0 (research; https://github.com/IFoA-ADSWP/fm4sd)"
 
 # Politeness: arXiv asks that automated clients stay light. 3 req/s across a
@@ -361,7 +370,9 @@ def normalise_arxiv_id(raw: str) -> str:
     Strip a trailing version suffix (`...v2`), keeping the archive/subclass case
     as published. The stored id is always unversioned, which is what makes
     `arxiv.org/src/<id>`, `arxiv.org/abs/<id>` and version-suffixed variants
-    (`<id>v1`) resolve from one value, modern or legacy alike.
+    (`<id>v1`) resolve from one value, modern or legacy alike. The resolved
+    revision is stored separately in `Paper.arxiv_rev` (#33), so stripping here
+    never discards it.
     """
     return re.sub(r"v\d+$", "", raw.strip())
 LINK_RE = re.compile(r"\[(?P<text>[^\]]+)\]\((?P<url>[^)]+)\)")
@@ -370,6 +381,13 @@ LINK_RE = re.compile(r"\[(?P<text>[^\]]+)\]\((?P<url>[^)]+)\)")
 # ever committed. parse_index() strips links out before applying this, which is what
 # keeps `[arxiv]` and `[video]` from being read as the citation.
 CITATION_RE = re.compile(r"\\?\[(?P<cite>[^\[\]]+?)\\?\]")
+
+# The version an export-API Atom entry describes: `<id>.../abs/2102.10154v3</id>`.
+# The id fragment is shared with the README patterns above; `vN` is read, never
+# constructed. A legacy id (`cond-mat/0011094`) matches too, slash and all.
+ARXIV_VERSION_RE = re.compile(rf"/abs/(?P<id>{ARXIV_ID})v(?P<rev>\d+)\s*</id>")
+# The same fact on the abs page's submission history: `/abs/<id>vN` links.
+ARXIV_ABS_VERSION_RE = re.compile(rf"/abs/(?P<id>{ARXIV_ID})v(?P<rev>\d+)")
 
 # Section headings in the README: "## papers", "## queue", "## extras", plus
 # category headers like "  - tabular" and "    - forecasting".
@@ -399,6 +417,11 @@ class Paper:
     subcategory: str
     citation: str = ""
     links: dict[str, str] = field(default_factory=dict)
+
+    # Pinned arXiv revision N of id@vN (#33). `arxiv_id` stays unversioned --
+    # slugs, licence carry-forward and match_year key off it -- so the revision
+    # lives beside it. 0 means unresolved/unpinned and is omitted from the JSON.
+    arxiv_rev: int = 0
 
     # Populated by fetch.
     source: str = ""          # "tex" | "pdf" | "html" | "xml"
@@ -433,6 +456,10 @@ class Paper:
         # field (a full manifest rewrite should show them as unchanged).
         if not d.get("route"):
             d.pop("route", None)
+        # Same for the revision pin: id-less rows have none, and omitting it keeps
+        # their shape unchanged.
+        if not d.get("arxiv_rev"):
+            d.pop("arxiv_rev", None)
         d["has_code"] = self.has_code
         return d
 
@@ -492,6 +519,114 @@ def http_get(url: str, limiter: RateLimiter, retries: int = 3) -> bytes:
                 raise
             time.sleep(2**attempt)
     raise last_err  # type: ignore[misc]
+
+
+def resolve_arxiv_rev(arxiv_id: str, limiter: RateLimiter,
+                      fallback: RateLimiter | None = None) -> int:
+    """Return the revision number arXiv currently serves for an unversioned id.
+
+    One export-API call per id: `id_list=<id>` returns the paper's Atom entry,
+    whose `<id>` is `.../abs/<id>vN`. The revision is read off that response --
+    never constructed from a version count we would have to guess. Returns 0
+    when the API cannot be read or the id has no version, so the caller can
+    record an honest gap instead of pinning something invented.
+
+    If the API refuses the query (it answered 429 to every uncached request after
+    the #33 migration's opening burst), fall back to the paper's abs page, whose
+    submission history links every `/abs/<id>vN`; the highest N is the same fact
+    read from the same record. Pass `fallback` to control that limiter.
+    """
+    url = f"{ARXIV_API}{urllib.parse.quote(arxiv_id, safe='/')}"
+    try:
+        blob = http_get(url, limiter)
+    except Exception as e:  # noqa: BLE001
+        if DEBUG:
+            traceback.print_exc()
+        print(f"    {arxiv_id}: API resolution failed ({type(e).__name__}); "
+              f"reading the abs page instead", flush=True)
+        return resolve_arxiv_rev_from_abs(arxiv_id, fallback or limiter)
+
+    for m in ARXIV_VERSION_RE.finditer(blob.decode("utf-8", "replace")):
+        if normalise_arxiv_id(m.group("id")).lower() == arxiv_id.lower():
+            return int(m.group("rev"))
+    print(f"    {arxiv_id}: the API response carried no version", flush=True)
+    return 0
+
+
+def resolve_arxiv_rev_from_abs(arxiv_id: str, limiter: RateLimiter) -> int:
+    """Fallback: the highest revision linked from the paper's abs page.
+
+    `/abs/<id>` lists the submission history as `/abs/<id>v1` … `/abs/<id>vN`;
+    the maximum is the current revision. Nothing is constructed -- the page's own
+    links are the evidence -- and 0 means the page could not be read.
+    """
+    url = f"https://arxiv.org/abs/{urllib.parse.quote(arxiv_id, safe='/')}"
+    try:
+        blob = http_get(url, limiter)
+    except Exception as e:  # noqa: BLE001
+        if DEBUG:
+            traceback.print_exc()
+        print(f"    {arxiv_id}: abs page resolution failed ({type(e).__name__})",
+              flush=True)
+        return 0
+    versions = [int(m.group("rev"))
+                for m in ARXIV_ABS_VERSION_RE.finditer(blob.decode("utf-8", "replace"))
+                if normalise_arxiv_id(m.group("id")).lower() == arxiv_id.lower()]
+    return max(versions, default=0)
+
+
+def resolve_arxiv_revs(arxiv_ids: list[str], limiter: RateLimiter,
+                       fallback: RateLimiter | None = None) -> dict[str, int]:
+    """Resolve many ids in as few export-API calls as politeness allows.
+
+    `id_list` accepts a comma-separated list, so the 323-id migration costs a
+    handful of requests instead of 323. That matters: a long sequential run of
+    single-id queries drew HTTP 429 from `export.arxiv.org` on 2026-10-31, even
+    at 3 req/s -- the API's own guidance is much slower. Batches are spaced by
+    the shared arXiv limiter; ids absent from a response stay unresolved (0),
+    and a failed batch is reported rather than silently treated as "no version".
+
+    Any id the API still has not answered for is resolved from its abs page, at
+    `fallback`'s pace (the web limiter by default) rather than hammering the API.
+
+    Keys are lowercased ids, because Atom responses are normalised in shape but
+    we should not depend on the case of a legacy archive/subclass being echoed.
+    """
+    out: dict[str, int] = {}
+    uniq = sorted(set(arxiv_ids))
+    for start in range(0, len(uniq), ARXIV_API_BATCH):
+        chunk = uniq[start:start + ARXIV_API_BATCH]
+        query = ",".join(urllib.parse.quote(a, safe="/") for a in chunk)
+        try:
+            blob = http_get(f"{ARXIV_API}{query}", limiter)
+        except Exception as e:  # noqa: BLE001
+            if DEBUG:
+                traceback.print_exc()
+            print(f"    revision batch {start // ARXIV_API_BATCH + 1}: "
+                  f"resolution failed ({type(e).__name__}: {e})", flush=True)
+            continue
+        for m in ARXIV_VERSION_RE.finditer(blob.decode("utf-8", "replace")):
+            out[normalise_arxiv_id(m.group("id")).lower()] = int(m.group("rev"))
+
+    leftover = [a for a in uniq if a.lower() not in out]
+    if leftover:
+        print(f"    {len(leftover)} id(s) unresolved by the API; reading their "
+              f"abs pages at the web rate", flush=True)
+        slow = fallback or RateLimiter(POLITE_REQS_PER_SECOND)
+        for aid in leftover:
+            rev = resolve_arxiv_rev_from_abs(aid, slow)
+            if rev:
+                out[aid.lower()] = rev
+    return out
+
+
+def marker_text(kind: str, sha256: str, rev: int = 0) -> str:
+    """The `.fetched` marker body: kind, digest, and the pinned revision (#33).
+
+    Three lines when pinned (`tex\\n<sha256>\\nv3`), two otherwise, so markers
+    written before #33 stay readable by reconcile().
+    """
+    return f"{kind}\n{sha256}\n" + (f"v{rev}\n" if rev else "")
 
 
 def parse_index(markdown: str) -> list[Paper]:
@@ -736,23 +871,53 @@ def classify_failure(exc: BaseException) -> str:
 
 
 def fetch_arxiv(paper: Paper, limiter: RateLimiter, force: bool = False) -> Paper:
-    """Resolve one arXiv paper to papers/<slug>/{bundle,src|text.txt}."""
+    """Resolve one arXiv paper to papers/<slug>/{bundle,src|text.txt}.
+
+    The revision is pinned before anything is downloaded (#33): a fresh row is
+    resolved through the export API on first fetch, and a row that already has
+    `arxiv_rev` keeps that pin. Only `--force` re-resolves and moves the pin to
+    the current revision -- a newer upstream version is otherwise reported, not
+    adopted. URLs are built from the version-suffixed form, so the recorded
+    sha256 means "this revision, byte for byte".
+    """
     dest = PAPERS / paper.slug
     marker = dest / ".fetched"
     if marker.exists() and not force:
         paper.fetch_status = "cached"
         paper.path = str(dest.relative_to(REPO))
-        sha = marker.read_text().split()
-        paper.sha256 = sha[1] if len(sha) > 1 else paper.sha256
+        parts = marker.read_text().split()
+        paper.sha256 = parts[1] if len(parts) > 1 else paper.sha256
+        # The marker describes the payload actually on disk, so its revision wins
+        # over a manifest that may have been rebuilt elsewhere.
+        if len(parts) > 2 and parts[2].startswith("v"):
+            try:
+                paper.arxiv_rev = int(parts[2][1:])
+            except ValueError:
+                pass
         return paper
 
     dest.mkdir(parents=True, exist_ok=True)
     aid = paper.arxiv_id
     paper.path = str(dest.relative_to(REPO))
 
+    # --- pin the revision first ---
+    # cmd_fetch resolves every needed id in one batched pass first (including
+    # under --force), so only an unresolved id retries here.
+    if not paper.arxiv_rev:
+        rev = resolve_arxiv_rev(aid, limiter)
+        if rev:
+            if paper.arxiv_rev and paper.arxiv_rev != rev:
+                print(f"    {paper.slug}: bumped {aid}v{paper.arxiv_rev} -> v{rev}",
+                      flush=True)
+            paper.arxiv_rev = rev
+    # No resolved revision -> the bare URL (old behaviour), so an API outage
+    # costs a pin, not the payload. The row then has a digest but no revision,
+    # which --status/--check-revisions report plainly.
+    suffix = f"v{paper.arxiv_rev}" if paper.arxiv_rev else ""
+
     # --- try LaTeX source first ---
     try:
-        blob = http_get(f"https://arxiv.org/src/{aid}", limiter)
+        blob = http_get(f"https://arxiv.org/src/{aid}{suffix}", limiter)
         bundle = dest / "source.tar.gz"
         bundle.write_bytes(blob)
         paper.sha256 = hashlib.sha256(blob).hexdigest()
@@ -771,7 +936,7 @@ def fetch_arxiv(paper: Paper, limiter: RateLimiter, force: bool = False) -> Pape
             # figures are actually wanted.
             if not KEEP_SRC:
                 shutil.rmtree(tex_dir, ignore_errors=True)
-            marker.write_text(f"tex\n{paper.sha256}\n")
+            marker.write_text(marker_text("tex", paper.sha256, paper.arxiv_rev))
             return paper
 
         for stale in (bundle, dest / "src", dest / "text.txt"):
@@ -783,14 +948,14 @@ def fetch_arxiv(paper: Paper, limiter: RateLimiter, force: bool = False) -> Pape
 
     # --- fall back to PDF ---
     try:
-        pdf = http_get(f"https://arxiv.org/pdf/{aid}", limiter)
+        pdf = http_get(f"https://arxiv.org/pdf/{aid}{suffix}", limiter)
         pages, n_bytes = extract_text_from_pdf(pdf, dest)
         paper.sha256 = hashlib.sha256(pdf).hexdigest()
         paper.source = "pdf"
         paper.pages = pages
         paper.text_bytes = n_bytes
         paper.fetch_status = "ok"
-        marker.write_text(f"pdf\n{paper.sha256}\n")
+        marker.write_text(marker_text("pdf", paper.sha256, paper.arxiv_rev))
         return paper
     except Exception as e:  # noqa: BLE001
         if DEBUG:
@@ -861,7 +1026,7 @@ def fetch_route(paper: Paper, limiter: RateLimiter, force: bool = False) -> Pape
             paper.route = route.family
             paper.text_bytes = n_bytes
             paper.fetch_status = "ok"
-            marker.write_text(f"{route.kind}\n{paper.sha256}\n")
+            marker.write_text(marker_text(route.kind, paper.sha256, paper.arxiv_rev))
             return paper
         except Exception as e:  # noqa: BLE001
             if DEBUG:
@@ -949,6 +1114,11 @@ def reconcile(papers: list[Paper]) -> int:
         p.fetch_status = "ok"
         if len(fields) > 1:
             p.sha256 = fields[1]
+        if len(fields) > 2 and fields[2].startswith("v"):
+            try:
+                p.arxiv_rev = int(fields[2][1:])
+            except ValueError:
+                pass
         if kind == "pdf":
             pdf = PAPERS / p.slug / "paper.pdf"
             if pdf.exists():
@@ -1002,17 +1172,17 @@ def carry_forward(papers: list[Paper], prior: dict[str, dict]) -> int:
 
 
 FETCH_FIELDS = ("source", "route", "path", "text_bytes", "pages", "n_tex_files",
-                "sha256", "fetch_status")
+                "sha256", "fetch_status", "arxiv_rev")
 
 
 def preserve_fetch(papers: list[Paper], prior: dict[str, dict]) -> int:
     """Restore recorded fetch metadata when the payload is not on this tree.
 
-    #33 covers the root cause -- the manifest records a sha256 but not what it
-    was fetched *against*, so a revision cannot be pinned. This is the narrower
-    half: the manifest is a record of a fetch that happened, and rebuilding it on
-    a machine without `papers/` (the normal state of a clone -- the payload is
-    gitignored) used to erase that record. Reconcile covers the payload-present
+    #33 recorded which arXiv revision a digest belongs to and made the fetch URL
+    version-suffixed; this is still the narrower half: the manifest is a record of
+    a fetch that happened, and rebuilding it on a machine without `papers/` (the
+    normal state of a clone -- the payload is gitignored) must not erase that
+    record. Reconcile covers the payload-present
     case; this covers the payload-absent one, and only when the identity is
     unchanged (same slug, same arXiv id) and the static route tables have not
     since learned the row is unreachable. A stale `ok` is therefore never used to
@@ -1050,7 +1220,7 @@ def preserve_fetch(papers: list[Paper], prior: dict[str, dict]) -> int:
                 kept += 1
             continue
         # Payload was found on disk: fill in what the marker cannot carry.
-        for k in ("route", "sha256", "pages", "n_tex_files"):
+        for k in ("route", "sha256", "arxiv_rev", "pages", "n_tex_files"):
             if not getattr(p, k) and old.get(k):
                 setattr(p, k, old[k])
     return kept
@@ -1205,6 +1375,33 @@ def cmd_fetch(only: list[str], force: bool, workers: int) -> None:
     done = 0
     total = len(papers)
 
+    # Resolve every unpinned (or, with --force, every) id up front in batched
+    # export-API calls. Doing this per paper from four workers is what drew 429s
+    # during the #33 migration; one batched pass is both faster and politer.
+    unresolved_before = {p.slug: p.arxiv_rev for p in papers if p.arxiv_id}
+    to_resolve = [p.arxiv_id for p in papers
+                  if p.arxiv_id and (force or not p.arxiv_rev)]
+    if to_resolve:
+        batches = (len(set(to_resolve)) + ARXIV_API_BATCH - 1) // ARXIV_API_BATCH
+        print(f"resolving {len(set(to_resolve))} arXiv revisions "
+              f"({batches} export-API request{'s' if batches != 1 else ''})…", flush=True)
+        resolved = resolve_arxiv_revs(to_resolve, limiters.arxiv, limiters.web)
+        for p in papers:
+            if not p.arxiv_id or not (force or not p.arxiv_rev):
+                continue
+            rev = resolved.get(p.arxiv_id.lower())
+            if not rev:
+                continue
+            old = unresolved_before[p.slug]
+            if old and old != rev:
+                print(f"  bumped {p.slug}: {p.arxiv_id}v{old} -> v{rev}", flush=True)
+            p.arxiv_rev = rev
+        missing = sum(1 for p in papers if p.arxiv_id and not p.arxiv_rev)
+        if missing:
+            print(f"  ! {missing} id(s) left unpinned — the API did not give a "
+                  f"version; they fetch the moving URL and are reported by "
+                  f"--check-revisions", flush=True)
+
     # arXiv and web routes carry separate limiters, so a shared pool cannot turn
     # four workers into four requests per second against a publisher: the web
     # limiter serialises those at ~1 req/s while arXiv keeps its own budget.
@@ -1223,7 +1420,7 @@ def cmd_fetch(only: list[str], force: bool, workers: int) -> None:
         if e["slug"] in by_slug:
             e.update({k: v for k, v in by_slug[e["slug"]].to_json().items()
                       if k in ("source", "route", "path", "text_bytes", "pages",
-                               "n_tex_files", "sha256", "fetch_status",
+                               "n_tex_files", "sha256", "fetch_status", "arxiv_rev",
                                "licence", "licence_source", "shareable")})
     save_manifest(entries_new)
 
@@ -1234,6 +1431,51 @@ def cmd_fetch(only: list[str], force: bool, workers: int) -> None:
     mb = sum(p.text_bytes for p in papers) / 1e6
     print(f"\nfetched {ok}/{len(papers)}  ({tex} latex, {pdf} pdf, {html} html)  "
           f"{mb:.1f} MB of text")
+
+
+def cmd_check_revisions(only: list[str]) -> None:
+    """Resolve every pinned id and report drift against the manifest. Writes nothing.
+
+    A digest pins one revision, and arXiv keeps every version, so a new `v(N+1)`
+    does not invalidate the recorded digest -- it simply makes a newer revision
+    available. This reports which pins are now behind without touching them, in
+    keeping with #33's rule that a bump is deliberate: `--fetch --force --only
+    <slug>` moves one pin, `--fetch --force` moves them all.
+    """
+    if not MANIFEST.exists():
+        sys.exit("no manifest; run --index first")
+    rows = [e for e in load_manifest() if e.get("arxiv_id")]
+    if only:
+        rows = [e for e in rows if e["slug"] in only or e["arxiv_id"] in only]
+
+    limiter = RateLimiter(REQS_PER_SECOND)
+    fallback = RateLimiter(POLITE_REQS_PER_SECOND)
+    resolved = resolve_arxiv_revs(
+        [e["arxiv_id"] for e in rows], limiter, fallback)
+    current_count = behind = unpinned = unresolved = 0
+    for e in rows:
+        pinned = int(e.get("arxiv_rev") or 0)
+        current = resolved.get(e["arxiv_id"].lower(), 0)
+        if not current:
+            unresolved += 1
+            print(f"  unresolved  {e['slug']:<40} {e['arxiv_id']}")
+        elif not pinned:
+            unpinned += 1
+            print(f"  unpinned    {e['slug']:<40} {e['arxiv_id']} -> v{current}")
+        elif current == pinned:
+            current_count += 1
+        elif current > pinned:
+            behind += 1
+            print(f"  behind      {e['slug']:<40} {e['arxiv_id']}v{pinned} -> v{current}")
+        else:
+            unresolved += 1
+            print(f"  ! pinned v{pinned} but the API says v{current} "
+                  f"{e['slug']:<38} {e['arxiv_id']}")
+
+    print(f"\n{len(rows)} id-bearing rows: {current_count} pinned to the current revision, "
+          f"{behind} behind, {unpinned} unpinned, {unresolved} unresolved")
+    if behind or unpinned:
+        print("bump deliberately: --fetch --force [--only <slug> …] re-resolves and refetches")
 
 
 def cmd_status() -> None:
@@ -1266,6 +1508,8 @@ def main() -> None:
                     help="--index: diff the upstream index against ours; writes nothing")
     ap.add_argument("--fetch", action="store_true", help="fetch + extract text")
     ap.add_argument("--status", action="store_true", help="show what is fetched")
+    ap.add_argument("--check-revisions", action="store_true", dest="check_revisions",
+                    help="report pinned revisions that are behind upstream; writes nothing")
     ap.add_argument("--only", nargs="*", default=None, help="restrict to these slugs/ids")
     ap.add_argument("--force", action="store_true", help="refetch even if cached")
     ap.add_argument("--workers", type=int, default=4)
@@ -1277,7 +1521,9 @@ def main() -> None:
         cmd_fetch(args.only or [], args.force, args.workers)
     if args.status:
         cmd_status()
-    if not (args.index or args.fetch or args.status):
+    if args.check_revisions:
+        cmd_check_revisions(args.only or [])
+    if not (args.index or args.fetch or args.status or args.check_revisions):
         ap.print_help()
 
 

@@ -16,8 +16,9 @@ the *index* and the *digests*; the paper payload stays on disk.
 ## Layout
 
 ```
-references/manifest.json   COMMITTED — 383 entries: id, title, category, subcategory,
-                            citation, licence, shareable, sha256, fetch status, published date
+references/manifest.json   COMMITTED — 383 entries: id, pinned revision, title, category,
+                            subcategory, citation, licence, shareable, sha256, fetch status,
+                            published date
 references/summaries/      COMMITTED — digests and sweep findings
 papers/<slug>/text.txt     GITIGNORED — extracted plain text
 scripts/fm4sd_fetch.py     parse the index, fetch (arXiv + non-arXiv routes), extract
@@ -35,6 +36,7 @@ negative results.
 python3 scripts/fm4sd_fetch.py --index      # README -> manifest.json
 python3 scripts/fm4sd_fetch.py --fetch      # fetch + extract all missing
 python3 scripts/fm4sd_fetch.py --status     # what is on disk, and why not
+python3 scripts/fm4sd_fetch.py --check-revisions  # pins that have moved upstream
 python3 scripts/fm4sd_licences.py           # fill in licences via the arXiv API
 
 python3 scripts/fm4sd_search.py stats
