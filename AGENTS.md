@@ -55,6 +55,12 @@ Research findings live on `research/<gap>` branches and never merge: the ticket 
 with its finding cited from the branch, so `main` has no `research/` directory. Read
 `docs/RESEARCH.md` before proposing a PR for a research branch.
 
+## Working copies
+
+Dispatching a writer means running `scripts/new-worktree.sh <branch>` and quoting its
+output in the prompt. One writer per worktree; the main clone stays free for parallel
+sessions.
+
 ## Conventions
 
 This is a **research/corpus repo**, not an application. There is no test suite and there is
