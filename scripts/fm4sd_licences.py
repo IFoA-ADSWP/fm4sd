@@ -22,8 +22,7 @@ from __future__ import annotations
 
 import sys
 import time
-import urllib.error
-import urllib.request
+import net
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
@@ -75,21 +74,29 @@ def parse_response(xml: bytes) -> dict[str, dict]:
     return out
 
 
+class _Every:
+    """A pace for retries: arXiv asks for >=3 s between API calls."""
+
+    def __init__(self, seconds: float = 3.0) -> None:
+        self.seconds = seconds
+        self._first = True
+
+    def wait(self) -> None:
+        if self._first:  # the first call needs no wait
+            self._first = False
+            return
+        time.sleep(self.seconds)
+
+
 def fetch_batch(ids: list[str], retries: int = 3) -> dict[str, dict]:
-    """Return {canonical id: {licence, published, title}} for one batch."""
+    """Return {canonical id: {licence, published, title}} for one batch.
+
+    The retry policy is the shared client's; spacing between attempts is this
+    script's 3 s floor, and the batch pause stays in main(). Note the shared
+    policy's status set differs from the old blanket retry: 4xx is final.
+    """
     url = f"{API}?id_list={','.join(ids)}&max_results={len(ids)}"
-    last: Exception | None = None
-    for attempt in range(retries):
-        try:
-            req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
-            with urllib.request.urlopen(req, timeout=60) as r:
-                xml = r.read()
-            break
-        except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError) as e:
-            last = e
-            time.sleep(3 * (attempt + 1))
-    else:
-        raise last  # type: ignore[misc]
+    xml = net.get(url, user_agent=USER_AGENT, attempts=retries, pace=_Every())
     return parse_response(xml)
 
 
@@ -131,7 +138,7 @@ def main() -> None:
             resolved.update(got)
             print(f"  [{i + len(batch):3d}/{len(ids)}] resolved {len(got)}/{len(batch)}")
         except Exception as e:  # noqa: BLE001
-            print(f"  [{i + len(batch):3d}/{len(ids)}] batch failed: {type(e).__name__}")
+            print(f"  [{i + len(batch):3d}/{len(ids)}] batch failed: {e}")
         time.sleep(3)  # arXiv asks for >=3s between API calls
 
     for e in entries:

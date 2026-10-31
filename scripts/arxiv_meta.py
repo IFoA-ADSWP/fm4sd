@@ -23,11 +23,9 @@ import os
 import re
 import sys
 import time
-import urllib.error
 import urllib.parse
-import urllib.request
-from datetime import datetime, timezone
-from email.utils import parsedate_to_datetime
+
+import net
 from pathlib import Path
 
 import entry as entry_vocab
@@ -91,45 +89,10 @@ def human_age(seconds: float) -> str:
     return f"{seconds / 3600:.1f}h"
 
 
-def retry_after(value: str | None) -> float | None:
-    """Seconds from a Retry-After header: delay-seconds or an HTTP date."""
-    if not value:
-        return None
-    value = value.strip()
-    if value.isdigit():
-        return float(value)
-    try:
-        when = parsedate_to_datetime(value)
-    except (TypeError, ValueError):
-        return None
-    if when.tzinfo is None:
-        when = when.replace(tzinfo=timezone.utc)
-    return max(0.0, (when - datetime.now(timezone.utc)).total_seconds())
-
-
 def fetch(url: str) -> bytes:
-    """GET with retries. Backoff only sleeps when another attempt remains."""
-    last: Exception | None = None
-    for attempt in range(RETRIES):
-        request = urllib.request.Request(url, headers={"User-Agent": UA})
-        try:
-            with urllib.request.urlopen(request, timeout=TIMEOUT) as response:
-                return response.read()
-        except urllib.error.HTTPError as error:
-            last = error
-            if error.code not in (429, 503):
-                raise
-            wait = retry_after(error.headers.get("Retry-After"))
-        except (urllib.error.URLError, TimeoutError, ConnectionError) as error:
-            last = error
-            wait = None
-        if attempt == RETRIES - 1:
-            break
-        delay = wait if wait is not None else min(60.0, 2.0 ** attempt)
-        print(f"arxiv_meta: retrying {url} in {delay:.0f}s "
-              f"(attempt {attempt + 1}/{RETRIES}): {last}", file=sys.stderr)
-        time.sleep(delay)
-    raise RuntimeError(f"gave up on {url} after {RETRIES} attempts: {last}")
+    """GET through the shared client, with this tool's user agent and patience."""
+    return net.get(url, user_agent=UA, timeout=TIMEOUT, attempts=RETRIES,
+                   log=lambda message: print(f"arxiv_meta: {message}", file=sys.stderr))
 
 
 def parse_feed(xml: str) -> dict[str, dict]:
