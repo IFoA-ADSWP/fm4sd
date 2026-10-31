@@ -249,6 +249,27 @@ ROUTES: dict[str, RouteSpec] = {
                                    absence="paywall"),
     "augtab": RouteSpec("springer chapter; content/pdf redirects to landing",
                         absence="paywall"),
+    # The canonical non-life actuarial methodology (#47). Journal-only, pre-arXiv or
+    # with no preprint: the DOI resolves, the full text is a subscription. These six
+    # record venue knowledge, not an observed probe; the rows above record what the
+    # request returned. Both are recorded once rather than probed on every run.
+    # No DOI exists for this one; the free CAS scan is the payload, so it enters as a
+    # [pdf] row and fetches rather than joining the citation-only rows above.
+    "bornhuetter-ferguson": RouteSpec(
+        "PCAS 1972 scan, no DOI; enters as [pdf] and fetches (#47)"),
+    "distribution-free-calculation-of-the-standard-error-of-chain-ladder-reserve":
+        RouteSpec("cambridge core / astin bulletin; subscription", absence="paywall"),
+    "stochastic-claims-reserving-in-general-insurance":
+        RouteSpec("cambridge core / british actuarial journal; subscription",
+                  absence="paywall"),
+    "actuarial-applications-of-a-hierarchical-insurance-claims-model":
+        RouteSpec("cambridge core / astin bulletin; subscription", absence="paywall"),
+    "fitting-tweedies-compound-poisson-model-to-insurance-claims-data":
+        RouteSpec("taylor & francis; subscription", absence="paywall"),
+    "zero-inflated-poisson-regression-with-an-application-to-defects":
+        RouteSpec("jstor; subscription", absence="paywall"),
+    "specification-and-testing-of-some-modified-count-data-models":
+        RouteSpec("elsevier / sciencedirect; subscription", absence="paywall"),
     # Dead: a 404, a DNS failure, or a stub redirect to something else.
     "kumorfm": RouteSpec("pdf stub redirects to nvidia product docs; no second id",
                           absence="dead"),
@@ -264,6 +285,9 @@ ROUTES: dict[str, RouteSpec] = {
                       absence="unknown"),
     "bitcoinllmforecast": RouteSpec(
         "sciencedirect 403 bot defence; openalex says hybrid OA", absence="unknown"),
+    "machine-learning-in-p-and-c-insurance-a-review-for-pricing-and-reserving":
+        RouteSpec("mdpi 403 access denied; open access per the publisher, no payload",
+                  absence="unknown"),
 
     # --- publisher PDF ------------------------------------------------------
     # Licence and sharing record for each route entry (decision on #9: "unknown is
@@ -320,6 +344,16 @@ ROUTES: dict[str, RouteSpec] = {
         licence="unknown",
         licence_source="https://groups.csail.mit.edu/EVO-DesignOpt/groupWebSite/uploads/Site/DSAA_DSM_2015.pdf",
         shareable="unknown"),
+    "quantile-regression-forests": RouteSpec(
+        note="JMLR article PDF; no arXiv preprint (#47)",
+        licence="none stated",
+        licence_source="https://www.jmlr.org/papers/volume7/meinshausen06a/meinshausen06a.pdf",
+        shareable="unknown"),
+    "the-actuary-and-ibnr": RouteSpec(
+        note="CAS proceedings scan, PCAS LIX (1972); no DOI exists (#47)",
+        licence="none stated",
+        licence_source="https://www.casact.org/sites/default/files/database/proceed_proceed72_72181.pdf",
+        shareable="unknown"),
 
     # --- PMLR (copyright line, no reuse licence) ---------------------------
     "ptnas": RouteSpec(
@@ -339,6 +373,11 @@ ROUTES: dict[str, RouteSpec] = {
     "wikidbs": RouteSpec(
         licence="unknown -- CC BY 4.0 stated for the dataset and code, not the paper",
         licence_source="https://proceedings.neurips.cc/paper_files/paper/2024/file/4847447cae911dde321ca19afe7d8707-Paper-Datasets_and_Benchmarks_Track.pdf",
+        shareable="unknown"),
+    "lightgbm": RouteSpec(
+        note="NeurIPS 2017 proceedings PDF; no arXiv preprint exists (#47)",
+        licence="none stated",
+        licence_source="https://proceedings.neurips.cc/paper_files/paper/2017/file/6449f44a102fde848669bdd9eb6b76fa-Paper.pdf",
         shareable="unknown"),
 
     # --- web-native HTML: `html_key` is the link key holding the paper's own

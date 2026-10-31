@@ -1,7 +1,7 @@
 {
   "source": "LOCAL README.md",
   "note": "Parsed from the fm4sd README. Payload lives in gitignored papers/.",
-  "count": 383
+  "count": 431
 }
 --- entries ---
 [
@@ -1266,6 +1266,592 @@
     "has_code": false
   },
   {
+    "slug": "xgboost",
+    "arxiv_id": "1603.02754",
+    "section": "papers",
+    "category": "baselines",
+    "subcategory": "",
+    "citation": "chen and guestrin 2016",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/1603.02754"
+    },
+    "arxiv_rev": 3,
+    "source": "tex",
+    "path": "papers/xgboost",
+    "text_bytes": 74922,
+    "pages": 0,
+    "n_tex_files": 1,
+    "sha256": "0f9ef509d28fe79f87e48c428e82af9071db562a9d2832d771013b3d3d403643",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "catboost",
+    "arxiv_id": "1706.09516",
+    "section": "papers",
+    "category": "baselines",
+    "subcategory": "",
+    "citation": "prokhorenkova et al. 2017",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/1706.09516"
+    },
+    "arxiv_rev": 5,
+    "source": "tex",
+    "path": "papers/catboost",
+    "text_bytes": 96074,
+    "pages": 0,
+    "n_tex_files": 1,
+    "sha256": "dc40eeae12c5f113d05561b16669e80f8e813dd47cc741fcf04f49e1e4050c65",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "lightgbm",
+    "arxiv_id": "",
+    "section": "papers",
+    "category": "baselines",
+    "subcategory": "",
+    "citation": "ke et al. 2017",
+    "links": {
+      "neurips": "https://proceedings.neurips.cc/paper_files/paper/2017/file/6449f44a102fde848669bdd9eb6b76fa-Paper.pdf"
+    },
+    "source": "pdf",
+    "route": "neurips",
+    "path": "papers/lightgbm",
+    "text_bytes": 38769,
+    "pages": 9,
+    "n_tex_files": 0,
+    "sha256": "32ddfe0c7a8e1acb87c97cff904a16e0a556a8d79ebfecf772159843e736affc",
+    "fetch_status": "ok",
+    "licence": "none stated",
+    "licence_source": "https://proceedings.neurips.cc/paper_files/paper/2017/file/6449f44a102fde848669bdd9eb6b76fa-Paper.pdf",
+    "shareable": "unknown",
+    "has_code": false
+  },
+  {
+    "slug": "revisiting-deep-learning-models-for-tabular-data",
+    "arxiv_id": "2106.11959",
+    "section": "papers",
+    "category": "baselines",
+    "subcategory": "",
+    "citation": "gorishniy et al. 2021",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2106.11959"
+    },
+    "arxiv_rev": 5,
+    "source": "tex",
+    "path": "papers/revisiting-deep-learning-models-for-tabular-data",
+    "text_bytes": 135737,
+    "pages": 0,
+    "n_tex_files": 13,
+    "sha256": "eebd40f5d9101237b6af85a216bdf70c5a0877592eaa20b2bb1b8a3b68aee8b9",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "tabular-data-deep-learning-is-not-all-you-need",
+    "arxiv_id": "2106.03253",
+    "section": "papers",
+    "category": "baselines",
+    "subcategory": "",
+    "citation": "shwartz-ziv and armon 2021",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2106.03253"
+    },
+    "arxiv_rev": 2,
+    "source": "tex",
+    "path": "papers/tabular-data-deep-learning-is-not-all-you-need",
+    "text_bytes": 53508,
+    "pages": 0,
+    "n_tex_files": 1,
+    "sha256": "d40ed57933a1d414efdbc5f2532d2c423428b595967ddafe626570665ced5c57",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "well-tuned-simple-nets-excel-on-tabular-datasets",
+    "arxiv_id": "2106.11189",
+    "section": "papers",
+    "category": "baselines",
+    "subcategory": "",
+    "citation": "kadra et al. 2021",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2106.11189"
+    },
+    "arxiv_rev": 2,
+    "source": "tex",
+    "path": "papers/well-tuned-simple-nets-excel-on-tabular-datasets",
+    "text_bytes": 211474,
+    "pages": 0,
+    "n_tex_files": 54,
+    "sha256": "f1799180a1e638acacf70302db1b45611078ef35bfe22fa3893032c347f4d7c3",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "deep-neural-networks-and-tabular-data-a-survey",
+    "arxiv_id": "2110.01889",
+    "section": "papers",
+    "category": "baselines",
+    "subcategory": "",
+    "citation": "borisov et al. 2021",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2110.01889"
+    },
+    "arxiv_rev": 3,
+    "source": "tex",
+    "path": "papers/deep-neural-networks-and-tabular-data-a-survey",
+    "text_bytes": 198826,
+    "pages": 0,
+    "n_tex_files": 9,
+    "sha256": "a3e3bacf6f90124f64fdddbebe4582e9160fe7c04fcda9b369be3ea7ec0254d6",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "why-do-tree-based-models-still-outperform-deep-learning",
+    "arxiv_id": "2207.08815",
+    "section": "papers",
+    "category": "baselines",
+    "subcategory": "",
+    "citation": "grinsztajn et al. 2022",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2207.08815"
+    },
+    "arxiv_rev": 1,
+    "source": "tex",
+    "path": "papers/why-do-tree-based-models-still-outperform-deep-learning",
+    "text_bytes": 129448,
+    "pages": 0,
+    "n_tex_files": 3,
+    "sha256": "0c03207655320a7e978db35514e583d8e01905db3f03164ef5470f4d15d640a7",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "when-do-neural-nets-outperform-boosted-trees-on-tabular-data",
+    "arxiv_id": "2305.02997",
+    "section": "papers",
+    "category": "baselines",
+    "subcategory": "",
+    "citation": "mcfresh et al. 2023",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2305.02997"
+    },
+    "arxiv_rev": 4,
+    "source": "tex",
+    "path": "papers/when-do-neural-nets-outperform-boosted-trees-on-tabular-data",
+    "text_bytes": 173234,
+    "pages": 0,
+    "n_tex_files": 14,
+    "sha256": "4107d0dca36c46b6b42723f103ace2e2d9a9321cdc8f0b84ff8d246e3b72ab4b",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "quantile-regression-forests",
+    "arxiv_id": "",
+    "section": "papers",
+    "category": "probabilistic",
+    "subcategory": "",
+    "citation": "meinshausen 2006",
+    "links": {
+      "pdf": "https://www.jmlr.org/papers/volume7/meinshausen06a/meinshausen06a.pdf"
+    },
+    "source": "pdf",
+    "route": "direct-pdf",
+    "path": "papers/quantile-regression-forests",
+    "text_bytes": 46177,
+    "pages": 17,
+    "n_tex_files": 0,
+    "sha256": "781a07fea0fadeec515ac0034a338efa66b234073cf5877e13ec08e5ffb2b882",
+    "fetch_status": "ok",
+    "licence": "none stated",
+    "licence_source": "https://www.jmlr.org/papers/volume7/meinshausen06a/meinshausen06a.pdf",
+    "shareable": "unknown",
+    "has_code": false
+  },
+  {
+    "slug": "of-quantiles-and-expectiles-consistent-scoring-functions",
+    "arxiv_id": "1503.08195",
+    "section": "papers",
+    "category": "probabilistic",
+    "subcategory": "",
+    "citation": "ehm et al. 2016",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/1503.08195"
+    },
+    "arxiv_rev": 2,
+    "source": "tex",
+    "path": "papers/of-quantiles-and-expectiles-consistent-scoring-functions",
+    "text_bytes": 100652,
+    "pages": 0,
+    "n_tex_files": 1,
+    "sha256": "4c625747bd3adc6f57a3d3e60e12be2bd1053129965d96945938f4935fefd06d",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "bayesian-structured-additive-distributional-regression",
+    "arxiv_id": "1509.05230",
+    "section": "papers",
+    "category": "probabilistic",
+    "subcategory": "",
+    "citation": "klein et al. 2015",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/1509.05230"
+    },
+    "arxiv_rev": 1,
+    "source": "tex",
+    "path": "papers/bayesian-structured-additive-distributional-regression",
+    "text_bytes": 132193,
+    "pages": 0,
+    "n_tex_files": 1,
+    "sha256": "ed2c26372eb47294719266c5d8770479098d4dd6b3629935c4a8af552f156428",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "distribution-free-predictive-inference-for-regression",
+    "arxiv_id": "1604.04173",
+    "section": "papers",
+    "category": "probabilistic",
+    "subcategory": "",
+    "citation": "lei et al. 2018",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/1604.04173"
+    },
+    "arxiv_rev": 2,
+    "source": "tex",
+    "path": "papers/distribution-free-predictive-inference-for-regression",
+    "text_bytes": 142656,
+    "pages": 0,
+    "n_tex_files": 22,
+    "sha256": "926aab6403af4a1f67028e0e46b2c335dd63938877912038757c7b7e847089b1",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "accurate-uncertainties-for-deep-learning-using-calibrated-regression",
+    "arxiv_id": "1807.00263",
+    "section": "papers",
+    "category": "probabilistic",
+    "subcategory": "",
+    "citation": "kuleshov et al. 2018",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/1807.00263"
+    },
+    "arxiv_rev": 1,
+    "source": "pdf",
+    "path": "papers/accurate-uncertainties-for-deep-learning-using-calibrated-regression",
+    "text_bytes": 42334,
+    "pages": 9,
+    "n_tex_files": 0,
+    "sha256": "e0007ef5e8ccbc67d6ed29117a8abce1fa03d3da8d037f1c0539db2c3c1f91c1",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "conformalized-quantile-regression",
+    "arxiv_id": "1905.03222",
+    "section": "papers",
+    "category": "probabilistic",
+    "subcategory": "",
+    "citation": "romano et al. 2019",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/1905.03222"
+    },
+    "arxiv_rev": 1,
+    "source": "tex",
+    "path": "papers/conformalized-quantile-regression",
+    "text_bytes": 78283,
+    "pages": 0,
+    "n_tex_files": 11,
+    "sha256": "7e6132dfbc4d746f6a6b77019c59492b9a2525496d9a477876b0b204e7fd1c0f",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "ngboost-natural-gradient-boosting-for-probabilistic-prediction",
+    "arxiv_id": "1910.03225",
+    "section": "papers",
+    "category": "probabilistic",
+    "subcategory": "",
+    "citation": "duan et al. 2020",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/1910.03225"
+    },
+    "arxiv_rev": 4,
+    "source": "tex",
+    "path": "papers/ngboost-natural-gradient-boosting-for-probabilistic-prediction",
+    "text_bytes": 68839,
+    "pages": 0,
+    "n_tex_files": 1,
+    "sha256": "899c7cb3c482c8265d94bdbb0583ba48eaa762b97c035365c5bff1a1d9d2a980",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "regression-diagnostics-meets-forecast-evaluation",
+    "arxiv_id": "2108.03210",
+    "section": "papers",
+    "category": "probabilistic",
+    "subcategory": "",
+    "citation": "gneiting and resin 2023",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2108.03210"
+    },
+    "arxiv_rev": 3,
+    "source": "tex",
+    "path": "papers/regression-diagnostics-meets-forecast-evaluation",
+    "text_bytes": 3782262,
+    "pages": 0,
+    "n_tex_files": 77,
+    "sha256": "096aa0da27dc5963b38bf2da57f586d6d2c1aae8475cce514ff9bc97d234832f",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "easy-uncertainty-quantification-easyuq",
+    "arxiv_id": "2212.08376",
+    "section": "papers",
+    "category": "probabilistic",
+    "subcategory": "",
+    "citation": "walz et al. 2022",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2212.08376"
+    },
+    "arxiv_rev": 2,
+    "source": "tex",
+    "path": "papers/easy-uncertainty-quantification-easyuq",
+    "text_bytes": 110401,
+    "pages": 0,
+    "n_tex_files": 1,
+    "sha256": "d0c29c779375ea97da8022b6b6cf642391b7f8f0411f64e93b9366af42472f3d",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "decompositions-of-the-mean-continuous-ranked-probability-score",
+    "arxiv_id": "2311.14122",
+    "section": "papers",
+    "category": "probabilistic",
+    "subcategory": "",
+    "citation": "arnold et al. 2023",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2311.14122"
+    },
+    "arxiv_rev": 1,
+    "source": "tex",
+    "path": "papers/decompositions-of-the-mean-continuous-ranked-probability-score",
+    "text_bytes": 140293,
+    "pages": 0,
+    "n_tex_files": 1,
+    "sha256": "8179dbcd1a17793176f63baf23c326ec83bfc5c406a7ab7d712cee67daed4d79",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "reliable-real-time-value-at-risk-estimation-via-quantile-regression-forest",
+    "arxiv_id": "2602.01912",
+    "section": "papers",
+    "category": "probabilistic",
+    "subcategory": "",
+    "citation": "wang et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2602.01912"
+    },
+    "arxiv_rev": 1,
+    "source": "tex",
+    "path": "papers/reliable-real-time-value-at-risk-estimation-via-quantile-regression-forest",
+    "text_bytes": 54786,
+    "pages": 0,
+    "n_tex_files": 1,
+    "sha256": "0465755bf4976e77cbfef7a9276c04458c89cb81b137c8bfc53d1c09e0cab704",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "pmlb-a-large-benchmark-suite-for-machine-learning-evaluation-and-comparison",
+    "arxiv_id": "1703.00512",
+    "section": "papers",
+    "category": "benchmark methodology",
+    "subcategory": "",
+    "citation": "olson et al. 2017",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/1703.00512"
+    },
+    "arxiv_rev": 1,
+    "source": "tex",
+    "path": "papers/pmlb-a-large-benchmark-suite-for-machine-learning-evaluation-and-comparison",
+    "text_bytes": 32013,
+    "pages": 0,
+    "n_tex_files": 1,
+    "sha256": "1b59be02539b77300cf6bc62ef21682d2dc4c4351856537d688c0f91d1c5c0da",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "openml-benchmarking-suites",
+    "arxiv_id": "1708.03731",
+    "section": "papers",
+    "category": "benchmark methodology",
+    "subcategory": "",
+    "citation": "bischl et al. 2017",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/1708.03731"
+    },
+    "arxiv_rev": 3,
+    "source": "tex",
+    "path": "papers/openml-benchmarking-suites",
+    "text_bytes": 49061,
+    "pages": 0,
+    "n_tex_files": 1,
+    "sha256": "29203085a0041bf56ae3e8d8f33c372251053f4eea926343ce42d2cfa5b4057c",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "show-your-work-improved-reporting-of-experimental-results",
+    "arxiv_id": "1909.03004",
+    "section": "papers",
+    "category": "benchmark methodology",
+    "subcategory": "",
+    "citation": "dodge et al. 2019",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/1909.03004"
+    },
+    "arxiv_rev": 1,
+    "source": "tex",
+    "path": "papers/show-your-work-improved-reporting-of-experimental-results",
+    "text_bytes": 119868,
+    "pages": 0,
+    "n_tex_files": 1,
+    "sha256": "dbdcead0f3b723f3867ddd84923678674d7b522fd45aee91d6546894dbe1f94b",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "improving-reproducibility-in-machine-learning-research",
+    "arxiv_id": "2003.12206",
+    "section": "papers",
+    "category": "benchmark methodology",
+    "subcategory": "",
+    "citation": "pineau et al. 2020",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2003.12206"
+    },
+    "arxiv_rev": 4,
+    "source": "tex",
+    "path": "papers/improving-reproducibility-in-machine-learning-research",
+    "text_bytes": 48166,
+    "pages": 0,
+    "n_tex_files": 3,
+    "sha256": "b411763f87fd2c18fe72af09e66c26840109dd38e860cf34df28fc9504676268",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "the-benchmark-lottery",
+    "arxiv_id": "2107.07002",
+    "section": "papers",
+    "category": "benchmark methodology",
+    "subcategory": "",
+    "citation": "dehghani et al. 2021",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2107.07002"
+    },
+    "arxiv_rev": 1,
+    "source": "tex",
+    "path": "papers/the-benchmark-lottery",
+    "text_bytes": 112976,
+    "pages": 0,
+    "n_tex_files": 2,
+    "sha256": "efad1a26b6ce0bc28c2a15a12a0c66038703257350e59924e4a4ad3df70fb39e",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "leakage-and-the-reproducibility-crisis-in-ml-based-science",
+    "arxiv_id": "2207.07048",
+    "section": "papers",
+    "category": "benchmark methodology",
+    "subcategory": "",
+    "citation": "kapoor and narayanan 2022",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2207.07048"
+    },
+    "arxiv_rev": 1,
+    "source": "tex",
+    "path": "papers/leakage-and-the-reproducibility-crisis-in-ml-based-science",
+    "text_bytes": 121703,
+    "pages": 0,
+    "n_tex_files": 1,
+    "sha256": "9a8da6649e4092217d50de46d2fa352dee743f92c0dd54a40c37e9f5748cb800",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "amlb-an-automl-benchmark",
+    "arxiv_id": "2207.12560",
+    "section": "papers",
+    "category": "benchmark methodology",
+    "subcategory": "",
+    "citation": "gijsbers et al. 2022",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2207.12560"
+    },
+    "arxiv_rev": 2,
+    "source": "tex",
+    "path": "papers/amlb-an-automl-benchmark",
+    "text_bytes": 327989,
+    "pages": 0,
+    "n_tex_files": 37,
+    "sha256": "2637c339dbc4893f3270fd29a7ef409a463571616c2b4d9fbeb12f665c201dba",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "tabrepo-a-large-scale-repository-of-tabular-model-evaluations",
+    "arxiv_id": "2311.02971",
+    "section": "papers",
+    "category": "benchmark methodology",
+    "subcategory": "",
+    "citation": "salinas and erickson 2023",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2311.02971"
+    },
+    "arxiv_rev": 3,
+    "source": "tex",
+    "path": "papers/tabrepo-a-large-scale-repository-of-tabular-model-evaluations",
+    "text_bytes": 161528,
+    "pages": 0,
+    "n_tex_files": 20,
+    "sha256": "7402b8f701e59151df4a37e2d317565bbab89783ef87785abb3e735f74a83728",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "lmem-for-post-hoc-analysis-of-hpo-benchmarking",
+    "arxiv_id": "2408.02533",
+    "section": "papers",
+    "category": "benchmark methodology",
+    "subcategory": "",
+    "citation": "geburek et al. 2024",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2408.02533"
+    },
+    "arxiv_rev": 1,
+    "source": "tex",
+    "path": "papers/lmem-for-post-hoc-analysis-of-hpo-benchmarking",
+    "text_bytes": 61212,
+    "pages": 0,
+    "n_tex_files": 14,
+    "sha256": "bbeae249a99ba16b03b9687386a9e269d0a4dd5c74d970009a7dfc0dd24dedf2",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
     "slug": "dfs",
     "arxiv_id": "",
     "section": "papers",
@@ -2197,6 +2783,206 @@
     "has_code": true
   },
   {
+    "slug": "moirai",
+    "arxiv_id": "2402.02592",
+    "section": "papers",
+    "category": "time series",
+    "subcategory": "forecasting",
+    "citation": "woo et al. 2024",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2402.02592"
+    },
+    "arxiv_rev": 2,
+    "source": "tex",
+    "path": "papers/moirai",
+    "text_bytes": 132185,
+    "pages": 0,
+    "n_tex_files": 50,
+    "sha256": "d1e5830def516d52579c45bd770a4bde32b0678416a0313ecd36e1d0eb4a9d21",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "lag-llama",
+    "arxiv_id": "2310.08278",
+    "section": "papers",
+    "category": "time series",
+    "subcategory": "forecasting",
+    "citation": "rasul et al. 2023",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2310.08278"
+    },
+    "arxiv_rev": 3,
+    "source": "tex",
+    "path": "papers/lag-llama",
+    "text_bytes": 117607,
+    "pages": 0,
+    "n_tex_files": 1,
+    "sha256": "c93a0a57e8446d001169100ae15874f6470b15d5a29e0b8598bcb03f4a60dfa5",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "timegpt-1",
+    "arxiv_id": "2310.03589",
+    "section": "papers",
+    "category": "time series",
+    "subcategory": "forecasting",
+    "citation": "garza et al. 2023",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2310.03589"
+    },
+    "arxiv_rev": 3,
+    "source": "tex",
+    "path": "papers/timegpt-1",
+    "text_bytes": 49256,
+    "pages": 0,
+    "n_tex_files": 13,
+    "sha256": "d1770c744b4bd367ed3d2d5c056ca824bec4acf9c83f2fcfc4da664b140fe0b2",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "timesfm",
+    "arxiv_id": "2310.10688",
+    "section": "papers",
+    "category": "time series",
+    "subcategory": "forecasting",
+    "citation": "das et al. 2023",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2310.10688"
+    },
+    "arxiv_rev": 4,
+    "source": "tex",
+    "path": "papers/timesfm",
+    "text_bytes": 191570,
+    "pages": 0,
+    "n_tex_files": 3,
+    "sha256": "a657e18ecbe3f06b74d9f8baa81fe32187ed164ac62084e0faabcd061ba1bdae",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "toto",
+    "arxiv_id": "2407.07874",
+    "section": "papers",
+    "category": "time series",
+    "subcategory": "forecasting",
+    "citation": "cohen et al. 2024",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2407.07874"
+    },
+    "arxiv_rev": 2,
+    "source": "tex",
+    "path": "papers/toto",
+    "text_bytes": 54388,
+    "pages": 0,
+    "n_tex_files": 20,
+    "sha256": "dc3c2e7d8fb142990c09319f3367712803bc8bf35f743e0690b1770106883fd4",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "moment",
+    "arxiv_id": "2402.03885",
+    "section": "papers",
+    "category": "time series",
+    "subcategory": "forecasting",
+    "citation": "goswami et al. 2024",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2402.03885"
+    },
+    "arxiv_rev": 3,
+    "source": "tex",
+    "path": "papers/moment",
+    "text_bytes": 198189,
+    "pages": 0,
+    "n_tex_files": 9,
+    "sha256": "4d3c72bfa3b1d4b8f535737a209b5e9eb70f74447d865b169efd4ad48f3fb1ee",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "time-moe",
+    "arxiv_id": "2409.16040",
+    "section": "papers",
+    "category": "time series",
+    "subcategory": "forecasting",
+    "citation": "shi et al. 2024",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2409.16040"
+    },
+    "arxiv_rev": 4,
+    "source": "tex",
+    "path": "papers/time-moe",
+    "text_bytes": 144926,
+    "pages": 0,
+    "n_tex_files": 25,
+    "sha256": "4848d4e5fec30cf3aadacda7eeb441df4106f2ef43883613138aa61b63fc4c93",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "ts-fm-survey",
+    "arxiv_id": "2403.14735",
+    "section": "papers",
+    "category": "time series",
+    "subcategory": "forecasting",
+    "citation": "liang et al. 2024",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2403.14735"
+    },
+    "arxiv_rev": 3,
+    "source": "tex",
+    "path": "papers/ts-fm-survey",
+    "text_bytes": 110525,
+    "pages": 0,
+    "n_tex_files": 3,
+    "sha256": "fc4a9de844cb64e34a7b248283a9e4f4734f726c953bc4d9e615d7fb8413c9a1",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "sundial",
+    "arxiv_id": "2502.00816",
+    "section": "papers",
+    "category": "time series",
+    "subcategory": "forecasting",
+    "citation": "liu et al. 2025",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2502.00816"
+    },
+    "arxiv_rev": 4,
+    "source": "tex",
+    "path": "papers/sundial",
+    "text_bytes": 114047,
+    "pages": 0,
+    "n_tex_files": 1,
+    "sha256": "0b60cf295eac21fa83a47d1e7d257de451631e4566712f32c34c5cf8fcdf6079",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "moirai-2",
+    "arxiv_id": "2511.11698",
+    "section": "papers",
+    "category": "time series",
+    "subcategory": "forecasting",
+    "citation": "liu et al. 2025",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2511.11698"
+    },
+    "arxiv_rev": 3,
+    "source": "tex",
+    "path": "papers/moirai-2",
+    "text_bytes": 68115,
+    "pages": 0,
+    "n_tex_files": 1,
+    "sha256": "6a26f5b59fc3a7c3f62c41bda44688303e6022593f8826985c0c654f4f46b867",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
     "slug": "timee",
     "arxiv_id": "2607.07500",
     "section": "papers",
@@ -2942,6 +3728,26 @@
     "has_code": false
   },
   {
+    "slug": "towards-foundation-models-for-insurance-risk-modelling",
+    "arxiv_id": "2609.14576",
+    "section": "papers",
+    "category": "actuarial / loss modelling",
+    "subcategory": "severity",
+    "citation": "blier-wong 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2609.14576"
+    },
+    "arxiv_rev": 1,
+    "source": "tex",
+    "path": "papers/towards-foundation-models-for-insurance-risk-modelling",
+    "text_bytes": 117926,
+    "pages": 0,
+    "n_tex_files": 1,
+    "sha256": "f7a8e652be2556728cca5e1817b59e4d6a930cf7b17f5afacbef0115f15c607a",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
     "slug": "insurance-premium-prediction-via-gradient-tree-boosted-tweed",
     "arxiv_id": "1508.06378",
     "section": "papers",
@@ -3217,6 +4023,82 @@
     "has_code": false
   },
   {
+    "slug": "actuarial-applications-of-a-hierarchical-insurance-claims-model",
+    "arxiv_id": "",
+    "section": "papers",
+    "category": "actuarial / loss modelling",
+    "subcategory": "frequency and count models",
+    "citation": "frees et al. 2009",
+    "links": {
+      "doi": "https://doi.org/10.2143/AST.39.1.2038061"
+    },
+    "source": "",
+    "path": "",
+    "text_bytes": 0,
+    "pages": 0,
+    "n_tex_files": 0,
+    "sha256": "",
+    "fetch_status": "skipped:unreachable:paywall",
+    "has_code": false
+  },
+  {
+    "slug": "fitting-tweedies-compound-poisson-model-to-insurance-claims-data",
+    "arxiv_id": "",
+    "section": "papers",
+    "category": "actuarial / loss modelling",
+    "subcategory": "frequency and count models",
+    "citation": "j\u00f8rgensen and de souza 1994",
+    "links": {
+      "doi": "https://doi.org/10.1080/03461238.1994.10413930"
+    },
+    "source": "",
+    "path": "",
+    "text_bytes": 0,
+    "pages": 0,
+    "n_tex_files": 0,
+    "sha256": "",
+    "fetch_status": "skipped:unreachable:paywall",
+    "has_code": false
+  },
+  {
+    "slug": "zero-inflated-poisson-regression-with-an-application-to-defects",
+    "arxiv_id": "",
+    "section": "papers",
+    "category": "actuarial / loss modelling",
+    "subcategory": "frequency and count models",
+    "citation": "lambert 1992",
+    "links": {
+      "doi": "https://doi.org/10.2307/1269547"
+    },
+    "source": "",
+    "path": "",
+    "text_bytes": 0,
+    "pages": 0,
+    "n_tex_files": 0,
+    "sha256": "",
+    "fetch_status": "skipped:unreachable:paywall",
+    "has_code": false
+  },
+  {
+    "slug": "specification-and-testing-of-some-modified-count-data-models",
+    "arxiv_id": "",
+    "section": "papers",
+    "category": "actuarial / loss modelling",
+    "subcategory": "frequency and count models",
+    "citation": "mullahy 1986",
+    "links": {
+      "doi": "https://doi.org/10.1016/0304-4076%2886%2990002-3"
+    },
+    "source": "",
+    "path": "",
+    "text_bytes": 0,
+    "pages": 0,
+    "n_tex_files": 0,
+    "sha256": "",
+    "fetch_status": "skipped:unreachable:paywall",
+    "has_code": false
+  },
+  {
     "slug": "local-quantile-regression",
     "arxiv_id": "1208.5384",
     "section": "papers",
@@ -3389,6 +4271,86 @@
     "published": "2020-08-13",
     "arxiv_title": "SynthETIC: an individual insurance claim simulator with feature control",
     "redistributable": false,
+    "has_code": false
+  },
+  {
+    "slug": "distribution-free-calculation-of-the-standard-error-of-chain-ladder-reserve",
+    "arxiv_id": "",
+    "section": "papers",
+    "category": "actuarial / loss modelling",
+    "subcategory": "tail metrics, quantiles, reserving",
+    "citation": "mack 1993",
+    "links": {
+      "doi": "https://doi.org/10.2143/AST.23.2.2005092"
+    },
+    "source": "",
+    "path": "",
+    "text_bytes": 0,
+    "pages": 0,
+    "n_tex_files": 0,
+    "sha256": "",
+    "fetch_status": "skipped:unreachable:paywall",
+    "has_code": false
+  },
+  {
+    "slug": "the-actuary-and-ibnr",
+    "arxiv_id": "",
+    "section": "papers",
+    "category": "actuarial / loss modelling",
+    "subcategory": "tail metrics, quantiles, reserving",
+    "citation": "bornhuetter and ferguson 1972",
+    "links": {
+      "pdf": "https://www.casact.org/sites/default/files/database/proceed_proceed72_72181.pdf"
+    },
+    "source": "pdf",
+    "route": "direct-pdf",
+    "path": "papers/the-actuary-and-ibnr",
+    "text_bytes": 31649,
+    "pages": 15,
+    "n_tex_files": 0,
+    "sha256": "3d92fbb5fa474444793229fc284a6f8078fb9686d4200ce20de32dd177725b1c",
+    "fetch_status": "ok",
+    "licence": "none stated",
+    "licence_source": "https://www.casact.org/sites/default/files/database/proceed_proceed72_72181.pdf",
+    "shareable": "unknown",
+    "has_code": false
+  },
+  {
+    "slug": "stochastic-claims-reserving-in-general-insurance",
+    "arxiv_id": "",
+    "section": "papers",
+    "category": "actuarial / loss modelling",
+    "subcategory": "tail metrics, quantiles, reserving",
+    "citation": "england and verrall 2002",
+    "links": {
+      "doi": "https://doi.org/10.1017/S1357321700003809"
+    },
+    "source": "",
+    "path": "",
+    "text_bytes": 0,
+    "pages": 0,
+    "n_tex_files": 0,
+    "sha256": "",
+    "fetch_status": "skipped:unreachable:paywall",
+    "has_code": false
+  },
+  {
+    "slug": "machine-learning-in-p-and-c-insurance-a-review-for-pricing-and-reserving",
+    "arxiv_id": "",
+    "section": "papers",
+    "category": "actuarial / loss modelling",
+    "subcategory": "tail metrics, quantiles, reserving",
+    "citation": "blier-wong et al. 2021",
+    "links": {
+      "doi": "https://doi.org/10.3390/risks9010004"
+    },
+    "source": "",
+    "path": "",
+    "text_bytes": 0,
+    "pages": 0,
+    "n_tex_files": 0,
+    "sha256": "",
+    "fetch_status": "skipped:unreachable:unknown",
     "has_code": false
   },
   {

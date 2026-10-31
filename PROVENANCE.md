@@ -23,15 +23,16 @@ index's links against arXiv.
 ## Upstream relationship
 
 - **Posture:** this fork **merges** `upstream/main`; it does not re-sync. Replacing the
-  README with upstream's would destroy the 28 local actuarial entries, their manifest
+  README with upstream's would destroy the 37 local actuarial entries, their manifest
   records and the three actuarial sub-categories, and buys nothing — no shared entry has
   been patched. Details: `docs/RESEARCH.md`.
 - **Drift trigger:** merge when upstream is roughly **25 entries ahead** (about two weeks at
   its current ~3.5/day), or whenever a decision session needs fresher data. No calendar tick.
-- **Local actuarial block:** 28 entries stay in this fork's `README.md` while their upstream
-  PR ([borawhocodess/fm4sd#5](https://github.com/borawhocodess/fm4sd/pull/5), opened
-  2026-10-30) is open. The local category is authoritative here until it lands; acceptance
-  upstream is unknown (no fork PR has ever been merged there).
+- **Local actuarial block:** the 28 entries proposed in that PR
+  ([borawhocodess/fm4sd#5](https://github.com/borawhocodess/fm4sd/pull/5), opened
+  2026-10-30) stay in this fork's `README.md` while it is open. The nine methods papers added
+  by #47 are local too, but are **not** proposed upstream. The local category is authoritative
+  here until #5 lands; acceptance upstream is unknown (no fork PR has ever been merged there).
 - **On landing:** drop the local block from `README.md`, re-run `--index`, and add a row to
   the corrections log. After that every sync is a pure merge.
 - **Mechanics:** `git merge upstream/main`, then `--index` (fetch metadata is recovered from
@@ -48,15 +49,15 @@ parsed; a non-paper link inside a parsed section is an entry with `skipped:not-p
 | Field | Value |
 |---|---|
 | Index parsed | **`README.md` in this fork** since 2026-10-08 (was upstream `main/README.md` at `62382d2`) |
-| Entries parsed | 383 (355 upstream + 28 actuarial) |
-| With an arXiv id | 323 (84%) |
+| Entries parsed | 431 (355 upstream + 37 actuarial + 39 comparison literature) |
+| With an arXiv id | 361 (84%) |
 | Linking released code | 138 |
-| Fetched locally | 340 — 317 LaTeX source bundles, 18 PDF, 5 HTML/XML (4 web-native papers + 1 PMC full-text XML) |
-| Extracted text | 43.6 MB |
+| Fetched locally | 381 — 354 LaTeX source bundles, 22 PDF, 5 HTML/XML (4 web-native papers + 1 PMC full-text XML) |
+| Extracted text | 52.0 MB |
 | Source preference | `arxiv.org/src/<id>vN`, falling back to `arxiv.org/pdf/<id>vN` (revision pinned — see below); non-arXiv entries by route family (see below) |
 | PDF extractor | PyMuPDF 1.28.2 |
 | Rate limit | arXiv 3 req/s; non-arXiv web routes ~1 req/s, same real User-Agent |
-| Not fetched | 43 entries, each with a reason: 22 `skipped:unreachable:captcha`, 7 `...:paywall`, 5 `...:unknown`, 2 `...:dead`, 7 `skipped:not-paper` |
+| Not fetched | 50 entries, each with a reason: 22 `skipped:unreachable:captcha`, 13 `...:paywall`, 6 `...:unknown`, 2 `...:dead`, 7 `skipped:not-paper` |
 
 `references/manifest.json` is the machine-readable record: id, pinned revision (`arxiv_rev`),
 title, category, section, subcategory, citation, links, licence, `licence_url`/`licence_source`,
@@ -98,10 +99,10 @@ could reach:
 
 | Route | n | Entries |
 |---|---|---|
-| direct PDF | 7 | `tfm-agents-humans`, `era-of-experience`, `pfnsyn`, `good-bad-controls`, `cdc-prompt`, `mit-ai-report`, `dfs` |
+| direct PDF | 9 | `tfm-agents-humans`, `era-of-experience`, `pfnsyn`, `good-bad-controls`, `cdc-prompt`, `mit-ai-report`, `dfs`, `quantile-regression-forests` (JMLR), `the-actuary-and-ibnr` (CAS scan) |
 | publisher PDF | 3 | `tabpfnv2` (Nature → PMC PDF → Europe PMC full-text XML fallback), `tabssldataselect` (Springer), `schemapile` (CWI/ACM) |
 | PMLR | 3 | `ptnas`, `baguan-ts`, `pf-ges` |
-| NeurIPS proceedings | 1 | `wikidbs` |
+| NeurIPS proceedings | 2 | `wikidbs`, `lightgbm` |
 | web-native HTML | 4 | `circuits-framework`, `monosemanticity`, `nonergodic-geometry`, `dust` |
 
 **Observed 2026-10-31, two days after the audit:** Nature and Springer served a JavaScript
@@ -109,10 +110,13 @@ could reach:
 `skipped:unreachable:captcha` rather than fetched, and `tabpfnv2` comes from Europe PMC's
 full-text JATS XML instead of the Nature PDF. The reason is recorded, not hidden.
 
-**Licence records.** The route entries carry `licence`, `licence_source` and `shareable`:
+**Licence records.** The fetched route entries carry `licence`, `licence_source` and
+`shareable`; the citation-only DOI rows carry none at all:
 verified CC BY 4.0 for `tabpfnv2`, `tabssldataselect` and `schemapile`; `pfnsyn` is
-CC BY-NC-ND 4.0, so its text stays local. The 70 arXiv rows added by the 2026-10-30 merge
-still have no `fm4sd_licences.py` record; that gap is unchanged here.
+CC BY-NC-ND 4.0, so its text stays local. `lightgbm`, `quantile-regression-forests` and
+`the-actuary-and-ibnr`, added by #47, state no reuse licence, so they are recorded `unknown`
+and stay local. The 108 arXiv rows added by the 2026-10-30 merge and by #47 still have no
+`fm4sd_licences.py` record; that gap is unchanged here.
 
 ### Index source — changed 2026-10-08
 
@@ -173,6 +177,33 @@ Scope limit: **arXiv-only.** Paywalled actuarial venues (IME, ASTIN) are unreach
 `fm4sd_fetch.py` skips any entry without an arXiv ID — the same reason 49 pre-existing entries
 were never fetched. *(Superseded 2026-10-31 — see Corpus scope below.)*
 
+### Comparison literature — added 2026-10-31
+
+48 entries from the five approved research lists (#42–#46, landed by #47), in five blocks:
+
+| Block | n | Where | Notes |
+|---|---|---|---|
+| `baselines` | 9 | new top-level bullet under `## papers` | 8 arXiv; `lightgbm` via the NeurIPS 2017 proceedings PDF — no arXiv preprint exists |
+| `probabilistic` | 11 | new top-level bullet | 10 arXiv; `quantile-regression-forests` (Meinshausen 2006) via the JMLR PDF — no arXiv preprint exists |
+| `benchmark methodology` | 9 | new top-level bullet | all arXiv |
+| `time series` | 10 | existing `forecasting` sub-heading | all arXiv; benchmarks were not duplicated |
+| `actuarial / loss modelling` | 9 | existing `severity` (1), `frequency and count models` (4), `tail metrics, quantiles, reserving` (4) | 1 arXiv (`2609.14576`); 1 free CAS scan (`the-actuary-and-ibnr`); 7 DOI-only and citation-only |
+
+The `baselines`, `probabilistic` and `benchmark methodology` bullets are single-level, so
+`parse_index()` records them as `category` with an empty `subcategory` — no parser change and
+no new `GLOSSARY.md` vocabulary.
+
+The seven DOI-only actuarial rows carry a `ROUTES` spec instead of a route: six
+`absence="paywall"` (Mack/ASTIN, England–Verrall/BAJ, Frees–Shi–Valdez/ASTIN, Jørgensen/T&F,
+Lambert/JSTOR, Mullahy/Elsevier) and one `absence="unknown"` (Blier-Wong et al. 2021, MDPI:
+open access per the publisher but 403 to a plain client). They have no payload and no licence
+record, as approved. `the-actuary-and-ibnr` is **not** DOI-only — PCAS has no DOI at all — so
+it enters with the free CAS scan and is fetched.
+
+Every arXiv id was re-read from `export.arxiv.org/api/query?id_list=…` once, serially (the
+research pass hit 429s); all 38 resolved and none needed correcting. Citation strings take the
+venue year where the research note fixed one and the arXiv first-publication year otherwise.
+
 ## Corpus scope
 
 The corpus is deliberately incomplete, and the line is a capability line, not a judgement
@@ -215,7 +246,7 @@ entry between reasons without moving the line.
 
 Per entry the manifest records `licence` (what the source declares), the URL that claim came
 from, and `shareable: yes | no | unknown`. That URL is `licence_url` on the 253 arXiv rows,
-written by `fm4sd_licences.py`, and `licence_source` on the 18 route rows, written by the
+written by `fm4sd_licences.py`, and `licence_source` on the 21 route rows, written by the
 fetcher: **one fact under two names**, kept that way because renaming either would change the
 committed manifest, and the manifest is the reproducibility contract. The mapping is stated
 once, as `LICENCE_URL_FIELDS` in `scripts/fm4sd_fetch.py`, and
@@ -328,7 +359,7 @@ against upstream and writes nothing.
 `--fetch` resolves arXiv entries' current revision through the export API (batched `id_list`
 queries), then fetches `/src/<id>vN` → `/pdf/<id>vN`; every other entry goes through its route
 family. `--only <slug> …` restricts a run (used to fetch the 18 non-arXiv papers without
-rebuilding the 323 arXiv payloads), and `--force` moves a pin to the revision arXiv serves now.
+rebuilding the 361 arXiv payloads), and `--force` moves a pin to the revision arXiv serves now.
 `--check-revisions` reports drift without writing. `--status` prints the fetched total and the
 reason tally.
 
@@ -349,3 +380,4 @@ any load-bearing claim against the paper before relying on it. `SWEEPS.md` recor
 | 2026-10-30 | `gnr` was recorded as having no arXiv id because the fetcher's id patterns only matched the modern form; its legacy id `cond-mat/0011094` was misclassified. Id-less count 50 → 49; fetched 253 → 254. See "Legacy arXiv ids" above (#23). |
 | 2026-10-31 | `skipped:no-arxiv-id` was retired: 18 non-arXiv entries now resolve through direct-PDF, publisher-PDF, PMLR, NeurIPS and web-native HTML routes, and the remaining 42 id-less entries carry `skipped:not-paper` or `skipped:unreachable:<reason>`. Fetched 323 → 340 (317 LaTeX, 18 PDF, 5 HTML/XML). Nature and Springer answered the 2026-10-31 probe with a JS challenge, so `tabssldataselect` is recorded as captcha and `tabpfnv2` comes from Europe PMC XML. See "Non-arXiv route families" (#29). |
 | 2026-10-31 | A `sha256` now names the revision it belongs to: every id-bearing row records `arxiv_rev` and is fetched from the version-suffixed URL. All 323 arXiv rows were re-resolved and refetched, taking recorded digests from 115 to 340 (323 arXiv + 17 non-arXiv routes); the corpus counts did not move. Two metadata consequences are recorded here: `n_tex_files` was backfilled `0 → N` on 221 rows (the cached path never recovered it), and 16 rows' extracted text changed at the pinned refetch (12 LaTeX rows gained file counts or text; 4 PDF rows gained page counts). No digest claim depends on them — the only summaries citing those rows are two historical sweep-log lines. `--index` preserves the pin on a payload-less tree. See "Pinned arXiv revisions" (#33). |
+| 2026-10-31 | The five approved comparison lists landed (#47): 48 entries, taking the index 383 → 431, arXiv-resolvable 323 → 361, fetched 340 → 381 (317/18 → 354/22 LaTeX/PDF, 5 HTML/XML unchanged) and extracted text 43.6 → 52.0 MB. Three new `papers` bullets (`baselines`, `probabilistic`, `benchmark methodology`) and nine actuarial rows take that block from 28 to 37. Not-fetched 43 → 50: paywall 7 → 13 and unknown 5 → 6 from the citation-only actuarial rows. All 48 figures were recomputed from `fm4sd_search.py stats`. See "Comparison literature" above. |

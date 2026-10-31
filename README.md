@@ -18,15 +18,15 @@ entries with no arXiv id.
 
 | | |
 |---|---|
-| **383** | entries in the index |
-| **323** | resolvable to arXiv |
-| **340** | fetched locally (**317** LaTeX source, **18** PDF, **5** HTML/XML) |
-| **43.6 MB** | of extracted plain text |
+| **431** | entries in the index |
+| **361** | resolvable to arXiv |
+| **381** | fetched locally (**354** LaTeX source, **22** PDF, **5** HTML/XML) |
+| **52.0 MB** | of extracted plain text |
 | **138** | link released code |
 | **12** | digest documents (~35 papers read closely), plus 9 corpus sweeps |
 
-The other 43 entries say why they are absent rather than that they lack an id: 22
-`skipped:unreachable:captcha`, 7 `paywall`, 5 `unknown`, 2 `dead`, and 7 `skipped:not-paper`
+The other 50 entries say why they are absent rather than that they lack an id: 22
+`skipped:unreachable:captcha`, 13 `paywall`, 6 `unknown`, 2 `dead`, and 7 `skipped:not-paper`
 (repo/blog rows with no paper behind the link).
 
 Counts above are `python3 scripts/fm4sd_search.py stats` and
@@ -35,7 +35,7 @@ the same figures with their derivation.
 
 ```bash
 git clone https://github.com/IFoA-ADSWP/fm4sd && cd fm4sd
-python3 scripts/fm4sd_fetch.py --index && python3 scripts/fm4sd_fetch.py --fetch   # ~44 MB
+python3 scripts/fm4sd_fetch.py --index && python3 scripts/fm4sd_fetch.py --fetch   # ~52 MB
 pip install pymupdf    # only needed for the PDF fallback path
 
 python3 scripts/fm4sd_search.py stats
@@ -144,6 +144,38 @@ rm <id>.tar.gz
   - localpfn — [arxiv](https://arxiv.org/abs/2406.05207) · [neurips](https://proceedings.neurips.cc/paper_files/paper/2024/file/c40daf14d7a6469e65116507c21faeb7-Paper-Conference.pdf) — [thomas et al. 2024]
   - tfm-priority — [arxiv](https://arxiv.org/abs/2405.01147) · [icml](https://proceedings.mlr.press/v235/van-breugel24a.html) — [van breugel and van der schaar 2024]
   - tfm-systematic-survey — [ssrn](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7531718) — [archetti et al. 2026]
+- baselines
+  - xgboost — [arxiv](https://arxiv.org/abs/1603.02754) — [chen and guestrin 2016]
+  - catboost — [arxiv](https://arxiv.org/abs/1706.09516) — [prokhorenkova et al. 2017]
+  - lightgbm — [neurips](https://proceedings.neurips.cc/paper_files/paper/2017/file/6449f44a102fde848669bdd9eb6b76fa-Paper.pdf) — [ke et al. 2017]
+  - revisiting-deep-learning-models-for-tabular-data — [arxiv](https://arxiv.org/abs/2106.11959) — [gorishniy et al. 2021]
+  - tabular-data-deep-learning-is-not-all-you-need — [arxiv](https://arxiv.org/abs/2106.03253) — [shwartz-ziv and armon 2021]
+  - well-tuned-simple-nets-excel-on-tabular-datasets — [arxiv](https://arxiv.org/abs/2106.11189) — [kadra et al. 2021]
+  - deep-neural-networks-and-tabular-data-a-survey — [arxiv](https://arxiv.org/abs/2110.01889) — [borisov et al. 2021]
+  - why-do-tree-based-models-still-outperform-deep-learning — [arxiv](https://arxiv.org/abs/2207.08815) — [grinsztajn et al. 2022]
+  - when-do-neural-nets-outperform-boosted-trees-on-tabular-data — [arxiv](https://arxiv.org/abs/2305.02997) — [mcfresh et al. 2023]
+- probabilistic
+  - quantile-regression-forests — [pdf](https://www.jmlr.org/papers/volume7/meinshausen06a/meinshausen06a.pdf) — [meinshausen 2006]
+  - of-quantiles-and-expectiles-consistent-scoring-functions — [arxiv](https://arxiv.org/abs/1503.08195) — [ehm et al. 2016]
+  - bayesian-structured-additive-distributional-regression — [arxiv](https://arxiv.org/abs/1509.05230) — [klein et al. 2015]
+  - distribution-free-predictive-inference-for-regression — [arxiv](https://arxiv.org/abs/1604.04173) — [lei et al. 2018]
+  - accurate-uncertainties-for-deep-learning-using-calibrated-regression — [arxiv](https://arxiv.org/abs/1807.00263) — [kuleshov et al. 2018]
+  - conformalized-quantile-regression — [arxiv](https://arxiv.org/abs/1905.03222) — [romano et al. 2019]
+  - ngboost-natural-gradient-boosting-for-probabilistic-prediction — [arxiv](https://arxiv.org/abs/1910.03225) — [duan et al. 2020]
+  - regression-diagnostics-meets-forecast-evaluation — [arxiv](https://arxiv.org/abs/2108.03210) — [gneiting and resin 2023]
+  - easy-uncertainty-quantification-easyuq — [arxiv](https://arxiv.org/abs/2212.08376) — [walz et al. 2022]
+  - decompositions-of-the-mean-continuous-ranked-probability-score — [arxiv](https://arxiv.org/abs/2311.14122) — [arnold et al. 2023]
+  - reliable-real-time-value-at-risk-estimation-via-quantile-regression-forest — [arxiv](https://arxiv.org/abs/2602.01912) — [wang et al. 2026]
+- benchmark methodology
+  - pmlb-a-large-benchmark-suite-for-machine-learning-evaluation-and-comparison — [arxiv](https://arxiv.org/abs/1703.00512) — [olson et al. 2017]
+  - openml-benchmarking-suites — [arxiv](https://arxiv.org/abs/1708.03731) — [bischl et al. 2017]
+  - show-your-work-improved-reporting-of-experimental-results — [arxiv](https://arxiv.org/abs/1909.03004) — [dodge et al. 2019]
+  - improving-reproducibility-in-machine-learning-research — [arxiv](https://arxiv.org/abs/2003.12206) — [pineau et al. 2020]
+  - the-benchmark-lottery — [arxiv](https://arxiv.org/abs/2107.07002) — [dehghani et al. 2021]
+  - leakage-and-the-reproducibility-crisis-in-ml-based-science — [arxiv](https://arxiv.org/abs/2207.07048) — [kapoor and narayanan 2022]
+  - amlb-an-automl-benchmark — [arxiv](https://arxiv.org/abs/2207.12560) — [gijsbers et al. 2022]
+  - tabrepo-a-large-scale-repository-of-tabular-model-evaluations — [arxiv](https://arxiv.org/abs/2311.02971) — [salinas and erickson 2023]
+  - lmem-for-post-hoc-analysis-of-hpo-benchmarking — [arxiv](https://arxiv.org/abs/2408.02533) — [geburek et al. 2024]
 - relational
   - dfs — [pdf](https://groups.csail.mit.edu/EVO-DesignOpt/groupWebSite/uploads/Site/DSAA_DSM_2015.pdf) — [kanter and veeramachaneni 2015]
   - graphsage — [arxiv](https://arxiv.org/abs/1706.02216) · [neurips](https://papers.nips.cc/paper/2017/hash/5dd9db5e033da9c6fb5ba83c7a7ebea9-Abstract.html) — [hamilton et al. 2017]
@@ -186,6 +218,16 @@ rm <id>.tar.gz
     - tirex-2 — [arxiv](https://arxiv.org/abs/2607.01204) — [podest et al. 2026]
     - timesfm-3 — [blog](https://research.google/blog/timesfm-3-a-zero-shot-foundation-model-for-multivariate-forecasting/)
     - timersi — [arxiv](https://arxiv.org/abs/2610.19725) · [github](https://github.com/haoxin1998/TimeRSI) — [liu et al. 2026]
+    - moirai — [arxiv](https://arxiv.org/abs/2402.02592) — [woo et al. 2024]
+    - lag-llama — [arxiv](https://arxiv.org/abs/2310.08278) — [rasul et al. 2023]
+    - timegpt-1 — [arxiv](https://arxiv.org/abs/2310.03589) — [garza et al. 2023]
+    - timesfm — [arxiv](https://arxiv.org/abs/2310.10688) — [das et al. 2023]
+    - toto — [arxiv](https://arxiv.org/abs/2407.07874) — [cohen et al. 2024]
+    - moment — [arxiv](https://arxiv.org/abs/2402.03885) — [goswami et al. 2024]
+    - time-moe — [arxiv](https://arxiv.org/abs/2409.16040) — [shi et al. 2024]
+    - ts-fm-survey — [arxiv](https://arxiv.org/abs/2403.14735) — [liang et al. 2024]
+    - sundial — [arxiv](https://arxiv.org/abs/2502.00816) — [liu et al. 2025]
+    - moirai-2 — [arxiv](https://arxiv.org/abs/2511.11698) — [liu et al. 2025]
   - classification
     - timee — [arxiv](https://arxiv.org/abs/2607.07500) · [github](https://github.com/automl/timee) — [küken et al. 2026]
     - mantis — [arxiv](https://arxiv.org/abs/2502.15637) · [icml](https://proceedings.mlr.press/v306/feofanov26a.html) · [github](https://github.com/vfeofanov/mantis) — [feofanov et al. 2026]
@@ -216,6 +258,8 @@ rm <id>.tar.gz
   two incidental hits. These papers exist to ground the project's central question (why do
   tabular foundation models fail on severity/frequency) on the modelling side that the ML
   literature never discusses.
+  Nine canonical non-life methods papers were added 2026-10-31 (#47): seven are DOI-only and
+  citation-only, one is a free CAS scan, and one is on arXiv.
 
   ## severity: loss distributions and heavy tails
   - one-family-six-distributions-a-flexible-model-for-insurance — [arxiv](https://arxiv.org/abs/1805.10854) — [bølviken and haff 2018]
@@ -228,6 +272,7 @@ rm <id>.tar.gz
   - composite-lognormal-t-regression-models-with-varying-thresho — [arxiv](https://arxiv.org/abs/2208.01262) — [aradhye et al. 2022]
   - a-copula-based-family-of-bivariate-composite-models-for-clai — [arxiv](https://arxiv.org/abs/2210.05091) — [aradhye et al. 2022]
   - beyond-the-pearson-correlation-heavy-tailed-risks-weighted-g — [arxiv](https://arxiv.org/abs/1607.02623) — [furman and zitikis 2016]
+  - towards-foundation-models-for-insurance-risk-modelling — [arxiv](https://arxiv.org/abs/2609.14576) — [blier-wong 2026]
 
   ## frequency and count models: Tweedie, compound Poisson, zero-inflated
   - insurance-premium-prediction-via-gradient-tree-boosted-tweed — [arxiv](https://arxiv.org/abs/1508.06378) — [yang et al. 2015]
@@ -241,6 +286,10 @@ rm <id>.tar.gz
   - comparing-tobit-and-two-part-hurdle-models-for-semi-continuo — [arxiv](https://arxiv.org/abs/2608.09725) — [bandreddi et al. 2026]
   - bayesian-cart-models-for-insurance-claims-frequency — [arxiv](https://arxiv.org/abs/2303.01923) — [zhang et al. 2023]
   - dynamic-online-prediction-model-and-its-application-to-autom — [arxiv](https://arxiv.org/abs/2301.03005) — [jiang et al. 2023]
+  - actuarial-applications-of-a-hierarchical-insurance-claims-model — [doi](https://doi.org/10.2143/AST.39.1.2038061) — [frees et al. 2009]
+  - fitting-tweedies-compound-poisson-model-to-insurance-claims-data — [doi](https://doi.org/10.1080/03461238.1994.10413930) — [jørgensen and de souza 1994]
+  - zero-inflated-poisson-regression-with-an-application-to-defects — [doi](https://doi.org/10.2307/1269547) — [lambert 1992]
+  - specification-and-testing-of-some-modified-count-data-models — [doi](https://doi.org/10.1016/0304-4076%2886%2990002-3) — [mullahy 1986]
 
   ## tail metrics, quantiles, reserving
   - local-quantile-regression — [arxiv](https://arxiv.org/abs/1208.5384) — [spokoiny et al. 2012]
@@ -250,6 +299,10 @@ rm <id>.tar.gz
   - deeptriangle-a-deep-learning-approach-to-loss-reserving — [arxiv](https://arxiv.org/abs/1804.09253) — [kevin kuo 2018]
   - micro-level-reserving-for-general-insurance-claims-using-a-l — [arxiv](https://arxiv.org/abs/2201.13267) — [chaoubi et al. 2022]
   - synthetic-an-individual-insurance-claim-simulator-with-featu — [arxiv](https://arxiv.org/abs/2008.05693) — [avanzi et al. 2020]
+  - distribution-free-calculation-of-the-standard-error-of-chain-ladder-reserve — [doi](https://doi.org/10.2143/AST.23.2.2005092) — [mack 1993]
+  - the-actuary-and-ibnr — [pdf](https://www.casact.org/sites/default/files/database/proceed_proceed72_72181.pdf) — [bornhuetter and ferguson 1972]
+  - stochastic-claims-reserving-in-general-insurance — [doi](https://doi.org/10.1017/S1357321700003809) — [england and verrall 2002]
+  - machine-learning-in-p-and-c-insurance-a-review-for-pricing-and-reserving — [doi](https://doi.org/10.3390/risks9010004) — [blier-wong et al. 2021]
 
 ## queue
 
