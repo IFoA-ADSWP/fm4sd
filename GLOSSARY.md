@@ -26,9 +26,9 @@ a given clone has fetched. Committed manifest data is not payload.
 
 Ambiguous, and avoided where a claim depends on it. It has been used for the index (the
 list), the manifest (the projection) and the payload (the files). Say which: an entry count
-is about the index; a fetch status is about one entry's payload; "42 MB" is about payload on
-one machine. A sentence about "the corpus" that would be true on one clone and false on
-another is a payload claim.
+is about the index; a fetch status is about one entry's payload; a byte total is about
+payload on one machine. A sentence about "the corpus" that would be true on one clone and
+false on another is a payload claim.
 
 ## route
 

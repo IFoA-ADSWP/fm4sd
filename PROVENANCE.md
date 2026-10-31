@@ -114,7 +114,7 @@ the API response rather than written from memory. Digest: `references/summaries/
 
 Scope limit: **arXiv-only.** Paywalled actuarial venues (IME, ASTIN) are unreachable, and
 `fm4sd_fetch.py` skips any entry without an arXiv ID — the same reason 49 pre-existing entries
-were never fetched.
+were never fetched. *(Superseded 2026-10-31 — see Corpus scope below.)*
 
 ## Corpus scope
 
@@ -125,8 +125,8 @@ record, and they move as entries are added or fetched.
 
 ### In scope — non-arXiv payload a plain HTTP client can reach
 
-18 non-arXiv papers are in scope, over five non-arXiv route families. With the arXiv
-source/PDF route the fetcher already served, that is six route families in all:
+Non-arXiv papers that a plain HTTP client can reach are in scope, across these route
+families (plus the arXiv source/PDF route the fetcher already served):
 
 - **direct PDF** — a PDF URL in the index, e.g. a lab or funder copy
 - **publisher PDF** — the version of record from a publisher, with a PMC mirror as fallback
@@ -158,7 +158,9 @@ entry between reasons without moving the line.
 
 Per entry the manifest records `licence` (what the source declares), `licence_source` (the
 URL that claim came from) and `shareable: yes | no | unknown`. An unstated, API-omitted or
-unverifiable licence is recorded as unknown and treated as **not permission**.
+unverifiable licence is recorded as unknown and treated as **not permission**. The arXiv
+licence script writes the same `licence` under an older companion field, `redistributable`
+(a boolean derived from that licence); where both are present they must agree.
 
 Only `shareable: yes` entries are published: an extracted `text.txt` plus a citation and
 licence header (source URL, licence, retrieval date) under `corpus-shared/<slug>/`.
