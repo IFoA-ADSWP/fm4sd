@@ -72,7 +72,8 @@ deliberately no build step — the "gate" is **reproducibility**, not tests.
   treating it as a missing file.
 - **`scripts/`** — `arxiv_meta.py` (batched, cached arXiv metadata), `fm4sd_fetch.py` (corpus build),
   `fm4sd_search.py` (query),
-  `fm4sd_licences.py`, `check_reproducibility.py` (the gate). Deterministic workflows go
+  `fm4sd_licences.py`, `check_reproducibility.py` (the gate), and `new-worktree.sh` (dispatch
+  helper). Deterministic workflows go
   through these scripts, not ad-hoc loops.
 - **`references/manifest.json`** is machine-readable and generated; `references/summaries/`
   holds the per-paper digests.
