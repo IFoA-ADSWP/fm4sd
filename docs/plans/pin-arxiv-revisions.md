@@ -68,7 +68,8 @@ are re-recorded against the now-explicit revision. `papers/` stays gitignored; o
 manifest's metadata is committed. Failures are reported and counted, not looped on.
 
 Expected result: 383 / 323 / 340 counts unchanged; 323 id-bearing rows with `arxiv_rev`
-and `sha256`; 115 → 323 digests overall (17 route rows already had one).
+and `sha256`; digests overall 115 → 340 (323 arXiv + the 17 non-arXiv route payloads that
+already had one).
 
 ## Docs
 
@@ -97,3 +98,25 @@ and `sha256`; 115 → 323 digests overall (17 route rows already had one).
   surfaced by `--check-revisions`.
 - Fetching 323 papers takes ~10–15 minutes at 3 req/s plus extraction; run once, resume
   from markers if interrupted (a marker only exists after a successful extraction).
+
+## Delivery note — the export API's 429s, and how they were handled
+
+The first full `--fetch` (323 ids, 2026-10-31) resolved 37 revisions through the export API,
+then `export.arxiv.org` answered **HTTP 429 to every uncached query** for the next ~20 minutes
+— the single-id-per-worker pattern is too fast for that host even at 3 req/s. Those 286 rows
+still fetched, but from the bare URL, and the run reported "version resolution failed" per id
+rather than pretending they were pinned.
+
+The resolver gained two things as a result, both in the delivered code:
+
+- **Batched resolution.** `id_list` accepts a comma-separated list, so a full pass is ~7
+  requests (`ARXIV_API_BATCH = 50`) instead of 323, done once before the worker pool starts.
+- **Abs-page fallback.** When the API refuses, the paper's `/abs/<id>` submission history
+  lists every `/abs/<id>vN`; the highest N is the same fact from the same record. The
+  fallback runs at the web limiter (1 req/s) and prints what it is doing.
+
+Second pass: 60 ids resolved by the API, the other 226 from abs pages, then
+`--fetch --force --only <286 ids>` refetched all 286 at their pinned URLs (18m42s). Final
+state: **323/323 id-bearing rows pinned with a digest, 0 unresolved**. Three spot checks
+(LaTeX, PDF, a 2026 paper) reproduce the manifest digest byte-for-byte from the pinned URL.
+A fresh tree with no payload rebuilds those three rows from their pins with no API call.

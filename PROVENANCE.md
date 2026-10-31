@@ -48,15 +48,41 @@ index's links against arXiv.
 | Linking released code | 138 |
 | Fetched locally | 340 — 317 LaTeX source bundles, 18 PDF, 5 HTML/XML (4 web-native papers + 1 PMC full-text XML) |
 | Extracted text | 43.6 MB |
-| Source preference | `arxiv.org/src/<id>`, falling back to `arxiv.org/pdf/<id>`; non-arXiv entries by route family (see below) |
+| Source preference | `arxiv.org/src/<id>vN`, falling back to `arxiv.org/pdf/<id>vN` (revision pinned — see below); non-arXiv entries by route family (see below) |
 | PDF extractor | PyMuPDF 1.28.2 |
 | Rate limit | arXiv 3 req/s; non-arXiv web routes ~1 req/s, same real User-Agent |
 | Not fetched | 43 entries, each with a reason: 22 `skipped:unreachable:captcha`, 7 `...:paywall`, 5 `...:unknown`, 2 `...:dead`, 7 `skipped:not-paper` |
 
-`references/manifest.json` is the machine-readable record: id, title, category, section,
-subcategory, citation, links, licence, `licence_source`, `shareable`, sha256, source type,
-byte counts, fetch status, and for non-arXiv payloads the route used. Its header records which
-index source was used.
+`references/manifest.json` is the machine-readable record: id, pinned revision (`arxiv_rev`),
+title, category, section, subcategory, citation, links, licence, `licence_source`, `shareable`,
+sha256, source type, byte counts, fetch status, and for non-arXiv payloads the route used. Its
+header records which index source was used.
+
+### Pinned arXiv revisions — added 2026-10-31
+
+**What a `sha256` promises.** `arxiv_id` stays unversioned (slugs, licence carry-forward and
+`match_year` key off it) and `arxiv_rev` records the revision the digest belongs to: the row
+`arxiv_id: "1508.06378"`, `arxiv_rev: 3` was fetched from
+`https://arxiv.org/src/1508.06378v3`. The `sha256` is the byte digest of **that revision**, so
+refetching the version-suffixed URL reproduces it byte-for-byte. arXiv treats a published
+version as a permanent part of the record — replacements increment `vN`, they never rewrite
+it — which is what makes the digest a re-assertable pin rather than a dated snapshot. The bare
+`/src/<id>` URL tracks the latest revision and must never be used to check a pin.
+
+**A newer revision is reported, never adopted.** The pin and its digest stay valid when an
+author posts `v(N+1)`; they just describe an older revision. `--check-revisions` resolves every
+pinned id and prints which are behind (`id v2 -> v3`); it writes nothing.
+
+**Bumping is deliberate.** `--fetch --force --only <slug|id>` re-resolves that id, moves the pin
+to the current revision and refetches it; `--fetch --force` does so for the whole corpus. After
+a bump, `--index` restores the new revision from the `.fetched` marker and the manifest is
+committed with the new digest. Non-arXiv rows have no revision: their digest pins the fetched
+artifact as it was served.
+
+**Why the manifest carries it.** The revision, like the digest, is payload-derived, so
+`--index` on a tree without `papers/` restores it from the prior manifest instead of erasing it
+(the bug this change also closes). The reproducibility gate excludes `arxiv_rev` from its
+README-derived comparison for the same reason.
 
 ### Non-arXiv routes — added 2026-10-31
 
@@ -235,13 +261,17 @@ python3 scripts/fm4sd_search.py stats
 ```
 
 `--index` is safe to re-run: it reconciles against payload already on disk, restores recorded
-fetch metadata when the payload is not on this tree, and carries forward the licence records
-`fm4sd_licences.py` and the non-arXiv fetcher wrote rather than deleting them. `--force`
-refetches deliberately. `--index --remote` only diffs against upstream and writes nothing.
+fetch metadata — including the pinned `arxiv_rev` and its `sha256` — when the payload is not on
+this tree, and carries forward the licence records `fm4sd_licences.py` and the non-arXiv fetcher
+wrote rather than deleting them. `--force` refetches deliberately. `--index --remote` only diffs
+against upstream and writes nothing.
 
-`--fetch` resolves arXiv entries through `/src` → `/pdf`, and every other entry through its
-route family; `--only <slug> …` restricts a run (used to fetch the 18 non-arXiv papers without
-rebuilding the 323 arXiv payloads). `--status` prints the fetched total and the reason tally.
+`--fetch` resolves arXiv entries' current revision through the export API (batched `id_list`
+queries), then fetches `/src/<id>vN` → `/pdf/<id>vN`; every other entry goes through its route
+family. `--only <slug> …` restricts a run (used to fetch the 18 non-arXiv papers without
+rebuilding the 323 arXiv payloads), and `--force` moves a pin to the revision arXiv serves now.
+`--check-revisions` reports drift without writing. `--status` prints the fetched total and the
+reason tally.
 
 ## Digests
 
@@ -259,3 +289,4 @@ any load-bearing claim against the paper before relying on it. `SWEEPS.md` recor
 | 2026-10-08 | The speedrun gap report was withdrawn: the ledger does stack. A round-1 sweep found nothing about composability and reported that as a gap — wrong on two counts: the records are explicitly cumulative (`pr19` vs `pr19+pr20`, 31 runs each), and the paper is two records out of date. A leaderboard's live state lives in its repo, not its paper. Ledger now at 0.76 min / ~98×. Full write-up in [SWEEPS.md](references/summaries/SWEEPS.md#q3-correction-read-the-repo-not-just-the-paper); also summarised in [references/summaries/README.md](references/summaries/README.md). |
 | 2026-10-30 | `gnr` was recorded as having no arXiv id because the fetcher's id patterns only matched the modern form; its legacy id `cond-mat/0011094` was misclassified. Id-less count 50 → 49; fetched 253 → 254. See "Legacy arXiv ids" above (#23). |
 | 2026-10-31 | `skipped:no-arxiv-id` was retired: 18 non-arXiv entries now resolve through direct-PDF, publisher-PDF, PMLR, NeurIPS and web-native HTML routes, and the remaining 42 id-less entries carry `skipped:not-paper` or `skipped:unreachable:<reason>`. Fetched 323 → 340 (317 LaTeX, 18 PDF, 5 HTML/XML). Nature and Springer answered the 2026-10-31 probe with a JS challenge, so `tabssldataselect` is recorded as captcha and `tabpfnv2` comes from Europe PMC XML. See "Non-arXiv route families" (#29). |
+| 2026-10-31 | A `sha256` now names the revision it belongs to: every id-bearing row records `arxiv_rev` and is fetched from the version-suffixed URL. All 323 arXiv rows were re-resolved and refetched, taking recorded digests from 115 to 340 (323 arXiv + 17 non-arXiv routes); the corpus counts did not move. `--index` preserves the pin on a payload-less tree. See "Pinned arXiv revisions" (#33). |
