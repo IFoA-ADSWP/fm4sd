@@ -22,8 +22,7 @@ from __future__ import annotations
 
 import sys
 import time
-import urllib.error
-import urllib.request
+import net
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
@@ -76,20 +75,12 @@ def parse_response(xml: bytes) -> dict[str, dict]:
 
 
 def fetch_batch(ids: list[str], retries: int = 3) -> dict[str, dict]:
-    """Return {canonical id: {licence, published, title}} for one batch."""
+    """Return {canonical id: {licence, published, title}} for one batch.
+
+    The retry policy is the shared client's; the batch pause stays in main().
+    """
     url = f"{API}?id_list={','.join(ids)}&max_results={len(ids)}"
-    last: Exception | None = None
-    for attempt in range(retries):
-        try:
-            req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
-            with urllib.request.urlopen(req, timeout=60) as r:
-                xml = r.read()
-            break
-        except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError) as e:
-            last = e
-            time.sleep(3 * (attempt + 1))
-    else:
-        raise last  # type: ignore[misc]
+    xml = net.get(url, user_agent=USER_AGENT, attempts=retries)
     return parse_response(xml)
 
 
