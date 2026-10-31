@@ -2,10 +2,13 @@
 """arxiv_meta.py — batched, cached arXiv metadata for ids you already have.
 
     python3 scripts/arxiv_meta.py 2102.10154 cond-mat/0011094
-    python3 scripts/arxiv_meta.py --json --offline 2102.10154
+    python3 scripts/arxiv_meta.py --json --offline 2102.10154 --refresh
 
-Prints one record per id: id, revision, year, first author, title. The cache
-lives under .cache/arxiv-meta/ (gitignored), so a repeat run costs no request.
+Prints one record per id: id, revision, publication year, first author, title.
+The cache lives under .cache/arxiv-meta/ (gitignored, repo-root anchored); each
+record carries `fetched_at`, and a cached record older than --max-age is
+refetched rather than replayed. `--offline` reads the cache and says how old the
+records are.
 
 Why this exists: export.arxiv.org rate-limits hard (#61). The fetcher's own
 resolver batches for the corpus build; research and triage agents kept hand-
@@ -23,6 +26,8 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
+from datetime import datetime, timezone
+from email.utils import parsedate_to_datetime
 from pathlib import Path
 
 API = "https://export.arxiv.org/api/query"
@@ -30,19 +35,38 @@ BATCH = 50
 PAUSE_SECONDS = 1.5  # the API's guidance is well below the fetcher's 3 req/s
 RETRIES = 5
 TIMEOUT = 60
-CACHE = Path(os.environ.get("FM4SD_ARXIV_CACHE", ".cache/arxiv-meta"))
+DEFAULT_MAX_AGE = 24 * 3600
+REPO_ROOT = Path(__file__).resolve().parents[1]
+CACHE = Path(os.environ.get("FM4SD_ARXIV_CACHE") or REPO_ROOT / ".cache" / "arxiv-meta")
 UA = "fm4sd-arxiv-meta/1.0 (+https://github.com/IFoA-ADSWP/fm4sd)"
 
+# Modern and legacy forms, with an optional version suffix. Deliberately stricter
+# than "anything goes": a malformed id is the one thing this tool is used to catch.
+ID_RE = re.compile(r"^(?:\d{4}\.\d{4,5}|[a-z-]+(?:\.[a-z]{2})?/\d{7})(?:v\d+)?$", re.I)
 ENTRY_RE = re.compile(r"<entry>(.*?)</entry>", re.S)
 ABS_RE = re.compile(r"<id>\s*https?://arxiv\.org/abs/([^<\s]+)\s*</id>")
 TITLE_RE = re.compile(r"<title>(.*?)</title>", re.S)
-PUBLISHED_RE = re.compile(r"<published>\s*([0-9]{4})-[0-9]{2}-[0-9]{2}")
+PUBLISHED_RE = re.compile(r"<published>\s*(\d{4})-(\d{2})-(\d{2})")
+UPDATED_RE = re.compile(r"<updated>\s*(\d{4}-\d{2}-\d{2})")
 AUTHOR_RE = re.compile(r"<author>\s*<name>([^<]+)</name>", re.S)
-REV_RE = re.compile(r"^(?P<aid>.+?)v(?P<rev>\d+)$")
+VERSION_RE = re.compile(r"v(\d+)$", re.I)
+
+
+def canon(raw: str) -> str:
+    """Validated, version-stripped, lowercase id — the cache and lookup key.
+
+    Lowercasing mirrors the fetcher (`resolve_arxiv_revs` keys lowercase because
+    Atom may echo a legacy archive in different case). Keeping it here means the
+    same id finds the same record cold or warm, on any filesystem.
+    """
+    value = raw.strip()
+    if not ID_RE.match(value):
+        raise SystemExit(f"arxiv_meta: not an arXiv id: {raw!r}")
+    return VERSION_RE.sub("", value).lower()
 
 
 def cache_path(aid: str) -> Path:
-    return CACHE / (aid.replace("/", "_") + ".json")
+    return CACHE / (urllib.parse.quote(aid, safe="") + ".json")
 
 
 def load_cached(aid: str) -> dict | None:
@@ -50,9 +74,10 @@ def load_cached(aid: str) -> dict | None:
     if not path.exists():
         return None
     try:
-        return json.loads(path.read_text(encoding="utf-8"))
+        record = json.loads(path.read_text(encoding="utf-8"))
     except (json.JSONDecodeError, OSError):
         return None
+    return record if isinstance(record, dict) and "fetched_at" in record else None
 
 
 def store(record: dict) -> None:
@@ -61,8 +86,36 @@ def store(record: dict) -> None:
         json.dumps(record, indent=2) + "\n", encoding="utf-8")
 
 
+def age(record: dict) -> float:
+    return max(0.0, time.time() - float(record.get("fetched_at") or 0))
+
+
+def human_age(seconds: float) -> str:
+    if seconds < 90:
+        return f"{seconds:.0f}s"
+    if seconds < 5400:
+        return f"{seconds / 60:.0f}m"
+    return f"{seconds / 3600:.1f}h"
+
+
+def retry_after(value: str | None) -> float | None:
+    """Seconds from a Retry-After header: delay-seconds or an HTTP date."""
+    if not value:
+        return None
+    value = value.strip()
+    if value.isdigit():
+        return float(value)
+    try:
+        when = parsedate_to_datetime(value)
+    except (TypeError, ValueError):
+        return None
+    if when.tzinfo is None:
+        when = when.replace(tzinfo=timezone.utc)
+    return max(0.0, (when - datetime.now(timezone.utc)).total_seconds())
+
+
 def fetch(url: str) -> bytes:
-    """GET with backoff on 429/503, honouring Retry-After when it is numeric."""
+    """GET with retries. Backoff only sleeps when another attempt remains."""
     last: Exception | None = None
     for attempt in range(RETRIES):
         request = urllib.request.Request(url, headers={"User-Agent": UA})
@@ -73,16 +126,21 @@ def fetch(url: str) -> bytes:
             last = error
             if error.code not in (429, 503):
                 raise
-            retry_after = (error.headers.get("Retry-After") or "").strip()
-            delay = float(retry_after) if retry_after.isdigit() else min(60.0, 2.0 ** attempt)
-            print(f"arxiv_meta: HTTP {error.code}; retrying in {delay:.0f}s "
-                  f"(attempt {attempt + 1}/{RETRIES})", file=sys.stderr)
-            time.sleep(delay)
-    raise RuntimeError(f"giving up: {last}")
+            wait = retry_after(error.headers.get("Retry-After"))
+        except (urllib.error.URLError, TimeoutError, ConnectionError) as error:
+            last = error
+            wait = None
+        if attempt == RETRIES - 1:
+            break
+        delay = wait if wait is not None else min(60.0, 2.0 ** attempt)
+        print(f"arxiv_meta: retrying {url} in {delay:.0f}s "
+              f"(attempt {attempt + 1}/{RETRIES}): {last}", file=sys.stderr)
+        time.sleep(delay)
+    raise RuntimeError(f"gave up on {url} after {RETRIES} attempts: {last}")
 
 
 def parse_feed(xml: str) -> dict[str, dict]:
-    """Map id-without-version -> record. The feed echoes each id with its vN."""
+    """Map canonical id -> record. The feed echoes each id with its current vN."""
     records: dict[str, dict] = {}
     for entry in ENTRY_RE.findall(xml):
         abs_match = ABS_RE.search(entry)
@@ -90,42 +148,53 @@ def parse_feed(xml: str) -> dict[str, dict]:
         if not abs_match or not title_match:
             continue
         raw_id = abs_match.group(1).strip()
-        rev_match = REV_RE.match(raw_id)
-        if rev_match:
-            aid, rev = rev_match.group("aid"), int(rev_match.group("rev"))
-        else:  # an entry that never had a version suffix
-            aid, rev = raw_id, 0
+        rev_match = VERSION_RE.search(raw_id)
+        aid = VERSION_RE.sub("", raw_id).lower()
+        version = int(rev_match.group(1)) if rev_match else 0
         published = PUBLISHED_RE.search(entry)
+        updated = UPDATED_RE.search(entry)
         author = AUTHOR_RE.search(entry)
         records[aid] = {
             "id": aid,
-            "rev": rev,
+            "rev": version,
             "year": int(published.group(1)) if published else None,
+            "updated": updated.group(1) if updated else None,
             "first_author": re.sub(r"\s+", " ", author.group(1)).strip() if author else "",
             "title": re.sub(r"\s+", " ", title_match.group(1)).strip(),
+            "fetched_at": time.time(),
         }
     return records
 
 
-def resolve(wanted: list[str], offline: bool) -> tuple[dict[str, dict], list[str]]:
+def resolve(wanted: list[str], *, offline: bool, max_age: float, refresh: bool):
+    """Return (records, unresolved, cached_count). Cached records are replayed
+    only when fresh enough (or offline), and their age is reported either way."""
     found: dict[str, dict] = {}
-    missing: list[str] = []
+    cached_count = 0
+    todo: list[str] = []
     for aid in wanted:
-        cached = load_cached(aid)
-        if cached:
-            found[aid] = cached
+        record = None if refresh else load_cached(aid)
+        if record and (offline or age(record) <= max_age):
+            found[aid] = record
+            cached_count += 1
+            # Offline replays a cache that may be older than --max-age; say so,
+            # because `rev` and `year` are only true as of `fetched_at`.
+            if offline and age(record) > max_age:
+                print(f"arxiv_meta: {aid} served from a cache {human_age(age(record))} "
+                      f"old (--max-age {human_age(max_age)}); revision may be behind",
+                      file=sys.stderr)
         else:
-            missing.append(aid)
-    if offline or not missing:
-        return found, [aid for aid in missing]
+            todo.append(aid)
+    if offline:
+        return found, todo, cached_count
 
     unresolved: list[str] = []
-    for start in range(0, len(missing), BATCH):
-        chunk = missing[start:start + BATCH]
+    for start in range(0, len(todo), BATCH):
+        chunk = todo[start:start + BATCH]
         query = urllib.parse.urlencode({"id_list": ",".join(chunk)})
         try:
             records = parse_feed(fetch(f"{API}?{query}").decode("utf-8", "replace"))
-        except Exception as error:  # noqa: BLE001 - reported per batch, not fatal
+        except Exception as error:  # noqa: BLE001 - one bad batch must not kill the run
             print(f"arxiv_meta: batch {start // BATCH + 1} failed: {error}", file=sys.stderr)
             records = {}
         for aid in chunk:
@@ -135,30 +204,43 @@ def resolve(wanted: list[str], offline: bool) -> tuple[dict[str, dict], list[str
                 store(record)
             else:
                 unresolved.append(aid)
-        if start + BATCH < len(missing):
+        if start + BATCH < len(todo):
             time.sleep(PAUSE_SECONDS)
-    return found, unresolved
+    return found, unresolved, cached_count
 
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("ids", nargs="+", help="arXiv ids, with or without a version suffix")
-    parser.add_argument("--json", action="store_true", help="emit JSON instead of lines")
-    parser.add_argument("--offline", action="store_true",
-                        help="read the cache only; fail on a miss")
+    parser.add_argument("--json", action="store_true", help="emit a JSON envelope")
+    parser.add_argument("--offline", action="store_true", help="read the cache only")
+    parser.add_argument("--refresh", action="store_true", help="ignore cached records")
+    parser.add_argument("--max-age", type=float, default=DEFAULT_MAX_AGE,
+                        help=f"seconds a cached record stays usable (default {DEFAULT_MAX_AGE})")
     args = parser.parse_args(argv)
 
-    wanted = [REV_RE.match(aid).group("aid") if REV_RE.match(aid) else aid for aid in args.ids]
-    found, missing = resolve(wanted, args.offline)
+    seen: list[str] = []
+    for raw in args.ids:
+        aid = canon(raw)
+        if aid not in seen:
+            seen.append(aid)
+
+    found, missing, cached = resolve(
+        seen, offline=args.offline, max_age=args.max_age, refresh=args.refresh)
 
     if args.json:
-        print(json.dumps([found[aid] for aid in wanted if aid in found], indent=2))
+        print(json.dumps({
+            "records": [found[aid] for aid in seen if aid in found],
+            "missing": missing,
+        }, indent=2))
     else:
-        for aid in wanted:
+        for aid in seen:
             record = found.get(aid)
             if record:
                 print(f"{aid}\tv{record['rev']}\t{record['year']}\t"
                       f"{record['first_author']}\t{record['title']}")
+        if cached:
+            print(f"arxiv_meta: {cached}/{len(seen)} served from cache", file=sys.stderr)
 
     if missing:
         for aid in missing:

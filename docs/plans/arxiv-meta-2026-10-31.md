@@ -18,8 +18,8 @@ recurs in research, triage and implementation.
 ## Why
 
 The rate limit is not a nuisance to retry blindly: the API's guidance is far below the 3 req/s
-the fetcher uses for `/src/`. A helper that batches and paces turns a 323-id pass into seven
-requests, and the cache stops three agents re-fetching the same 40 ids.
+the fetcher uses for `/src/`. A helper that batches and paces turns the manifest's 361
+id-bearing rows into eight requests, and the cache stops three agents re-fetching the same 40 ids.
 
 ## Verification
 
