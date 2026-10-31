@@ -18,11 +18,14 @@ checks:
    licence/title/date records `fm4sd_licences.py` writes are excluded by construction: a
    payload-less `--index` cannot reproduce them (that wipe is #33, not this gate).
 2. `--index --remote` leaves the manifest byte-identical — it must only compare upstream.
-3. The counts published in `README.md`, `references/README.md` and `PROVENANCE.md` equal the
-   figures derived from the manifest, and `fm4sd_search.py stats` agrees with both. The
-   figures are read out of the documents, not hardcoded, so moving the corpus means updating
-   the prose in the same commit. `references/summaries/` is still a manual read: digests are
-   prose about papers, not derived figures.
+3. The counts published in the live documents — `README.md`, `references/README.md`,
+   `PROVENANCE.md`, `references/summaries/README.md`, `docs/RESEARCH.md` — equal the figures
+   derived from the manifest, and `fm4sd_search.py stats` agrees with both. The figures are
+   read out of the documents, not hardcoded, so moving the corpus means updating the prose
+   in the same commit. Any *other* tracked document that publishes an `N entries, M fetched`
+   pair fails closed until it joins `LIVE_DOCS` (or moves under `docs/plans/` if it is
+   history). The digests' prose about papers remains a manual read; their corpus figures are
+   not.
 
 CI runs the same command (`.github/workflows/reproducibility.yml`) on every PR and push to
 `main`. State which checks you ran when you report a change. A change to corpus-building or a

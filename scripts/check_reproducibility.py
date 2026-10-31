@@ -28,12 +28,15 @@ Three checks, each independent:
    with upstream's index and deleted the local actuarial category; the flag must
    leave the committed bytes untouched.
 
-3. **Published counts agree with the manifest.** Every figure in `README.md`,
-   `references/README.md` and `PROVENANCE.md` that describes the corpus is read
-   out of the document with a phrase-anchored pattern and compared with the same
-   figure derived from `references/manifest.json` — never from `papers/`, which
-   CI does not have. `fm4sd_search.py stats`, which those documents cite as the
-   source of their numbers, has to agree too.
+3. **Published counts agree with the manifest.** Every figure in the live
+   documents (`README.md`, `references/README.md`, `PROVENANCE.md`,
+   `references/summaries/README.md`, `docs/RESEARCH.md`) that describes the corpus
+   is read out of the document with a phrase-anchored pattern and compared with
+   the same figure derived from `references/manifest.json` — never from `papers/`,
+   which CI does not have. Any other tracked document that publishes an
+   `N entries, M fetched` pair fails closed rather than going unchecked.
+   `fm4sd_search.py stats`, which those documents cite as the source of their
+   numbers, has to agree too.
 
 Exit status is 0 only when all three pass. Failures name the document, the
 figure and both values, so the fix is obvious from the log.
@@ -87,16 +90,6 @@ README_FIELDS = (
 # Fields --fetch / reconcile() derive from payload under papers/. Excluded from
 # check 1 because CI has no payload; check 3 still holds them to the published
 # figures, so a wipe in the real tree is caught there.
-# Documents a reader treats as current. The sweep above reads these without
-# enumerating a Claim for each: a new live doc joins this list once.
-LIVE_DOCS = (
-    "README.md",
-    "references/README.md",
-    "PROVENANCE.md",
-    "references/summaries/README.md",
-    "docs/RESEARCH.md",
-)
-
 PAYLOAD_FIELDS = (
     "source",
     "path",
@@ -106,6 +99,19 @@ PAYLOAD_FIELDS = (
     "sha256",
     "fetch_status",
     "arxiv_rev",  # pinned from the export API at fetch time (#33)
+)
+
+# Documents a reader treats as current. Check 3 compares their corpus figures, and
+# fails closed on any *other* tracked document that starts publishing the pair, so a
+# new document forces a decision instead of becoming a blind spot. Dated plans are
+# evidence, not live claims.
+PLAN_PREFIX = "docs/plans/"
+LIVE_DOCS = (
+    "README.md",
+    "references/README.md",
+    "PROVENANCE.md",
+    "references/summaries/README.md",
+    "docs/RESEARCH.md",
 )
 
 # Fields written by fm4sd_licences.py and the fetcher's route records, carried
@@ -403,10 +409,7 @@ CLAIMS = (
           r"(?:,\s*\*\*\d+\*\*\s*HTML/XML)?\)",
           ("fetched", "tex", "pdf")),
     Claim("README.md", "quick-start corpus size",
-          r"#\s*~(?P<text_mb>[\d.]+)\s*MB", ("text_mb",)),
-    Claim("references/summaries/README.md", "summaries coverage line",
-          r"(?P<entries>\d+) entries,\s*(?P<fetched>\d+) fetched",
-          ("entries", "fetched")),
+          r"--fetch[^\n]*#\s*~(?P<text_mb>[\d.]+)\s*MB", ("text_mb",)),
     Claim("README.md", "of extracted plain text",
           r"\|\s*\*\*(?P<text_mb>[\d.]+)\s*MB\*\*\s*\|\s*of extracted plain text",
           ("text_mb",)),
@@ -532,24 +535,55 @@ def check_published_counts(verbose: bool) -> str:
             if verbose:
                 print(f"       {claim.doc}: {name} = {got:g}")
 
-    # A new document that publishes "N entries, M fetched" must not become a blind
-    # spot by not being in CLAIMS. Dated history is exempt: corrections-log rows and
-    # transitions ("303 -> 383") record what was true, not what is.
-    for doc in LIVE_DOCS:
+    # A document that publishes corpus figures must not become a blind spot. Live
+    # docs are compared; any other tracked doc publishing the pair fails closed, so
+    # a new document forces a decision. Two exemptions only: a dated table row (a
+    # corrections-log line records what was true), and a transition that joins two
+    # numeric pairs ("303 entries, 340 fetched -> 383/381"). The line is flattened of
+    # markdown emphasis first, and a line that mentions both words but cannot be
+    # parsed fails rather than passing silently.
+    listed = subprocess.run(
+        ["git", "ls-files", "*.md"], cwd=REPO, capture_output=True, text=True,
+        check=False,
+    ).stdout.split()
+    tracked = listed or [
+        str(p.relative_to(REPO)) for p in REPO.rglob("*.md")
+        if ".git" not in p.parts
+    ]
+    dated_row = re.compile(r"^\s*\d{4}-\d{2}-\d{2}\b")
+    transition = re.compile(r"(\d+)\s*entries\D{0,12}(\d+)\s*fetched\s*(?:→|->)\s*\d")
+    pair = re.compile(r"(\d+)\s*entries\D{0,12}(\d+)\s*fetched")
+    scanned = 0
+    for doc in sorted(tracked):
+        if doc.startswith(PLAN_PREFIX):
+            continue
         path = REPO / doc
         if not path.exists():
-            problems.append(f"{doc}: missing (LIVE_DOCS expects it)")
             continue
+        scanned += 1
         for lineno, line in enumerate(
                 path.read_text(encoding="utf-8", errors="replace").splitlines(), 1):
-            if line.startswith("| 2026-") or "→" in line or "->" in line:
+            flat = re.sub(r"[*_|`]", " ", line)
+            if "entries" not in flat or "fetched" not in flat:
                 continue
-            for m in re.finditer(r"(\d+) entries,\s*(\d+) fetched", line):
-                if (int(m.group(1)), int(m.group(2))) != (figures["entries"], figures["fetched"]):
-                    problems.append(
-                        f"{doc}:{lineno}: says {m.group(1)} entries / {m.group(2)} fetched, "
-                        f"manifest says {figures['entries']} / {figures['fetched']}"
-                    )
+            if dated_row.match(flat.strip()) or transition.search(flat):
+                continue
+            m = pair.search(flat)
+            if not m:
+                continue
+            checked += 1
+            if doc not in LIVE_DOCS:
+                problems.append(
+                    f"{doc}:{lineno}: publishes '{m.group(1)} entries, "
+                    f"{m.group(2)} fetched' but is not a live document — add it to "
+                    f"LIVE_DOCS, or move it under {PLAN_PREFIX} if it is history"
+                )
+            elif (int(m.group(1)), int(m.group(2))) != (
+                    figures["entries"], figures["fetched"]):
+                problems.append(
+                    f"{doc}:{lineno}: says {m.group(1)} entries / {m.group(2)} fetched, "
+                    f"manifest says {figures['entries']} / {figures['fetched']}"
+                )
 
     # `stats` is what those documents cite as the source of their numbers, so
     # it has to agree with the manifest as well.
@@ -588,7 +622,8 @@ def check_published_counts(verbose: bool) -> str:
         )
 
     docs = sorted({c.doc for c in CLAIMS})
-    return f"{checked} published figures across {len(docs)} documents agree with the manifest"
+    return (f"{checked} published figures agree with the manifest across {len(docs)} "
+            f"claim documents; the pair sweep read {scanned} tracked documents")
 
 
 # --------------------------------------------------------------------------
