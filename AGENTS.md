@@ -55,6 +55,13 @@ Research findings live on `research/<gap>` branches and never merge: the ticket 
 with its finding cited from the branch, so `main` has no `research/` directory. Read
 `docs/RESEARCH.md` before proposing a PR for a research branch.
 
+## Working copies
+
+Dispatching a writer means running `scripts/new-worktree.sh <branch> [base]` and quoting its
+output in the prompt. It places the worktree beside the main clone under `<repo>-wt/`. If it
+refuses, stop and resolve the collision — never fall back to the main clone. One writer per
+worktree; the main clone stays free for parallel sessions.
+
 ## Conventions
 
 This is a **research/corpus repo**, not an application. There is no test suite and there is
@@ -63,7 +70,7 @@ deliberately no build step — the "gate" is **reproducibility**, not tests.
 - **`papers/`** holds downloaded PDFs and is **gitignored**. Only the slugs are tracked. A
   missing `papers/` directory is normal — rebuild it with the fetch script rather than
   treating it as a missing file.
-- **`scripts/`** — `fm4sd_fetch.py` (corpus build), `fm4sd_search.py` (query),
+- **`scripts/`** — `new-worktree.sh` (dispatch helper), `fm4sd_fetch.py` (corpus build), `fm4sd_search.py` (query),
   `fm4sd_licences.py`, `check_reproducibility.py` (the gate). Deterministic workflows go
   through these scripts, not ad-hoc loops.
 - **`references/manifest.json`** is machine-readable and generated; `references/summaries/`
