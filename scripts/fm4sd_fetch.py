@@ -383,7 +383,7 @@ SUB_H2_RE = re.compile(r"^(?P<indent>\s+)##\s+(?P<name>.+?)\s*$")
 
 # The "extras" section is a list of workshops, surveys and site links -- not
 # papers. Fetching those as if they were papers would just produce noise.
-NON_PAPER_H2 = {"extras", "how 2 set up", "fm4sd papers"}
+NON_PAPER_H2 = {"extras", "cookbooks", "how 2 set up", "fm4sd papers"}
 
 
 @dataclass
