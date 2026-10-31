@@ -9,7 +9,8 @@ One small `CODING_STANDARDS.md` at the repo root, containing only judgement call
 raised **more than once** in this repo — the `standards` skill's promotion threshold. Each rule
 carries the finding that earned it.
 
-Two rules qualify; one candidate does not (recorded in the ticket, not the file). Mechanical
+One rule qualifies (#51 + #54). The citation-direction rule was raised only in #54,
+so it stays a review comment — recorded in the file's "Not yet promoted" section, not as a rule. Mechanical
 candidates go to checks: the stale-figure class already became #55/#56 and is not restated here.
 
 ## Why
@@ -17,6 +18,11 @@ candidates go to checks: the stale-figure class already became #55/#56 and is no
 A rule that appeared once may be a reviewer's taste. Writing it down anyway turns the standards
 file into a parking lot and teaches reviewers to enforce opinions. Two recurrences is the
 cheapest evidence a repo can offer that a call is its call.
+
+## Wiring
+
+The Review section of `AGENTS.md` gains the pointer to this file; `code-review` searches for it
+by name once it exists.
 
 ## Verification
 
