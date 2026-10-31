@@ -28,18 +28,37 @@ repo_root=$(git rev-parse --show-toplevel 2>/dev/null) || die "not inside a git 
 main_root=$(git -C "$repo_root" worktree list --porcelain | awk 'NR==1{sub(/^worktree /,""); print}')
 [[ -n "$main_root" ]] || die "could not resolve the main working tree"
 
-git -C "$repo_root" fetch origin --quiet 2>/dev/null || true
+git -C "$repo_root" check-ref-format --branch "$branch" >/dev/null 2>&1 \
+  || die "git will not accept '$branch' as a branch name"
+
+if git -C "$repo_root" remote get-url origin >/dev/null 2>&1; then
+  if ! git -C "$repo_root" fetch origin --quiet 2>/dev/null; then
+    nomerge="fetch origin failed: $base may be stale — check your network/auth"
+    printf 'new-worktree: warning: %s\n' "$nomerge" >&2
+  fi
+elif [[ "$base" == origin/* ]]; then
+  die "no 'origin' remote; pass an explicit base (e.g. main)"
+fi
 git -C "$repo_root" rev-parse --verify --quiet "$base" >/dev/null \
   || die "base '$base' does not exist; fetch it first"
 
 git -C "$repo_root" show-ref --verify --quiet "refs/heads/$branch" \
   && die "branch '$branch' already exists — pick another, or reuse its worktree"
+if git -C "$repo_root" show-ref --verify --quiet "refs/remotes/origin/$branch"; then
+  die "branch '$branch' exists on origin — continue it explicitly with
+  git worktree add -b '$branch' <path> origin/$branch
+or pick a new branch name"
+fi
 
 slug=${branch//\//-}
 parent="$(dirname "$main_root")/$(basename "$main_root")-wt"
 path="$parent/$slug"
 
-[[ -e "$path" ]] && die "worktree path already exists: $path"
+if [[ -e "$path" ]]; then
+  owner=$(git -C "$repo_root" worktree list --porcelain \
+    | awk -v want="$path" '/^worktree /{wt=$2} /^branch /{if (wt==want) print $2}')
+  die "worktree path already exists: $path${owner:+ (checked out as $owner)} — a different branch may slug to the same path"
+fi
 
 mkdir -p "$parent"
 if ! out=$(git -C "$repo_root" worktree add -b "$branch" "$path" "$base" 2>&1); then
@@ -50,5 +69,6 @@ fi
 printf '\nworktree: %s\n' "$path"
 printf 'branch:   %s (from %s)\n\n' "$branch" "$base"
 printf 'dispatch line:\n'
-printf '  Work ONLY in %s. Do not read or write %s.\n\n' "$path" "$main_root"
-printf 'verify:\n  ~/.config/opencode/scripts/workload.sh %s\n\n' "$main_root"
+printf '  Work ONLY in %s. Do not read or write %s or other worktrees under %s.\n\n' \
+  "$path" "$main_root" "$parent"
+printf "verify:\n  ~/.config/opencode/scripts/workload.sh '%s'\n\n" "$main_root"
