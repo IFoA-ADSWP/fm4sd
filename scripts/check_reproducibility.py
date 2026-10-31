@@ -45,7 +45,6 @@ figure and both values, so the fix is obvious from the log.
 from __future__ import annotations
 
 import argparse
-import json
 import os
 import re
 import shutil
@@ -69,7 +68,6 @@ sys.path.insert(0, str(FETCH.parent))
 from fm4sd_fetch import (  # noqa: E402
     FETCHED_STATUSES,
     INDEX_INPUTS,
-    SCRATCH_MODULES,
     LICENCE_URL_FIELDS,
     corpus_figures,
 )
@@ -206,15 +204,14 @@ def make_scratch() -> Path:
     shutil.copy2(README, root / "README.md")
     (root / "scripts").mkdir()
     shutil.copy2(FETCH, root / "scripts" / "fm4sd_fetch.py")
-    for module in SCRATCH_MODULES:
-        shutil.copy2(FETCH.parent / module, root / "scripts" / module)
+    for rel, _ in INDEX_INPUTS:
+        if rel.startswith("scripts/") and (REPO / rel).exists():
+            shutil.copy2(REPO / rel, root / rel)
     (root / "references").mkdir()
     shutil.copy2(MANIFEST, root / "references" / "manifest.json")
 
     missing = [rel for rel, _ in INDEX_INPUTS
                if (REPO / rel).exists() and not (root / rel).exists()]
-    missing += [f"scripts/{m}" for m in SCRATCH_MODULES
-                if not (root / "scripts" / m).exists()]
     if missing:
         raise Failure(
             "make_scratch() did not copy every input --index declares",

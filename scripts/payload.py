@@ -33,7 +33,11 @@ class Payload:
 
     @property
     def ready(self) -> bool:
-        """Fetched and usable: a marker plus readable text. The one rule."""
+        """Fetched and usable: a non-empty marker plus readable text.
+
+        An empty or truncated marker is not credited: its provenance is unknown,
+        so the entry is refetched rather than trusted.
+        """
         return self.marker and self.has_text
 
     @property

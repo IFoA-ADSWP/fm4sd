@@ -33,6 +33,7 @@ if str(REPO / "scripts") not in sys.path:
     sys.path.insert(0, str(REPO / "scripts"))
 from fm4sd_fetch import FETCHED_STATUSES, corpus_figures  # noqa: E402
 import manifest as manifest_store  # noqa: E402
+import payload as payload_store  # noqa: E402
 
 # Sentence-ish split for --context. Avoids depending on nltk/spacy.
 SENT_SPLIT = re.compile(r"(?<=[.!?])\s+(?=[A-Z(\[])")
@@ -41,17 +42,17 @@ SENT_SPLIT = re.compile(r"(?<=[.!?])\s+(?=[A-Z(\[])")
 def load() -> list[dict]:
     try:
         _, entries, _ = manifest_store.read(MANIFEST)
-    except manifest_store.ManifestError:
-        sys.exit("manifest malformed; rerun fm4sd_fetch.py --index")
+    except manifest_store.ManifestError as error:
+        sys.exit(f"{error}; rerun fm4sd_fetch.py --index")
     return entries
 
 
 def text_path(entry: dict) -> Path | None:
-    p = entry.get("path")
-    if not p:
+    """The entry's text, using the same payload rule as the corpus builder."""
+    if not entry.get("path"):
         return None
-    f = REPO / p / "text.txt"
-    return f if f.exists() else None
+    state = payload_store.read(REPO / "papers", entry["slug"])
+    return state.directory / payload_store.TEXT if state.ready else None
 
 
 def cmd_list(entries: list[dict], args) -> None:

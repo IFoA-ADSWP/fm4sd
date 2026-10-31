@@ -103,14 +103,14 @@ LICENCE_URL_FIELDS = ("licence_url", "licence_source")
 # input, not just an output -- and is absent on a fresh clone, which is normal.
 # The reproducibility gate copies these into its scratch tree and fails loudly if
 # a declared input is missing there (#38).
+# Everything `--index` reads, code included. The gate copies these into its
+# scratch tree and fails loudly if one did not travel (#38, #63).
 INDEX_INPUTS: tuple[tuple[str, bool], ...] = (
     ("README.md", True),
     ("references/manifest.json", False),
+    ("scripts/manifest.py", True),
+    ("scripts/payload.py", True),
 )
-
-# Sibling modules this script imports. A scratch copy needs them beside the
-# script, and the gate checks they travelled (#63).
-SCRATCH_MODULES = ("manifest.py", "payload.py")
 
 
 # Entry shape in the README, e.g.
@@ -1227,8 +1227,8 @@ def load_manifest() -> list[dict]:
     """The entries array. A malformed file is fatal here: --index must rebuild."""
     try:
         _, entries, _ = manifest_store.read(MANIFEST)
-    except manifest_store.ManifestError:
-        sys.exit(f"{MANIFEST} is malformed; rerun --index")
+    except manifest_store.ManifestError as error:
+        sys.exit(f"{error}; rerun --index")
     return entries
 
 
@@ -1290,7 +1290,9 @@ def reconcile(papers: list[Paper]) -> int:
     Re-running --index rebuilds entries from the README and would otherwise drop
     every fetch_status, forcing a needless refetch of text we already have.
     `payload.ready` is the rule: a marker plus readable text. Older markers carry
-    only the kind, and their digest comes from preserve_fetch() instead.
+    only the kind, and their digest comes from preserve_fetch() instead. A PDF's
+    page count is not recoverable here; preserve_fetch() refills it from the prior
+    record after this runs.
     """
     recovered = 0
     for p in papers:
@@ -1316,7 +1318,7 @@ def load_prior() -> dict[str, dict]:
     """
     try:
         _, entries, _ = manifest_store.read(MANIFEST)
-    except (manifest_store.ManifestError, OSError):
+    except manifest_store.ManifestError:
         return {}
     return manifest_store.by_slug(entries)
 

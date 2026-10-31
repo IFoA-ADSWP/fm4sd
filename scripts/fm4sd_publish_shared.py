@@ -53,7 +53,6 @@ from __future__ import annotations
 
 import argparse
 import hashlib
-import json
 import re
 import shutil
 import sys
@@ -61,6 +60,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 import manifest as manifest_store
+import payload as payload_store
 from typing import Iterable
 
 REPO = Path(__file__).resolve().parent.parent
@@ -105,8 +105,8 @@ SHA_RE = re.compile(r"sha256\s+([0-9a-f]{64})")
 def load_entries() -> list[dict]:
     try:
         _, entries, _ = manifest_store.read(MANIFEST)
-    except manifest_store.ManifestError:
-        sys.exit(f"{MANIFEST} is malformed; run --index first")
+    except manifest_store.ManifestError as error:
+        sys.exit(f"{error}; run --index first")
     return entries
 
 
@@ -115,9 +115,14 @@ def text_path(entry: dict) -> Path:
 
 
 def payload_bytes(entry: dict) -> bytes | None:
-    """The entry's extracted text, or None when this clone has no payload."""
-    p = text_path(entry)
-    return p.read_bytes() if p.is_file() else None
+    """The entry's extracted text, or None when this clone has no usable payload.
+
+    `payload.ready` is the repo's one rule for that (marker plus text), so the
+    publisher and the corpus builder cannot disagree about a directory (#63).
+    """
+    state = payload_store.read(PAPERS, entry["slug"])
+    text = state.directory / payload_store.TEXT
+    return text.read_bytes() if state.ready else None
 
 
 def title_of(entry: dict) -> tuple[str, bool]:
