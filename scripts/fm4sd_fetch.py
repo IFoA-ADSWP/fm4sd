@@ -50,6 +50,7 @@ import urllib.parse
 import urllib.request
 from dataclasses import dataclass, field, asdict
 
+import entry as entry_vocab
 import manifest as manifest_store
 import payload as payload_store
 from html.parser import HTMLParser
@@ -108,6 +109,7 @@ LICENCE_URL_FIELDS = ("licence_url", "licence_source")
 INDEX_INPUTS: tuple[tuple[str, bool], ...] = (
     ("README.md", True),
     ("references/manifest.json", False),
+    ("scripts/entry.py", True),
     ("scripts/manifest.py", True),
     ("scripts/payload.py", True),
 )
@@ -121,7 +123,7 @@ ENTRY_RE = re.compile(r"^\s*-\s+(?P<slug>[^\n—]+?)\s+—\s+(?P<rest>.*)$")
 #   legacy (pre-2007):   cond-mat/0011094    archive[/subclass]/yymmnnn
 # The legacy subclass is case-preserving because arXiv ids are case-sensitive on
 # the page (`math.GT/0309136`), though the site tolerates any case in URLs.
-ARXIV_ID = r"\d{4}\.\d{4,5}|[a-z-]+(?:\.[A-Za-z][A-Za-z-]*)?/\d{7}"
+ARXIV_ID = entry_vocab.ARXIV_ID  # one accept set (#66)
 ARXIV_RE = re.compile(rf"https?://arxiv\.org/(?:abs|pdf)/(?P<id>{ARXIV_ID})")
 ARXIV_PDF_RE = re.compile(rf"https?://arxiv\.org/pdf/(?P<id>{ARXIV_ID})")
 ARXIV_ABS_RE = re.compile(rf"https?://arxiv\.org/abs/(?P<id>{ARXIV_ID})")
@@ -543,7 +545,7 @@ def normalise_arxiv_id(raw: str) -> str:
     revision is stored separately in `Paper.arxiv_rev` (#33), so stripping here
     never discards it.
     """
-    return re.sub(r"v\d+$", "", raw.strip())
+    return entry_vocab.parse(raw).id
 LINK_RE = re.compile(r"\[(?P<text>[^\]]+)\]\((?P<url>[^)]+)\)")
 # Optional backslashes: this README and upstream's both write `— [nie et al. 2023]`
 # unescaped, so requiring `\[` matched nothing and citation was empty on every entry
