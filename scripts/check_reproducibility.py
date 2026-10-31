@@ -454,6 +454,22 @@ def check_published_counts(verbose: bool) -> str:
     problems: list[str] = []
     checked = 0
 
+    # #33's headline invariant. `arxiv_rev` is payload-derived, so check 1 cannot
+    # see a regression that drops every pin; without this, deleting all 323
+    # revisions would leave the gate green.
+    for e in entries:
+        if e.get("arxiv_id") and int(e.get("arxiv_rev") or 0) <= 0:
+            problems.append(
+                f"manifest: {e['slug']} has an arXiv id but no pinned revision"
+            )
+        if e.get("fetch_status") in ("ok", "cached"):
+            sha = str(e.get("sha256") or "").lower()
+            if len(sha) != 64 or any(c not in "0123456789abcdef" for c in sha):
+                problems.append(
+                    f"manifest: {e['slug']} is fetched but its sha256 is not a "
+                    f"64-hex digest"
+                )
+
     for claim in CLAIMS:
         if claim.doc not in texts:
             path = REPO / claim.doc

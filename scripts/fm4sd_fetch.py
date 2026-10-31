@@ -899,7 +899,9 @@ def fetch_arxiv(paper: Paper, limiter: RateLimiter, force: bool = False) -> Pape
     paper.path = str(dest.relative_to(REPO))
 
     # --- pin the revision first ---
-    if force or not paper.arxiv_rev:
+    # cmd_fetch resolves every needed id in one batched pass first (including
+    # under --force), so only an unresolved id retries here.
+    if not paper.arxiv_rev:
         rev = resolve_arxiv_rev(aid, limiter)
         if rev:
             if paper.arxiv_rev and paper.arxiv_rev != rev:
@@ -1022,7 +1024,7 @@ def fetch_route(paper: Paper, limiter: RateLimiter, force: bool = False) -> Pape
             paper.route = route.family
             paper.text_bytes = n_bytes
             paper.fetch_status = "ok"
-            marker.write_text(f"{route.kind}\n{paper.sha256}\n")
+            marker.write_text(marker_text(route.kind, paper.sha256, paper.arxiv_rev))
             return paper
         except Exception as e:  # noqa: BLE001
             if DEBUG:
@@ -1445,10 +1447,13 @@ def cmd_check_revisions(only: list[str]) -> None:
         rows = [e for e in rows if e["slug"] in only or e["arxiv_id"] in only]
 
     limiter = RateLimiter(REQS_PER_SECOND)
+    fallback = RateLimiter(POLITE_REQS_PER_SECOND)
+    resolved = resolve_arxiv_revs(
+        [e["arxiv_id"] for e in rows], limiter, fallback)
     current_count = behind = unpinned = unresolved = 0
     for e in rows:
         pinned = int(e.get("arxiv_rev") or 0)
-        current = resolve_arxiv_rev(e["arxiv_id"], limiter)
+        current = resolved.get(e["arxiv_id"].lower(), 0)
         if not current:
             unresolved += 1
             print(f"  unresolved  {e['slug']:<40} {e['arxiv_id']}")
