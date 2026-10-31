@@ -62,6 +62,14 @@ is a different object, evaluated on synthetic zero-inflated auto-insurance claim
 than the wording implies, and it is the cheapest untested variant in the repo: a Tweedie
 *objective inside a GBDT* rather than a linear fit.
 
+*Note 2026-10-31 (#53):* "untested" is true of us, not of the literature. The variant has
+been in this corpus since 2026-10-08 — `insurance-premium-prediction-via-gradient-tree-boosted-tweed`
+(1508.06378, Yang et al. 2015) is a gradient-tree-boosted Tweedie premium model — and the
+distributional-regression arm is published in
+`ngboost-natural-gradient-boosting-for-probabilistic-prediction` (1910.03225) and
+`bayesian-structured-additive-distributional-regression` (1509.05230). It is a known variant this
+repo has not run, not an untried idea.
+
 ### 3. Direct domain match — boosted zero-inflated claims, and CatBoost wins
 
 **`enhanced-gradient-boosting-for-zero-inflated-insurance-claim`** (2307.07771) — property &
@@ -71,6 +79,9 @@ casualty insurance, right-skewed positive claims with excess zeros.
 > based on predictive performance. Furthermore, we propose a new **zero-inflated Poisson
 > boosted tree model**, with variation in the assumption about the relationship between
 > inflation probability $p$ and distribution mean $\mu$"
+
+The CatBoost they name is the library indexed as `catboost` (1706.09516) — cited here because the
+digest leans on the name (added 2026-10-31, #53).
 
 Their identified gap is directly relevant to our two-step construction:
 
@@ -86,6 +97,20 @@ tension, and this paper names the choice.
 Also: an independent finding that **CatBoost** is the right frequency model, which bears on
 Audit 3 — our baseline is depth-3/`n_estimators=4` and the actuarial ML literature picks
 CatBoost.
+
+Two narrower readings of that, added 2026-10-31 (#53):
+
+- **"the actuarial ML literature picks CatBoost" overstates one paper.** It is one study, two
+  datasets and three libraries compared (`enhanced-gradient-boosting-for-zero-inflated-insurance-claim`,
+  2307.07771), so the honest unit is "one paper, two datasets, three libraries". The library
+  itself is `catboost` (1706.09516); a single result is not a consensus.
+- **"our baseline is depth-3/`n_estimators=4`" is a tuning caveat, not a footnote.** A 4-tree
+  depth-3 GBDT is far below the tuning-parity standard the benchmarks in this corpus use:
+  `why-do-tree-based-models-still-outperform-deep-learning` (2207.08815) compares models
+  "accounting for both fitting models and finding good hyperparameters", and
+  `when-do-neural-nets-outperform-boosted-trees-on-tabular-data` (2305.02997) finds light GBDT
+  tuning matters more than the family choice. So "beats the GBDT" here means **beats a depth-3,
+  4-tree GBDT**; it is not evidence against a tuned CatBoost, and RF parity is not GBDT parity.
 
 ### 4. The two-part family: hurdle is the flexible member
 
@@ -117,7 +142,7 @@ of a pattern, not as evidence about ours.
 | "The tail cannot be recovered" | **Narrowed.** A parametric family estimates tail quantiles well on sufficient data; our 5,950-claimant population may not be sufficient. Untested either way. |
 | "The distribution family is not the lever" (F18) | **Narrowed to linear GLMs.** A boosted zero-inflated Tweedie (EMTboost) exists and was never run. |
 | "Two-step (independent indicator + magnitude) is the right form" | **Contested.** The literature explicitly varies $p$'s coupling to $\mu$; F30 measures `corr = +0.348`, which argues *against* independence. |
-| CatBoost is the reference frequency model | Independent support for an external answer to Audit 3's baseline question. |
+| CatBoost is one study's reference frequency model | One paper, two datasets, three libraries (2307.07771) — support for an external baseline answer, not a consensus. |
 
 ## What it does *not* establish
 
@@ -125,6 +150,12 @@ None of these papers study a **tabular foundation model**, and none reports a p9
 of the kind this repo measures. Audit 2's finding stands: the TFM literature does not publish
 tail-accuracy numbers, and the actuarial literature does not evaluate TFMs. **The seam W1
 targets sits in the gap between them.**
+
+*Note 2026-10-31 (#53):* the second half of that no longer holds as written —
+`towards-foundation-models-for-insurance-risk-modelling` (2609.14576) reviews tabular foundation
+models for insurance risk modelling, so the actuarial literature now *reviews* TFMs. It still
+publishes no tail-accuracy evaluation. The claim narrows to **the actuarial literature reviews
+TFMs but does not evaluate their tails**, and the seam W1 targets sits in that narrower gap.
 
 ## Caveats
 

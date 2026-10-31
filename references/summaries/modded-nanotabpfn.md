@@ -54,6 +54,16 @@ verified over many repeated runs with bootstrap CIs (record 11 compares `pr19` v
 Target: **≤ 0.8068462330697953** val avg ROC AUC (RF-matched). Paper-era figure: 81× wallclock,
 22× fewer datasets. Current: ~98×, 20× fewer datasets.
 
+**Note 2026-10-31 (#53): RF-matched is Random-Forest parity, not GBDT parity.** The bar was
+set against a Random Forest on a subsampled suite, so clearing it is a claim about a tree
+baseline, not about gradient boosting. `why-do-tree-based-models-still-outperform-deep-learning`
+(2207.08815) is the benchmark that compares at tuning parity — models "accounting for both fitting
+models and finding good hyperparameters"; `tabular-data-deep-learning-is-not-all-you-need`
+(2106.03253) is the often-cited XGBoost-beats-deep-learning result whose deep baselines were
+tuned far less — which is why a tuning-parity bar matters; and
+`tabrepo-a-large-scale-repository-of-tabular-model-evaluations` (2311.02971) holds the tuned-model
+evaluations to check a target against. A GBDT-matched target would be a harder bar.
+
 The exact number of thinking rows is inconsistent *within the paper* — record-6 text says 16,
 the architecture figure caption says 24, and the live repo lists **24**.
 
