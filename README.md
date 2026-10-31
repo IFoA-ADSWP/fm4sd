@@ -539,7 +539,9 @@ the recipes are notebooks and prose, and the repo carries no licence.
 ## blog
 
 Posts from [priorlabs.ai/blog](https://priorlabs.ai/blog) that bear on the corpus
-(benchmarks, models, use cases). Company announcements are omitted.
+(benchmarks, models, use cases). The six not listed below are the five company
+announcements (manifesto, co-CEO, changelog, podcast, next chapter) and
+`introducing-relarena`, which is already cited on the `relarena-alpha` entry under papers.
 
 - why-are-llms-missing-on-tabular-benchmark-leaderboards — [blog](https://priorlabs.ai/blog-posts/why-are-llms-missing-on-tabular-benchmark-leaderboards)
 - tabpfn-3-5-thinking-upgrade — [blog](https://priorlabs.ai/blog-posts/tabpfn-3-5-thinking-upgrade)

@@ -10,6 +10,11 @@ One line of the reading index: a single paper, with its title, citation, categor
 links it offers. An entry exists whether or not any content was ever fetched — an entry is a
 row in the list, not a file.
 
+Not every README row is an entry. The non-paper sections (`extras`, `cookbooks`, `blog`, the
+setup preamble) are catalogued links — workshops, recipes, posts — and are deliberately not
+parsed. A non-paper link that sits *inside* a parsed section is an entry with the status
+`skipped:not-paper` instead.
+
 ## index
 
 The curated reading list: `README.md` (upstream's list preserved, plus the local actuarial

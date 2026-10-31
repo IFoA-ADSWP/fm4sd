@@ -381,8 +381,10 @@ H2_RE = re.compile(r"^##\s+(?P<name>.+?)\s*$")
 # this neither matches and all 28 entries lose their subcategory.
 SUB_H2_RE = re.compile(r"^(?P<indent>\s+)##\s+(?P<name>.+?)\s*$")
 
-# The "extras" section is a list of workshops, surveys and site links -- not
-# papers. Fetching those as if they were papers would just produce noise.
+# Sections that are listed in the README but never parsed into entries: workshop
+# and site links ("extras"), Prior Labs cookbook recipes and blog posts, the setup
+# preamble, and the upstream banner. They are catalogue rows, not papers, so they
+# carry no entry, status or fetch attempt.
 NON_PAPER_H2 = {"extras", "cookbooks", "blog", "how 2 set up", "fm4sd papers"}
 
 
