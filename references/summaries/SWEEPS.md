@@ -99,6 +99,12 @@ Current: **0.76 min vs the 74.32 min baseline ≈ 98×**, on 4,096 synthetic dat
    11's own std is **0.06 min**. The improvement is roughly half a standard deviation — it may
    not be a real separation. Record 11's own numbers also show the trade-off honestly: epochs got
    *faster* per epoch (0.84s → 0.72s) but it needs *more* of them (57 → 64).
+
+   *Named 2026-10-31 (#53):* "roughly half a standard deviation — it may not be a real
+   separation" is the right doubt, and the instrument for it is a mixed-effects model over
+   per-task results, not two medians — `lmem-for-post-hoc-analysis-of-hpo-benchmarking`
+   (2408.02533). Comparing medians of aggregated runs is the weaker test the paper exists to
+   replace.
 2. **Sub-minute timings assume a warm `torch.compile` cache** — the record's README says so
    explicitly. First-run wallclock will not match.
 
@@ -109,6 +115,11 @@ same subsampled TabArena evaluation. Evaluation: 38 TabArena **classification** 
 subsample to 100 features and 1,000 rows (stratified by class); 5-fold shuffled
 `StratifiedKFold`; constant columns dropped, numeric mean-imputed, categorical ordinal-encoded;
 binary or one-vs-rest ROC AUC averaged over tasks.
+
+Two qualifiers on that target, added 2026-10-31 (#53): it is **Random-Forest parity, not GBDT
+parity**, and a single-suite RF-matched bar is a benchmark-lottery draw
+(`the-benchmark-lottery`, 2107.07002). The tuned-model comparison to check it against is
+`tabrepo-a-large-scale-repository-of-tabular-model-evaluations` (2311.02971).
 
 Note the paper itself is inconsistent on thinking-row count — the record-6 text says 16, the
 architecture caption says 24, and the live repo README lists **24**.
@@ -143,6 +154,12 @@ python3 scripts/fm4sd_search.py grep "TabArena" --min-hits 3
 Relevant caveat: the speedrun evaluates on **subsampled** TabArena. `beyondarena`
 (2606.30410) exists because TabArena itself was found to saturate — worth checking before
 treating a TabArena AUC as a meaningful target.
+
+*Cited 2026-10-31 (#53):* that saturation caution is the **benchmark lottery**
+(`the-benchmark-lottery`, 2107.07002) — a leaderboard position on one suite need not survive a
+resample of tasks and metrics. The comparison that is not a lottery draw is a tuned evaluation
+across many suites, which is what `tabrepo-a-large-scale-repository-of-tabular-model-evaluations`
+(2311.02971) holds.
 
 ---
 
@@ -244,6 +261,13 @@ arrived at from first principles (F30/F31) has **no published counterpart** in t
 is either novelty or a sign it is not considered an interesting angle. The sweep cannot
 distinguish those.
 
+*Narrowed 2026-10-31 (#53):* read "no published counterpart" as **no _ICL_ counterpart**. The
+canonical hurdle and zero-inflated models are now indexed, citation-only because both are
+paywalled: `zero-inflated-poisson-regression-with-an-application-to-defects` (Lambert 1992) and
+`specification-and-testing-of-some-modified-count-data-models` (Mullahy 1986). What is still
+absent is a paper that treats the decomposition as a *foundation-model / in-context* problem —
+which is the claim this sweep actually supports.
+
 `tabicl` matched on its large-data motivation (4 hits), not on decomposition.
 
 **But the sweep found something else, and it is the biggest conceptual result of the round:**
@@ -303,6 +327,36 @@ the metric question stays a business decision rather than a literature question.
 > The general lesson: **a null result that is really a scope limit is a reason to widen the
 > scope, not to stop.** Recorded alongside the two earlier sweeps whose nulls were query
 > artefacts.
+
+> **NARROWED AGAIN 2026-10-31 (#53), on the #47 block.** Two sentences of the 2026-10-08 note
+> above are overtaken by the 48 comparison entries added in #47 — the `probabilistic` block and
+> the nine new `actuarial / loss modelling` entries. The sweep result itself still stands; what
+> follows is what the reading no longer covers.
+>
+> - "there is **no actuarial / reserving / tail-calibration literature in this corpus at all**"
+>   — **false as written**, and it is the tail-calibration half that moved. Reserving now has
+>   the chain-ladder standard-error and stochastic-reserving references indexed,
+>   `distribution-free-calculation-of-the-standard-error-of-chain-ladder-reserve` (Mack 1993) and
+>   `stochastic-claims-reserving-in-general-insurance` (England and Verrall 2002) — citation-only,
+>   both paywalled. Tail calibration now has `quantile-regression-forests` (Meinshausen 2006),
+>   `conformalized-quantile-regression` (1905.03222) and
+>   `reliable-real-time-value-at-risk-estimation-via-quantile-regression-forest` (2602.01912),
+>   plus the scoring and calibration theory in
+>   `of-quantiles-and-expectiles-consistent-scoring-functions` (1503.08195),
+>   `regression-diagnostics-meets-forecast-evaluation` (2108.03210) and
+>   `decompositions-of-the-mean-continuous-ranked-probability-score` (2311.14122).
+> - "the actuarial side now says what a tail estimate requires: **a specified loss family and
+>   enough data**" — a specified family is *one* route, not the requirement. QRF (Meinshausen
+>   2006) estimates conditional quantiles without assuming a family, conformalized quantile
+>   regression (1905.03222) adds finite-sample coverage, and the 2026 VaR paper runs VaR by QRF
+>   with conformal calibration. What survives from the original: **no TFM paper evaluates tail
+>   accuracy**, so Audit 2's negative result is untouched.
+> - "the metric question is still a business decision" narrows to **which functional** the
+>   business wants priced. The quantile score (1503.08195) and T-calibration with reliability
+>   diagrams (2108.03210) make the *evaluation* a literature question; the choice of functional
+>   stays a decision.
+>
+> See [actuarial.md](actuarial.md) and the `probabilistic` block in `../README.md`.
 
 ---
 

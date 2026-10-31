@@ -27,7 +27,8 @@ That is the whole scaling trick.
   resources.
 - Across **200 TALENT** classification datasets: on par with TabPFN v2, systematically **faster**
   — **1.5×** on small datasets, **3–10×** on large.
-- On **53 datasets with >10K samples**, beats both TabPFN v2 and **CatBoost**.
+- On **53 datasets with >10K samples**, beats both TabPFN v2 and **CatBoost** — the gradient
+  boosting library, indexed as `catboost` (1706.09516).
 - Fitted runtime scaling laws give ~**5× average speedup** on large datasets.
 - Concrete: 10,000 samples × 100 features → ~20 s vs 1 min 40 s for TabPFN v2.
 - Achieved by "using fewer of the expensive row-wise and column-wise attention layers with
@@ -48,8 +49,16 @@ reduces class count by ≥10×.
 - **That prior-sampling detail is a concrete, cheap lever** nobody in the ledger has tried —
   prior *design* is a separate axis from optimizer and precision, and the speedrun protocol
   only constrains the evaluation pipeline, not the prior. Changing the prior is fair game.
-- Beats CatBoost on >10K-sample classification, which is the closest published support for the
-  observation that TFMs beat GBDT once data is not scarce.
+- Beats CatBoost on >10K-sample classification, which this file called "the closest published
+  support for the observation that TFMs beat GBDT once data is not scarce."
+
+  *Narrowed 2026-10-31 (#53):* it is no longer the closest support, and the generalisation is now
+  contested. `when-do-neural-nets-outperform-boosted-trees-on-tabular-data` (2305.02997) is a
+  larger published study — 19 algorithms over 176 datasets — and its headline is the opposite
+  framing: the NN/GBDT gap is often negligible, light GBDT tuning matters more than the family
+  choice, TabPFN's win is measured at ≤3,000 training rows, and GBDTs handle skewed or
+  heavy-tailed feature distributions better than NNs. TabICL's own >10K result stands; the
+  inference drawn from it does not.
 
 ## Caveats
 

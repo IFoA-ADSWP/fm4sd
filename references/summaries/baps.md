@@ -56,12 +56,28 @@ Four caveats, all material:
    balanced accuracy / ROC-AUC / ECE. There is **no regression and no tail calibration** — and
    the open question in this project is a p99 *severity* tail, which requires calibrated
    magnitude, not class discrimination.
+
+   *Named 2026-10-31 (#53):* what is missing has references in this corpus, so say it rather
+   than only asserting the absence. Calibrated distributional regression is
+   `accurate-uncertainties-for-deep-learning-using-calibrated-regression` (1807.00263); the
+   regression/quantile calibration theory — T-calibration, reliability diagrams, the R\*
+   coefficient — is `regression-diagnostics-meets-forecast-evaluation` (2108.03210); and the
+   CRPS decomposition into miscalibration / discrimination / uncertainty is
+   `decompositions-of-the-mean-continuous-ranked-probability-score` (2311.14122).
 3. **It compresses training context, not test rows.** The project's other memory issue —
    TabICL's ~2.6 MB per test row — is a different axis and is already handled by `--test-cap`.
    BAPS addresses compute/latency for a large *training* set.
 4. **"Reliable calibration" is ECE on balanced-ish classification**, not tail calibration. ECE
    on a 50/50 binary target says little about whether the top 1% of a heavy-tailed continuous
    outcome is priced correctly.
+
+   *Made actionable 2026-10-31 (#53):* report a quantile reliability diagram or pinball loss
+   instead of ECE when the question is the tail. The instrument is
+   `regression-diagnostics-meets-forecast-evaluation` (2108.03210) for T-calibration and
+   reliability diagrams, `of-quantiles-and-expectiles-consistent-scoring-functions` (1503.08195)
+   for the quantile score, and `decompositions-of-the-mean-continuous-ranked-probability-score`
+   (2311.14122) for reading a CRPS into its parts. ECE is the wrong number for this target, not
+   a weak one.
 
 ## What is worth doing with it
 
