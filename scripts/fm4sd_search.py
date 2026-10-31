@@ -89,7 +89,7 @@ def cmd_list(entries: list[dict], args) -> None:
 
 
 def match_year(arxiv_id: str) -> int | None:
-    """The publication year encoded in the id, via the one parser (#66)."""
+    """The first-submission year encoded in the id (YYMM), via the one parser (#66)."""
     try:
         return entry_vocab.parse(arxiv_id).year
     except entry_vocab.IdError:

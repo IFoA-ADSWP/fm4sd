@@ -15,10 +15,10 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass
 
-# Modern `YYMM.NNNNN` and legacy `archive[/subclass]/YYMMNNN`, with the archive
-# and subclass case tolerated. Exported so URL matchers and validators accept
-# exactly the same set instead of each carrying a copy.
-ARXIV_ID = r"\d{4}\.\d{4,5}|[a-z-]+(?:\.[A-Za-z][A-Za-z-]*)?/\d{7}"
+# Modern `YYMM.NNNNN` and legacy `archive[/subclass]/YYMMNNN`. Case is tolerated
+# inside the fragment itself, so a regex that interpolates it needs no `re.I` and
+# accepts exactly what `parse()` accepts. Grouped, so interpolation is safe.
+ARXIV_ID = r"(?:\d{4}\.\d{4,5}|[A-Za-z][A-Za-z-]*(?:\.[A-Za-z][A-Za-z-]*)?/\d{7})"
 
 _ID_RE = re.compile(rf"^(?P<id>{ARXIV_ID})(?:v(?P<rev>\d+))?$", re.I)
 
@@ -60,3 +60,8 @@ def parse(raw: str) -> ArxivId:
         revision=int(match.group("rev") or 0),
         year=_year(identifier),
     )
+
+
+def key(raw: str) -> str:
+    """The lowercase lookup key for an id, parsed once."""
+    return parse(raw).key

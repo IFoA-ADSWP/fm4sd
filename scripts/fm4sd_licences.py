@@ -20,7 +20,6 @@ rather than left blank, so "we do not know" never reads as "public domain".
 
 from __future__ import annotations
 
-import re
 import sys
 import time
 import urllib.error

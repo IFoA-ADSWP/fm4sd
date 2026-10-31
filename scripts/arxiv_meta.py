@@ -48,6 +48,8 @@ TITLE_RE = re.compile(r"<title>(.*?)</title>", re.S)
 PUBLISHED_RE = re.compile(r"<published>\s*(\d{4})-(\d{2})-(\d{2})")
 UPDATED_RE = re.compile(r"<updated>\s*(\d{4}-\d{2}-\d{2})")
 AUTHOR_RE = re.compile(r"<author>\s*<name>([^<]+)</name>", re.S)
+
+
 def canon(raw: str) -> str:
     """Validated, version-stripped, lowercase id — the cache and lookup key."""
     try:
@@ -138,7 +140,10 @@ def parse_feed(xml: str) -> dict[str, dict]:
         title_match = TITLE_RE.search(entry)
         if not abs_match or not title_match:
             continue
-        parsed = entry_vocab.parse(abs_match.group(1))
+        try:
+            parsed = entry_vocab.parse(abs_match.group(1))
+        except entry_vocab.IdError:
+            continue  # one unparseable entry must not kill the feed
         aid, version = parsed.key, parsed.revision
         published = PUBLISHED_RE.search(entry)
         updated = UPDATED_RE.search(entry)

@@ -535,17 +535,6 @@ def route_candidates(paper: Paper) -> list[Route]:
     return routes
 
 
-def normalise_arxiv_id(raw: str) -> str:
-    """Canonicalise a matched id so every URL builder works from the stored form.
-
-    Strip a trailing version suffix (`...v2`), keeping the archive/subclass case
-    as published. The stored id is always unversioned, which is what makes
-    `arxiv.org/src/<id>`, `arxiv.org/abs/<id>` and version-suffixed variants
-    (`<id>v1`) resolve from one value, modern or legacy alike. The resolved
-    revision is stored separately in `Paper.arxiv_rev` (#33), so stripping here
-    never discards it.
-    """
-    return entry_vocab.parse(raw).id
 LINK_RE = re.compile(r"\[(?P<text>[^\]]+)\]\((?P<url>[^)]+)\)")
 # Optional backslashes: this README and upstream's both write `— [nie et al. 2023]`
 # unescaped, so requiring `\[` matched nothing and citation was empty on every entry
@@ -556,9 +545,9 @@ CITATION_RE = re.compile(r"\\?\[(?P<cite>[^\[\]]+?)\\?\]")
 # The version an export-API Atom entry describes: `<id>.../abs/2102.10154v3</id>`.
 # The id fragment is shared with the README patterns above; `vN` is read, never
 # constructed. A legacy id (`cond-mat/0011094`) matches too, slash and all.
-ARXIV_VERSION_RE = re.compile(rf"/abs/(?P<id>{ARXIV_ID})v(?P<rev>\d+)\s*</id>")
-# The same fact on the abs page's submission history: `/abs/<id>vN` links.
-ARXIV_ABS_VERSION_RE = re.compile(rf"/abs/(?P<id>{ARXIV_ID})v(?P<rev>\d+)")
+# Any `/abs/<id>[vN]` link: the API's entry id and the abs page's submission
+# history. Which revision it names is `entry.parse()`'s answer, not a second regex.
+ABS_LINK_RE = re.compile(r"/abs/(?P<raw>[A-Za-z0-9._/-]+)")
 
 # Section headings in the README: "## papers", "## queue", "## extras", plus
 # category headers like "  - tabular" and "    - forecasting".
@@ -718,7 +707,7 @@ def resolve_arxiv_rev(arxiv_id: str, limiter: RateLimiter,
         return resolve_arxiv_rev_from_abs(arxiv_id, fallback or limiter)
 
     for m in ARXIV_VERSION_RE.finditer(blob.decode("utf-8", "replace")):
-        if normalise_arxiv_id(m.group("id")).lower() == arxiv_id.lower():
+        if entry_vocab.key(m.group("id")) == entry_vocab.key(arxiv_id):
             return int(m.group("rev"))
     print(f"    {arxiv_id}: the API response carried no version", flush=True)
     return 0
@@ -740,9 +729,15 @@ def resolve_arxiv_rev_from_abs(arxiv_id: str, limiter: RateLimiter) -> int:
         print(f"    {arxiv_id}: abs page resolution failed ({type(e).__name__})",
               flush=True)
         return 0
-    versions = [int(m.group("rev"))
-                for m in ARXIV_ABS_VERSION_RE.finditer(blob.decode("utf-8", "replace"))
-                if normalise_arxiv_id(m.group("id")).lower() == arxiv_id.lower()]
+    wanted = entry_vocab.key(arxiv_id)
+    versions = []
+    for match in ABS_LINK_RE.finditer(blob.decode("utf-8", "replace")):
+        try:
+            parsed = entry_vocab.parse(match.group("raw"))
+        except entry_vocab.IdError:
+            continue
+        if parsed.key == wanted and parsed.revision:
+            versions.append(parsed.revision)
     return max(versions, default=0)
 
 
@@ -776,10 +771,15 @@ def resolve_arxiv_revs(arxiv_ids: list[str], limiter: RateLimiter,
             print(f"    revision batch {start // ARXIV_API_BATCH + 1}: "
                   f"resolution failed ({type(e).__name__}: {e})", flush=True)
             continue
-        for m in ARXIV_VERSION_RE.finditer(blob.decode("utf-8", "replace")):
-            out[normalise_arxiv_id(m.group("id")).lower()] = int(m.group("rev"))
+        for match in ABS_LINK_RE.finditer(blob.decode("utf-8", "replace")):
+            try:
+                parsed = entry_vocab.parse(match.group("raw"))
+            except entry_vocab.IdError:
+                continue
+            if parsed.revision:
+                out[parsed.key] = parsed.revision
 
-    leftover = [a for a in uniq if a.lower() not in out]
+    leftover = [a for a in uniq if entry_vocab.key(a) not in out]
     if leftover:
         print(f"    {len(leftover)} id(s) unresolved by the API; reading their "
               f"abs pages at the web rate", flush=True)
@@ -787,7 +787,7 @@ def resolve_arxiv_revs(arxiv_ids: list[str], limiter: RateLimiter,
         for aid in leftover:
             rev = resolve_arxiv_rev_from_abs(aid, slow)
             if rev:
-                out[aid.lower()] = rev
+                out[entry_vocab.key(aid)] = rev
     return out
 
 
@@ -859,7 +859,7 @@ def parse_index(markdown: str) -> list[Paper]:
         for pattern in (ARXIV_RE, ARXIV_PDF_RE, ARXIV_ABS_RE):
             m = pattern.search(rest)
             if m:
-                arxiv = normalise_arxiv_id(m.group("id"))
+                arxiv = m.group("id")
                 break
 
         # Entries with no arXiv id are either benchmarks, blogs, or a link to
