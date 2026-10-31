@@ -65,9 +65,9 @@ positive.**
 
 ## Coverage
 
-12 digest documents covering ~35 papers, of **254 fetched** (corpus grew 275 → 303 entries on
-2026-10-08). The rest are corpus for sweeping — see `../manifest.json` and
-`../README.md`.
+12 digest documents covering ~35 papers, of the manifest's fetched set (updated 2026-10-31:
+383 entries, 340 fetched — `python3 scripts/fm4sd_search.py stats` is the record). The rest
+are corpus for sweeping — see `../manifest.json` and `../README.md`.
 
 Not yet digested but high-value on the current question set: `gotabpfn` (high-dim tokenization),
 `tabpfn-3` (may close the high-dim limitation), `tabiclv2` (next generation), `tabfm`, `tabh2o`,

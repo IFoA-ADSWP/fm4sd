@@ -205,11 +205,33 @@ def cmd_stats(entries: list[dict]) -> None:
     ok = [e for e in entries if e.get("fetch_status") in ("ok", "cached")]
     tex = [e for e in ok if e.get("source") == "tex"]
     pdf = [e for e in ok if e.get("source") == "pdf"]
+    html = [e for e in ok if e.get("source") in ("html", "xml")]
     total_bytes = sum(e.get("text_bytes", 0) for e in ok)
 
     print(f"entries        {len(entries)}")
-    print(f"fetched        {len(ok)}  ({len(tex)} latex, {len(pdf)} pdf)")
+    print(f"fetched        {len(ok)}  ({len(tex)} latex, {len(pdf)} pdf, {len(html)} html/xml)")
     print(f"text on disk   {total_bytes / 1e6:.1f} MB")
+
+    # Status is the reason vocabulary, not just "missing": the corpus counts in
+    # README/PROVENANCE are checked against this block, and `skipped:no-arxiv-id`
+    # is retired (#29).
+    status: dict[str, int] = {}
+    for e in entries:
+        s = e.get("fetch_status") or "(pending)"
+        status[s] = status.get(s, 0) + 1
+    print("\nby status:")
+    for s, n in sorted(status.items(), key=lambda kv: (-kv[1], kv[0])):
+        print(f"  {s:<32} {n}")
+
+    # Licence records exist for entries that are not fetched too (an assessed
+    # paper behind a challenge), so this counts records, not payloads.
+    share = [e for e in entries if e.get("shareable")]
+    if share:
+        print("\nshareable (licence record):")
+        for s in ("yes", "no", "unknown"):
+            n = sum(1 for e in share if e.get("shareable") == s)
+            if n:
+                print(f"  {s:<24} {n}")
 
     def tally(key):
         out: dict[str, int] = {}
