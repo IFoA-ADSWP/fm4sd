@@ -198,6 +198,54 @@ The probes behind this line are recorded in `research/no-arxiv-payload.md` on th
 `research/no-arxiv-payload` branch; this section is the policy that outlives it. Vocabulary
 used here is fixed in [GLOSSARY.md](GLOSSARY.md).
 
+### Published extracts — added 2026-10-31
+
+[`corpus-shared/`](corpus-shared/) is the only paper text this repo redistributes: the
+extracted text of entries whose manifest record is `shareable: yes` **and** whose payload is
+fetched, with the attribution each licence requires. It is written by
+`scripts/fm4sd_publish_shared.py` and committed. The fetcher never writes there, so a re-run
+of `--fetch` cannot widen the redistributed set on its own: an entry appears only after a
+licence has been verified and the manifest records `yes`.
+
+| Entry | Licence | Licence evidence | Published |
+|---|---|---|---|
+| `tabpfnv2` | CC BY 4.0 | <https://www.nature.com/articles/s41586-024-08328-6> | `text.txt` + `LICENSE.txt` |
+| `schemapile` | CC BY 4.0 | <https://ir.cwi.nl/pub/34763/34763.pdf> | `text.txt` + `LICENSE.txt` |
+| `tabssldataselect` | CC BY 4.0 | <https://link.springer.com/article/10.1007/s10994-026-07133-8> | **pending** — `skipped:unreachable:captcha`, no payload |
+
+Each published directory holds `text.txt`, byte-identical to the `papers/<slug>/text.txt` the
+digests were written from, and a `LICENSE.txt` naming the paper, its citation, its source URL,
+the licence, the URL that licence was verified at, and the retrieval date.
+[`corpus-shared/README.md`](corpus-shared/README.md) is generated alongside them and lists
+the published, pending and withheld sets.
+
+`pfnsyn` (CC BY-NC-ND 4.0) and `wikidbs` (its CC BY line covers the dataset and code, not the
+paper, so `unknown`) stay local despite being fetched: non-derivative is not shareable, and
+unknown is not permission.
+
+Re-running is safe and idempotent:
+
+```bash
+python3 scripts/fm4sd_publish_shared.py           # write / update corpus-shared/
+python3 scripts/fm4sd_publish_shared.py --check   # diff against the committed set, write nothing
+```
+
+The publisher republishes only from the manifest's recorded licence — it never re-probes a
+licence and never invents text for an entry without payload. What it does with the awkward
+cases:
+
+- **Pending.** `tabssldataselect` is shareable but not fetched; it is reported, the run exits
+  0, and it publishes on the first run after a fetch succeeds. The CAPTCHA is not bypassed.
+- **Payload absent from this clone.** The committed files are kept and the generated README is
+  unchanged, so a payload-less checkout cannot empty the directory.
+- **Payload disagrees with the manifest.** The entry is refused and the run exits 1 rather than
+  publishing a stale or truncated extract.
+- **Licence re-checked and downgraded.** `<slug>/` is removed on the next run, which is what
+  keeps the directory exactly the shareable-and-fetched set.
+- **Retrieval date.** Stamped from the payload's mtime on first publish, then read back out of
+  the committed `LICENSE.txt` while the text's sha256 is unchanged, so a re-run on another
+  clone reproduces the committed bytes; a re-extracted text re-stamps it.
+
 ## Licence — recorded as UNKNOWN, deliberately
 
 `scripts/fm4sd_licences.py` queries the arXiv API for a licence per paper. It returns

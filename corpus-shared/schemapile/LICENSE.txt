@@ -1,0 +1,16 @@
+SchemaPile: A Large Collection of Relational Database Schemas
+=============================================================
+
+Entry:            schemapile
+Citation:         döhmen et al. 2024
+Source URL:       https://doi.org/10.1145/3654975
+Licence:          CC BY 4.0
+Licence evidence: https://ir.cwi.nl/pub/34763/34763.pdf
+Licence text:     https://creativecommons.org/licenses/by/4.0/legalcode
+Retrieved:        2026-10-31
+Published text:   text.txt, 91816 bytes, sha256 f1e5aac75c3e09721418cf2530678c263e516b2db31aa31d749b88e2f875df34
+
+This file is the extracted text of the paper named above, republished under
+the licence named above with attribution to its authors. It is not the
+version of record -- see the source URL for the publisher's copy -- and
+reuse is limited to what that licence allows.
