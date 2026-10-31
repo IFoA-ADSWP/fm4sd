@@ -6,13 +6,15 @@ supplies. Production passes the default urllib transport and a rate limiter;
 a scratch run passes a fake transport and a recording pace, so retries and
 spacing are assertable without a socket.
 
-Defaults: three attempts; 404 is final; every other HTTP status is retryable;
+Defaults: three attempts; **408, 429 and every 5xx are retryable**; every other
+status is final, including 400/401/403/404/410 — the repo already classifies
+403 as a challenge and 404/410 as dead, so retrying them is wasted politeness.
 `Retry-After` is honoured as delay-seconds or as an HTTP date; otherwise the
 delay is exponential (1s, 2s, …); the last attempt does not sleep; success is
 silent and each retry logs one line.
 
-    data = http.get(url, pace=limiter)
-    data = http.get(url, retry_statuses=(429, 503), pace=limiter)
+    data = net.get(url, pace=limiter)
+    data = net.get(url, retry_on=lambda code: code != 404)   # fetch's old policy
 """
 
 from __future__ import annotations
@@ -27,10 +29,9 @@ from typing import Callable, Protocol
 
 USER_AGENT = "fm4sd-corpus/1.0 (research; https://github.com/IFoA-ADSWP/fm4sd)"
 TIMEOUT = 60.0
-RETRIES = 3
-FINAL_STATUSES = (404,)
-RETRY_STATUSES: tuple[int, ...] | None = None  # None = every non-final status
+ATTEMPTS = 3
 MAX_DELAY = 60.0
+RETRYABLE = frozenset({408, 429}) | frozenset(range(500, 600))
 
 
 class HttpError(RuntimeError):
@@ -48,13 +49,6 @@ class Pace(Protocol):
     def wait(self) -> None: ...
 
 
-class NoPace:
-    """The null pace: useful for a single-shot client or a test."""
-
-    def wait(self) -> None:
-        return None
-
-
 def transport(url: str, user_agent: str, timeout: float) -> bytes:
     """The production transport: one urllib GET with the caller's user agent."""
     request = urllib.request.Request(url, headers={"User-Agent": user_agent})
@@ -62,24 +56,35 @@ def transport(url: str, user_agent: str, timeout: float) -> bytes:
         return response.read()
 
 
+def retryable(status: int) -> bool:
+    """The default policy: transient statuses retry, the rest are answers."""
+    return status in RETRYABLE
+
+
 def retry_after(value: str | None) -> float | None:
-    """Seconds from a Retry-After header: delay-seconds or an HTTP date."""
+    """Seconds from a Retry-After header, or None when there is no usable delay.
+
+    A date already in the past yields None rather than 0: an instant retry is
+    worse than falling back to the exponential delay.
+    """
     if not value:
         return None
     value = value.strip()
     if value.isdigit():
-        return float(value)
+        seconds = float(value)
+        return seconds if seconds > 0 else None
     try:
         when = parsedate_to_datetime(value)
     except (TypeError, ValueError):
         return None
     if when.tzinfo is None:
         when = when.replace(tzinfo=timezone.utc)
-    return max(0.0, (when - datetime.now(timezone.utc)).total_seconds())
+    seconds = (when - datetime.now(timezone.utc)).total_seconds()
+    return seconds if seconds > 0 else None
 
 
 def _log(message: str) -> None:
-    print(f"http: {message}", file=sys.stderr)
+    print(f"net: {message}", file=sys.stderr)
 
 
 def get(
@@ -87,37 +92,39 @@ def get(
     *,
     transport: Callable[[str, str, float], bytes] = transport,
     pace: Pace | None = None,
-    retries: int = RETRIES,
-    final_statuses: tuple[int, ...] = FINAL_STATUSES,
-    retry_statuses: tuple[int, ...] | None = RETRY_STATUSES,
+    attempts: int = ATTEMPTS,
+    retry_on: Callable[[int], bool] = retryable,
     user_agent: str = USER_AGENT,
     timeout: float = TIMEOUT,
     sleep: Callable[[float], None] = time.sleep,
     log: Callable[[str], None] | None = None,
 ) -> bytes:
-    """GET `url`, retrying by the policy above. Raises HttpError when it gives up."""
+    """GET `url` under the policy above. Raises HttpError when it gives up."""
+    if attempts < 1:
+        raise ValueError("attempts must be at least 1")
     log = log or _log
     last: Exception | None = None
-    status: int | None = None
-    for attempt in range(retries):
+    last_status: int | None = None
+    for attempt in range(attempts):
+        status: int | None = None
         if pace is not None:
             pace.wait()
         try:
             return transport(url, user_agent, timeout)
         except urllib.error.HTTPError as error:
-            status = error.code
+            status = last_status = error.code
             last = error
-            if error.code in final_statuses:
-                raise HttpError(url, f"final status {error.code}", error.code) from error
-            if retry_statuses is not None and error.code not in retry_statuses:
+            if not retry_on(error.code):
                 raise HttpError(url, f"status {error.code}", error.code) from error
             wait = retry_after(error.headers.get("Retry-After") if error.headers else None)
         except (urllib.error.URLError, TimeoutError, ConnectionError) as error:
             last = error
+            last_status = None
             wait = None
-        if attempt == retries - 1:
+        if attempt == attempts - 1:
             break
         delay = wait if wait is not None else min(MAX_DELAY, 2.0 ** attempt)
-        log(f"retrying {url} in {delay:.0f}s (attempt {attempt + 1}/{retries}): {last}")
+        log(f"retrying {url} in {delay:.0f}s (attempt {attempt + 1}/{attempts}): {last}")
         sleep(delay)
-    raise HttpError(url, f"gave up after {retries} attempts: {last}", status)
+    raise HttpError(url, f"gave up after {attempts} attempts: {last}",
+                    last_status) from last
