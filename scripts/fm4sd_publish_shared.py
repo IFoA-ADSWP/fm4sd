@@ -59,13 +59,14 @@ import shutil
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
+
+import manifest as manifest_store
 from typing import Iterable
 
 REPO = Path(__file__).resolve().parent.parent
 MANIFEST = REPO / "references" / "manifest.json"
 PAPERS = REPO / "papers"
 SHARED = REPO / "corpus-shared"
-DELIM = "\n--- entries ---\n"
 
 FETCHED = ("ok", "cached")
 
@@ -102,10 +103,11 @@ SHA_RE = re.compile(r"sha256\s+([0-9a-f]{64})")
 # --------------------------------------------------------------------------
 
 def load_entries() -> list[dict]:
-    raw = MANIFEST.read_text(encoding="utf-8")
-    if DELIM not in raw:
-        sys.exit(f"{MANIFEST} is malformed (no '{DELIM.strip()}' line); run --index first")
-    return json.loads(raw.split(DELIM, 1)[1])
+    try:
+        _, entries, _ = manifest_store.read(MANIFEST)
+    except manifest_store.ManifestError:
+        sys.exit(f"{MANIFEST} is malformed; run --index first")
+    return entries
 
 
 def text_path(entry: dict) -> Path:

@@ -31,17 +31,19 @@ MANIFEST = REPO / "references" / "manifest.json"
 # so the import works however this script is launched.
 if str(REPO / "scripts") not in sys.path:
     sys.path.insert(0, str(REPO / "scripts"))
-from fm4sd_fetch import FETCHED_STATUSES, MANIFEST_DELIM, corpus_figures  # noqa: E402
+from fm4sd_fetch import FETCHED_STATUSES, corpus_figures  # noqa: E402
+import manifest as manifest_store  # noqa: E402
 
 # Sentence-ish split for --context. Avoids depending on nltk/spacy.
 SENT_SPLIT = re.compile(r"(?<=[.!?])\s+(?=[A-Z(\[])")
 
 
 def load() -> list[dict]:
-    raw = MANIFEST.read_text()
-    if MANIFEST_DELIM not in raw:
+    try:
+        _, entries, _ = manifest_store.read(MANIFEST)
+    except manifest_store.ManifestError:
         sys.exit("manifest malformed; rerun fm4sd_fetch.py --index")
-    return json.loads(raw.split(MANIFEST_DELIM, 1)[1])
+    return entries
 
 
 def text_path(entry: dict) -> Path | None:
