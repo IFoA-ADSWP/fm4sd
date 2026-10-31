@@ -75,6 +75,37 @@ TIMEOUT = 60
 DEBUG = bool(os.environ.get("FM4SD_DEBUG"))
 KEEP_SRC = bool(os.environ.get("FM4SD_KEEP_SRC"))
 
+# "A paper's worth of text", in bytes. Below this a LaTeX bundle is a wrapper with
+# no body and a web page is a landing page rather than the paper, so the fetch
+# falls through to the next route. One name for both guards (#38).
+MIN_TEXT_BYTES = 4000
+
+# The two statuses that mean the payload is on disk: `ok` (fetched in that run)
+# and `cached` (already there and not re-fetched). Every figure about fetched
+# entries counts these two.
+FETCHED_STATUSES = ("ok", "cached")
+
+# The URL a licence claim was read from, under the two names the manifest carries.
+# `licence_url` is written by fm4sd_licences.py for the 253 arXiv rows;
+# `licence_source` is written by the route records here for the 18 id-less rows.
+# They name one fact and are kept as two keys because renaming either would change
+# the committed manifest -- byte-identical output is the reproducibility contract
+# (#38). This tuple is the single statement of that mapping; the gate imports it
+# and PROVENANCE.md cites it.
+LICENCE_URL_FIELDS = ("licence_url", "licence_source")
+
+# Every repo file `--index` reads, relative to the repo root: (path, required).
+# README.md is the index itself; references/manifest.json is the prior record it
+# carries fetch metadata, licence rows and pinned revisions forward from -- an
+# input, not just an output -- and is absent on a fresh clone, which is normal.
+# The reproducibility gate copies these into its scratch tree and fails loudly if
+# a declared input is missing there (#38).
+INDEX_INPUTS: tuple[tuple[str, bool], ...] = (
+    ("README.md", True),
+    ("references/manifest.json", False),
+)
+
+
 # Entry shape in the README, e.g.
 #   - tabpfn — [arxiv](https://arxiv.org/abs/2207.01848) · [iclr](...) — \[hollmann et al. 2023\]
 ENTRY_RE = re.compile(r"^\s*-\s+(?P<slug>[^\n—]+?)\s+—\s+(?P<rest>.*)$")
@@ -103,168 +134,248 @@ ARXIV_ABS_RE = re.compile(rf"https?://arxiv\.org/abs/(?P<id>{ARXIV_ID})")
 # 2026-10-29) refreshed for the post-merge index in the #29 triage comment
 # (2026-10-30). Re-probing the 35 unreachable rows on every run would hammer
 # publishers to learn something already recorded; a row whose route comes back to
-# life is a one-line move from UNREACHABLE to a link the index already carries.
+# life is a one-line move from an absence reason to a link the index already carries.
 # ---------------------------------------------------------------------------
 
 # Web routes are slower than arXiv's: one request per second per host.
 POLITE_REQS_PER_SECOND = 1.0
 
-# Repo/blog rows: there is no paper behind the link, so no route can exist.
-NON_PAPER: dict[str, str] = {
-    "aplr": "GitHub repo only -- no paper",
-    "kumo-tabular": "Hugging Face blog + repo, no paper",
-    "timesfm-3": "Google Research blog, no paper",
-    "limix2-contamination": "GitHub issue, no paper",
-    "tabpfn-rel": "GitHub repo, no paper",
-    "tabiclr": "GitHub repo, no paper",
-    "turkforecast": "GitHub model card, no paper",
-}
 
-# Rows a plain HTTP client cannot reach. The value is the reason flavour the
-# manifest records; the comment names the route that answered and how.
-UNREACHABLE: dict[str, tuple[str, str]] = {
-    # OpenReview's browser-verification challenge, on forum, PDF and api2 alike.
-    "principled-datagen": ("captcha", "openreview forum; challenge"),
-    "zeroshot-coordination-llm-agents": ("captcha", "openreview forum; challenge"),
-    "strong-posttraining-pretraining": ("captcha", "openreview forum; challenge"),
-    "ensemble-inference": ("captcha", "openreview forum; challenge"),
-    "shapinggeometry": ("captcha", "openreview forum; challenge"),
-    "goggle": ("captcha", "openreview forum; challenge"),
-    "rna-topology-encoding": ("captcha", "openreview pdf; challenge"),
-    "rules-or-exemplars": ("captcha", "openreview forum; challenge"),
-    "tscausalfm": ("captcha", "openreview forum; challenge"),
-    "causalfewshot": ("captcha", "openreview forum; challenge"),
-    "causalorder": ("captcha", "openreview forum; challenge"),
-    "causaltab": ("captcha", "openreview forum; challenge"),
-    "posttreatmentcfm": ("captcha", "openreview forum; challenge"),
-    "agata": ("captcha", "LG landing has no payload; openreview challenged"),
-    "bsplinenorm": ("captcha", "LG landing has no payload; openreview challenged"),
+@dataclass(frozen=True)
+class RouteSpec:
+    """Everything the static audit knows about one id-less entry.
+
+    These facts used to be five slug-keyed tables -- `NON_PAPER`, `UNREACHABLE`,
+    `HTML_PAPERS`, `PUBLISHER_PDFS`, `LICENCE_RECORDS` -- so adding a row meant
+    patching five literals, and `PUBLISHER_PDFS` existed only because "this PDF
+    comes from a publisher" had nowhere else to live. One spec per slug keeps an
+    entry's facts together (#38).
+    """
+
+    note: str = ""            # what the link is, or which route answered and how
+    absence: str = ""         # "" when a route exists; else not-paper|captcha|paywall|dead|unknown
+    html_key: str = ""        # link key holding a web-native HTML paper
+    publisher: bool = False   # PDF comes from a publisher/mirror, not the author
+    licence: str = ""         # what the source declares
+    licence_source: str = ""  # URL the licence claim was read from
+    shareable: str = ""       # "yes" | "no" | "unknown"; unknown is never permission
+
+    @property
+    def status(self) -> str:
+        """The `fetch_status` of a row with no payload ("" when a route exists)."""
+        if not self.absence:
+            return ""
+        if self.absence == "not-paper":
+            return "skipped:not-paper"
+        return f"skipped:unreachable:{self.absence}"
+
+    @property
+    def licence_record(self) -> dict[str, str]:
+        """The manifest keys for this entry's licence, in the manifest's order."""
+        if not self.licence:
+            return {}
+        return {
+            "licence": self.licence,
+            "licence_source": self.licence_source,
+            "shareable": self.shareable,
+        }
+
+
+# One entry per slug: whether a paper exists behind the link, the reason when no
+# plain-HTTP route reaches it, whether its payload is a server-rendered page,
+# whether its PDF comes from a publisher, and its licence record (#38).
+ROUTES: dict[str, RouteSpec] = {
+    # --- not a paper: repo, blog, model card or issue -----------------------
+    "aplr": RouteSpec("GitHub repo only -- no paper", absence="not-paper"),
+    "kumo-tabular": RouteSpec("Hugging Face blog + repo, no paper", absence="not-paper"),
+    "timesfm-3": RouteSpec("Google Research blog, no paper", absence="not-paper"),
+    "limix2-contamination": RouteSpec("GitHub issue, no paper", absence="not-paper"),
+    "tabpfn-rel": RouteSpec("GitHub repo, no paper", absence="not-paper"),
+    "tabiclr": RouteSpec("GitHub repo, no paper", absence="not-paper"),
+    "turkforecast": RouteSpec("GitHub model card, no paper", absence="not-paper"),
+
+    # --- unreachable: the reason the manifest records, and the route that
+    # answered. OpenReview's browser-verification challenge, on forum, PDF and
+    # api2 alike.
+    "principled-datagen": RouteSpec("openreview forum; challenge", absence="captcha"),
+    "zeroshot-coordination-llm-agents": RouteSpec("openreview forum; challenge",
+                                                 absence="captcha"),
+    "strong-posttraining-pretraining": RouteSpec("openreview forum; challenge",
+                                                 absence="captcha"),
+    "ensemble-inference": RouteSpec("openreview forum; challenge", absence="captcha"),
+    "shapinggeometry": RouteSpec("openreview forum; challenge", absence="captcha"),
+    "goggle": RouteSpec("openreview forum; challenge", absence="captcha"),
+    "rna-topology-encoding": RouteSpec("openreview pdf; challenge", absence="captcha"),
+    "rules-or-exemplars": RouteSpec("openreview forum; challenge", absence="captcha"),
+    "tscausalfm": RouteSpec("openreview forum; challenge", absence="captcha"),
+    "causalfewshot": RouteSpec("openreview forum; challenge", absence="captcha"),
+    "causalorder": RouteSpec("openreview forum; challenge", absence="captcha"),
+    "causaltab": RouteSpec("openreview forum; challenge", absence="captcha"),
+    "posttreatmentcfm": RouteSpec("openreview forum; challenge", absence="captcha"),
+    "agata": RouteSpec("LG landing has no payload; openreview challenged",
+                       absence="captcha"),
+    "bsplinenorm": RouteSpec("LG landing has no payload; openreview challenged",
+                             absence="captcha"),
     # Cloudflare "Just a moment" on the publisher's own page.
-    "ggpl": ("captcha", "dl.acm.org; cloudflare challenge"),
-    "zerorel": ("captcha", "dl.acm.org; cloudflare challenge"),
-    "stablepfn": ("captcha", "dl.acm.org; cloudflare challenge"),
-    "tfm-systematic-survey": ("captcha", "ssrn; cloudflare challenge"),
-    "twostagefinance": ("captcha", "ssrn; cloudflare challenge"),
-    "icl-order": ("captcha", "researchgate; cookie/JS challenge"),
+    "ggpl": RouteSpec("dl.acm.org; cloudflare challenge", absence="captcha"),
+    "zerorel": RouteSpec("dl.acm.org; cloudflare challenge", absence="captcha"),
+    "stablepfn": RouteSpec("dl.acm.org; cloudflare challenge", absence="captcha"),
+    "tfm-systematic-survey": RouteSpec("ssrn; cloudflare challenge", absence="captcha"),
+    "twostagefinance": RouteSpec("ssrn; cloudflare challenge", absence="captcha"),
+    "icl-order": RouteSpec("researchgate; cookie/JS challenge", absence="captcha"),
     # Subscription full text withheld; metadata says closed.
-    "sdi": ("paywall", "elsevier/sciencedirect; 403, crossref+openalex closed"),
-    "kamel": ("paywall", "elsevier/sciencedirect; 403, crossref+openalex closed"),
-    "qdhgan": ("paywall", "elsevier/sciencedirect; 403, openalex closed"),
-    "tabllama": ("paywall", "elsevier/sciencedirect; 403, openalex closed"),
-    "mmda": ("paywall", "ieee xplore; stamp.jsp redirects to abstract"),
-    "exo-zeroshot-tsfm": ("paywall", "ieee xplore; stamp.jsp redirects to abstract"),
-    "augtab": ("paywall", "springer chapter; content/pdf redirects to landing"),
+    "sdi": RouteSpec("elsevier/sciencedirect; 403, crossref+openalex closed",
+                     absence="paywall"),
+    "kamel": RouteSpec("elsevier/sciencedirect; 403, crossref+openalex closed",
+                       absence="paywall"),
+    "qdhgan": RouteSpec("elsevier/sciencedirect; 403, openalex closed",
+                        absence="paywall"),
+    "tabllama": RouteSpec("elsevier/sciencedirect; 403, openalex closed",
+                          absence="paywall"),
+    "mmda": RouteSpec("ieee xplore; stamp.jsp redirects to abstract", absence="paywall"),
+    "exo-zeroshot-tsfm": RouteSpec("ieee xplore; stamp.jsp redirects to abstract",
+                                   absence="paywall"),
+    "augtab": RouteSpec("springer chapter; content/pdf redirects to landing",
+                        absence="paywall"),
     # Dead: a 404, a DNS failure, or a stub redirect to something else.
-    "kumorfm": ("dead", "pdf stub redirects to nvidia product docs; no second id"),
-    "timestral": ("dead", "site redirects to an unrelated page (seedvr2.net)"),
+    "kumorfm": RouteSpec("pdf stub redirects to nvidia product docs; no second id",
+                          absence="dead"),
+    "timestral": RouteSpec("site redirects to an unrelated page (seedvr2.net)",
+                           absence="dead"),
     # Could not decide: bot defence with no observable paywall, or landing only.
-    "rt-j": ("unknown", "project page 200, no PDF link; openreview challenged"),
-    "ratab": ("unknown", "LG landing 200, abstract only, no payload"),
-    "orchecause": ("unknown", "LG landing 200, abstract only, no payload"),
-    "cwfm": ("unknown", "mdpi 403 access denied; crossref/openalex say gold OA"),
-    "bitcoinllmforecast": ("unknown", "sciencedirect 403 bot defence; openalex says hybrid OA"),
-}
+    "rt-j": RouteSpec("project page 200, no PDF link; openreview challenged",
+                      absence="unknown"),
+    "ratab": RouteSpec("LG landing 200, abstract only, no payload", absence="unknown"),
+    "orchecause": RouteSpec("LG landing 200, abstract only, no payload",
+                            absence="unknown"),
+    "cwfm": RouteSpec("mdpi 403 access denied; crossref/openalex say gold OA",
+                      absence="unknown"),
+    "bitcoinllmforecast": RouteSpec(
+        "sciencedirect 403 bot defence; openalex says hybrid OA", absence="unknown"),
 
-# Web-native HTML papers: slug -> the link key holding the paper's own URL.
-# Everything else with a route is a PDF. These pages are server-rendered full
-# papers, not abstracts: a landing page without the paper fails the length guard
-# in extract_text_from_html() and is recorded as unreachable instead.
-HTML_PAPERS: dict[str, str] = {
-    "circuits-framework": "blog",
-    "monosemanticity": "blog",
-    "nonergodic-geometry": "site",
-    "dust": "site",
-}
+    # --- publisher PDF ------------------------------------------------------
+    # Licence and sharing record for each route entry (decision on #9: "unknown is
+    # never permission"). Seeded from the audit table in research/no-arxiv-payload.md
+    # and confirmed against the fetched payload; `licence_source` is the URL the
+    # claim was read from -- for "none stated" that is the document itself, which is
+    # evidence of absence, not permission. `shareable` is "yes" only for an explicit
+    # permissive grant: today tabpfnv2, tabssldataselect and schemapile (CC BY 4.0).
+    "tabpfnv2": RouteSpec(
+        note="Nature article -> PMC PDF -> Europe PMC full-text XML fallback",
+        publisher=True,
+        licence="CC BY 4.0",
+        licence_source="https://www.nature.com/articles/s41586-024-08328-6",
+        shareable="yes"),
+    "tabssldataselect": RouteSpec(
+        note="Springer article -> content/pdf",
+        publisher=True,
+        licence="CC BY 4.0",
+        licence_source="https://link.springer.com/article/10.1007/s10994-026-07133-8",
+        shareable="yes"),
+    "schemapile": RouteSpec(
+        note="CWI/ACM article PDF",
+        publisher=True,
+        licence="CC BY 4.0",
+        licence_source="https://ir.cwi.nl/pub/34763/34763.pdf",
+        shareable="yes"),
 
-# PDF routes that go through a publisher/mirror rather than the author's own
-# hosting. Label only -- used to name the route in the manifest.
-PUBLISHER_PDFS = {"tabpfnv2", "tabssldataselect", "schemapile"}
+    # --- direct PDF ---------------------------------------------------------
+    "tfm-agents-humans": RouteSpec(
+        licence="none stated",
+        licence_source="https://ir.cwi.nl/pub/36086/36086.pdf",
+        shareable="unknown"),
+    "era-of-experience": RouteSpec(
+        licence="none stated",
+        licence_source="https://storage.googleapis.com/deepmind-media/Era-of-Experience%20/The%20Era%20of%20Experience%20Paper.pdf",
+        shareable="unknown"),
+    "pfnsyn": RouteSpec(
+        licence="CC BY-NC-ND 4.0",
+        licence_source="https://tabular-data-analysis.github.io/tada2026/papers/TaDA26_16.pdf",
+        shareable="no"),
+    "good-bad-controls": RouteSpec(
+        licence="none stated",
+        licence_source="https://ftp.cs.ucla.edu/pub/stat_ser/r493.pdf",
+        shareable="unknown"),
+    "cdc-prompt": RouteSpec(
+        licence="none stated",
+        licence_source="https://cdn.openai.com/pdf/04d1d1e4-bc75-476a-97cf-49055cd98d31/cdc_prompt.pdf",
+        shareable="unknown"),
+    "mit-ai-report": RouteSpec(
+        licence="© MIT, no reuse grant",
+        licence_source="https://bpb-us-e1.wpmucdn.com/sites.mit.edu/dist/d/2418/files/2026/09/AI-Committee-Final-Report-Aug-13.pdf",
+        shareable="no"),
+    "dfs": RouteSpec(
+        licence="unknown",
+        licence_source="https://groups.csail.mit.edu/EVO-DesignOpt/groupWebSite/uploads/Site/DSAA_DSM_2015.pdf",
+        shareable="unknown"),
 
-# Licence and sharing record for each route entry (decision on #9: "unknown is
-# never permission"). Seeded from the audit table in research/no-arxiv-payload.md
-# and confirmed against the fetched payload; `licence_source` is the URL the claim
-# was read from -- for "none stated" that is the document itself, which is
-# evidence of absence, not permission. `shareable` is "yes" only for an explicit
-# permissive grant: today tabpfnv2, tabssldataselect and schemapile (CC BY 4.0).
-LICENCE_RECORDS: dict[str, dict[str, str]] = {
-    # --- publisher PDF -----------------------------------------------------
-    "tabpfnv2": {
-        "licence": "CC BY 4.0",
-        "licence_source": "https://www.nature.com/articles/s41586-024-08328-6",
-        "shareable": "yes"},
-    "tabssldataselect": {
-        "licence": "CC BY 4.0",
-        "licence_source": "https://link.springer.com/article/10.1007/s10994-026-07133-8",
-        "shareable": "yes"},
-    "schemapile": {
-        "licence": "CC BY 4.0",
-        "licence_source": "https://ir.cwi.nl/pub/34763/34763.pdf",
-        "shareable": "yes"},
-    # --- direct PDF --------------------------------------------------------
-    "tfm-agents-humans": {
-        "licence": "none stated",
-        "licence_source": "https://ir.cwi.nl/pub/36086/36086.pdf",
-        "shareable": "unknown"},
-    "era-of-experience": {
-        "licence": "none stated",
-        "licence_source": "https://storage.googleapis.com/deepmind-media/Era-of-Experience%20/The%20Era%20of%20Experience%20Paper.pdf",
-        "shareable": "unknown"},
-    "pfnsyn": {
-        "licence": "CC BY-NC-ND 4.0",
-        "licence_source": "https://tabular-data-analysis.github.io/tada2026/papers/TaDA26_16.pdf",
-        "shareable": "no"},
-    "good-bad-controls": {
-        "licence": "none stated",
-        "licence_source": "https://ftp.cs.ucla.edu/pub/stat_ser/r493.pdf",
-        "shareable": "unknown"},
-    "cdc-prompt": {
-        "licence": "none stated",
-        "licence_source": "https://cdn.openai.com/pdf/04d1d1e4-bc75-476a-97cf-49055cd98d31/cdc_prompt.pdf",
-        "shareable": "unknown"},
-    "mit-ai-report": {
-        "licence": "© MIT, no reuse grant",
-        "licence_source": "https://bpb-us-e1.wpmucdn.com/sites.mit.edu/dist/d/2418/files/2026/09/AI-Committee-Final-Report-Aug-13.pdf",
-        "shareable": "no"},
-    "dfs": {
-        "licence": "unknown",
-        "licence_source": "https://groups.csail.mit.edu/EVO-DesignOpt/groupWebSite/uploads/Site/DSAA_DSM_2015.pdf",
-        "shareable": "unknown"},
     # --- PMLR (copyright line, no reuse licence) ---------------------------
-    "ptnas": {
-        "licence": "PMLR copyright, no reuse licence",
-        "licence_source": "https://proceedings.mlr.press/v306/xing26a.html",
-        "shareable": "no"},
-    "baguan-ts": {
-        "licence": "PMLR copyright, no reuse licence",
-        "licence_source": "https://proceedings.mlr.press/v306/yang26ac.html",
-        "shareable": "no"},
-    "pf-ges": {
-        "licence": "PMLR copyright, no reuse licence",
-        "licence_source": "https://proceedings.mlr.press/v323/gajewski26a.html",
-        "shareable": "no"},
+    "ptnas": RouteSpec(
+        licence="PMLR copyright, no reuse licence",
+        licence_source="https://proceedings.mlr.press/v306/xing26a.html",
+        shareable="no"),
+    "baguan-ts": RouteSpec(
+        licence="PMLR copyright, no reuse licence",
+        licence_source="https://proceedings.mlr.press/v306/yang26ac.html",
+        shareable="no"),
+    "pf-ges": RouteSpec(
+        licence="PMLR copyright, no reuse licence",
+        licence_source="https://proceedings.mlr.press/v323/gajewski26a.html",
+        shareable="no"),
+
     # --- NeurIPS proceedings ----------------------------------------------
-    "wikidbs": {
-        "licence": "unknown -- CC BY 4.0 stated for the dataset and code, not the paper",
-        "licence_source": "https://proceedings.neurips.cc/paper_files/paper/2024/file/4847447cae911dde321ca19afe7d8707-Paper-Datasets_and_Benchmarks_Track.pdf",
-        "shareable": "unknown"},
-    # --- web-native HTML ---------------------------------------------------
-    "circuits-framework": {
-        "licence": "none stated",
-        "licence_source": "https://transformer-circuits.pub/2021/framework/index.html",
-        "shareable": "unknown"},
-    "monosemanticity": {
-        "licence": "none stated",
-        "licence_source": "https://transformer-circuits.pub/2023/monosemantic-features/index.html",
-        "shareable": "unknown"},
-    "nonergodic-geometry": {
-        "licence": "none stated",
-        "licence_source": "https://simplex.pub/nonergodic-geometry/",
-        "shareable": "unknown"},
-    "dust": {
-        "licence": "unknown",
-        "licence_source": "https://qlabs.sh/research/dust",
-        "shareable": "unknown"},
+    "wikidbs": RouteSpec(
+        licence="unknown -- CC BY 4.0 stated for the dataset and code, not the paper",
+        licence_source="https://proceedings.neurips.cc/paper_files/paper/2024/file/4847447cae911dde321ca19afe7d8707-Paper-Datasets_and_Benchmarks_Track.pdf",
+        shareable="unknown"),
+
+    # --- web-native HTML: `html_key` is the link key holding the paper's own
+    # URL. These pages are server-rendered full papers, not abstracts: a landing
+    # page without the paper fails the length guard in extract_text_from_html()
+    # and is recorded as unreachable instead.
+    "circuits-framework": RouteSpec(
+        html_key="blog",
+        licence="none stated",
+        licence_source="https://transformer-circuits.pub/2021/framework/index.html",
+        shareable="unknown"),
+    "monosemanticity": RouteSpec(
+        html_key="blog",
+        licence="none stated",
+        licence_source="https://transformer-circuits.pub/2023/monosemantic-features/index.html",
+        shareable="unknown"),
+    "nonergodic-geometry": RouteSpec(
+        html_key="site",
+        licence="none stated",
+        licence_source="https://simplex.pub/nonergodic-geometry/",
+        shareable="unknown"),
+    "dust": RouteSpec(
+        html_key="site",
+        licence="unknown",
+        licence_source="https://qlabs.sh/research/dust",
+        shareable="unknown"),
 }
+
+
+def route_spec(slug: str) -> RouteSpec | None:
+    """The static audit record for one slug, or None when the index links a paper."""
+    return ROUTES.get(slug)
+
+
+def recorded_absence(slug: str) -> str:
+    """The reason a row has no payload before any fetch, or "" if a route exists.
+
+    The one vocabulary `absence_status()`, `route_candidates()` and `fetch_route()`
+    share: a row is either not a paper, unreachable for a named reason, or has a
+    route to try.
+    """
+    spec = route_spec(slug)
+    return spec.status if spec else ""
+
+
+def licence_record(slug: str) -> dict[str, str]:
+    """The licence/shareable record for one route entry ({} when it has none)."""
+    spec = route_spec(slug)
+    return spec.licence_record if spec else {}
 
 
 @dataclass(frozen=True)
@@ -330,20 +441,20 @@ def route_candidates(paper: Paper) -> list[Route]:
     and for rows the audit established as unreachable -- those carry a reason
     instead, so we do not hit a publisher to relearn a 403.
     """
-    if paper.arxiv_id or paper.slug in NON_PAPER or paper.slug in UNREACHABLE:
+    if paper.arxiv_id or recorded_absence(paper.slug):
         return []
 
     slug, links = paper.slug, paper.links
+    spec = route_spec(slug)
     routes: list[Route] = []
 
-    if slug in HTML_PAPERS:
-        key = HTML_PAPERS[slug]
-        if key in links:
-            routes.append(Route("html", links[key], "web-native"))
+    if spec and spec.html_key:
+        if spec.html_key in links:
+            routes.append(Route("html", links[spec.html_key], "web-native"))
         return routes
 
     if "pdf" in links:
-        family = "publisher-pdf" if slug in PUBLISHER_PDFS else "direct-pdf"
+        family = "publisher-pdf" if spec and spec.publisher else "direct-pdf"
         routes.append(Route("pdf", links["pdf"], family))
     if "nature" in links:
         routes.append(Route("pdf", nature_pdf(links["nature"]), "publisher-pdf"))
@@ -629,6 +740,61 @@ def marker_text(kind: str, sha256: str, rev: int = 0) -> str:
     return f"{kind}\n{sha256}\n" + (f"v{rev}\n" if rev else "")
 
 
+@dataclass(frozen=True)
+class Marker:
+    """What a `.fetched` marker records about the payload on disk."""
+
+    kind: str
+    sha256: str
+    rev: int
+
+
+def read_marker(dest: Path) -> Marker | None:
+    """Read `papers/<slug>/.fetched`, or None when this entry has no payload.
+
+    The marker is the record of what was fetched -- kind, our digest of the
+    download, and (since #33) the pinned revision -- written by marker_text().
+    Parsing it in one place is what stops the two fetch paths and reconcile()
+    from disagreeing about its shape (#38): one copy recovered the revision, the
+    other did not. A marker with only the kind line (pre-#29) yields an empty
+    digest and revision 0, so the caller keeps what the manifest already had.
+    """
+    marker = dest / ".fetched"
+    if not marker.exists():
+        return None
+    fields = marker.read_text().split()
+    rev = 0
+    if len(fields) > 2 and fields[2].startswith("v"):
+        try:
+            rev = int(fields[2][1:])
+        except ValueError:
+            rev = 0
+    return Marker(kind=fields[0] if fields else "tex",
+                  sha256=fields[1] if len(fields) > 1 else "",
+                  rev=rev)
+
+
+def cached_entry(paper: Paper, force: bool) -> bool:
+    """Credit the payload already on disk. True when there is nothing to fetch.
+
+    The cache short-circuit both fetch paths share, so the marker's digest and
+    pinned revision are recovered identically whichever path owns the entry.
+    """
+    dest = PAPERS / paper.slug
+    marker = read_marker(dest)
+    if marker is None or force:
+        return False
+    paper.fetch_status = "cached"
+    paper.path = str(dest.relative_to(REPO))
+    if marker.sha256:
+        paper.sha256 = marker.sha256
+    if marker.rev:
+        # The marker describes the payload actually on disk, so its revision wins
+        # over a manifest that may have been rebuilt elsewhere.
+        paper.arxiv_rev = marker.rev
+    return True
+
+
 def parse_index(markdown: str) -> list[Paper]:
     """Walk the README and pull out one Paper per resolvable entry."""
     papers: list[Paper] = []
@@ -848,12 +1014,13 @@ def looks_challenged(blob: bytes) -> bool:
 def classify_failure(exc: BaseException) -> str:
     """Map a failed route to the reason vocabulary the manifest records.
 
-    Deliberately coarse. The authority for a row that is known unreachable is
-    UNREACHABLE, not this function; this only labels a route that failed today,
-    so that a route rotting between probes still says *why* rather than leaving
-    an identifier-gap status behind. 403 is labelled `captcha` because every 403
-    observed in the audit was a browser challenge (Cloudflare, OpenReview,
-    ResearchGate) rather than a subscription wall; a 401/402 is a `paywall`.
+    Deliberately coarse. The authority for a row that is known unreachable is the
+    static audit table (ROUTES), not this function; this only labels a route that
+    failed today, so that a route rotting between probes still says *why* rather
+    than leaving an identifier-gap status behind. 403 is labelled `captcha`
+    because every 403 observed in the audit was a browser challenge (Cloudflare,
+    OpenReview, ResearchGate) rather than a subscription wall; a 401/402 is a
+    `paywall`.
     """
     if isinstance(exc, RoutePayloadError) and exc.reason != "unknown":
         return exc.reason
@@ -881,22 +1048,11 @@ def fetch_arxiv(paper: Paper, limiter: RateLimiter, force: bool = False) -> Pape
     sha256 means "this revision, byte for byte".
     """
     dest = PAPERS / paper.slug
-    marker = dest / ".fetched"
-    if marker.exists() and not force:
-        paper.fetch_status = "cached"
-        paper.path = str(dest.relative_to(REPO))
-        parts = marker.read_text().split()
-        paper.sha256 = parts[1] if len(parts) > 1 else paper.sha256
-        # The marker describes the payload actually on disk, so its revision wins
-        # over a manifest that may have been rebuilt elsewhere.
-        if len(parts) > 2 and parts[2].startswith("v"):
-            try:
-                paper.arxiv_rev = int(parts[2][1:])
-            except ValueError:
-                pass
+    if cached_entry(paper, force):
         return paper
 
     dest.mkdir(parents=True, exist_ok=True)
+    marker = dest / ".fetched"
     aid = paper.arxiv_id
     paper.path = str(dest.relative_to(REPO))
 
@@ -924,7 +1080,7 @@ def fetch_arxiv(paper: Paper, limiter: RateLimiter, force: bool = False) -> Pape
         n_tex, n_bytes, tex_dir = extract_text_from_tex(bundle, dest)
 
         # A stub bundle (no .tex, or almost no text) is not worth keeping.
-        if n_tex > 0 and n_bytes > 4000:
+        if n_tex > 0 and n_bytes > MIN_TEXT_BYTES:
             paper.source = "tex"
             paper.n_tex_files = n_tex
             paper.text_bytes = n_bytes
@@ -975,29 +1131,22 @@ def fetch_route(paper: Paper, limiter: RateLimiter, force: bool = False) -> Pape
     never an error class from the transport, and never `no-arxiv-id`.
     """
     dest = PAPERS / paper.slug
-    marker = dest / ".fetched"
-    if marker.exists() and not force:
-        paper.fetch_status = "cached"
-        paper.path = str(dest.relative_to(REPO))
-        parts = marker.read_text().split()
-        paper.sha256 = parts[1] if len(parts) > 1 else ""
-        paper.extra.update(LICENCE_RECORDS.get(paper.slug, {}))
+    if cached_entry(paper, force):
+        paper.extra.update(licence_record(paper.slug))
         return paper
 
     routes = route_candidates(paper)
     if not routes:
-        # Not reachable, not a paper, or an id-less row no route covers yet.
-        if paper.slug in UNREACHABLE:
-            paper.fetch_status = f"skipped:unreachable:{UNREACHABLE[paper.slug][0]}"
-        elif paper.slug in NON_PAPER:
-            paper.fetch_status = "skipped:not-paper"
-        else:
-            paper.fetch_status = "skipped:unreachable:unknown"
+        # Not reachable, not a paper, or an id-less row no route covers yet: the
+        # same cascade --index stamps, from one definition. `pending` is
+        # unreachable here because the branch requires an empty route list.
+        paper.fetch_status = absence_status(paper)
         return paper
 
     dest.mkdir(parents=True, exist_ok=True)
+    marker = dest / ".fetched"
     paper.path = str(dest.relative_to(REPO))
-    paper.extra.update(LICENCE_RECORDS.get(paper.slug, {}))
+    paper.extra.update(licence_record(paper.slug))
 
     reasons: list[str] = []
     for route in routes:
@@ -1018,7 +1167,7 @@ def fetch_route(paper: Paper, limiter: RateLimiter, force: bool = False) -> Pape
                         f"{route.url} is a browser challenge", reason="captcha")
                 pages, n_bytes = extract_text_from_html(
                     blob, dest, all_tags_block=(route.kind == "xml"))
-                if n_bytes < 4000:
+                if n_bytes < MIN_TEXT_BYTES:
                     raise RoutePayloadError(
                         f"{route.url} yielded {n_bytes} bytes of text")
             paper.sha256 = hashlib.sha256(blob).hexdigest()
@@ -1088,6 +1237,52 @@ def save_manifest(entries: list[dict]) -> None:
     MANIFEST.write_text(f"{header}{MANIFEST_DELIM}{json.dumps(entries, indent=2)}\n")
 
 
+def corpus_figures(entries: list[dict]) -> dict[str, int | float]:
+    """Every corpus figure the documents publish, derived from manifest entries.
+
+    The one definition: `fm4sd_search.py stats` prints from it and the
+    reproducibility gate compares the published prose against it, so a change to
+    what "fetched", "tex" or "code" means lands in one place instead of two that
+    can drift (#38). Counts are payload-derived, so this reads the manifest and
+    never `papers/`.
+    """
+    fetched = [e for e in entries if e.get("fetch_status") in FETCHED_STATUSES]
+    return {
+        "entries": len(entries),
+        "with_id": sum(1 for e in entries if e.get("arxiv_id")),
+        "without_id": sum(1 for e in entries if not e.get("arxiv_id")),
+        "fetched": len(fetched),
+        "tex": sum(1 for e in fetched if e.get("source") == "tex"),
+        "pdf": sum(1 for e in fetched if e.get("source") == "pdf"),
+        "html": sum(1 for e in fetched if e.get("source") in ("html", "xml")),
+        "code": sum(1 for e in entries if e.get("has_code")),
+        "text_bytes": sum(int(e.get("text_bytes") or 0) for e in fetched),
+        "licences": sum(1 for e in entries if e.get("licence") == "api-omitted"),
+        "skipped_total": sum(
+            1 for e in entries if str(e.get("fetch_status") or "").startswith("skipped:")
+        ),
+        "skip_captcha": sum(
+            1 for e in entries
+            if e.get("fetch_status") == "skipped:unreachable:captcha"
+        ),
+        "skip_paywall": sum(
+            1 for e in entries
+            if e.get("fetch_status") == "skipped:unreachable:paywall"
+        ),
+        "skip_unknown": sum(
+            1 for e in entries
+            if e.get("fetch_status") == "skipped:unreachable:unknown"
+        ),
+        "skip_dead": sum(
+            1 for e in entries
+            if e.get("fetch_status") == "skipped:unreachable:dead"
+        ),
+        "not_paper": sum(
+            1 for e in entries if e.get("fetch_status") == "skipped:not-paper"
+        ),
+    }
+
+
 def reconcile(papers: list[Paper]) -> int:
     """Recover fetch metadata from payload already on disk.
 
@@ -1102,25 +1297,21 @@ def reconcile(papers: list[Paper]) -> int:
     """
     recovered = 0
     for p in papers:
-        marker = PAPERS / p.slug / ".fetched"
-        text = PAPERS / p.slug / "text.txt"
-        if not marker.exists() or not text.exists():
+        dest = PAPERS / p.slug
+        marker = read_marker(dest)
+        text = dest / "text.txt"
+        if marker is None or not text.exists():
             continue
-        fields = marker.read_text().split()
-        kind = fields[0] if fields else "tex"
-        p.source = kind if kind in ("tex", "pdf", "html", "xml") else "tex"
+        p.source = marker.kind if marker.kind in ("tex", "pdf", "html", "xml") else "tex"
         p.text_bytes = text.stat().st_size
-        p.path = str((PAPERS / p.slug).relative_to(REPO))
+        p.path = str(dest.relative_to(REPO))
         p.fetch_status = "ok"
-        if len(fields) > 1:
-            p.sha256 = fields[1]
-        if len(fields) > 2 and fields[2].startswith("v"):
-            try:
-                p.arxiv_rev = int(fields[2][1:])
-            except ValueError:
-                pass
-        if kind == "pdf":
-            pdf = PAPERS / p.slug / "paper.pdf"
+        if marker.sha256:
+            p.sha256 = marker.sha256
+        if marker.rev:
+            p.arxiv_rev = marker.rev
+        if marker.kind == "pdf":
+            pdf = dest / "paper.pdf"
             if pdf.exists():
                 p.pages = 0  # page count not stored; cheap to re-derive if needed
         recovered += 1
@@ -1193,13 +1384,13 @@ def preserve_fetch(papers: list[Paper], prior: dict[str, dict]) -> int:
         old = prior.get(p.slug)
         if not old or old.get("arxiv_id") != p.arxiv_id:
             continue
-        if p.slug in NON_PAPER or p.slug in UNREACHABLE:
-            continue  # the reason tables are newer knowledge than the old record
+        if recorded_absence(p.slug):
+            continue  # the recorded reason is newer knowledge than the old record
         if not (p.arxiv_id or route_candidates(p)):
             continue
-        if p.fetch_status not in ("ok", "cached"):
+        if p.fetch_status not in FETCHED_STATUSES:
             old_status = old.get("fetch_status") or ""
-            if old_status in ("ok", "cached"):
+            if old_status in FETCHED_STATUSES:
                 for k in FETCH_FIELDS:
                     if k in old:
                         setattr(p, k, old[k])
@@ -1210,7 +1401,7 @@ def preserve_fetch(papers: list[Paper], prior: dict[str, dict]) -> int:
             # reason until --fetch retries the route; the reason tables above win
             # because they are code, not a past run.
             if (old_status.startswith("skipped:unreachable:") and route_candidates(p)):
-                for k in ("path", "licence", "licence_source", "shareable"):
+                for k in ("path", "licence", *LICENCE_URL_FIELDS, "shareable"):
                     if old.get(k):
                         if k in FETCH_FIELDS:
                             setattr(p, k, old[k])
@@ -1229,13 +1420,14 @@ def preserve_fetch(papers: list[Paper], prior: dict[str, dict]) -> int:
 def absence_status(paper: Paper) -> str:
     """The status an id-less entry carries before any fetch is attempted.
 
-    Retires `skipped:no-arxiv-id` (#29): an entry without an arXiv id is either
-    not a paper, known unreachable for a named reason, or has a route to try.
+    The one cascade `--index` stamps every id-less row with and `fetch_route`
+    reaches when no candidate route exists. Retires `skipped:no-arxiv-id` (#29):
+    an entry without an arXiv id is either not a paper, known unreachable for a
+    named reason, or has a route to try (`pending`).
     """
-    if paper.slug in NON_PAPER:
-        return "skipped:not-paper"
-    if paper.slug in UNREACHABLE:
-        return f"skipped:unreachable:{UNREACHABLE[paper.slug][0]}"
+    recorded = recorded_absence(paper.slug)
+    if recorded:
+        return recorded
     if route_candidates(paper):
         return "pending"
     return "skipped:unreachable:unknown"
@@ -1292,9 +1484,11 @@ def cmd_index(remote: bool = False) -> None:
         compare_remote()
         return
 
+    missing = [rel for rel, required in INDEX_INPUTS if required and not (REPO / rel).exists()]
+    if missing:
+        sys.exit(f"--index needs {', '.join(missing)} at the repo root; "
+                 f"--remote compares against upstream without writing")
     local = REPO / "README.md"
-    if not local.exists():
-        sys.exit("no local README.md; use --remote to compare against upstream")
     source = "LOCAL README.md"
     md = local.read_text(encoding="utf-8", errors="replace")
     papers = parse_index(md)
@@ -1306,8 +1500,7 @@ def cmd_index(remote: bool = False) -> None:
     for p in papers:
         if not p.arxiv_id:
             p.fetch_status = absence_status(p)
-            if p.fetch_status == "skipped:unreachable:unknown" and (
-                    p.slug not in NON_PAPER and p.slug not in UNREACHABLE):
+            if p.fetch_status == "skipped:unreachable:unknown" and not recorded_absence(p.slug):
                 uncovered.append(p.slug)
     prior = load_prior()
     carried = carry_forward(papers, prior)
@@ -1317,8 +1510,7 @@ def cmd_index(remote: bool = False) -> None:
     # fetch artefact, so it is reproducible from the index alone -- a fresh clone
     # gets the same `licence`/`licence_source`/`shareable` rows as a fetched tree.
     for p in papers:
-        if p.slug in LICENCE_RECORDS and p.slug not in UNREACHABLE:
-            p.extra.update(LICENCE_RECORDS[p.slug])
+        p.extra.update(licence_record(p.slug))
     # `--status` and the manifest must speak one vocabulary: an unfetched entry
     # with a route to try is `pending`, whichever fetch path it belongs to.
     for p in papers:
@@ -1335,7 +1527,10 @@ def cmd_index(remote: bool = False) -> None:
     print(f"parsed {len(papers)} entries -> {MANIFEST.relative_to(REPO)}")
     print(f"  {with_arxiv} have an arXiv id ({with_arxiv / len(papers):.0%})")
     print(f"  {routable} have a non-arXiv route (direct/publisher PDF, PMLR, NeurIPS, HTML)")
-    print(f"  {len(NON_PAPER)} are not papers; {len(UNREACHABLE)} are unreachable by plain HTTP")
+    not_paper = sum(1 for s in ROUTES.values() if s.absence == "not-paper")
+    unreachable = sum(1 for s in ROUTES.values()
+                      if s.absence and s.absence != "not-paper")
+    print(f"  {not_paper} are not papers; {unreachable} are unreachable by plain HTTP")
     print(f"  {with_code} link released code")
     if recovered:
         print(f"  {recovered} already fetched locally (metadata recovered from disk)")
@@ -1346,8 +1541,8 @@ def cmd_index(remote: bool = False) -> None:
     if carried:
         print(f"  {carried} carried forward metadata other tools wrote (licence, published, …)")
     for slug in uncovered:
-        print(f"  ! {slug} has no arXiv id, no route and no recorded reason — add it to "
-              f"NON_PAPER or UNREACHABLE")
+        print(f"  ! {slug} has no arXiv id, no route and no recorded reason — add a "
+              f"RouteSpec to ROUTES with an absence reason")
     for section in sorted({p.section for p in papers}):
         n = sum(1 for p in papers if p.section == section)
         print(f"  section {section or '(none)'}: {n}")
@@ -1419,12 +1614,10 @@ def cmd_fetch(only: list[str], force: bool, workers: int) -> None:
     for e in entries_new:
         if e["slug"] in by_slug:
             e.update({k: v for k, v in by_slug[e["slug"]].to_json().items()
-                      if k in ("source", "route", "path", "text_bytes", "pages",
-                               "n_tex_files", "sha256", "fetch_status", "arxiv_rev",
-                               "licence", "licence_source", "shareable")})
+                      if k in (*FETCH_FIELDS, "licence", *LICENCE_URL_FIELDS, "shareable")})
     save_manifest(entries_new)
 
-    ok = sum(1 for p in papers if p.fetch_status in ("ok", "cached"))
+    ok = sum(1 for p in papers if p.fetch_status in FETCHED_STATUSES)
     tex = sum(1 for p in papers if p.source == "tex")
     pdf = sum(1 for p in papers if p.source == "pdf")
     html = sum(1 for p in papers if p.source in ("html", "xml"))
@@ -1482,14 +1675,14 @@ def cmd_status() -> None:
     if not MANIFEST.exists():
         sys.exit("no manifest; run --index first")
     entries = load_manifest()
-    ok = [e for e in entries if e.get("fetch_status") in ("ok", "cached")]
+    ok = [e for e in entries if e.get("fetch_status") in FETCHED_STATUSES]
     print(f"{len(ok)}/{len(entries)} entries fetched locally")
 
     # A tally, so the reason vocabulary is checkable at a glance and the docs'
     # figures have one place to come from.
     tally: dict[str, int] = {}
     for e in entries:
-        if e.get("fetch_status") in ("ok", "cached"):
+        if e.get("fetch_status") in FETCHED_STATUSES:
             continue
         s = e.get("fetch_status") or "(pending)"
         tally[s] = tally.get(s, 0) + 1
@@ -1497,7 +1690,7 @@ def cmd_status() -> None:
         print(f"  {n:3d}  {s}")
 
     for e in sorted(entries, key=lambda x: x["slug"]):
-        if e.get("fetch_status") not in ("ok", "cached"):
+        if e.get("fetch_status") not in FETCHED_STATUSES:
             print(f"  {e['slug']:<44} {e.get('fetch_status') or '(pending)'}")
 
 

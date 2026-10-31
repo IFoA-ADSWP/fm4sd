@@ -59,9 +59,9 @@ parsed; a non-paper link inside a parsed section is an entry with `skipped:not-p
 | Not fetched | 43 entries, each with a reason: 22 `skipped:unreachable:captcha`, 7 `...:paywall`, 5 `...:unknown`, 2 `...:dead`, 7 `skipped:not-paper` |
 
 `references/manifest.json` is the machine-readable record: id, pinned revision (`arxiv_rev`),
-title, category, section, subcategory, citation, links, licence, `licence_source`, `shareable`,
-sha256, source type, byte counts, fetch status, and for non-arXiv payloads the route used. Its
-header records which index source was used.
+title, category, section, subcategory, citation, links, licence, `licence_url`/`licence_source`,
+`shareable`, sha256, source type, byte counts, fetch status, and for non-arXiv payloads the
+route used. Its header records which index source was used.
 
 ### Pinned arXiv revisions — added 2026-10-31
 
@@ -213,11 +213,17 @@ entry between reasons without moving the line.
 
 ### Licence and sharing
 
-Per entry the manifest records `licence` (what the source declares), `licence_source` (the
-URL that claim came from) and `shareable: yes | no | unknown`. An unstated, API-omitted or
-unverifiable licence is recorded as unknown and treated as **not permission**. The arXiv
-licence script writes the same `licence` under an older companion field, `redistributable`
-(a boolean derived from that licence); where both are present they must agree.
+Per entry the manifest records `licence` (what the source declares), the URL that claim came
+from, and `shareable: yes | no | unknown`. That URL is `licence_url` on the 253 arXiv rows,
+written by `fm4sd_licences.py`, and `licence_source` on the 18 route rows, written by the
+fetcher: **one fact under two names**, kept that way because renaming either would change the
+committed manifest, and the manifest is the reproducibility contract. The mapping is stated
+once, as `LICENCE_URL_FIELDS` in `scripts/fm4sd_fetch.py`, and
+`scripts/check_reproducibility.py` imports it rather than repeating the field names. An
+unstated, API-omitted or unverifiable licence is recorded as unknown and treated as **not
+permission**. The arXiv licence script writes the same `licence` under an older companion
+field, `redistributable` (a boolean derived from that licence); where both are present they
+must agree.
 
 Only `shareable: yes` entries are published: an extracted `text.txt` plus a citation and
 licence header (source URL, licence, retrieval date) under `corpus-shared/<slug>/`.
