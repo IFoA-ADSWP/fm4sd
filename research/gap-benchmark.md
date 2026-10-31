@@ -122,19 +122,19 @@ case-insensitively for `tabrepo`, `pmlb`, `amlb`, `openml`, `benchmark lottery`,
 `mixed-effect`, `show your work`: one hit, `supportsetleakage`, which is the leakage entry
 discussed above.
 
-**Identity.** Each id was fetched from its arXiv abs page on 2026-10-31 and the returned
-title, author list and dateline revision recorded; the table quotes those titles verbatim and
-the `@vN` column is the "this version" of that dateline. This is arXiv's own record, not a
-secondary index.
+**Identity.** Each id was fetched from its arXiv abs page on 2026-10-31 and read back from the
+arXiv API once the block below lifted: `export.arxiv.org/api/query?id_list=…` returned nine
+entries and the `<title>`, `<published>` and version suffix of every one matched the table
+(TabRepo `v3`, AMLB `v2`, OpenML suites `v3`, PMLB `v1`, Benchmark Lottery `v1`, leakage `v1`,
+Show Your Work `v1`, LMEMs `v1`, NeurIPS report `v4`). The table quotes the API's titles
+verbatim and the `@vN` column is the revision the API reports.
 
-**arXiv API.** The `export.arxiv.org/api/query?id_list=…` endpoint returned HTTP 429 with an
-empty body for every live query from this host throughout the session (edge-cached queries
-such as `all:electron` still returned 200, which is what rules out a network fault). Three
-other research tickets (#42, #43, #46) were querying the same endpoint from the same IP at
-the same time, which is the likely cause. Consequence: id and title were confirmed from
-`arxiv.org/abs/<id>` rather than the API feed. Before #47 adds these entries, re-run
-`id_list` and check the returned `<title>`/`<published>` against the table — treat that as an
-open verification item, not a completed one.
+**arXiv API, and the 429 episode.** The endpoint returned HTTP 429 with an empty body for
+every live query from 01:05 to 01:32, while edge-cached queries such as `all:electron` still
+returned 200 — which rules out a network fault and points at a quota shared with the sibling
+research tickets (#42, #43, #46) querying the same endpoint from this IP. A single batched
+`id_list` request at 01:32:12 returned all nine. Retrieval order was abs pages first, API
+confirmation second; both agree, so no candidate rests on recall.
 
 **What I did not run.** No fetch, index or gate command: the worktree has no payload, and
 `scripts/` was not touched. The nine ids are proposals, not additions.
