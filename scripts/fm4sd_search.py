@@ -32,6 +32,7 @@ MANIFEST = REPO / "references" / "manifest.json"
 if str(REPO / "scripts") not in sys.path:
     sys.path.insert(0, str(REPO / "scripts"))
 from fm4sd_fetch import FETCHED_STATUSES, corpus_figures  # noqa: E402
+import entry as entry_vocab  # noqa: E402
 import manifest as manifest_store  # noqa: E402
 import payload as payload_store  # noqa: E402
 
@@ -88,15 +89,11 @@ def cmd_list(entries: list[dict], args) -> None:
 
 
 def match_year(arxiv_id: str) -> int | None:
-    if len(arxiv_id) >= 4 and arxiv_id[:2].isdigit():
-        y = int(arxiv_id[:2])
-        return 2000 + y if y < 91 else 1900 + y
-    # Legacy pre-2007 ids: archive[/subclass]/yymmnnn, e.g. cond-mat/0011094 -> 2000.
-    m = re.search(r"/(\d{7})$", arxiv_id)
-    if m:
-        y = int(m.group(1)[:2])
-        return 2000 + y if y < 91 else 1900 + y
-    return None
+    """The first-submission year encoded in the id (YYMM), via the one parser (#66)."""
+    try:
+        return entry_vocab.parse(arxiv_id).year
+    except entry_vocab.IdError:
+        return None
 
 
 def cmd_show(entries: list[dict], slug: str, args) -> None:

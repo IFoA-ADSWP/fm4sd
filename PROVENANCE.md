@@ -161,8 +161,9 @@ stored id is normalised (version suffix stripped, subclass case preserved) so th
 Consequence for the counts: the population is **49 entries genuinely lacking an arXiv id + 1
 that was misclassified**, not 50 id-less. Every figure above, in `README.md` and in
 `references/summaries/` was recomputed from `fm4sd_search.py stats` after the fix.
-`fm4sd_licences.py` has not been re-run, so `gnr` has no licence record yet — its API-id
-extractor is still modern-only (the same family of gap as #9).
+`fm4sd_licences.py` has not been re-run since #66 taught it to recognise legacy ids, so `gnr`
+still has no licence record; the next licence pass adds it, and the 253 arXiv licence rows
+become 254.
 
 ### Actuarial category — added 2026-10-08
 

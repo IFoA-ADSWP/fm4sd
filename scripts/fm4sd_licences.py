@@ -20,13 +20,14 @@ rather than left blank, so "we do not know" never reads as "public domain".
 
 from __future__ import annotations
 
-import re
 import sys
 import time
 import urllib.error
 import urllib.request
 import xml.etree.ElementTree as ET
 from pathlib import Path
+
+import entry as entry_vocab
 
 import manifest as manifest_store
 
@@ -43,8 +44,39 @@ NAMESPACES = {
 USER_AGENT = "fm4sd-corpus/1.0 (research; https://github.com/IFoA-ADSWP/fm4sd)"
 
 
+def parse_response(xml: bytes) -> dict[str, dict]:
+    """{canonical id: licence record} for one Atom response.
+
+    The id comes through the same parser the corpus uses, so a legacy id is
+    recognised instead of silently dropped (#66).
+    """
+    root = ET.fromstring(xml)
+    out: dict[str, dict] = {}
+    for entry in root.findall("atom:entry", NAMESPACES):
+        raw_id = (entry.findtext("atom:id", "", NAMESPACES) or "").strip()
+        bare = raw_id.rsplit("/abs/", 1)[-1]  # the API echoes an abs URL
+        try:
+            parsed = entry_vocab.parse(bare)
+        except entry_vocab.IdError:
+            continue
+        # The API does NOT reliably carry licence. Entries frequently have no
+        # <arxiv:license> element even when the abs page shows one (verified:
+        # 2511.03634 is CC-BY-4.0 on arxiv.org/abs but has no licence element
+        # here). So "no element" must NOT be recorded as "no licence" -- it
+        # means the API did not report one, and the real answer lives on the abs
+        # page. Recording it as a definite value would be a fabricated fact.
+        lic_el = entry.find("arxiv:license", NAMESPACES)
+        licence = (lic_el.get("href") if lic_el is not None else None) or "api-omitted"
+        out[parsed.key] = {
+            "licence": licence,
+            "published": (entry.findtext("atom:published", "", NAMESPACES) or "")[:10],
+            "title": " ".join((entry.findtext("atom:title", "", NAMESPACES) or "").split()),
+        }
+    return out
+
+
 def fetch_batch(ids: list[str], retries: int = 3) -> dict[str, dict]:
-    """Return {arxiv_id: {licence, published, title}} for one batch."""
+    """Return {canonical id: {licence, published, title}} for one batch."""
     url = f"{API}?id_list={','.join(ids)}&max_results={len(ids)}"
     last: Exception | None = None
     for attempt in range(retries):
@@ -58,28 +90,7 @@ def fetch_batch(ids: list[str], retries: int = 3) -> dict[str, dict]:
             time.sleep(3 * (attempt + 1))
     else:
         raise last  # type: ignore[misc]
-
-    root = ET.fromstring(xml)
-    out: dict[str, dict] = {}
-    for entry in root.findall("atom:entry", NAMESPACES):
-        raw_id = (entry.findtext("atom:id", "", NAMESPACES) or "").strip()
-        m = re.search(r"abs/([0-9]{4}\.[0-9]{4,5})", raw_id)
-        if not m:
-            continue
-        # The API does NOT reliably carry licence. Entries frequently have no
-        # <arxiv:license> element even when the abs page shows one (verified:
-        # 2511.03634 is CC-BY-4.0 on arxiv.org/abs but has no licence element
-        # here). So "no element" must NOT be recorded as "no licence" -- it
-        # means the API did not report one, and the real answer lives on the abs
-        # page. Recording it as a definite value would be a fabricated fact.
-        lic_el = entry.find("arxiv:license", NAMESPACES)
-        licence = (lic_el.get("href") if lic_el is not None else None) or "api-omitted"
-        out[m.group(1)] = {
-            "licence": licence,
-            "published": (entry.findtext("atom:published", "", NAMESPACES) or "")[:10],
-            "title": " ".join((entry.findtext("atom:title", "", NAMESPACES) or "").split()),
-        }
-    return out
+    return parse_response(xml)
 
 
 def redistributable(licence: str) -> bool:
@@ -106,7 +117,10 @@ def main() -> None:
     except manifest_store.ManifestError as error:
         sys.exit(f"{error}; rerun fm4sd_fetch.py --index")
 
-    ids = sorted({e["arxiv_id"] for e in entries if e.get("arxiv_id")})
+    def key_of(raw: str) -> str:
+        return entry_vocab.parse(raw).key
+
+    ids = sorted({key_of(e["arxiv_id"]) for e in entries if e.get("arxiv_id")})
     print(f"resolving licences for {len(ids)} arXiv ids")
 
     resolved: dict[str, dict] = {}
@@ -124,7 +138,7 @@ def main() -> None:
         aid = e.get("arxiv_id")
         if not aid:
             continue
-        meta = resolved.get(aid)
+        meta = resolved.get(key_of(aid))
         if meta:
             e["licence"] = meta["licence"]
             e["licence_url"] = meta["licence"]

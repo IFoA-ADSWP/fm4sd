@@ -30,6 +30,8 @@ from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
 from pathlib import Path
 
+import entry as entry_vocab
+
 API = "https://export.arxiv.org/api/query"
 BATCH = 50
 PAUSE_SECONDS = 1.5  # the API's guidance is well below the fetcher's 3 req/s
@@ -40,29 +42,20 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 CACHE = Path(os.environ.get("FM4SD_ARXIV_CACHE") or REPO_ROOT / ".cache" / "arxiv-meta")
 UA = "fm4sd-arxiv-meta/1.0 (+https://github.com/IFoA-ADSWP/fm4sd)"
 
-# Modern and legacy forms, with an optional version suffix. Deliberately stricter
-# than "anything goes": a malformed id is the one thing this tool is used to catch.
-ID_RE = re.compile(r"^(?:\d{4}\.\d{4,5}|[a-z-]+(?:\.[a-z]{2})?/\d{7})(?:v\d+)?$", re.I)
 ENTRY_RE = re.compile(r"<entry>(.*?)</entry>", re.S)
 ABS_RE = re.compile(r"<id>\s*https?://arxiv\.org/abs/([^<\s]+)\s*</id>")
 TITLE_RE = re.compile(r"<title>(.*?)</title>", re.S)
 PUBLISHED_RE = re.compile(r"<published>\s*(\d{4})-(\d{2})-(\d{2})")
 UPDATED_RE = re.compile(r"<updated>\s*(\d{4}-\d{2}-\d{2})")
 AUTHOR_RE = re.compile(r"<author>\s*<name>([^<]+)</name>", re.S)
-VERSION_RE = re.compile(r"v(\d+)$", re.I)
 
 
 def canon(raw: str) -> str:
-    """Validated, version-stripped, lowercase id — the cache and lookup key.
-
-    Lowercasing mirrors the fetcher (`resolve_arxiv_revs` keys lowercase because
-    Atom may echo a legacy archive in different case). Keeping it here means the
-    same id finds the same record cold or warm, on any filesystem.
-    """
-    value = raw.strip()
-    if not ID_RE.match(value):
-        raise SystemExit(f"arxiv_meta: not an arXiv id: {raw!r}")
-    return VERSION_RE.sub("", value).lower()
+    """Validated, version-stripped, lowercase id — the cache and lookup key."""
+    try:
+        return entry_vocab.parse(raw).key
+    except entry_vocab.IdError as error:
+        raise SystemExit(f"arxiv_meta: {error}") from error
 
 
 def cache_path(aid: str) -> Path:
@@ -147,10 +140,11 @@ def parse_feed(xml: str) -> dict[str, dict]:
         title_match = TITLE_RE.search(entry)
         if not abs_match or not title_match:
             continue
-        raw_id = abs_match.group(1).strip()
-        rev_match = VERSION_RE.search(raw_id)
-        aid = VERSION_RE.sub("", raw_id).lower()
-        version = int(rev_match.group(1)) if rev_match else 0
+        try:
+            parsed = entry_vocab.parse(abs_match.group(1))
+        except entry_vocab.IdError:
+            continue  # one unparseable entry must not kill the feed
+        aid, version = parsed.key, parsed.revision
         published = PUBLISHED_RE.search(entry)
         updated = UPDATED_RE.search(entry)
         author = AUTHOR_RE.search(entry)
