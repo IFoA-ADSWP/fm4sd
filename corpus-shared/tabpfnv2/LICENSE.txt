@@ -1,0 +1,16 @@
+Accurate predictions on small data with a tabular foundation model
+==================================================================
+
+Entry:            tabpfnv2
+Citation:         hollmann et al. 2025
+Source URL:       https://www.nature.com/articles/s41586-024-08328-6
+Licence:          CC BY 4.0
+Licence evidence: https://www.nature.com/articles/s41586-024-08328-6
+Licence text:     https://creativecommons.org/licenses/by/4.0/legalcode
+Retrieved:        2026-10-31
+Published text:   text.txt, 94136 bytes, sha256 d6510d73b33597c070ab2b508003dfffef805e4bc08bed4fd0397bc441cdb7cb
+
+This file is the extracted text of the paper named above, republished under
+the licence named above with attribution to its authors. It is not the
+version of record -- see the source URL for the publisher's copy -- and
+reuse is limited to what that licence allows.

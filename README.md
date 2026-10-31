@@ -62,6 +62,16 @@ state nothing or reserve rights. Unknown is not permission, so `papers/` stays l
 `references/manifest.json` (ids, titles, categories, sha256, status, licence) is tracked
 instead.
 
+**What is published anyway.** The entries whose licence plainly allows redistribution are
+committed under [`corpus-shared/`](corpus-shared/): one directory per paper with `text.txt` and
+a `LICENSE.txt` naming the paper, its source URL, the licence, the evidence for it and the
+retrieval date. Publishing is a separate script
+(`python3 scripts/fm4sd_publish_shared.py`), not a fetcher side effect, so a re-run of `--fetch`
+cannot add a file there. Published today: `tabpfnv2` and `schemapile`; `tabssldataselect` is
+waiting on a payload the publisher will not bypass a CAPTCHA for. Everything `shareable: no` or
+`unknown` stays local. The record, and the rules the publisher holds to, are in
+[`PROVENANCE.md`](PROVENANCE.md) → *Published extracts*.
+
 Full details: [`references/README.md`](references/README.md) · [`PROVENANCE.md`](PROVENANCE.md)
 
 ---

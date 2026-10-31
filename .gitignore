@@ -18,6 +18,10 @@ workdir/
 #     python3 scripts/fm4sd_fetch.py --index && python3 scripts/fm4sd_fetch.py --fetch
 papers/
 
+# corpus-shared/ is deliberately NOT ignored: it holds the extracts whose licence was
+# verified as shareable (yes only -- no and unknown stay above), with attribution.
+# PROVENANCE.md, "Published extracts".
+
 # Python bytecode
 __pycache__/
 *.pyc

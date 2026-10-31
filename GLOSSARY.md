@@ -27,6 +27,11 @@ The fetched paper content itself: `papers/<slug>/text.txt` and the source bundle
 was extracted from. Payload is gitignored and local, so its size and contents depend on what
 a given clone has fetched. Committed manifest data is not payload.
 
+One exception is deliberate: a `shareable: yes` entry's text is also committed, with its
+licence record, under `corpus-shared/<slug>/`. That copy **is** part of the repo — it exists
+so a reader who cannot run the fetcher still has the paper — while everything else stays
+local.
+
 ## "the corpus"
 
 Ambiguous, and avoided where a claim depends on it. It has been used for the index (the
