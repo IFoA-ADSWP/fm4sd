@@ -49,7 +49,9 @@ def _year(identifier: str) -> int | None:
 
 def parse(raw: str) -> ArxivId:
     """Parse a modern or legacy id, with or without a version suffix."""
-    value = (raw or "").strip()
+    if not isinstance(raw, str):
+        raise IdError(f"not an arXiv id: {raw!r}")
+    value = raw.strip()
     match = _ID_RE.match(value)
     if not match:
         raise IdError(f"not an arXiv id: {raw!r}")

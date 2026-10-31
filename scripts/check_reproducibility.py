@@ -474,15 +474,29 @@ def check_published_counts(verbose: bool) -> str:
     problems: list[str] = []
     checked = 0
 
-    # #33's headline invariant. `arxiv_rev` is payload-derived, so check 1 cannot
-    # see a regression that drops every pin; without this, deleting all 323
-    # revisions would leave the gate green.
+    # The entry invariants (#33, #66, #67, #68). These fields are payload-derived,
+    # so check 1 cannot see a regression that drops them; without this block,
+    # deleting every revision or inventing a status would leave the gate green.
     for e in entries:
-        if e.get("arxiv_id") and int(e.get("arxiv_rev") or 0) <= 0:
+        status = entry_vocab.status(e.get("fetch_status"))
+        if not status.recognised:
             problems.append(
-                f"manifest: {e['slug']} has an arXiv id but no pinned revision"
+                f"manifest: {e['slug']} carries a status this code does not "
+                f"define: {status.value!r}"
             )
-        if entry_vocab.is_fetched(e.get("fetch_status")):
+        if e.get("arxiv_id"):
+            try:
+                entry_vocab.parse(e["arxiv_id"])
+            except entry_vocab.IdError:
+                problems.append(
+                    f"manifest: {e['slug']} carries an id the one parser "
+                    f"rejects: {e['arxiv_id']!r}"
+                )
+            if int(e.get("arxiv_rev") or 0) <= 0:
+                problems.append(
+                    f"manifest: {e['slug']} has an arXiv id but no pinned revision"
+                )
+        if status.is_fetched:
             sha = str(e.get("sha256") or "").lower()
             if len(sha) != 64 or any(c not in "0123456789abcdef" for c in sha):
                 problems.append(
