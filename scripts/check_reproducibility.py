@@ -141,7 +141,7 @@ def stats_numbers(out: str) -> dict[str, float]:
     """
     pats = {
         "entries": r"^entries\s+(\d+)\s*$",
-        "fetched": r"^fetched\s+(\d+)\s+\((\d+) latex,\s*(\d+) pdf\)\s*$",
+        "fetched": r"^fetched\s+(\d+)\s+\((\d+) latex,\s*(\d+) pdf(?:,\s*\d+ html/xml)?\)\s*$",
         "text_mb": r"^text on disk\s+([\d.]+) MB\s*$",
     }
     found: dict[str, float] = {}
@@ -173,6 +173,28 @@ def manifest_figures(entries: list[dict]) -> dict[str, float]:
         "code": sum(1 for e in entries if e.get("has_code")),
         "text_bytes": sum(int(e.get("text_bytes") or 0) for e in fetched),
         "licences": sum(1 for e in entries if e.get("licence") == "api-omitted"),
+        "skipped_total": sum(
+            1 for e in entries if str(e.get("fetch_status") or "").startswith("skipped:")
+        ),
+        "skip_captcha": sum(
+            1 for e in entries
+            if e.get("fetch_status") == "skipped:unreachable:captcha"
+        ),
+        "skip_paywall": sum(
+            1 for e in entries
+            if e.get("fetch_status") == "skipped:unreachable:paywall"
+        ),
+        "skip_unknown": sum(
+            1 for e in entries
+            if e.get("fetch_status") == "skipped:unreachable:unknown"
+        ),
+        "skip_dead": sum(
+            1 for e in entries
+            if e.get("fetch_status") == "skipped:unreachable:dead"
+        ),
+        "not_paper": sum(
+            1 for e in entries if e.get("fetch_status") == "skipped:not-paper"
+        ),
     }
 
 
@@ -366,9 +388,12 @@ CLAIMS = (
     # README.md — the research-layer table a reader lands on first.
     Claim("README.md", "entries in the index",
           r"\|\s*\*\*(\d+)\*\*\s*\|\s*entries in the index", ("entries",)),
-    Claim("README.md", "resolvable to arXiv, fetched locally",
-          r"\|\s*\*\*(\d+)\*\*\s*\|\s*resolvable to arXiv, fetched locally"
-          r"\s*\(\*\*(\d+)\*\*\s*LaTeX source,\s*\*\*(\d+)\*\*\s*PDF fallback\)",
+    Claim("README.md", "resolvable to arXiv",
+          r"\|\s*\*\*(\d+)\*\*\s*\|\s*resolvable to arXiv\s*\|", ("with_id",)),
+    Claim("README.md", "fetched locally",
+          r"\|\s*\*\*(\d+)\*\*\s*\|\s*fetched locally"
+          r"\s*\(\*\*(\d+)\*\*\s*LaTeX source,\s*\*\*(\d+)\*\*\s*PDF"
+          r"(?:,\s*\*\*\d+\*\*\s*HTML/XML)?\)",
           ("fetched", "tex", "pdf")),
     Claim("README.md", "of extracted plain text",
           r"\|\s*\*\*([\d.]+)\s*MB\*\*\s*\|\s*of extracted plain text", ("text_mb",)),
@@ -382,6 +407,18 @@ CLAIMS = (
           r"corpus is\s*~?\s*([\d.]+)\s*MB of text", ("text_mb",)),
     Claim("references/README.md", "api-omitted licence count",
           r"`api-omitted` for all\s+(\d+)", ("licences",)),
+    Claim("references/README.md", "entries not in the corpus",
+          r"Why\s+(\d+)\s+entries are not in the corpus", ("skipped_total",)),
+    Claim("references/README.md", "captcha tally",
+          r"\|\s*`skipped:unreachable:captcha`\s*\|\s*(\d+)", ("skip_captcha",)),
+    Claim("references/README.md", "paywall tally",
+          r"\|\s*`skipped:unreachable:paywall`\s*\|\s*(\d+)", ("skip_paywall",)),
+    Claim("references/README.md", "unknown tally",
+          r"\|\s*`skipped:unreachable:unknown`\s*\|\s*(\d+)", ("skip_unknown",)),
+    Claim("references/README.md", "dead tally",
+          r"\|\s*`skipped:unreachable:dead`\s*\|\s*(\d+)", ("skip_dead",)),
+    Claim("references/README.md", "not-paper tally",
+          r"\|\s*`skipped:not-paper`\s*\|\s*(\d+)", ("not_paper",)),
 
     # PROVENANCE.md — the Corpus table, the enforcement record.
     Claim("PROVENANCE.md", "Entries parsed",
@@ -392,7 +429,7 @@ CLAIMS = (
           r"\|\s*Linking released code\s*\|\s*(\d+)", ("code",)),
     Claim("PROVENANCE.md", "Fetched locally",
           r"\|\s*Fetched locally\s*\|\s*(\d+)\s*[—-]\s*(\d+)\s+LaTeX source bundles,"
-          r"\s*(\d+)\s+PDF fallback", ("fetched", "tex", "pdf")),
+          r"\s*(\d+)\s+PDF(?:,\s*\d+\s+HTML/XML)?", ("fetched", "tex", "pdf")),
     Claim("PROVENANCE.md", "Extracted text",
           r"\|\s*Extracted text\s*\|\s*([\d.]+)\s*MB", ("text_mb",)),
 )
