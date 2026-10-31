@@ -70,7 +70,7 @@ deliberately no build step — the "gate" is **reproducibility**, not tests.
 - **`papers/`** holds downloaded PDFs and is **gitignored**. Only the slugs are tracked. A
   missing `papers/` directory is normal — rebuild it with the fetch script rather than
   treating it as a missing file.
-- **`scripts/`** — `entry.py` (one arXiv-id vocabulary), `manifest.py` + `payload.py` (the manifest format and
+- **`scripts/`** — `entry.py` (the entry vocabulary: id and status), `manifest.py` + `payload.py` (the manifest format and
   the payload probe), `arxiv_meta.py`
   (batched, cached arXiv metadata), `fm4sd_fetch.py` (corpus build),
   `fm4sd_search.py` (query),

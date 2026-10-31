@@ -149,7 +149,6 @@ ARXIV_ABS_RE = re.compile(rf"https?://arxiv\.org/abs/(?P<id>{ARXIV_ID})")
 POLITE_REQS_PER_SECOND = 1.0
 
 
-ABSENCE_REASONS = frozenset({"not-paper", "captcha", "paywall", "dead", "unknown"})
 SHAREABLE_VALUES = frozenset({"yes", "no", "unknown"})
 
 
@@ -175,7 +174,7 @@ class RouteSpec:
     def __post_init__(self) -> None:
         # GLOSSARY.md fixes both vocabularies; a typo would otherwise mint a
         # status or a permission value the docs do not define.
-        if self.absence and self.absence not in ABSENCE_REASONS:
+        if self.absence and self.absence not in entry_vocab.ABSENCE_REASONS:
             raise ValueError(f"unknown absence reason: {self.absence!r}")
         if self.shareable and self.shareable not in SHAREABLE_VALUES:
             raise ValueError(f"unknown shareable value: {self.shareable!r}")
@@ -185,9 +184,7 @@ class RouteSpec:
         """The `fetch_status` of a row with no payload ("" when a route exists)."""
         if not self.absence:
             return ""
-        if self.absence == "not-paper":
-            return "skipped:not-paper"
-        return f"skipped:unreachable:{self.absence}"
+        return entry_vocab.absent(self.absence).value
 
     @property
     def licence_record(self) -> dict[str, str]:
@@ -1264,23 +1261,19 @@ def corpus_figures(entries: list[dict]) -> dict[str, int | float]:
             1 for e in entries if entry_vocab.is_absent(e.get("fetch_status"))
         ),
         "skip_captcha": sum(
-            1 for e in entries
-            if e.get("fetch_status") == "skipped:unreachable:captcha"
+            1 for e in entries if entry_vocab.reason(e.get("fetch_status")) == "captcha"
         ),
         "skip_paywall": sum(
-            1 for e in entries
-            if e.get("fetch_status") == "skipped:unreachable:paywall"
+            1 for e in entries if entry_vocab.reason(e.get("fetch_status")) == "paywall"
         ),
         "skip_unknown": sum(
-            1 for e in entries
-            if e.get("fetch_status") == "skipped:unreachable:unknown"
+            1 for e in entries if entry_vocab.reason(e.get("fetch_status")) == "unknown"
         ),
         "skip_dead": sum(
-            1 for e in entries
-            if e.get("fetch_status") == "skipped:unreachable:dead"
+            1 for e in entries if entry_vocab.reason(e.get("fetch_status")) == "dead"
         ),
         "not_paper": sum(
-            1 for e in entries if e.get("fetch_status") == "skipped:not-paper"
+            1 for e in entries if entry_vocab.reason(e.get("fetch_status")) == "not-paper"
         ),
     }
 
@@ -1491,7 +1484,7 @@ def cmd_index(remote: bool = False) -> None:
     for p in papers:
         if not p.arxiv_id:
             p.fetch_status = absence_status(p)
-            if p.fetch_status == "skipped:unreachable:unknown" and not recorded_absence(p.slug):
+            if entry_vocab.reason(p.fetch_status) == "unknown" and not recorded_absence(p.slug):
                 uncovered.append(p.slug)
     prior = load_prior()
     carried = carry_forward(papers, prior)
@@ -1506,14 +1499,14 @@ def cmd_index(remote: bool = False) -> None:
     # with a route to try is `pending`, whichever fetch path it belongs to.
     for p in papers:
         if not p.fetch_status:
-            p.fetch_status = "pending"
+            p.fetch_status = entry_vocab.pending().value
 
     REFERENCES.mkdir(parents=True, exist_ok=True)
     MANIFEST.write_text(dump_manifest(papers, source))
 
     with_arxiv = sum(1 for p in papers if p.arxiv_id)
     with_code = sum(1 for p in papers if p.has_code)
-    fetched = sum(1 for p in papers if entry_vocab.is_fresh(p.fetch_status))
+    fetched = sum(1 for p in papers if entry_vocab.is_fetched(p.fetch_status))
     routable = sum(1 for p in papers if not p.arxiv_id and route_candidates(p))
     print(f"parsed {len(papers)} entries -> {MANIFEST.relative_to(REPO)}")
     print(f"  {with_arxiv} have an arXiv id ({with_arxiv / len(papers):.0%})")
@@ -1679,6 +1672,14 @@ def cmd_status() -> None:
         tally[s] = tally.get(s, 0) + 1
     for s, n in sorted(tally.items(), key=lambda kv: (-kv[1], kv[0])):
         print(f"  {n:3d}  {s}")
+
+    unknown = [e for e in entries
+               if not entry_vocab.status(e.get("fetch_status")).recognised]
+    if unknown:
+        print(f"  ! {len(unknown)} entr(y/ies) carry a status this code does not "
+              f"define:", flush=True)
+        for e in unknown:
+            print(f"    {e['slug']:<44} {e.get('fetch_status')!r}")
 
     for e in sorted(entries, key=lambda x: x["slug"]):
         if not entry_vocab.is_fetched(e.get("fetch_status")):

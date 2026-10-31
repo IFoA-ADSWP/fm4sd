@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""entry.py — the vocabulary of a corpus entry (#66).
+"""entry.py — the vocabulary of a corpus entry: its identifier and its status (#66, #67).
 
-One place decides what an arXiv id is, which revision it names and which year it
-belongs to. The corpus builder, the metadata helper, the licence pass and the
+One place decides what an arXiv id is, which revision it names, which year it
+belongs to, and what a fetch status means. The corpus builder, the metadata helper, the licence pass and the
 year query all ask here, so "this consumer knows the id" stops being a separate
 question from "the corpus knows the id".
 
@@ -72,6 +72,8 @@ def key(raw: str) -> str:
 # ---------------------------------------------------------------------------
 
 FETCHED = ("ok", "cached")
+# The stages the fetcher can fail in; a made-up stage is not recognised.
+_ERROR_RE = re.compile(r"(?:src|pdf|html|xml)-error:[A-Za-z0-9_.]+")
 ABSENCE_REASONS = frozenset({"not-paper", "captcha", "paywall", "dead", "unknown"})
 _PENDING = "pending"
 
@@ -91,26 +93,40 @@ class Status:
         return self.value in FETCHED
 
     @property
+    def kind(self) -> str:
+        """One of fetched | skipped | error | pending | unset | unrecognised."""
+        if self.value in FETCHED:
+            return "fetched"
+        if self.value == _PENDING:
+            return "pending"
+        if self.value == "":
+            return "unset"
+        if self.value == "skipped:not-paper":
+            return "skipped"
+        if self.value.startswith("skipped:unreachable:"):
+            return "skipped" if self.reason in ABSENCE_REASONS else "unrecognised"
+        if _ERROR_RE.fullmatch(self.value):
+            return "error"
+        return "unrecognised"
+
+    @property
     def reason(self) -> str | None:
-        """Why the entry is absent, or None when it is fetched or unclassified."""
+        """Why the entry is absent: a skip reason, or None for any other kind."""
         if self.value == "skipped:not-paper":
             return "not-paper"
         if self.value.startswith("skipped:unreachable:"):
-            return self.value.split(":", 2)[2]
-        if "-error:" in self.value:
-            return "error"
+            tail = self.value.split(":", 2)[2]
+            return tail if tail in ABSENCE_REASONS else None
         return None
 
     @property
     def recognised(self) -> bool:
         """False for a value no constructor here could have produced."""
-        if self.value in FETCHED or self.value in ("", _PENDING):
-            return True
-        if self.value == "skipped:not-paper":
-            return True
-        if self.value.startswith("skipped:unreachable:"):
-            return self.value.split(":", 2)[2] in ABSENCE_REASONS
-        return "-error:" in self.value
+        return self.kind != "unrecognised"
+
+    @property
+    def is_error(self) -> bool:
+        return self.kind == "error"
 
 
 def fetched() -> Status:
@@ -148,11 +164,6 @@ def status(value: str | None) -> Status:
     return Status(value or "")
 
 
-def is_fresh(value: str | None) -> bool:
-    """True for `ok` specifically — fetched in this run, not merely cached."""
-    return status(value).value == "ok"
-
-
 def is_fetched(value: str | None) -> bool:
     return status(value).is_fetched
 
@@ -167,5 +178,5 @@ def is_absent(value: str | None) -> bool:
 
 
 def is_unreachable(value: str | None) -> bool:
-    why = reason(value)
-    return why is not None and why != "not-paper" and why != "error"
+    parsed = status(value)
+    return parsed.kind == "skipped" and parsed.reason != "not-paper"
