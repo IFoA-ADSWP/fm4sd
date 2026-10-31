@@ -35,7 +35,7 @@ the same figures with their derivation.
 
 ```bash
 git clone https://github.com/IFoA-ADSWP/fm4sd && cd fm4sd
-python3 scripts/fm4sd_fetch.py --index && python3 scripts/fm4sd_fetch.py --fetch   # ~44 MB
+python3 scripts/fm4sd_fetch.py --index && python3 scripts/fm4sd_fetch.py --fetch   # ~52 MB
 pip install pymupdf    # only needed for the PDF fallback path
 
 python3 scripts/fm4sd_search.py stats
