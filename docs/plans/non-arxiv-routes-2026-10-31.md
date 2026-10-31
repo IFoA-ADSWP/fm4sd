@@ -35,7 +35,7 @@ post-merge population in the #29 triage comment.
 `skipped:no-arxiv-id` conflates "not on arXiv" with "cannot be fetched". 18 of the 60
 id-less entries are fetchable by a plain HTTP client: seven direct PDFs, three publisher
 PDFs, three PMLR, one NeurIPS and four web-native HTML papers. Fetching them makes the
-corpus 341/383 instead of 323/383 and makes every remaining absence say why. Licence
+corpus 340/383 instead of 323/383 and makes every remaining absence say why. Licence
 fields are the precondition for publishing anything (#30): the manifest must be able to
 answer "may this payload be shared?" before a shared extract exists.
 

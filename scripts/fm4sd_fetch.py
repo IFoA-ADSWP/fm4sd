@@ -812,6 +812,8 @@ def fetch_route(paper: Paper, limiter: RateLimiter, force: bool = False) -> Pape
     if marker.exists() and not force:
         paper.fetch_status = "cached"
         paper.path = str(dest.relative_to(REPO))
+        parts = marker.read_text().split()
+        paper.sha256 = parts[1] if len(parts) > 1 else ""
         paper.extra.update(LICENCE_RECORDS.get(paper.slug, {}))
         return paper
 
@@ -876,6 +878,7 @@ def fetch_route(paper: Paper, limiter: RateLimiter, force: bool = False) -> Pape
     for stale in ("text.txt", "paper.pdf", "page.html"):
         (dest / stale).unlink(missing_ok=True)
     paper.source = paper.route = ""
+    paper.path = ""
     paper.text_bytes = paper.pages = 0
     paper.sha256 = ""
     return paper

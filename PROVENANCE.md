@@ -58,13 +58,12 @@ subcategory, citation, links, licence, `licence_source`, `shareable`, sha256, so
 byte counts, fetch status, and for non-arXiv payloads the route used. Its header records which
 index source was used.
 
-### Non-arXiv route families — added 2026-10-31
+### Non-arXiv routes — added 2026-10-31
 
-Decision on #9; evidence `research/no-arxiv-payload.md` on branch `research/no-arxiv-payload`
-(probes 2026-10-29), refreshed for the post-merge index in the #29 triage comment. 18 of the
-60 entries without an arXiv id are reachable by a plain HTTP client, across five route families
-(plus a PMC full-text XML fallback for one). 17 of the 18 fetched on 2026-10-31; the 18th
-carries a recorded reason:
+Decision and policy: see *Corpus scope* above. Evidence: `research/no-arxiv-payload.md` on
+branch `research/no-arxiv-payload` (probes 2026-10-29), refreshed for the post-merge index in
+the #29 triage comment. These are the entries without an arXiv id that a plain HTTP client
+could reach:
 
 | Route | n | Entries |
 |---|---|---|
@@ -74,39 +73,15 @@ carries a recorded reason:
 | NeurIPS proceedings | 1 | `wikidbs` |
 | web-native HTML | 4 | `circuits-framework`, `monosemanticity`, `nonergodic-geometry`, `dust` |
 
-No scraping, credentials, JavaScript execution or CAPTCHA solving is used. Web routes are
-throttled at ~1 req/s with the project User-Agent (arXiv keeps 3 req/s). A PDF route must
-return `%PDF-` and an HTML route a paper's worth of text, so a landing page, challenge or stub
-fails rather than being filed as a paper.
+**Observed 2026-10-31, two days after the audit:** Nature and Springer served a JavaScript
+"Client Challenge" to a plain HTTP client, so `tabssldataselect` is recorded as
+`skipped:unreachable:captcha` rather than fetched, and `tabpfnv2` comes from Europe PMC's
+full-text JATS XML instead of the Nature PDF. The reason is recorded, not hidden.
 
-**`skipped:no-arxiv-id` is retired.** An entry without an arXiv id now says why it is absent:
-`skipped:not-paper` for the 7 repo/blog rows (`aplr`, `kumo-tabular`, `timesfm-3`,
-`limix2-contamination`, `tabpfn-rel`, `tabiclr`, `turkforecast`), or
-`skipped:unreachable:<captcha|paywall|dead|unknown>` for the 35 rows the audit found
-unreachable. The reason tables live in `fm4sd_fetch.py` next to the route builders, and a route
-that fails today is classified the same way instead of reporting a transport error.
-
-**Observed on 2026-10-31, two days after the audit:** Nature and Springer served a JavaScript
-"Client Challenge" to a plain HTTP client, so `tabssldataselect` (CC BY 4.0, but behind the
-challenge) is recorded as `skipped:unreachable:captcha` rather than fetched, and `tabpfnv2`
-comes from Europe PMC's full-text JATS XML instead of the Nature PDF. That is the status
-vocabulary doing its job: the reason is recorded, not hidden behind "no arXiv id".
-
-**Licence and sharing.** The 18 route entries carry `licence`, `licence_source` (the URL the
-claim was read from) and `shareable: yes|no|unknown`. Verified CC BY 4.0: `tabpfnv2`,
-`tabssldataselect`, `schemapile`. `pfnsyn` is CC BY-NC-ND 4.0; PMLR proceedings are copyright
-with no reuse licence; several papers state nothing. Unknown is never permission, so only the
-CC BY 4.0 rows could ever be published (#30). The 70 arXiv rows added by the 2026-10-30 merge
+**Licence records.** The route entries carry `licence`, `licence_source` and `shareable`:
+verified CC BY 4.0 for `tabpfnv2`, `tabssldataselect` and `schemapile`; `pfnsyn` is
+CC BY-NC-ND 4.0, so its text stays local. The 70 arXiv rows added by the 2026-10-30 merge
 still have no `fm4sd_licences.py` record; that gap is unchanged here.
-
-**`--index` safety.** Rebuilding the manifest on a tree without `papers/` (the normal state of
-a clone) used to erase every fetch record. `--index` now restores recorded fetch metadata from
-the prior manifest when the slug and arXiv id are unchanged and the code's reason tables have
-not since learned the row is unreachable, and `.fetched` markers record the payload sha256 on
-their second line so a payload-present rebuild can recover it from disk. Verifying this change
-against `origin/main`'s manifest left all 323 arXiv rows byte-identical; only the 60 id-less
-rows changed (18 routes, 42 reasons) plus `tabssldataselect`'s recorded captcha. Revision
-pinning itself (which arXiv revision a sha256 belongs to) remains #33.
 
 ### Index source — changed 2026-10-08
 
