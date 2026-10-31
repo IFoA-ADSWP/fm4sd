@@ -9,8 +9,8 @@ surprise — the collision that bit T2 (a second `parse()` shadowing the id pars
 - The gate's invariant block grows two assertions beside the existing pin/digest pair: **every
   stored status is one this code defines** (`recognised`), and **every arXiv id parses** under the
   one parser. Each failure names the row and the offending value.
-- Delete the last old-vocabulary remnants (none remain outside `entry.py` after T2; verified by
-  grep, and the check is recorded).
+- Record that the old vocabulary is gone: none remains in code outside `entry.py` after T2's
+  review fixes, verified by grep (comments and plan history are not vocabulary).
 
 ## Why
 
@@ -19,9 +19,9 @@ gate is where that class of drift must surface, because there is no test harness
 
 ## Verification
 
-- synthetic rows: `skipped:unrecognised` and `not-an-id` each turn the gate red, naming the row
+- synthetic rows: `skipped:unreachable:banana` and `not-an-id` each turn the gate red, naming the row
 - real tree: 3/3, counts unchanged, manifest byte-identical
-- grep: no `FETCHED_STATUSES`, no status literals outside `entry.py`
+- grep: no `FETCHED_STATUSES`, no status literals **in code** outside `entry.py`
 
 ## Out of scope
 

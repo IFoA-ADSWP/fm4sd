@@ -496,7 +496,7 @@ def check_published_counts(verbose: bool) -> str:
                 problems.append(
                     f"manifest: {e['slug']} has an arXiv id but no pinned revision"
                 )
-        if entry_vocab.is_fetched(e.get("fetch_status")):
+        if status.is_fetched:
             sha = str(e.get("sha256") or "").lower()
             if len(sha) != 64 or any(c not in "0123456789abcdef" for c in sha):
                 problems.append(
