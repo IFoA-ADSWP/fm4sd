@@ -114,7 +114,63 @@ the API response rather than written from memory. Digest: `references/summaries/
 
 Scope limit: **arXiv-only.** Paywalled actuarial venues (IME, ASTIN) are unreachable, and
 `fm4sd_fetch.py` skips any entry without an arXiv ID — the same reason 49 pre-existing entries
-were never fetched.
+were never fetched. *(Superseded 2026-10-31 — see Corpus scope below.)*
+
+## Corpus scope
+
+The corpus is deliberately incomplete, and the line is a capability line, not a judgement
+about which papers matter. Living figures — how many entries, how many fetched — are not
+repeated here: the Corpus table above and `python3 scripts/fm4sd_search.py stats` are the
+record, and they move as entries are added or fetched.
+
+### In scope — non-arXiv payload a plain HTTP client can reach
+
+Non-arXiv papers that a plain HTTP client can reach are in scope, across these route
+families (plus the arXiv source/PDF route the fetcher already served):
+
+- **direct PDF** — a PDF URL in the index, e.g. a lab or funder copy
+- **publisher PDF** — the version of record from a publisher, with a PMC mirror as fallback
+- **PMLR proceedings** — the PMLR landing page, then its PDF
+- **NeurIPS proceedings** — the NeurIPS landing page, then its PDF
+- **web-native HTML** — a complete paper served as a web page, not a landing page or abstract
+- **arXiv** — `arxiv.org/src/<id>`, then `arxiv.org/pdf/<id>`, as before
+
+No scraping, credentials, JavaScript execution or CAPTCHA solving, ever. Reachability probes
+use one plain HTTP client at about one request per second with a real User-Agent. A row that
+is free in a browser but challenges an HTTP client stays out; CAPTCHA-gated papers may be
+perfectly readable by a human and are still out of scope. "Unreachable" below therefore means
+unreachable *to this fetcher*, not unavailable to a reader.
+
+### Out of scope — everything else, with a reason
+
+Each remaining entry carries a reason-flavoured status rather than `skipped:no-arxiv-id`
+(retired):
+
+- `skipped:unreachable:<captcha|paywall|dead|unknown>` — no plain-HTTP route served it:
+  browser verification (OpenReview, ACM DL, SSRN, ResearchGate), a subscription paywall, a
+  dead link, or a landing page with no payload to test
+- `skipped:not-paper` — the link is a code repository or blog post, not a paper
+
+The reason records what the route did, not what the paper is worth. Re-probing may move an
+entry between reasons without moving the line.
+
+### Licence and sharing
+
+Per entry the manifest records `licence` (what the source declares), `licence_source` (the
+URL that claim came from) and `shareable: yes | no | unknown`. An unstated, API-omitted or
+unverifiable licence is recorded as unknown and treated as **not permission**. The arXiv
+licence script writes the same `licence` under an older companion field, `redistributable`
+(a boolean derived from that licence); where both are present they must agree.
+
+Only `shareable: yes` entries are published: an extracted `text.txt` plus a citation and
+licence header (source URL, licence, retrieval date) under `corpus-shared/<slug>/`.
+Everything else stays in gitignored `papers/`, local to the clone. Open access is not the
+same as shareable — free to read grants no right to redistribute — and a non-derivative
+licence keeps even a fetchable paper's text local.
+
+The probes behind this line are recorded in `research/no-arxiv-payload.md` on the unmerged
+`research/no-arxiv-payload` branch; this section is the policy that outlives it. Vocabulary
+used here is fixed in [GLOSSARY.md](GLOSSARY.md).
 
 ## Licence — recorded as UNKNOWN, deliberately
 
