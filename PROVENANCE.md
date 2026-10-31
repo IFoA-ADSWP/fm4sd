@@ -40,6 +40,11 @@ index's links against arXiv.
 
 ## Corpus
 
+"Entries parsed" counts the README's **paper** rows. The non-paper sections — `extras`,
+`cookbooks`, `blog`, the setup preamble — are catalogue links and are deliberately not
+parsed; a non-paper link inside a parsed section is an entry with `skipped:not-paper` instead.
+`GLOSSARY.md` fixes the distinction.
+
 | Field | Value |
 |---|---|
 | Index parsed | **`README.md` in this fork** since 2026-10-08 (was upstream `main/README.md` at `62382d2`) |

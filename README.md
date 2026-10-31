@@ -504,6 +504,57 @@ not placed yet:
     - function-vectors — [arxiv](https://arxiv.org/abs/2310.15213) · [iclr](https://iclr.cc/virtual/2024/poster/19235) — [todd et al. 2024]
     - nonergodic-geometry — [site](https://simplex.pub/nonergodic-geometry/)
 
+## cookbooks
+
+Case-study recipes from [PriorLabs/tabpfn-cookbook](https://github.com/PriorLabs/tabpfn-cookbook),
+published at [docs.priorlabs.ai/cookbook](https://docs.priorlabs.ai/cookbook). Listed, not fetched —
+the recipes are notebooks and prose, and the repo carries no licence.
+
+- bayesian_optimization — [cookbook](https://docs.priorlabs.ai/cookbook/bayesian_optimization) — Bayesian Optimization with TabPFN Extensions
+- credit_card_fraud_detection — [cookbook](https://docs.priorlabs.ai/cookbook/credit_card_fraud_detection) — Credit Card Fraud Detection with TabPFN
+- decoder_readout — [cookbook](https://docs.priorlabs.ai/cookbook/decoder_readout) — See Which Training Rows Drive a TabPFN Prediction
+- experiment_with_thinking_mode — [cookbook](https://docs.priorlabs.ai/cookbook/experiment_with_thinking_mode) — Experiment with Thinking Mode
+- faster_performance_with_cache — [cookbook](https://docs.priorlabs.ai/cookbook/faster_performance_with_cache) — Faster Inference with KV Cache
+- forecast_hierarchical_series — [cookbook](https://docs.priorlabs.ai/cookbook/forecast_hierarchical_series) — Forecast Related Time Series with TabPFN 3.5
+- forecast_spare_parts_demand — [cookbook](https://docs.priorlabs.ai/cookbook/forecast_spare_parts_demand) — Forecast Daily Spare-parts Demand with TabPFN
+- generate_synthetic_data — [cookbook](https://docs.priorlabs.ai/cookbook/generate_synthetic_data) — Generate Synthetic Data Using Real Data with TabPFN
+- grouped_data_model_comparison — [cookbook](https://docs.priorlabs.ai/cookbook/grouped_data_model_comparison) — Grouped data: TabPFN 3 vs 3.5 vs XGBoost
+- improving_tabpfn_performance_with_thinking_mode — [cookbook](https://docs.priorlabs.ai/cookbook/improving_tabpfn_performance_with_thinking_mode) — Improving TabPFN Performance with Thinking Mode
+- insurance_claim_modeling — [cookbook](https://docs.priorlabs.ai/cookbook/insurance_claim_modeling) — Insurance Claim Modeling: TabPFN vs. GLM
+- interpret_results — [cookbook](https://docs.priorlabs.ai/cookbook/interpret_results) — Interpreting Results with TabPFN
+- memory_optimisation — [cookbook](https://docs.priorlabs.ai/cookbook/memory_optimisation) — Fitting Large Datasets in Limited Memory
+- mlflow — [cookbook](https://docs.priorlabs.ai/cookbook/mlflow) — TabPFN with MLflow
+- predictive_distribution — [cookbook](https://docs.priorlabs.ai/cookbook/predictive_distribution) — Get Started with Predictive Distribution
+- pretrain_nanotabpfn — [cookbook](https://docs.priorlabs.ai/cookbook/pretrain_nanotabpfn) — Pretrain a Tabular Foundation Model from Scratch
+- quickstart — [cookbook](https://docs.priorlabs.ai/cookbook/quickstart) — TabPFN Quickstart
+- relational_predictions_tabpfn_rel — [cookbook](https://docs.priorlabs.ai/cookbook/relational_predictions_tabpfn_rel) — Predictions over Relational Data with TabPFN-Rel
+- tabpfn-vs-jev — [cookbook](https://docs.priorlabs.ai/cookbook/tabpfn-vs-jev) — When agents should use Jev vs. TabPFN?
+- tabpfn_35_vs_baselines — [cookbook](https://docs.priorlabs.ai/cookbook/tabpfn_35_vs_baselines) — Get Started with TabPFN 3.5
+- tabpfn_regressor_for_time_series — [cookbook](https://docs.priorlabs.ai/cookbook/tabpfn_regressor_for_time_series) — Time-Series Forecasting with TabPFN
+- tabpfn_vs_xgboost — [cookbook](https://docs.priorlabs.ai/cookbook/tabpfn_vs_xgboost) — TabPFN vs XGBoost
+- tabpfn_with_images — [cookbook](https://docs.priorlabs.ai/cookbook/tabpfn_with_images) — Predicting from Images and Tabular Data Together
+- time_series_interpretability — [cookbook](https://docs.priorlabs.ai/cookbook/time_series_interpretability) — Interpreting Time-Series Forecasts with TabPFN-TS
+- zomato_model_comparison — [cookbook](https://docs.priorlabs.ai/cookbook/zomato_model_comparison) — Predict Restaurant Ratings with TabPFN 3.5
+
+## blog
+
+Posts from [priorlabs.ai/blog](https://priorlabs.ai/blog) that bear on the corpus
+(benchmarks, models, use cases). The six not listed below are the five company
+announcements (manifesto, co-CEO, changelog, podcast, next chapter) and
+`introducing-relarena`, which is already cited on the `relarena-alpha` entry under papers.
+
+- why-are-llms-missing-on-tabular-benchmark-leaderboards — [blog](https://priorlabs.ai/blog-posts/why-are-llms-missing-on-tabular-benchmark-leaderboards)
+- tabpfn-3-5-thinking-upgrade — [blog](https://priorlabs.ai/blog-posts/tabpfn-3-5-thinking-upgrade)
+- machine-learning-interpretability-in-proteomics — [blog](https://priorlabs.ai/blog-posts/machine-learning-interpretability-in-proteomics)
+- look-into-the-future-with-tabpfn-rel — [blog](https://priorlabs.ai/blog-posts/look-into-the-future-with-tabpfn-rel)
+- predicting-a-world-cup-winner-with-tabpfn — [blog](https://priorlabs.ai/blog-posts/predicting-a-world-cup-winner-with-tabpfn)
+- how-tabpfn-helps-with-robust-planning-use-cases-at-tulana — [blog](https://priorlabs.ai/blog-posts/how-tabpfn-helps-with-robust-planning-use-cases-at-tulana)
+- aws-sagemaker — [blog](https://priorlabs.ai/blog-posts/aws-sagemaker)
+- tabpfn-on-azure — [blog](https://priorlabs.ai/blog-posts/tabpfn-on-azure)
+- tabpfn-on-databricks — [blog](https://priorlabs.ai/blog-posts/tabpfn-on-databricks)
+- extensions — [blog](https://priorlabs.ai/blog-posts/extensions)
+- priorlabs-sap — [blog](https://priorlabs.ai/blog-posts/priorlabs-sap)
+
 ## extras
 
 - icml-structured-fm-workshop — [site](https://icml-structured-fm-workshop.github.io)
@@ -516,3 +567,7 @@ not placed yet:
 - awesome-tfms — [github](https://github.com/jxucoder/Awesome-Tabular-Foundation-Models)
 - paperswithcode-tabular — [site](https://paperswithcode.co/tasks/tabular-learning)
 - data-foundry — [site](https://tabarena.github.io/data-foundry/) · [skills](https://github.com/TabArena/data-foundry/tree/main/.claude/skills)
+- awesome-tabpfn — [github](https://github.com/PriorLabs/awesome-tabpfn)
+- tabpfn-extensions — [github](https://github.com/PriorLabs/tabpfn-extensions)
+- tabpfn-client — [github](https://github.com/PriorLabs/tabpfn-client)
+- r-tabpfn — [github](https://github.com/PriorLabs/R-tabpfn)
