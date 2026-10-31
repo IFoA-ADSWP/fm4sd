@@ -69,6 +69,8 @@ What happened when the fetcher last tried an entry. There are three kinds:
   paper, or `skipped:not-paper` when the link is a code repository or blog post.
 - **error** — `src-error:<kind>` or `pdf-error:<kind>`: a route was attempted and the
   transfer or extraction failed. The entry is neither fetched nor deliberately out of scope.
+- **pending** — a route exists and has not been tried yet. Not an absence: `--index` stamps
+  it, `--status` shows it, and the next fetch moves it.
 
 `skipped:no-arxiv-id` is retired: it named an identifier an entry lacked rather than why it
 was skipped, and so read as a scope decision when it was not one. Status is about an entry's

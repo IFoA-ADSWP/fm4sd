@@ -59,6 +59,7 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
+import entry as entry_vocab
 import manifest as manifest_store
 import payload as payload_store
 from typing import Iterable
@@ -68,7 +69,6 @@ MANIFEST = REPO / "references" / "manifest.json"
 PAPERS = REPO / "papers"
 SHARED = REPO / "corpus-shared"
 
-FETCHED = ("ok", "cached")
 
 # The canonical licence text for the names the manifest records. `licence` is a
 # short name ("CC BY 4.0"), not a URL, and a reader of the published extract
@@ -368,9 +368,9 @@ def main() -> int:
 
     entries = load_entries()
     shareable = [e for e in entries if e.get("shareable") == "yes"]
-    published = sorted((e for e in shareable if e.get("fetch_status") in FETCHED),
+    published = sorted((e for e in shareable if entry_vocab.is_fetched(e.get("fetch_status"))),
                        key=lambda e: e["slug"])
-    pending = sorted((e for e in shareable if e.get("fetch_status") not in FETCHED),
+    pending = sorted((e for e in shareable if not entry_vocab.is_fetched(e.get("fetch_status"))),
                      key=lambda e: e["slug"])
     withheld = len(entries) - len(shareable)
 
