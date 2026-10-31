@@ -66,11 +66,11 @@ MANIFEST = REPO / "references" / "manifest.json"
 # `manifest_figures()` and a hardcoded `licence_url` all used to be copies here.
 sys.path.insert(0, str(FETCH.parent))
 from fm4sd_fetch import (  # noqa: E402
-    FETCHED_STATUSES,
     INDEX_INPUTS,
     LICENCE_URL_FIELDS,
     corpus_figures,
 )
+import entry as entry_vocab  # noqa: E402
 import manifest as manifest_store  # noqa: E402
 
 # Fields a fresh `--index` derives from README.md alone. These must match the
@@ -482,7 +482,7 @@ def check_published_counts(verbose: bool) -> str:
             problems.append(
                 f"manifest: {e['slug']} has an arXiv id but no pinned revision"
             )
-        if e.get("fetch_status") in FETCHED_STATUSES:
+        if entry_vocab.is_fetched(e.get("fetch_status")):
             sha = str(e.get("sha256") or "").lower()
             if len(sha) != 64 or any(c not in "0123456789abcdef" for c in sha):
                 problems.append(

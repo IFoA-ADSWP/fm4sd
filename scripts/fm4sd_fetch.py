@@ -87,7 +87,6 @@ MIN_TEXT_BYTES = 4000
 # The two statuses that mean the payload is on disk: `ok` (fetched in that run)
 # and `cached` (already there and not re-fetched). Every figure about fetched
 # entries counts these two.
-FETCHED_STATUSES = ("ok", "cached")
 
 # The URL a licence claim was read from, under the two names the manifest carries.
 # `licence_url` is written by fm4sd_licences.py for the 253 arXiv rows;
@@ -800,7 +799,7 @@ def cached_entry(paper: Paper, force: bool) -> bool:
     state = payload_store.read(PAPERS, paper.slug)
     if not state.ready or force:
         return False
-    paper.fetch_status = "cached"
+    paper.fetch_status = entry_vocab.cached().value
     paper.path = str(state.directory.relative_to(REPO))
     if state.sha256:
         paper.sha256 = state.sha256
@@ -1097,7 +1096,7 @@ def fetch_arxiv(paper: Paper, limiter: RateLimiter, force: bool = False) -> Pape
             paper.source = "tex"
             paper.n_tex_files = n_tex
             paper.text_bytes = n_bytes
-            paper.fetch_status = "ok"
+            paper.fetch_status = entry_vocab.fetched().value
             bundle.unlink(missing_ok=True)
             # Drop the unpacked sources. They carry .pdf/.png figure binaries and
             # dominate disk (~2.6 MB src vs 152 KB text for a single paper), and
@@ -1113,7 +1112,7 @@ def fetch_arxiv(paper: Paper, limiter: RateLimiter, force: bool = False) -> Pape
     except Exception as e:  # noqa: BLE001
         if DEBUG:
             traceback.print_exc()
-        paper.fetch_status = f"src-error:{type(e).__name__}"
+        paper.fetch_status = entry_vocab.failed("src", type(e).__name__).value
 
     # --- fall back to PDF ---
     try:
@@ -1123,13 +1122,13 @@ def fetch_arxiv(paper: Paper, limiter: RateLimiter, force: bool = False) -> Pape
         paper.source = "pdf"
         paper.pages = pages
         paper.text_bytes = n_bytes
-        paper.fetch_status = "ok"
+        paper.fetch_status = entry_vocab.fetched().value
         payload_store.write_marker(dest, "pdf", paper.sha256, paper.arxiv_rev)
         return paper
     except Exception as e:  # noqa: BLE001
         if DEBUG:
             traceback.print_exc()
-        paper.fetch_status = f"pdf-error:{type(e).__name__}"
+        paper.fetch_status = entry_vocab.failed("pdf", type(e).__name__).value
 
     return paper
 
@@ -1186,7 +1185,7 @@ def fetch_route(paper: Paper, limiter: RateLimiter, force: bool = False) -> Pape
             paper.source = route.kind
             paper.route = route.family
             paper.text_bytes = n_bytes
-            paper.fetch_status = "ok"
+            paper.fetch_status = entry_vocab.fetched().value
             payload_store.write_marker(dest, route.kind, paper.sha256, paper.arxiv_rev)
             return paper
         except Exception as e:  # noqa: BLE001
@@ -1199,7 +1198,7 @@ def fetch_route(paper: Paper, limiter: RateLimiter, force: bool = False) -> Pape
     # Keep the most specific reason: a challenge is a different fact from a 404.
     for reason in ("captcha", "paywall", "dead", "unknown"):
         if reason in reasons:
-            paper.fetch_status = f"skipped:unreachable:{reason}"
+            paper.fetch_status = entry_vocab.absent(reason).value
             break
 
     # Do not leave a half-written payload behind for a row that did not fetch.
@@ -1247,7 +1246,7 @@ def corpus_figures(entries: list[dict]) -> dict[str, int | float]:
     can drift (#38). Counts are payload-derived, so this reads the manifest and
     never `papers/`.
     """
-    fetched = [e for e in entries if e.get("fetch_status") in FETCHED_STATUSES]
+    fetched = [e for e in entries if entry_vocab.is_fetched(e.get("fetch_status"))]
     return {
         "entries": len(entries),
         "with_id": sum(1 for e in entries if e.get("arxiv_id")),
@@ -1262,7 +1261,7 @@ def corpus_figures(entries: list[dict]) -> dict[str, int | float]:
         "licence_url_rows": sum(1 for e in entries if e.get("licence_url")),
         "licence_source_rows": sum(1 for e in entries if e.get("licence_source")),
         "skipped_total": sum(
-            1 for e in entries if str(e.get("fetch_status") or "").startswith("skipped:")
+            1 for e in entries if entry_vocab.is_absent(e.get("fetch_status"))
         ),
         "skip_captcha": sum(
             1 for e in entries
@@ -1304,7 +1303,7 @@ def reconcile(papers: list[Paper]) -> int:
         p.source = state.source
         p.text_bytes = state.text_bytes
         p.path = str(state.directory.relative_to(REPO))
-        p.fetch_status = "ok"
+        p.fetch_status = entry_vocab.fetched().value
         if state.sha256:
             p.sha256 = state.sha256
         if state.rev:
@@ -1380,9 +1379,9 @@ def preserve_fetch(papers: list[Paper], prior: dict[str, dict]) -> int:
             continue  # the recorded reason is newer knowledge than the old record
         if not (p.arxiv_id or route_candidates(p)):
             continue
-        if p.fetch_status not in FETCHED_STATUSES:
+        if not entry_vocab.is_fetched(p.fetch_status):
             old_status = old.get("fetch_status") or ""
-            if old_status in FETCHED_STATUSES:
+            if entry_vocab.is_fetched(old_status):
                 for k in FETCH_FIELDS:
                     if k in old:
                         setattr(p, k, old[k])
@@ -1392,7 +1391,7 @@ def preserve_fetch(papers: list[Paper], prior: dict[str, dict]) -> int:
             # static tables, which only record the audit's probe. Preserve the
             # reason until --fetch retries the route; the reason tables above win
             # because they are code, not a past run.
-            if (old_status.startswith("skipped:unreachable:") and route_candidates(p)):
+            if entry_vocab.is_unreachable(old_status) and route_candidates(p):
                 for k in ("path", "licence", *LICENCE_URL_FIELDS, "shareable"):
                     if old.get(k):
                         if k in FETCH_FIELDS:
@@ -1421,8 +1420,8 @@ def absence_status(paper: Paper) -> str:
     if recorded:
         return recorded
     if route_candidates(paper):
-        return "pending"
-    return "skipped:unreachable:unknown"
+        return entry_vocab.pending().value
+    return entry_vocab.absent("unknown").value
 
 
 def compare_remote() -> None:
@@ -1514,7 +1513,7 @@ def cmd_index(remote: bool = False) -> None:
 
     with_arxiv = sum(1 for p in papers if p.arxiv_id)
     with_code = sum(1 for p in papers if p.has_code)
-    fetched = sum(1 for p in papers if p.fetch_status == "ok")
+    fetched = sum(1 for p in papers if entry_vocab.is_fresh(p.fetch_status))
     routable = sum(1 for p in papers if not p.arxiv_id and route_candidates(p))
     print(f"parsed {len(papers)} entries -> {MANIFEST.relative_to(REPO)}")
     print(f"  {with_arxiv} have an arXiv id ({with_arxiv / len(papers):.0%})")
@@ -1609,7 +1608,7 @@ def cmd_fetch(only: list[str], force: bool, workers: int) -> None:
                       if k in (*FETCH_FIELDS, "licence", *LICENCE_URL_FIELDS, "shareable")})
     save_manifest(entries_new)
 
-    ok = sum(1 for p in papers if p.fetch_status in FETCHED_STATUSES)
+    ok = sum(1 for p in papers if entry_vocab.is_fetched(p.fetch_status))
     tex = sum(1 for p in papers if p.source == "tex")
     pdf = sum(1 for p in papers if p.source == "pdf")
     html = sum(1 for p in papers if p.source in ("html", "xml"))
@@ -1667,14 +1666,14 @@ def cmd_status() -> None:
     if not MANIFEST.exists():
         sys.exit("no manifest; run --index first")
     entries = load_manifest()
-    ok = [e for e in entries if e.get("fetch_status") in FETCHED_STATUSES]
+    ok = [e for e in entries if entry_vocab.is_fetched(e.get("fetch_status"))]
     print(f"{len(ok)}/{len(entries)} entries fetched locally")
 
     # A tally, so the reason vocabulary is checkable at a glance and the docs'
     # figures have one place to come from.
     tally: dict[str, int] = {}
     for e in entries:
-        if e.get("fetch_status") in FETCHED_STATUSES:
+        if entry_vocab.is_fetched(e.get("fetch_status")):
             continue
         s = e.get("fetch_status") or "(pending)"
         tally[s] = tally.get(s, 0) + 1
@@ -1682,7 +1681,7 @@ def cmd_status() -> None:
         print(f"  {n:3d}  {s}")
 
     for e in sorted(entries, key=lambda x: x["slug"]):
-        if e.get("fetch_status") not in FETCHED_STATUSES:
+        if not entry_vocab.is_fetched(e.get("fetch_status")):
             print(f"  {e['slug']:<44} {e.get('fetch_status') or '(pending)'}")
 
 
