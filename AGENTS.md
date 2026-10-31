@@ -2,12 +2,43 @@
 
 ## Canonical test command
 
-No test suite — this is a research/corpus repo.
+```bash
+python3 scripts/check_reproducibility.py
+```
 
-Verification is reproducibility: re-run the relevant `scripts/fm4sd_*.py` and confirm
-`references/manifest.json`, `references/summaries/` and `PROVENANCE.md` still agree.
-State which of those you checked. A change to corpus-building or a figure needs
-`PROVENANCE.md` updated in the same commit.
+No test framework and no dependency installs — the gate is reproducibility, and this command
+is it. It needs no payload (`papers/` is absent in CI) and makes one network call. Three
+checks:
+
+1. `--index` regenerated in a scratch copy equals `references/manifest.json` on every
+   README-derived field — `slug`, `arxiv_id`, `section`, `category`, `subcategory`,
+   `citation`, `links`, `has_code`, the header and entry order. Payload-derived fields
+   (`source`, `path`, `text_bytes`, `pages`, `n_tex_files`, `sha256`, `fetch_status`) and the
+   licence/title/date records `fm4sd_licences.py` writes are excluded by construction: a
+   payload-less `--index` cannot reproduce them (that wipe is #33, not this gate).
+2. `--index --remote` leaves the manifest byte-identical — it must only compare upstream.
+3. The counts published in `README.md`, `references/README.md` and `PROVENANCE.md` equal the
+   figures derived from the manifest, and `fm4sd_search.py stats` agrees with both. The
+   figures are read out of the documents, not hardcoded, so moving the corpus means updating
+   the prose in the same commit. `references/summaries/` is still a manual read: digests are
+   prose about papers, not derived figures.
+
+CI runs the same command (`.github/workflows/reproducibility.yml`) on every PR and push to
+`main`. State which checks you ran when you report a change. A change to corpus-building or a
+figure needs `PROVENANCE.md` updated in the same commit.
+
+### Branch protection — admin, once
+
+A red run only blocks a merge when `main` requires the check. Repo admin, once:
+
+1. Settings → Branches → branch protection rule for `main` (edit the existing one, if any).
+2. Enable **Require status checks to pass before merging** and select the
+   **reproducibility** job from `reproducibility.yml`.
+3. Save, then confirm on any open PR that the merge button is disabled while the check is
+   red or still running.
+
+Documented rather than scripted: branch protection is a repo-admin setting that a PR cannot
+apply or verify, so it stays a setup step.
 
 ## Plans
 
@@ -23,7 +54,8 @@ deliberately no build step — the "gate" is **reproducibility**, not tests.
   missing `papers/` directory is normal — rebuild it with the fetch script rather than
   treating it as a missing file.
 - **`scripts/`** — `fm4sd_fetch.py` (corpus build), `fm4sd_search.py` (query),
-  `fm4sd_licences.py`. Deterministic workflows go through these scripts, not ad-hoc loops.
+  `fm4sd_licences.py`, `check_reproducibility.py` (the gate). Deterministic workflows go
+  through these scripts, not ad-hoc loops.
 - **`references/manifest.json`** is machine-readable and generated; `references/summaries/`
   holds the per-paper digests.
 - **`PROVENANCE.md` is the enforcement doc** — every claim about the corpus must resolve to
@@ -42,8 +74,8 @@ With it in place, `git diff upstream/main` still works and index-only improvemen
 PRed back. **Do not rewrite the upstream index** — the divergence 2026-10-07 was the
 research layer only.
 
-**Verification for a change here:** re-run the relevant script and confirm the manifest,
-summaries and `PROVENANCE.md` still agree. State which of those you checked.
+**Verification for a change here:** run `python3 scripts/check_reproducibility.py` (above),
+then read the `references/summaries/` digests the change touches. State which you did.
 
 <!-- Replace this block with gotchas as you find them. -->
 
