@@ -15,7 +15,7 @@ per-paper digests under `references/summaries/`. Figures and their derivation li
 
 **Posture — merge, not re-sync.** Syncing is a plain `git merge upstream/main`. The
 alternative (replace our README with upstream's, then rebuild) was ruled out: it deletes
-the 28 local actuarial entries and their manifest records, the three actuarial
+the 37 local actuarial entries and their manifest records, the three actuarial
 sub-categories, the research preamble, and the fetched payload — and buys nothing, because
 the fork has patched no shared entry.
 
@@ -23,11 +23,12 @@ the fork has patched no shared entry.
 its current ~3.5 entries/day — or whenever a decision session needs fresher data than the
 local index holds. There is no calendar tick.
 
-**The local actuarial block.** 28 entries (`actuarial / loss modelling`, grouped under
+**The local actuarial block.** 37 entries (`actuarial / loss modelling`, grouped under
 `severity`, `frequency and count models`, `tail metrics, quantiles, reserving`) live only
-in this fork's `README.md`. They are proposed upstream as
-[borawhocodess/fm4sd#5](https://github.com/borawhocodess/fm4sd/pull/5). While that PR is
-open they stay local, so an ignored PR costs nothing. Acceptance is genuinely unknown:
+in this fork's `README.md`. The original 28 are proposed upstream as
+[borawhocodess/fm4sd#5](https://github.com/borawhocodess/fm4sd/pull/5); the nine added by
+#47 are not. All 37 stay local while that PR is open, so an ignored PR costs nothing.
+Acceptance is genuinely unknown:
 upstream has never merged a fork PR, runs no issue tracker, and commits from branches on
 its own repo.
 

@@ -16,7 +16,7 @@ the *index* and the *digests*; the paper payload stays on disk.
 ## Layout
 
 ```
-references/manifest.json   COMMITTED — 383 entries: id, pinned revision, title, category,
+references/manifest.json   COMMITTED — 431 entries: id, pinned revision, title, category,
                             subcategory, citation, licence, shareable, sha256, fetch status,
                             published date
 references/summaries/      COMMITTED — digests and sweep findings
@@ -46,10 +46,10 @@ python3 scripts/fm4sd_search.py grep "zero.inflation" --context 2
 ```
 
 Fetch is resumable (`--force` to refetch) and cached via a `.fetched` marker per
-paper. The corpus is ~44 MB of text for the fetched subset: 340 of 383 entries
-(317 LaTeX, 18 PDF, 5 HTML/XML).
+paper. The corpus is ~52 MB of text for the fetched subset: 381 of 431 entries
+(354 LaTeX, 22 PDF, 5 HTML/XML).
 
-## Why 43 entries are not in the corpus
+## Why 50 entries are not in the corpus
 
 Entries with no arXiv id are not simply skipped. Each one records the reason it is
 absent, and `--status` prints the tally:
@@ -57,8 +57,8 @@ absent, and `--status` prints the tally:
 | Status | n | Meaning |
 |---|---|---|
 | `skipped:unreachable:captcha` | 22 | browser-verification challenge (OpenReview, ACM, SSRN, ResearchGate, and Nature/Springer on the day this was built) |
-| `skipped:unreachable:paywall` | 7 | subscription full text (Elsevier, IEEE, Springer chapter) |
-| `skipped:unreachable:unknown` | 5 | landing page only, or bot-defence with no observable paywall |
+| `skipped:unreachable:paywall` | 13 | subscription full text (Elsevier, IEEE, Springer chapter, and the journal-only actuarial canon added for #47) |
+| `skipped:unreachable:unknown` | 6 | landing page only, or bot-defence with no observable paywall |
 | `skipped:unreachable:dead` | 2 | 404/DNS failure, or a stub redirect to something else |
 | `skipped:not-paper` | 7 | repo/blog rows with no paper behind the link |
 
