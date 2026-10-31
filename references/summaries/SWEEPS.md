@@ -367,8 +367,8 @@ the metric question stays a business decision rather than a literature question.
 |---|---|
 | **A** ceiling fundamental? | Formal precedent exists but for a *different* obstruction. Do not overclaim. |
 | **B** unblock hardware? | **`baps` — actionable.** CPU-only context compression; only route found that could unblock the replication on existing hardware. |
-| **C** decomposition holds up? | No published counterpart — confirms novelty. **Bonus: `closedloop-priorselect` independently corroborates the closed prior line.** |
-| **D** p99 right metric? | **Nothing found in the ML index** — but that was a scope limit, and 28 actuarial papers were added on 2026-10-08 to fill it. The metric question stays a business decision (no TFM paper evaluates tail accuracy) while the modelling question now has references. |
+| **C** decomposition holds up? | No *ICL* counterpart — confirms novelty of the in-context framing (hurdle/zero-inflated models themselves are indexed; see the note above). **Bonus: `closedloop-priorselect` independently corroborates the closed prior line.** |
+| **D** p99 right metric? | **Nothing found in the ML index** — but that was a scope limit, and 28 actuarial papers were added on 2026-10-08 to fill it. The **evaluation** question now has references (quantile scores, T-calibration); what stays a business decision is **which functional** to price (no TFM paper evaluates tail accuracy). |
 
 ---
 

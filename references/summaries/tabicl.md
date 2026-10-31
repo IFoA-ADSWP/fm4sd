@@ -54,8 +54,8 @@ reduces class count by ≥10×.
 
   *Note 2026-10-31 (#53):* it is no longer the closest support, and the generalisation is now
   contested. `when-do-neural-nets-outperform-boosted-trees-on-tabular-data` (2305.02997) is a
-  larger published study — 19 algorithms over 176 datasets — and its headline is the opposite
-  framing: the NN/GBDT gap is often negligible, light GBDT tuning matters more than the family
+  larger published study — 19 algorithms over 176 datasets — whose headline is that the
+  NN/GBDT debate is overemphasised: the NN/GBDT gap is often negligible, light GBDT tuning matters more than the family
   choice, TabPFN is itself effectively limited to training sets of about 3,000 rows, and GBDTs handle skewed or
   heavy-tailed feature distributions better than NNs. TabICL's own >10K result stands; the
   inference drawn from it does not.

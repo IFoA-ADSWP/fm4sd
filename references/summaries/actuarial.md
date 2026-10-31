@@ -65,7 +65,7 @@ than the wording implies, and it is the cheapest untested variant in the repo: a
 *Note 2026-10-31 (#53):* "untested" is true of us, not of the literature. The variant has
 been in this corpus since 2026-10-08 — `insurance-premium-prediction-via-gradient-tree-boosted-tweed`
 (1508.06378, Yang et al. 2015) is a gradient-tree-boosted Tweedie premium model — and the
-distributional-boosting arm is published in
+distributional-regression arm is published in
 `ngboost-natural-gradient-boosting-for-probabilistic-prediction` (1910.03225) and
 `bayesian-structured-additive-distributional-regression` (1509.05230). It is a known variant this
 repo has not run, not an untried idea.
@@ -142,7 +142,7 @@ of a pattern, not as evidence about ours.
 | "The tail cannot be recovered" | **Narrowed.** A parametric family estimates tail quantiles well on sufficient data; our 5,950-claimant population may not be sufficient. Untested either way. |
 | "The distribution family is not the lever" (F18) | **Narrowed to linear GLMs.** A boosted zero-inflated Tweedie (EMTboost) exists and was never run. |
 | "Two-step (independent indicator + magnitude) is the right form" | **Contested.** The literature explicitly varies $p$'s coupling to $\mu$; F30 measures `corr = +0.348`, which argues *against* independence. |
-| CatBoost is the reference frequency model | Independent support for an external answer to Audit 3's baseline question. |
+| CatBoost is one study's reference frequency model | One paper, two datasets, three libraries (2307.07771) — support for an external baseline answer, not a consensus. |
 
 ## What it does *not* establish
 
