@@ -439,10 +439,13 @@ def main() -> int:
             print(f"  removed    {path.relative_to(REPO).as_posix()}/  "
                   f"(no longer shareable-and-fetched)")
 
-    # A published entry whose payload this clone lacks keeps its committed text, so that
-    # file is expected even though the plan could not produce it here.
-    expected = set(planned) | {Path(e["slug"]) / "text.txt" for e in no_payload
-                               if e not in unpublished}
+    # A published entry whose payload this clone lacks keeps its committed text, so both
+    # files are expected even though the plan could not produce them here.
+    expected = set(planned) | {
+        Path(e["slug"]) / name
+        for e in no_payload if e not in unpublished
+        for name in ("text.txt", "LICENSE.txt")
+    }
     for path in unexpected(expected):
         rel = path.relative_to(REPO).as_posix()
         if args.check:
