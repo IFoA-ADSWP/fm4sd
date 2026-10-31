@@ -516,3 +516,4 @@ not placed yet:
 - awesome-tfms — [github](https://github.com/jxucoder/Awesome-Tabular-Foundation-Models)
 - paperswithcode-tabular — [site](https://paperswithcode.co/tasks/tabular-learning)
 - data-foundry — [site](https://tabarena.github.io/data-foundry/) · [skills](https://github.com/TabArena/data-foundry/tree/main/.claude/skills)
+- tabpfn-cookbook — [github](https://github.com/PriorLabs/tabpfn-cookbook) · [docs](https://docs.priorlabs.ai/cookbook)
