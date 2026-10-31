@@ -138,7 +138,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:unreachable:captcha",
     "has_code": false
   },
   {
@@ -180,13 +180,17 @@
       "pmc": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11711098/",
       "video": "https://www.youtube.com/watch?v=9IkwXGe2Gaw"
     },
-    "source": "",
-    "path": "",
-    "text_bytes": 0,
+    "source": "xml",
+    "route": "publisher-pdf",
+    "path": "papers/tabpfnv2",
+    "text_bytes": 94136,
     "pages": 0,
     "n_tex_files": 0,
-    "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "sha256": "bfe4f572aa0b14d17a1ebf1e5be0276c7b5923c93b36caaa8ffde83ce8055e1e",
+    "fetch_status": "ok",
+    "licence": "CC BY 4.0",
+    "licence_source": "https://www.nature.com/articles/s41586-024-08328-6",
+    "shareable": "yes",
     "has_code": false
   },
   {
@@ -658,7 +662,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:not-paper",
     "has_code": true
   },
   {
@@ -1079,7 +1083,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:not-paper",
     "has_code": true
   },
   {
@@ -1092,13 +1096,17 @@
     "links": {
       "pdf": "https://ir.cwi.nl/pub/36086/36086.pdf"
     },
-    "source": "",
-    "path": "",
-    "text_bytes": 0,
-    "pages": 0,
+    "source": "pdf",
+    "route": "direct-pdf",
+    "path": "papers/tfm-agents-humans",
+    "text_bytes": 83033,
+    "pages": 20,
     "n_tex_files": 0,
-    "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "sha256": "fec660a77a5cdeaa7ad2e08ae1dc82637bc20a3afe5ad75d30095f371b80b2f6",
+    "fetch_status": "ok",
+    "licence": "none stated",
+    "licence_source": "https://ir.cwi.nl/pub/36086/36086.pdf",
+    "shareable": "unknown",
     "has_code": false
   },
   {
@@ -1118,7 +1126,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:not-paper",
     "has_code": true
   },
   {
@@ -1211,7 +1219,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:unreachable:captcha",
     "has_code": false
   },
   {
@@ -1224,13 +1232,17 @@
     "links": {
       "pdf": "https://groups.csail.mit.edu/EVO-DesignOpt/groupWebSite/uploads/Site/DSAA_DSM_2015.pdf"
     },
-    "source": "",
-    "path": "",
-    "text_bytes": 0,
-    "pages": 0,
+    "source": "pdf",
+    "route": "direct-pdf",
+    "path": "papers/dfs",
+    "text_bytes": 52950,
+    "pages": 10,
     "n_tex_files": 0,
-    "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "sha256": "826b818e0085e6923060a75e960aa3259d641b4b9c338e1096d3374620f78de2",
+    "fetch_status": "ok",
+    "licence": "unknown",
+    "licence_source": "https://groups.csail.mit.edu/EVO-DesignOpt/groupWebSite/uploads/Site/DSAA_DSM_2015.pdf",
+    "shareable": "unknown",
     "has_code": false
   },
   {
@@ -1443,7 +1455,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:unreachable:unknown",
     "has_code": true
   },
   {
@@ -1463,7 +1475,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:unreachable:dead",
     "has_code": false
   },
   {
@@ -1607,7 +1619,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:not-paper",
     "has_code": true
   },
   {
@@ -2084,7 +2096,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:not-paper",
     "has_code": false
   },
   {
@@ -3339,13 +3351,17 @@
     "links": {
       "pdf": "https://storage.googleapis.com/deepmind-media/Era-of-Experience%20/The%20Era%20of%20Experience%20Paper.pdf"
     },
-    "source": "",
-    "path": "",
-    "text_bytes": 0,
-    "pages": 0,
+    "source": "pdf",
+    "route": "direct-pdf",
+    "path": "papers/era-of-experience",
+    "text_bytes": 41553,
+    "pages": 11,
     "n_tex_files": 0,
-    "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "sha256": "af7c19261a953b194acd69d6c594f1ee64f8f5175a0df000212d8fb3cc409a63",
+    "fetch_status": "ok",
+    "licence": "none stated",
+    "licence_source": "https://storage.googleapis.com/deepmind-media/Era-of-Experience%20/The%20Era%20of%20Experience%20Paper.pdf",
+    "shareable": "unknown",
     "has_code": false
   },
   {
@@ -3515,7 +3531,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:unreachable:paywall",
     "has_code": false
   },
   {
@@ -3778,7 +3794,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:unreachable:captcha",
     "has_code": false
   },
   {
@@ -3797,7 +3813,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:unreachable:captcha",
     "has_code": false
   },
   {
@@ -3865,7 +3881,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:unreachable:captcha",
     "has_code": false
   },
   {
@@ -4005,13 +4021,17 @@
       "site": "https://qlabs.sh/research/dust",
       "github": "https://github.com/qlabs-eng/dust"
     },
-    "source": "",
-    "path": "",
-    "text_bytes": 0,
+    "source": "html",
+    "route": "web-native",
+    "path": "papers/dust",
+    "text_bytes": 42005,
     "pages": 0,
     "n_tex_files": 0,
-    "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "sha256": "ce2911ff87b44e8d9b8deb3e9d77bb59ff17a4f4db41408915d22a6d462f26a1",
+    "fetch_status": "ok",
+    "licence": "unknown",
+    "licence_source": "https://qlabs.sh/research/dust",
+    "shareable": "unknown",
     "has_code": true
   },
   {
@@ -4175,7 +4195,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:unreachable:captcha",
     "has_code": false
   },
   {
@@ -4333,13 +4353,17 @@
       "openreview": "https://openreview.net/pdf?id=3ADqf6jn9r",
       "icml": "https://proceedings.mlr.press/v306/xing26a.html"
     },
-    "source": "",
-    "path": "",
-    "text_bytes": 0,
-    "pages": 0,
+    "source": "pdf",
+    "route": "pmlr",
+    "path": "papers/ptnas",
+    "text_bytes": 123512,
+    "pages": 32,
     "n_tex_files": 0,
-    "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "sha256": "36f537f8fbaf6db51089ab6f7a40b0cde0ba08a893f1554d5b45583abe768892",
+    "fetch_status": "ok",
+    "licence": "PMLR copyright, no reuse licence",
+    "licence_source": "https://proceedings.mlr.press/v306/xing26a.html",
+    "shareable": "no",
     "has_code": false
   },
   {
@@ -4358,7 +4382,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:unreachable:paywall",
     "has_code": false
   },
   {
@@ -4543,13 +4567,17 @@
     "links": {
       "pdf": "https://tabular-data-analysis.github.io/tada2026/papers/TaDA26_16.pdf"
     },
-    "source": "",
-    "path": "",
-    "text_bytes": 0,
-    "pages": 0,
+    "source": "pdf",
+    "route": "direct-pdf",
+    "path": "papers/pfnsyn",
+    "text_bytes": 25079,
+    "pages": 5,
     "n_tex_files": 0,
-    "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "sha256": "3b1502acb8deced63093c0d5436f8f0bc2d739e22c6dd44bb12e68d27eb626f3",
+    "fetch_status": "ok",
+    "licence": "CC BY-NC-ND 4.0",
+    "licence_source": "https://tabular-data-analysis.github.io/tada2026/papers/TaDA26_16.pdf",
+    "shareable": "no",
     "has_code": false
   },
   {
@@ -4691,7 +4719,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:unreachable:paywall",
     "has_code": false
   },
   {
@@ -4809,7 +4837,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:unreachable:captcha",
     "has_code": false
   },
   {
@@ -4855,7 +4883,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:unreachable:captcha",
     "has_code": false
   },
   {
@@ -4900,7 +4928,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:unreachable:unknown",
     "has_code": false
   },
   {
@@ -4920,7 +4948,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:unreachable:captcha",
     "has_code": false
   },
   {
@@ -5357,7 +5385,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:unreachable:captcha",
     "has_code": false
   },
   {
@@ -5396,12 +5424,15 @@
       "springer": "https://link.springer.com/article/10.1007/s10994-026-07133-8"
     },
     "source": "",
-    "path": "",
+    "path": "papers/tabssldataselect",
     "text_bytes": 0,
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:unreachable:captcha",
+    "licence": "CC BY 4.0",
+    "licence_source": "https://link.springer.com/article/10.1007/s10994-026-07133-8",
+    "shareable": "yes",
     "has_code": false
   },
   {
@@ -5420,7 +5451,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:unreachable:paywall",
     "has_code": false
   },
   {
@@ -5439,7 +5470,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:unreachable:paywall",
     "has_code": false
   },
   {
@@ -5729,7 +5760,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:unreachable:captcha",
     "has_code": false
   },
   {
@@ -6345,7 +6376,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:not-paper",
     "has_code": true
   },
   {
@@ -6639,7 +6670,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:unreachable:captcha",
     "has_code": false
   },
   {
@@ -6974,13 +7005,17 @@
       "doi": "https://doi.org/10.1145/3654975",
       "pdf": "https://ir.cwi.nl/pub/34763/34763.pdf"
     },
-    "source": "",
-    "path": "",
-    "text_bytes": 0,
-    "pages": 0,
+    "source": "pdf",
+    "route": "publisher-pdf",
+    "path": "papers/schemapile",
+    "text_bytes": 91816,
+    "pages": 25,
     "n_tex_files": 0,
-    "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "sha256": "3b52c1205dd40ee119c9b37010ffbcdc41e632cce6ce337729d63a98e090cfff",
+    "fetch_status": "ok",
+    "licence": "CC BY 4.0",
+    "licence_source": "https://ir.cwi.nl/pub/34763/34763.pdf",
+    "shareable": "yes",
     "has_code": false
   },
   {
@@ -6993,13 +7028,17 @@
     "links": {
       "neurips": "https://proceedings.neurips.cc/paper_files/paper/2024/file/4847447cae911dde321ca19afe7d8707-Paper-Datasets_and_Benchmarks_Track.pdf"
     },
-    "source": "",
-    "path": "",
-    "text_bytes": 0,
-    "pages": 0,
+    "source": "pdf",
+    "route": "neurips",
+    "path": "papers/wikidbs",
+    "text_bytes": 59434,
+    "pages": 16,
     "n_tex_files": 0,
-    "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "sha256": "390124e419c90cb493fdc5b65ebd864ef758249a34c6791eb69b78fbd442bd76",
+    "fetch_status": "ok",
+    "licence": "unknown -- CC BY 4.0 stated for the dataset and code, not the paper",
+    "licence_source": "https://proceedings.neurips.cc/paper_files/paper/2024/file/4847447cae911dde321ca19afe7d8707-Paper-Datasets_and_Benchmarks_Track.pdf",
+    "shareable": "unknown",
     "has_code": false
   },
   {
@@ -7032,13 +7071,17 @@
       "openreview": "https://openreview.net/forum?id=xO10rIopwe",
       "icml": "https://proceedings.mlr.press/v306/yang26ac.html"
     },
-    "source": "",
-    "path": "",
-    "text_bytes": 0,
-    "pages": 0,
+    "source": "pdf",
+    "route": "pmlr",
+    "path": "papers/baguan-ts",
+    "text_bytes": 104183,
+    "pages": 26,
     "n_tex_files": 0,
-    "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "sha256": "814991e91601970d88b35e3b785d361d1a06a335a901033f911a882f42afa86d",
+    "fetch_status": "ok",
+    "licence": "PMLR copyright, no reuse licence",
+    "licence_source": "https://proceedings.mlr.press/v306/yang26ac.html",
+    "shareable": "no",
     "has_code": false
   },
   {
@@ -7158,7 +7201,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:unreachable:paywall",
     "has_code": false
   },
   {
@@ -7202,7 +7245,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:unreachable:captcha",
     "has_code": false
   },
   {
@@ -7273,7 +7316,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:unreachable:unknown",
     "has_code": false
   },
   {
@@ -7342,7 +7385,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:unreachable:paywall",
     "has_code": false
   },
   {
@@ -7443,7 +7486,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:unreachable:dead",
     "has_code": false
   },
   {
@@ -7462,7 +7505,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:not-paper",
     "has_code": true
   },
   {
@@ -7500,7 +7543,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:unreachable:captcha",
     "has_code": false
   },
   {
@@ -7519,7 +7562,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:unreachable:captcha",
     "has_code": false
   },
   {
@@ -7563,7 +7606,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:unreachable:captcha",
     "has_code": false
   },
   {
@@ -7582,7 +7625,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:unreachable:captcha",
     "has_code": false
   },
   {
@@ -7601,7 +7644,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:unreachable:captcha",
     "has_code": false
   },
   {
@@ -7671,7 +7714,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:unreachable:captcha",
     "has_code": false
   },
   {
@@ -7715,7 +7758,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:unreachable:unknown",
     "has_code": false
   },
   {
@@ -7759,7 +7802,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:unreachable:unknown",
     "has_code": false
   },
   {
@@ -7772,13 +7815,17 @@
     "links": {
       "pmlr": "https://proceedings.mlr.press/v323/gajewski26a.html"
     },
-    "source": "",
-    "path": "",
-    "text_bytes": 0,
-    "pages": 0,
+    "source": "pdf",
+    "route": "pmlr",
+    "path": "papers/pf-ges",
+    "text_bytes": 73991,
+    "pages": 27,
     "n_tex_files": 0,
-    "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "sha256": "3733921b677825264058d3ca554de11e18bc372e7ebed1339ac710ca90b4fca9",
+    "fetch_status": "ok",
+    "licence": "PMLR copyright, no reuse licence",
+    "licence_source": "https://proceedings.mlr.press/v323/gajewski26a.html",
+    "shareable": "no",
     "has_code": false
   },
   {
@@ -7818,13 +7865,17 @@
       "pdf": "https://ftp.cs.ucla.edu/pub/stat_ser/r493.pdf",
       "doi": "https://doi.org/10.1177/00491241221099552"
     },
-    "source": "",
-    "path": "",
-    "text_bytes": 0,
-    "pages": 0,
+    "source": "pdf",
+    "route": "direct-pdf",
+    "path": "papers/good-bad-controls",
+    "text_bytes": 62171,
+    "pages": 30,
     "n_tex_files": 0,
-    "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "sha256": "f744c57fcc379b1bf5f9d78662f174555d5ed0c0d8e7431251b3f644bad75ff0",
+    "fetch_status": "ok",
+    "licence": "none stated",
+    "licence_source": "https://ftp.cs.ucla.edu/pub/stat_ser/r493.pdf",
+    "shareable": "unknown",
     "has_code": false
   },
   {
@@ -8066,13 +8117,17 @@
     "links": {
       "pdf": "https://cdn.openai.com/pdf/04d1d1e4-bc75-476a-97cf-49055cd98d31/cdc_prompt.pdf"
     },
-    "source": "",
-    "path": "",
-    "text_bytes": 0,
-    "pages": 0,
+    "source": "pdf",
+    "route": "direct-pdf",
+    "path": "papers/cdc-prompt",
+    "text_bytes": 5057,
+    "pages": 2,
     "n_tex_files": 0,
-    "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "sha256": "0e48deee28caba82ee5b4191d4c5c6ec4d62e5d27890fa7f0d2c8868f8b758f3",
+    "fetch_status": "ok",
+    "licence": "none stated",
+    "licence_source": "https://cdn.openai.com/pdf/04d1d1e4-bc75-476a-97cf-49055cd98d31/cdc_prompt.pdf",
+    "shareable": "unknown",
     "has_code": false
   },
   {
@@ -8116,7 +8171,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:unreachable:captcha",
     "has_code": false
   },
   {
@@ -8204,13 +8259,17 @@
     "links": {
       "pdf": "https://bpb-us-e1.wpmucdn.com/sites.mit.edu/dist/d/2418/files/2026/09/AI-Committee-Final-Report-Aug-13.pdf"
     },
-    "source": "",
-    "path": "",
-    "text_bytes": 0,
-    "pages": 0,
+    "source": "pdf",
+    "route": "direct-pdf",
+    "path": "papers/mit-ai-report",
+    "text_bytes": 111257,
+    "pages": 40,
     "n_tex_files": 0,
-    "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "sha256": "eba14345d7fee5727f399bc01f0f69ef2e2542e924b947947147027e7a3c0a49",
+    "fetch_status": "ok",
+    "licence": "\u00a9 MIT, no reuse grant",
+    "licence_source": "https://bpb-us-e1.wpmucdn.com/sites.mit.edu/dist/d/2418/files/2026/09/AI-Committee-Final-Report-Aug-13.pdf",
+    "shareable": "no",
     "has_code": false
   },
   {
@@ -8409,7 +8468,7 @@
     "pages": 0,
     "n_tex_files": 0,
     "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "fetch_status": "skipped:unreachable:captcha",
     "has_code": false
   },
   {
@@ -8441,13 +8500,17 @@
     "links": {
       "blog": "https://transformer-circuits.pub/2021/framework/index.html"
     },
-    "source": "",
-    "path": "",
-    "text_bytes": 0,
+    "source": "html",
+    "route": "web-native",
+    "path": "papers/circuits-framework",
+    "text_bytes": 124986,
     "pages": 0,
     "n_tex_files": 0,
-    "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "sha256": "5b072df765d9dc659068841083d1b1e6012f04ad37f9ea62c11908b30eb61350",
+    "fetch_status": "ok",
+    "licence": "none stated",
+    "licence_source": "https://transformer-circuits.pub/2021/framework/index.html",
+    "shareable": "unknown",
     "has_code": false
   },
   {
@@ -8559,13 +8622,17 @@
     "links": {
       "blog": "https://transformer-circuits.pub/2023/monosemantic-features/index.html"
     },
-    "source": "",
-    "path": "",
-    "text_bytes": 0,
+    "source": "html",
+    "route": "web-native",
+    "path": "papers/monosemanticity",
+    "text_bytes": 164590,
     "pages": 0,
     "n_tex_files": 0,
-    "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "sha256": "d3011059d4b3d55dd7347cb5c295e8d28cc8478c6caeabcceea177ddc6ce68fa",
+    "fetch_status": "ok",
+    "licence": "none stated",
+    "licence_source": "https://transformer-circuits.pub/2023/monosemantic-features/index.html",
+    "shareable": "unknown",
     "has_code": false
   },
   {
@@ -8784,13 +8851,17 @@
     "links": {
       "site": "https://simplex.pub/nonergodic-geometry/"
     },
-    "source": "",
-    "path": "",
-    "text_bytes": 0,
+    "source": "html",
+    "route": "web-native",
+    "path": "papers/nonergodic-geometry",
+    "text_bytes": 123500,
     "pages": 0,
     "n_tex_files": 0,
-    "sha256": "",
-    "fetch_status": "skipped:no-arxiv-id",
+    "sha256": "02bb9947c9add11a94d8a35f4819576ee00429fda65853a9185fcbc7e37ef1b0",
+    "fetch_status": "ok",
+    "licence": "none stated",
+    "licence_source": "https://simplex.pub/nonergodic-geometry/",
+    "shareable": "unknown",
     "has_code": false
   }
 ]

@@ -12,15 +12,22 @@
 
 The index below is a list of **links**, which means the papers were never actually available to
 read or search — and upstream's `papers/` directory is gitignored, so there is no payload to
-clone. This fork resolves those links against arXiv and builds a local, greppable corpus.
+clone. This fork resolves those links and builds a local, greppable corpus: arXiv first, then
+the direct-PDF, publisher, PMLR, NeurIPS and web-native routes the index already carries for
+entries with no arXiv id.
 
 | | |
 |---|---|
 | **383** | entries in the index |
-| **323** | resolvable to arXiv, fetched locally (**317** LaTeX source, **6** PDF fallback) |
-| **42.4 MB** | of extracted plain text |
+| **323** | resolvable to arXiv |
+| **340** | fetched locally (**317** LaTeX source, **18** PDF, **5** HTML/XML) |
+| **43.6 MB** | of extracted plain text |
 | **138** | link released code |
 | **12** | digest documents (~35 papers read closely), plus 9 corpus sweeps |
+
+The other 43 entries say why they are absent rather than that they lack an id: 22
+`skipped:unreachable:captcha`, 7 `paywall`, 5 `unknown`, 2 `dead`, and 7 `skipped:not-paper`
+(repo/blog rows with no paper behind the link).
 
 Counts above are `python3 scripts/fm4sd_search.py stats` and
 [`references/summaries/README.md`](references/summaries/README.md); `PROVENANCE.md` carries
@@ -28,7 +35,7 @@ the same figures with their derivation.
 
 ```bash
 git clone https://github.com/IFoA-ADSWP/fm4sd && cd fm4sd
-python3 scripts/fm4sd_fetch.py --index && python3 scripts/fm4sd_fetch.py --fetch   # ~33 MB
+python3 scripts/fm4sd_fetch.py --index && python3 scripts/fm4sd_fetch.py --fetch   # ~44 MB
 pip install pymupdf    # only needed for the PDF fallback path
 
 python3 scripts/fm4sd_search.py stats
@@ -42,13 +49,17 @@ findings worth having.
 
 **Why LaTeX and not PDF.** Each paper is fetched from `arxiv.org/src/<id>` (the `.tex` bundle)
 before falling back to `/pdf/<id>`. Source is plain text with section structure and math
-intact, which is what makes it greppable; PDF extraction loses both.
+intact, which is what makes it greppable; PDF extraction loses both. Entries with no arXiv id
+use the publisher or proceedings PDF the index already links, or a server-rendered HTML paper;
+a rate-limit of ~1 req/s and no JavaScript, credentials or CAPTCHA solving apply throughout.
 
 **Why the corpus is gitignored.** Licences in this index are not uniformly permissive, and the
 arXiv API does not report them — it omits `<arxiv:license>` entirely (verified: 2511.03634 is
 CC-BY-4.0 on its abs page, yet has no licence element in the API response). The manifest
-records licence as *unreported* rather than guessing. Unknown is not permission, so `papers/`
-stays local and `references/manifest.json` (ids, titles, categories, sha256, status) is tracked
+records licence as *unreported* rather than guessing. For non-arXiv entries the manifest carries
+`licence`, `licence_source` and `shareable`: only three papers are verified CC BY 4.0, the rest
+state nothing or reserve rights. Unknown is not permission, so `papers/` stays local and
+`references/manifest.json` (ids, titles, categories, sha256, status, licence) is tracked
 instead.
 
 Full details: [`references/README.md`](references/README.md) · [`PROVENANCE.md`](PROVENANCE.md)

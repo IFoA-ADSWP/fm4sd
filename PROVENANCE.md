@@ -46,16 +46,67 @@ index's links against arXiv.
 | Entries parsed | 383 (355 upstream + 28 actuarial) |
 | With an arXiv id | 323 (84%) |
 | Linking released code | 138 |
-| Fetched locally | 323 — 317 LaTeX source bundles, 6 PDF fallback |
-| Extracted text | 42.4 MB |
-| Source preference | `arxiv.org/src/<id>`, falling back to `arxiv.org/pdf/<id>` |
+| Fetched locally | 340 — 317 LaTeX source bundles, 18 PDF, 5 HTML/XML (4 web-native papers + 1 PMC full-text XML) |
+| Extracted text | 43.6 MB |
+| Source preference | `arxiv.org/src/<id>`, falling back to `arxiv.org/pdf/<id>`; non-arXiv entries by route family (see below) |
 | PDF extractor | PyMuPDF 1.28.2 |
-| Rate limit | 3 req/s, 5 worker threads |
-| Not fetchable | 60 entries — `openreview`, `pmlr`, `doi`, `springer`, `blog`, `lgresearch`, or PDF-only links |
+| Rate limit | arXiv 3 req/s; non-arXiv web routes ~1 req/s, same real User-Agent |
+| Not fetched | 43 entries, each with a reason: 22 `skipped:unreachable:captcha`, 7 `...:paywall`, 5 `...:unknown`, 2 `...:dead`, 7 `skipped:not-paper` |
 
 `references/manifest.json` is the machine-readable record: id, title, category, section,
-subcategory, citation, links, licence, sha256, source type, byte counts, fetch status. Its
-header records which index source was used.
+subcategory, citation, links, licence, `licence_source`, `shareable`, sha256, source type,
+byte counts, fetch status, and for non-arXiv payloads the route used. Its header records which
+index source was used.
+
+### Non-arXiv route families — added 2026-10-31
+
+Decision on #9; evidence `research/no-arxiv-payload.md` on branch `research/no-arxiv-payload`
+(probes 2026-10-29), refreshed for the post-merge index in the #29 triage comment. 18 of the
+60 entries without an arXiv id are reachable by a plain HTTP client, across five route families
+(plus a PMC full-text XML fallback for one). 17 of the 18 fetched on 2026-10-31; the 18th
+carries a recorded reason:
+
+| Route | n | Entries |
+|---|---|---|
+| direct PDF | 7 | `tfm-agents-humans`, `era-of-experience`, `pfnsyn`, `good-bad-controls`, `cdc-prompt`, `mit-ai-report`, `dfs` |
+| publisher PDF | 3 | `tabpfnv2` (Nature → PMC PDF → Europe PMC full-text XML fallback), `tabssldataselect` (Springer), `schemapile` (CWI/ACM) |
+| PMLR | 3 | `ptnas`, `baguan-ts`, `pf-ges` |
+| NeurIPS proceedings | 1 | `wikidbs` |
+| web-native HTML | 4 | `circuits-framework`, `monosemanticity`, `nonergodic-geometry`, `dust` |
+
+No scraping, credentials, JavaScript execution or CAPTCHA solving is used. Web routes are
+throttled at ~1 req/s with the project User-Agent (arXiv keeps 3 req/s). A PDF route must
+return `%PDF-` and an HTML route a paper's worth of text, so a landing page, challenge or stub
+fails rather than being filed as a paper.
+
+**`skipped:no-arxiv-id` is retired.** An entry without an arXiv id now says why it is absent:
+`skipped:not-paper` for the 7 repo/blog rows (`aplr`, `kumo-tabular`, `timesfm-3`,
+`limix2-contamination`, `tabpfn-rel`, `tabiclr`, `turkforecast`), or
+`skipped:unreachable:<captcha|paywall|dead|unknown>` for the 35 rows the audit found
+unreachable. The reason tables live in `fm4sd_fetch.py` next to the route builders, and a route
+that fails today is classified the same way instead of reporting a transport error.
+
+**Observed on 2026-10-31, two days after the audit:** Nature and Springer served a JavaScript
+"Client Challenge" to a plain HTTP client, so `tabssldataselect` (CC BY 4.0, but behind the
+challenge) is recorded as `skipped:unreachable:captcha` rather than fetched, and `tabpfnv2`
+comes from Europe PMC's full-text JATS XML instead of the Nature PDF. That is the status
+vocabulary doing its job: the reason is recorded, not hidden behind "no arXiv id".
+
+**Licence and sharing.** The 18 route entries carry `licence`, `licence_source` (the URL the
+claim was read from) and `shareable: yes|no|unknown`. Verified CC BY 4.0: `tabpfnv2`,
+`tabssldataselect`, `schemapile`. `pfnsyn` is CC BY-NC-ND 4.0; PMLR proceedings are copyright
+with no reuse licence; several papers state nothing. Unknown is never permission, so only the
+CC BY 4.0 rows could ever be published (#30). The 70 arXiv rows added by the 2026-10-30 merge
+still have no `fm4sd_licences.py` record; that gap is unchanged here.
+
+**`--index` safety.** Rebuilding the manifest on a tree without `papers/` (the normal state of
+a clone) used to erase every fetch record. `--index` now restores recorded fetch metadata from
+the prior manifest when the slug and arXiv id are unchanged and the code's reason tables have
+not since learned the row is unreachable, and `.fetched` markers record the payload sha256 on
+their second line so a payload-present rebuild can recover it from disk. Verifying this change
+against `origin/main`'s manifest left all 323 arXiv rows byte-identical; only the 60 id-less
+rows changed (18 routes, 42 reasons) plus `tabssldataselect`'s recorded captcha. Revision
+pinning itself (which arXiv revision a sha256 belongs to) remains #33.
 
 ### Index source — changed 2026-10-08
 
@@ -75,7 +126,7 @@ reviewing the repo against its own manifest:
 |---|---|---|
 | `citation` | empty on **all 303** entries — `CITATION_RE` required an escaped `\[`, and neither this README nor upstream's ever uses one (288 plain `[nie et al. 2023]`, 0 escaped) | 288 populated; links are stripped before matching so `[arxiv]` cannot read as a citation |
 | `subcategory` | empty on the 28 actuarial entries — their `severity` / `frequency` / `tail` groupings are *indented* `##` headings, which a line-anchored `##` pattern and a `- ` bullet pattern both missed | `severity` (10), `frequency and count models` (11), `tail metrics, quantiles, reserving` (7); queryable via `fm4sd_search.py --subcategory` |
-| `fetch_status` | empty on the 49 entries with no arXiv id, so `--status` called them `(pending)` forever | `skipped:no-arxiv-id`, stamped at index time |
+| `fetch_status` | empty on the 49 entries with no arXiv id, so `--status` called them `(pending)` forever | `skipped:no-arxiv-id`, stamped at index time — itself retired 2026-10-31 for reason-flavoured statuses (see "Non-arXiv route families") |
 
 Also corrected here: the research-layer counts in `README.md` and `references/README.md` still
 read 275 / 225 / 30.5 MB from before the actuarial category, and the `api-omitted` count below
@@ -208,10 +259,14 @@ python3 scripts/fm4sd_licences.py           # licence fields from the arXiv API
 python3 scripts/fm4sd_search.py stats
 ```
 
-`--index` is safe to re-run: it reconciles against payload already on disk and preserves
-fetch metadata rather than forcing a refetch, and it carries forward the licence records
-`fm4sd_licences.py` wrote rather than deleting them. `--force` refetches deliberately.
-`--index --remote` only diffs against upstream and writes nothing.
+`--index` is safe to re-run: it reconciles against payload already on disk, restores recorded
+fetch metadata when the payload is not on this tree, and carries forward the licence records
+`fm4sd_licences.py` and the non-arXiv fetcher wrote rather than deleting them. `--force`
+refetches deliberately. `--index --remote` only diffs against upstream and writes nothing.
+
+`--fetch` resolves arXiv entries through `/src` → `/pdf`, and every other entry through its
+route family; `--only <slug> …` restricts a run (used to fetch the 18 non-arXiv papers without
+rebuilding the 323 arXiv payloads). `--status` prints the fetched total and the reason tally.
 
 ## Digests
 
@@ -228,3 +283,4 @@ any load-bearing claim against the paper before relying on it. `SWEEPS.md` recor
 | 2026-10-08 | The round-1 headline negative — "zero-inflation is unclaimed" — was published and then withdrawn: it was a bad sweep. `--min-hits 3` discarded every relevant paper (they contain 1–2 hits each), and the pattern missed the morphological variant `zero_inflated`. Zero-inflation does appear in tabular/causal FM generators (`tabcausal`, `foundcause`, `avici`, and a cited TabPFN microbiome use-case), so the contribution is narrower than "unclaimed" — it is the calibration and the learnability test, not the mechanism. Full write-up in [SWEEPS.md](references/summaries/SWEEPS.md#correction-2026-10-08-the-zero-inflation-is-unclaimed-result-was-a-bad-sweep); also summarised in [references/summaries/README.md](references/summaries/README.md). |
 | 2026-10-08 | The speedrun gap report was withdrawn: the ledger does stack. A round-1 sweep found nothing about composability and reported that as a gap — wrong on two counts: the records are explicitly cumulative (`pr19` vs `pr19+pr20`, 31 runs each), and the paper is two records out of date. A leaderboard's live state lives in its repo, not its paper. Ledger now at 0.76 min / ~98×. Full write-up in [SWEEPS.md](references/summaries/SWEEPS.md#q3-correction-read-the-repo-not-just-the-paper); also summarised in [references/summaries/README.md](references/summaries/README.md). |
 | 2026-10-30 | `gnr` was recorded as having no arXiv id because the fetcher's id patterns only matched the modern form; its legacy id `cond-mat/0011094` was misclassified. Id-less count 50 → 49; fetched 253 → 254. See "Legacy arXiv ids" above (#23). |
+| 2026-10-31 | `skipped:no-arxiv-id` was retired: 18 non-arXiv entries now resolve through direct-PDF, publisher-PDF, PMLR, NeurIPS and web-native HTML routes, and the remaining 42 id-less entries carry `skipped:not-paper` or `skipped:unreachable:<reason>`. Fetched 323 → 340 (317 LaTeX, 18 PDF, 5 HTML/XML). Nature and Springer answered the 2026-10-31 probe with a JS challenge, so `tabssldataselect` is recorded as captcha and `tabpfnv2` comes from Europe PMC XML. See "Non-arXiv route families" (#29). |
