@@ -98,7 +98,8 @@ then read the `references/summaries/` digests the change touches. State which yo
 
 ## Review
 
-Every change is reviewed before merge, in a fresh context, against the plan.
+Every change is reviewed before merge, in a fresh context, against the plan and the
+judgement calls in `CODING_STANDARDS.md`.
 
 ## Issue tracker
 
