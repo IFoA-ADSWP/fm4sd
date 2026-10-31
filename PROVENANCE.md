@@ -28,10 +28,11 @@ index's links against arXiv.
   been patched. Details: `docs/RESEARCH.md`.
 - **Drift trigger:** merge when upstream is roughly **25 entries ahead** (about two weeks at
   its current ~3.5/day), or whenever a decision session needs fresher data. No calendar tick.
-- **Local actuarial block:** 37 entries stay in this fork's `README.md` while their upstream
-  PR ([borawhocodess/fm4sd#5](https://github.com/borawhocodess/fm4sd/pull/5), opened
-  2026-10-30) is open. The local category is authoritative here until it lands; acceptance
-  upstream is unknown (no fork PR has ever been merged there).
+- **Local actuarial block:** the 28 entries proposed in that PR
+  ([borawhocodess/fm4sd#5](https://github.com/borawhocodess/fm4sd/pull/5), opened
+  2026-10-30) stay in this fork's `README.md` while it is open. The nine methods papers added
+  by #47 are local too, but are **not** proposed upstream. The local category is authoritative
+  here until #5 lands; acceptance upstream is unknown (no fork PR has ever been merged there).
 - **On landing:** drop the local block from `README.md`, re-run `--index`, and add a row to
   the corrections log. After that every sync is a pure merge.
 - **Mechanics:** `git merge upstream/main`, then `--index` (fetch metadata is recovered from
@@ -109,7 +110,8 @@ could reach:
 `skipped:unreachable:captcha` rather than fetched, and `tabpfnv2` comes from Europe PMC's
 full-text JATS XML instead of the Nature PDF. The reason is recorded, not hidden.
 
-**Licence records.** The route entries carry `licence`, `licence_source` and `shareable`:
+**Licence records.** The fetched route entries carry `licence`, `licence_source` and
+`shareable`; the citation-only DOI rows carry none at all:
 verified CC BY 4.0 for `tabpfnv2`, `tabssldataselect` and `schemapile`; `pfnsyn` is
 CC BY-NC-ND 4.0, so its text stays local. `lightgbm`, `quantile-regression-forests` and
 `the-actuary-and-ibnr`, added by #47, state no reuse licence, so they are recorded `unknown`

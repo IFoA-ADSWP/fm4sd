@@ -250,8 +250,9 @@ ROUTES: dict[str, RouteSpec] = {
     "augtab": RouteSpec("springer chapter; content/pdf redirects to landing",
                         absence="paywall"),
     # The canonical non-life actuarial methodology (#47). Journal-only, pre-arXiv or
-    # with no preprint: the DOI resolves, the full text is a subscription. Recorded
-    # rather than probed on every run, as the audit rows above are.
+    # with no preprint: the DOI resolves, the full text is a subscription. These six
+    # record venue knowledge, not an observed probe; the rows above record what the
+    # request returned. Both are recorded once rather than probed on every run.
     # No DOI exists for this one; the free CAS scan is the payload, so it enters as a
     # [pdf] row and fetches rather than joining the citation-only rows above.
     "bornhuetter-ferguson": RouteSpec(
