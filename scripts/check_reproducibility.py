@@ -87,6 +87,16 @@ README_FIELDS = (
 # Fields --fetch / reconcile() derive from payload under papers/. Excluded from
 # check 1 because CI has no payload; check 3 still holds them to the published
 # figures, so a wipe in the real tree is caught there.
+# Documents a reader treats as current. The sweep above reads these without
+# enumerating a Claim for each: a new live doc joins this list once.
+LIVE_DOCS = (
+    "README.md",
+    "references/README.md",
+    "PROVENANCE.md",
+    "references/summaries/README.md",
+    "docs/RESEARCH.md",
+)
+
 PAYLOAD_FIELDS = (
     "source",
     "path",
@@ -392,6 +402,11 @@ CLAIMS = (
           r"\s*\(\*\*(?P<tex>\d+)\*\*\s*LaTeX source,\s*\*\*(?P<pdf>\d+)\*\*\s*PDF"
           r"(?:,\s*\*\*\d+\*\*\s*HTML/XML)?\)",
           ("fetched", "tex", "pdf")),
+    Claim("README.md", "quick-start corpus size",
+          r"#\s*~(?P<text_mb>[\d.]+)\s*MB", ("text_mb",)),
+    Claim("references/summaries/README.md", "summaries coverage line",
+          r"(?P<entries>\d+) entries,\s*(?P<fetched>\d+) fetched",
+          ("entries", "fetched")),
     Claim("README.md", "of extracted plain text",
           r"\|\s*\*\*(?P<text_mb>[\d.]+)\s*MB\*\*\s*\|\s*of extracted plain text",
           ("text_mb",)),
@@ -516,6 +531,25 @@ def check_published_counts(verbose: bool) -> str:
             checked += 1
             if verbose:
                 print(f"       {claim.doc}: {name} = {got:g}")
+
+    # A new document that publishes "N entries, M fetched" must not become a blind
+    # spot by not being in CLAIMS. Dated history is exempt: corrections-log rows and
+    # transitions ("303 -> 383") record what was true, not what is.
+    for doc in LIVE_DOCS:
+        path = REPO / doc
+        if not path.exists():
+            problems.append(f"{doc}: missing (LIVE_DOCS expects it)")
+            continue
+        for lineno, line in enumerate(
+                path.read_text(encoding="utf-8", errors="replace").splitlines(), 1):
+            if line.startswith("| 2026-") or "→" in line or "->" in line:
+                continue
+            for m in re.finditer(r"(\d+) entries,\s*(\d+) fetched", line):
+                if (int(m.group(1)), int(m.group(2))) != (figures["entries"], figures["fetched"]):
+                    problems.append(
+                        f"{doc}:{lineno}: says {m.group(1)} entries / {m.group(2)} fetched, "
+                        f"manifest says {figures['entries']} / {figures['fetched']}"
+                    )
 
     # `stats` is what those documents cite as the source of their numbers, so
     # it has to agree with the manifest as well.
