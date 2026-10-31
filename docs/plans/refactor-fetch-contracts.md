@@ -60,7 +60,7 @@ the same manifest back. That is what makes "byte-identical" testable without pay
 
 ### `scripts/check_reproducibility.py`
 
-7. **Import the fetcher's contracts.** `MANIFEST_DELIM` replaces the local `DELIM`;
+7. **Import the fetcher's contracts.** `MANIFEST_DELIM` replaced the local `DELIM` (the delimiter now lives in `scripts/manifest.py`, #63);
    `corpus_figures()` replaces `manifest_figures()`; `LICENCE_URL_FIELDS` replaces the
    hardcoded field name. `make_scratch()` asserts every path in `INDEX_INPUTS` (declared by
    the fetcher: `README.md`, `references/manifest.json`) is present in the scratch tree, so a

@@ -45,7 +45,6 @@ figure and both values, so the fix is obvious from the log.
 from __future__ import annotations
 
 import argparse
-import json
 import os
 import re
 import shutil
@@ -70,9 +69,9 @@ from fm4sd_fetch import (  # noqa: E402
     FETCHED_STATUSES,
     INDEX_INPUTS,
     LICENCE_URL_FIELDS,
-    MANIFEST_DELIM,
     corpus_figures,
 )
+import manifest as manifest_store  # noqa: E402
 
 # Fields a fresh `--index` derives from README.md alone. These must match the
 # committed manifest exactly, values and order.
@@ -149,19 +148,11 @@ class Failure(Exception):
 # --------------------------------------------------------------------------
 
 def load_manifest(path: Path) -> tuple[dict, list[dict], str]:
-    """Return (header, entries, raw_text) for a manifest file."""
-    raw = path.read_text(encoding="utf-8")
-    if MANIFEST_DELIM not in raw:
-        raise Failure(f"{path} is malformed: no {MANIFEST_DELIM.strip()!r} delimiter")
-    head, body = raw.split(MANIFEST_DELIM, 1)
+    """Return (header, entries, raw_text); a malformed file is a gate failure."""
     try:
-        header = json.loads(head)
-        entries = json.loads(body)
-    except json.JSONDecodeError as e:
-        raise Failure(f"{path} is not valid JSON: {e}") from e
-    if not isinstance(entries, list):
-        raise Failure(f"{path}: entries section is not a list")
-    return header, entries, raw
+        return manifest_store.read(path)
+    except manifest_store.ManifestError as error:
+        raise Failure(str(error)) from error
 
 
 def stats_numbers(out: str) -> dict[str, float]:
@@ -213,6 +204,9 @@ def make_scratch() -> Path:
     shutil.copy2(README, root / "README.md")
     (root / "scripts").mkdir()
     shutil.copy2(FETCH, root / "scripts" / "fm4sd_fetch.py")
+    for rel, _ in INDEX_INPUTS:
+        if rel.startswith("scripts/") and (REPO / rel).exists():
+            shutil.copy2(REPO / rel, root / rel)
     (root / "references").mkdir()
     shutil.copy2(MANIFEST, root / "references" / "manifest.json")
 

@@ -49,6 +49,9 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from dataclasses import dataclass, field, asdict
+
+import manifest as manifest_store
+import payload as payload_store
 from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any
@@ -100,9 +103,13 @@ LICENCE_URL_FIELDS = ("licence_url", "licence_source")
 # input, not just an output -- and is absent on a fresh clone, which is normal.
 # The reproducibility gate copies these into its scratch tree and fails loudly if
 # a declared input is missing there (#38).
+# Everything `--index` reads, code included. The gate copies these into its
+# scratch tree and fails loudly if one did not travel (#38, #63).
 INDEX_INPUTS: tuple[tuple[str, bool], ...] = (
     ("README.md", True),
     ("references/manifest.json", False),
+    ("scripts/manifest.py", True),
+    ("scripts/payload.py", True),
 )
 
 
@@ -782,67 +789,21 @@ def resolve_arxiv_revs(arxiv_ids: list[str], limiter: RateLimiter,
     return out
 
 
-def marker_text(kind: str, sha256: str, rev: int = 0) -> str:
-    """The `.fetched` marker body: kind, digest, and the pinned revision (#33).
-
-    Three lines when pinned (`tex\\n<sha256>\\nv3`), two otherwise, so markers
-    written before #33 stay readable by reconcile().
-    """
-    return f"{kind}\n{sha256}\n" + (f"v{rev}\n" if rev else "")
-
-
-@dataclass(frozen=True)
-class Marker:
-    """What a `.fetched` marker records about the payload on disk."""
-
-    kind: str
-    sha256: str
-    rev: int
-
-
-def read_marker(dest: Path) -> Marker | None:
-    """Read `papers/<slug>/.fetched`, or None when this entry has no payload.
-
-    The marker is the record of what was fetched -- kind, our digest of the
-    download, and (since #33) the pinned revision -- written by marker_text().
-    Parsing it in one place is what stops the two fetch paths and reconcile()
-    from disagreeing about its shape (#38): one copy recovered the revision, the
-    other did not. A marker with only the kind line (pre-#29) yields an empty
-    digest and revision 0, so the caller keeps what the manifest already had.
-    """
-    marker = dest / ".fetched"
-    if not marker.exists():
-        return None
-    fields = marker.read_text().split()
-    rev = 0
-    if len(fields) > 2 and fields[2].startswith("v"):
-        try:
-            rev = int(fields[2][1:])
-        except ValueError:
-            rev = 0
-    return Marker(kind=fields[0] if fields else "tex",
-                  sha256=fields[1] if len(fields) > 1 else "",
-                  rev=rev)
-
-
 def cached_entry(paper: Paper, force: bool) -> bool:
     """Credit the payload already on disk. True when there is nothing to fetch.
 
-    The cache short-circuit both fetch paths share, so the marker's digest and
-    pinned revision are recovered identically whichever path owns the entry.
+    The same `payload.ready` rule `--index` uses, so a directory with a marker
+    and no text is refetched here rather than credited (#63).
     """
-    dest = PAPERS / paper.slug
-    marker = read_marker(dest)
-    if marker is None or force:
+    state = payload_store.read(PAPERS, paper.slug)
+    if not state.ready or force:
         return False
     paper.fetch_status = "cached"
-    paper.path = str(dest.relative_to(REPO))
-    if marker.sha256:
-        paper.sha256 = marker.sha256
-    if marker.rev:
-        # The marker describes the payload actually on disk, so its revision wins
-        # over a manifest that may have been rebuilt elsewhere.
-        paper.arxiv_rev = marker.rev
+    paper.path = str(state.directory.relative_to(REPO))
+    if state.sha256:
+        paper.sha256 = state.sha256
+    if state.rev:
+        paper.arxiv_rev = state.rev
     return True
 
 
@@ -1103,7 +1064,6 @@ def fetch_arxiv(paper: Paper, limiter: RateLimiter, force: bool = False) -> Pape
         return paper
 
     dest.mkdir(parents=True, exist_ok=True)
-    marker = dest / ".fetched"
     aid = paper.arxiv_id
     paper.path = str(dest.relative_to(REPO))
 
@@ -1143,7 +1103,7 @@ def fetch_arxiv(paper: Paper, limiter: RateLimiter, force: bool = False) -> Pape
             # figures are actually wanted.
             if not KEEP_SRC:
                 shutil.rmtree(tex_dir, ignore_errors=True)
-            marker.write_text(marker_text("tex", paper.sha256, paper.arxiv_rev))
+            payload_store.write_marker(dest, "tex", paper.sha256, paper.arxiv_rev)
             return paper
 
         for stale in (bundle, dest / "src", dest / "text.txt"):
@@ -1162,7 +1122,7 @@ def fetch_arxiv(paper: Paper, limiter: RateLimiter, force: bool = False) -> Pape
         paper.pages = pages
         paper.text_bytes = n_bytes
         paper.fetch_status = "ok"
-        marker.write_text(marker_text("pdf", paper.sha256, paper.arxiv_rev))
+        payload_store.write_marker(dest, "pdf", paper.sha256, paper.arxiv_rev)
         return paper
     except Exception as e:  # noqa: BLE001
         if DEBUG:
@@ -1195,7 +1155,6 @@ def fetch_route(paper: Paper, limiter: RateLimiter, force: bool = False) -> Pape
         return paper
 
     dest.mkdir(parents=True, exist_ok=True)
-    marker = dest / ".fetched"
     paper.path = str(dest.relative_to(REPO))
     paper.extra.update(licence_record(paper.slug))
 
@@ -1226,7 +1185,7 @@ def fetch_route(paper: Paper, limiter: RateLimiter, force: bool = False) -> Pape
             paper.route = route.family
             paper.text_bytes = n_bytes
             paper.fetch_status = "ok"
-            marker.write_text(marker_text(route.kind, paper.sha256, paper.arxiv_rev))
+            payload_store.write_marker(dest, route.kind, paper.sha256, paper.arxiv_rev)
             return paper
         except Exception as e:  # noqa: BLE001
             if DEBUG:
@@ -1258,34 +1217,23 @@ def fetch_one(paper: Paper, limiters: "Limiters", force: bool = False) -> Paper:
     return fetch_route(paper, limiters.web, force)
 
 
-MANIFEST_DELIM = "\n--- entries ---\n"
-
-
-def dump_manifest(papers: list[Paper], source: str) -> str:
-    """Manifest is a header object, a delimiter line, then the entries array.
-
-    A delimiter rather than a bare newline, so reading it back is unambiguous
-    instead of depending on where the header object happens to end.
-    """
-    header = json.dumps({
-        "source": source,
-        "note": "Parsed from the fm4sd README. Payload lives in gitignored papers/.",
-        "count": len(papers),
-    }, indent=2)
-    return f"{header}{MANIFEST_DELIM}{json.dumps([p.to_json() for p in papers], indent=2)}\n"
+def dump_manifest(papers: list["Paper"], source: str) -> str:
+    """The whole manifest text: header, delimiter, entries (format lives in manifest.py)."""
+    header = manifest_store.build_header(source, len(papers))
+    return manifest_store.render(header, [p.to_json() for p in papers])
 
 
 def load_manifest() -> list[dict]:
-    """Read the entries array back out of the manifest."""
-    raw = MANIFEST.read_text()
-    if MANIFEST_DELIM not in raw:
-        sys.exit(f"{MANIFEST} is malformed; rerun --index")
-    return json.loads(raw.split(MANIFEST_DELIM, 1)[1])
+    """The entries array. A malformed file is fatal here: --index must rebuild."""
+    try:
+        _, entries, _ = manifest_store.read(MANIFEST)
+    except manifest_store.ManifestError as error:
+        sys.exit(f"{error}; rerun --index")
+    return entries
 
 
 def save_manifest(entries: list[dict]) -> None:
-    header = MANIFEST.read_text().split(MANIFEST_DELIM, 1)[0]
-    MANIFEST.write_text(f"{header}{MANIFEST_DELIM}{json.dumps(entries, indent=2)}\n")
+    manifest_store.write(MANIFEST, entries)
 
 
 def corpus_figures(entries: list[dict]) -> dict[str, int | float]:
@@ -1341,32 +1289,24 @@ def reconcile(papers: list[Paper]) -> int:
 
     Re-running --index rebuilds entries from the README and would otherwise drop
     every fetch_status, forcing a needless refetch of text we already have.
-    Anything with a .fetched marker and a readable text.txt is credited back.
-
-    The marker's second line, written since #29, is the payload's sha256; older
-    markers carry only the kind, and their digest is recovered from the prior
-    manifest by preserve_fetch() instead. The same raise-or-die rule applies to
-    id-less route entries: a payload on disk is `ok` whatever the index says.
+    `payload.ready` is the rule: a marker plus readable text. Older markers carry
+    only the kind, and their digest comes from preserve_fetch() instead. A PDF's
+    page count is not recoverable here; preserve_fetch() refills it from the prior
+    record after this runs.
     """
     recovered = 0
     for p in papers:
-        dest = PAPERS / p.slug
-        marker = read_marker(dest)
-        text = dest / "text.txt"
-        if marker is None or not text.exists():
+        state = payload_store.read(PAPERS, p.slug)
+        if not state.ready:
             continue
-        p.source = marker.kind if marker.kind in ("tex", "pdf", "html", "xml") else "tex"
-        p.text_bytes = text.stat().st_size
-        p.path = str(dest.relative_to(REPO))
+        p.source = state.source
+        p.text_bytes = state.text_bytes
+        p.path = str(state.directory.relative_to(REPO))
         p.fetch_status = "ok"
-        if marker.sha256:
-            p.sha256 = marker.sha256
-        if marker.rev:
-            p.arxiv_rev = marker.rev
-        if marker.kind == "pdf":
-            pdf = dest / "paper.pdf"
-            if pdf.exists():
-                p.pages = 0  # page count not stored; cheap to re-derive if needed
+        if state.sha256:
+            p.sha256 = state.sha256
+        if state.rev:
+            p.arxiv_rev = state.rev
         recovered += 1
     return recovered
 
@@ -1376,14 +1316,11 @@ def load_prior() -> dict[str, dict]:
 
     This is the only place `--index` learns about fields it does not derive itself.
     """
-    if not MANIFEST.exists():
-        return {}
     try:
-        return {e["slug"]: e for e in load_manifest()}
-    except SystemExit:
+        _, entries, _ = manifest_store.read(MANIFEST)
+    except manifest_store.ManifestError:
         return {}
-    except (json.JSONDecodeError, KeyError, TypeError):
-        return {}
+    return manifest_store.by_slug(entries)
 
 
 def carry_forward(papers: list[Paper], prior: dict[str, dict]) -> int:

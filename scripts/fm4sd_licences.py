@@ -20,7 +20,6 @@ rather than left blank, so "we do not know" never reads as "public domain".
 
 from __future__ import annotations
 
-import json
 import re
 import sys
 import time
@@ -29,9 +28,10 @@ import urllib.request
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
+import manifest as manifest_store
+
 REPO = Path(__file__).resolve().parent.parent
 MANIFEST = REPO / "references" / "manifest.json"
-DELIM = "\n--- entries ---\n"
 
 API = "https://export.arxiv.org/api/query"
 BATCH = 50          # ids per request; the API prefers id_list over many queries
@@ -101,11 +101,10 @@ def redistributable(licence: str) -> bool:
 
 
 def main() -> None:
-    raw = MANIFEST.read_text()
-    if DELIM not in raw:
-        sys.exit("manifest malformed; rerun fm4sd_fetch.py --index")
-    header = raw.split(DELIM, 1)[0]
-    entries = json.loads(raw.split(DELIM, 1)[1])
+    try:
+        _, entries, _ = manifest_store.read(MANIFEST)
+    except manifest_store.ManifestError as error:
+        sys.exit(f"{error}; rerun fm4sd_fetch.py --index")
 
     ids = sorted({e["arxiv_id"] for e in entries if e.get("arxiv_id")})
     print(f"resolving licences for {len(ids)} arXiv ids")
@@ -137,7 +136,7 @@ def main() -> None:
             e["licence_note"] = "no API entry returned"
             e["redistributable"] = False
 
-    MANIFEST.write_text(f"{header}{DELIM}{json.dumps(entries, indent=2)}\n")
+    manifest_store.write(MANIFEST, entries)
 
     counts: dict[str, int] = {}
     for e in entries:
