@@ -1,0 +1,39 @@
+name: reproducibility
+
+# The AGENTS.md gate as a required check (#32, decision on #16).
+#
+# Pull requests and pushes to main only: upstream drift is inspected on demand with
+# `fm4sd_fetch.py --index --remote`, never on a schedule. The scripts are stdlib-only, so
+# there is no dependency install and no build step — one `python3` invocation runs all three
+# checks, and the single upstream fetch happens inside check 2.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: reproducibility-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  reproducibility:
+    name: reproducibility
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      # Pinned minor version, not `3.x`: the gate compares generated JSON and text sizes,
+      # so the interpreter should only move when someone moves it.
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # No `pip install`: check_reproducibility.py is stdlib-only by design, and it must
+      # also pass on a bare checkout that has no payload (`papers/` is gitignored).
+      - name: Run the reproducibility gate
+        run: python3 scripts/check_reproducibility.py

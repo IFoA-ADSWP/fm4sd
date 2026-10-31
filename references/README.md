@@ -17,10 +17,10 @@ the *index* and the *digests*; the paper payload stays on disk.
 
 ```
 references/manifest.json   COMMITTED — 383 entries: id, title, category, subcategory,
-                            citation, licence, shareable, sha256, fetch status, published date
+                            citation, licence, sha256, fetch status, published date
 references/summaries/      COMMITTED — digests and sweep findings
 papers/<slug>/text.txt     GITIGNORED — extracted plain text
-scripts/fm4sd_fetch.py     parse the index, fetch (arXiv + non-arXiv routes), extract
+scripts/fm4sd_fetch.py     parse the index, fetch, extract
 scripts/fm4sd_licences.py  resolve licences from the arXiv API
 scripts/fm4sd_search.py    query the manifest, grep the text
 ```
@@ -34,7 +34,7 @@ negative results.
 ```bash
 python3 scripts/fm4sd_fetch.py --index      # README -> manifest.json
 python3 scripts/fm4sd_fetch.py --fetch      # fetch + extract all missing
-python3 scripts/fm4sd_fetch.py --status     # what is on disk, and why not
+python3 scripts/fm4sd_fetch.py --status     # what is on disk
 python3 scripts/fm4sd_licences.py           # fill in licences via the arXiv API
 
 python3 scripts/fm4sd_search.py stats
@@ -44,26 +44,7 @@ python3 scripts/fm4sd_search.py grep "zero.inflation" --context 2
 ```
 
 Fetch is resumable (`--force` to refetch) and cached via a `.fetched` marker per
-paper. The corpus is ~44 MB of text for the fetched subset: 340 of 383 entries
-(317 LaTeX, 18 PDF, 5 HTML/XML).
-
-## Why 43 entries are not in the corpus
-
-Entries with no arXiv id are not simply skipped. Each one records the reason it is
-absent, and `--status` prints the tally:
-
-| Status | n | Meaning |
-|---|---|---|
-| `skipped:unreachable:captcha` | 22 | browser-verification challenge (OpenReview, ACM, SSRN, ResearchGate, and Nature/Springer on the day this was built) |
-| `skipped:unreachable:paywall` | 7 | subscription full text (Elsevier, IEEE, Springer chapter) |
-| `skipped:unreachable:unknown` | 5 | landing page only, or bot-defence with no observable paywall |
-| `skipped:unreachable:dead` | 2 | 404/DNS failure, or a stub redirect to something else |
-| `skipped:not-paper` | 7 | repo/blog rows with no paper behind the link |
-
-No scraping, credentials, JavaScript or CAPTCHA solving is used: a route either
-answers a plain HTTP GET at ~1 req/s or it is recorded as unreachable. The audit
-behind those reasons is `research/no-arxiv-payload.md` on branch
-`research/no-arxiv-payload` (decision on #9).
+paper. The corpus is ~42 MB of text for the fetched subset.
 
 ## Two design decisions worth knowing
 
@@ -82,11 +63,6 @@ yet has no `<arxiv:license>` in the API response), so it reports `api-omitted` f
 The manifest therefore records the licence as *unreported* rather than guessing, and
 `redistributable` is False everywhere — an unknown licence is not permission. To clear a
 paper for redistribution, read the licence line on its abs page and add it to `PROVENANCE.md`.
-
-Non-arXiv entries carry the same decision in three manifest fields: `licence`,
-`licence_source` (the URL the claim was read from) and `shareable: yes|no|unknown`. Three are
-verified CC BY 4.0 — `tabpfnv2`, `tabssldataselect`, `schemapile` — and the rest either state
-nothing (`unknown`) or reserve rights (`no`). Unknown is never permission.
 
 ## Reading the corpus
 
