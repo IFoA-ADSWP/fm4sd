@@ -25,3 +25,6 @@ papers/
 # Python bytecode
 __pycache__/
 *.pyc
+
+# arxiv_meta.py cache (metadata only, never payload)
+.cache/
