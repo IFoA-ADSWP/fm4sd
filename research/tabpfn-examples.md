@@ -238,8 +238,8 @@ job; knowing which part a claim rests on is.
 | Area | Files | What was done | Tag |
 |---|---:|---|---|
 | `examples/` | 19 (17 `.py`, 2 `.ipynb`) | all 17 scripts read in full; notebooks listed only | **verified** |
-| `src/` | 96 (94 `.py`) | names and module layout surveyed; two bodies read in full — elsewhere, in `tabpfn-reserving` (`finetuning/data_util.py`, `finetuning/finetuned_base.py`) | **listed** |
-| `tests/` | 145 (99 `.py`) | inventory by directory and filename; no test body read | **listed** |
+| `src/` | 96 (94 `.py`) | names and module layout surveyed; `finetuning/` read in body (Part 3) — all 8 files' structure, and the key functions of `finetuned_base.py` and `finetuned_regressor.py` | **part read** |
+| `tests/` | 145 (99 `.py`) | inventory; the fine-tuning suites' 47 test names read, no body read | **part read** |
 | `changelog/` | 25 | all 24 fragments' first line; 4 read in full | **verified** (as stated) |
 | `CHANGELOG.md` | 73 KB | release sections for 8.5.0, 9.0.0, 9.1.0 and 9.2.0 read | **verified** |
 | `docs/` | 2 | two SVG assets, no prose | **verified** (absence) |
@@ -311,7 +311,7 @@ what they would do to a measurement:
 |---|---|---|
 | `1198.breaking.md` | "Previously saved fitted regressors (`.tabpfn_fit` archives and pickled estimators) are incompatible with the updated target preprocessing and must be refitted. **Custom fine-tuning loops must pass `y_train_mean` and `y_train_std` to `fit_from_preprocessed`.**" | A saved artifact stops loading; a hand-written fine-tuning loop changes signature |
 | `1199.changed.md` | "Regression target transforms now act on **raw targets** before final standardization. Both `power` and `safepower` retain input standardization; `None` and `"none"` retain standardization only." | The target transform is the vendor's main regression lever. Its meaning moves, so a result either side of it is not comparable |
-| `1392.added.md` | "`TabPFNClassifier` and `TabPFNRegressor` take `group_col`: … or a list of labels whose joint value is one composite key. The selected columns are replaced by one categorical feature holding that key's integer code, **fitted on the training rows alone**." | **First-class grouped data.** This is the lever insurance work needs, and it does not exist in our pin |
+| `1392.added.md` | "`TabPFNClassifier` and `TabPFNRegressor` take `group_col`: … or a list of labels whose joint value is one composite key. The selected columns are replaced by one categorical feature holding that key's integer code, **fitted on the training rows alone**." | **First-class grouped data.** Implemented in the 9.2.0 tree (§22), release note pending, **refused on the fine-tuning path**, absent from our pin |
 | `1198.changed.md` | "Regression ensembles now normalize targets using each member's training rows; without subsampling, only floating-point differences are expected." | Named effect size, per ensemble member |
 | `1402.changed.md` | Attention over an int8/float8 KV cache casts the cache and folds the scales into the query | Cached inference is the cost lever of §5 |
 | `1397.added.md`, `1398.added.md` | The `quantile_norm*` and `safepower` presets now run on GPU | Preprocessing cost, not correctness |
@@ -344,8 +344,9 @@ The root suite names its own contract: `test_finetuning_regressor.py`, `test_fin
 `test_model_specs.py`, `test_validation.py`.
 
 For our purposes the two fine-tuning test modules are the nearest thing to a specification of §3: the
-examples show what the vendor *ran*, the tests assert what the wrapper *must do*. Neither has been
-read here — that is the obvious next read, and it is named rather than implied.
+examples show what the vendor *ran*, the tests assert what the wrapper *must do*. Their test names are
+read in §23, and one of them — `test__finetuned_tabpfn__model_version_tracks_package_default` — is the
+test that pins the default-model flip of §14.
 
 ## 17. Build, CI, and what the repository does not contain
 
@@ -376,6 +377,127 @@ read here — that is the obvious next read, and it is named rather than implied
    permanent home for code-level findings, and then the `research/<gap>` branch convention has to work
    — it does not today (Housekeeping) — or (b) the corpus gains a `code` status/route, and the manifest
    can record a repository as a first-class source. This note does not choose.
+
+---
+
+# Part 3 — inside the fine-tuning module
+
+Part 2 listed `src/tabpfn/finetuning/` as "listed". This part reads it: the structure of all eight
+files, and the key functions of `finetuned_base.py` (1418 lines) and `finetuned_regressor.py` (548)
+in body. Still reading only — no script executed.
+
+## 19. What the trainer actually optimises
+
+The default objective is **not** the bar-distribution likelihood, and it is not one term:
+
+> **verified**, `finetuned_regressor.py`, constructor at the pin: `ce_loss_weight=0.0`,
+> `crps_loss_weight=1.0`, `crls_loss_weight=0.0`, `mse_loss_weight=1.0`, `mae_loss_weight=0.0`.
+
+So a default fine-tune minimises **CRPS + mean-MSE**. And a reader who opens only the loss function
+gets a different answer — its own defaults are `ce_loss_weight=1.0` with every other term `0.0`. The
+class defaults win; the function defaults are a trap.
+
+| Quantity | Where | Value |
+|---|---|---|
+| Training objective | constructor of `FinetunedTabPFNRegressor` | **CRPS 1.0 + mean-MSE 1.0**; NLL (`ce`) off; no MAE |
+| Target space of that loss | `_targets_in_estimator_space` | targets passed through **the estimator's own target transform** — "the default ensemble's `safepower`" per its docstring — before the loss is computed |
+| Selection metric (when enabled) | `_evaluate_model` | **raw-space MSE**: `mean_squared_error(y_val, predictions)`, with `min_delta=1e-4` |
+| Cost of one validation epoch | `_evaluate_model` | a **fresh in-context fit** (`eval_regressor.fit(X_train, y_train)`) then predict — not a training-batch forward |
+| What one epoch is | `META_BATCH_SIZE = 1` (`finetuned_base.py:68`) | one chunk per optimizer step |
+
+Three consequences, and they are the reason this section exists:
+
+1. "Fine-tuning" is not a single quantity. The **training loss** (CRPS + mean-MSE, in transformed
+   space), the **selection metric** (raw MSE), and whatever **metric a reader cites** are three
+   different functions. A null result is a null of the first one.
+2. Early stopping is expensive per epoch: each validation pays a full in-context fit and predict over
+   the training split. Turning it off removes both the cost and the checkpoint selection.
+3. The loss is computed in estimator space, so the target transform is inside the optimisation, not
+   beside it. A transform change is an objective change (see `1199.changed.md`, §15).
+
+## 20. The validation split is not group-aware — but it can be replaced
+
+> **verified**, `_get_train_val_split`: `train_test_split(X, y, test_size=…, random_state=self.random_state,
+> stratify=y if self._model_type == "classifier" else None)`, with the holdout capped by
+> `MAX_VALIDATION_SAMPLES = 50_000`.
+
+There is no group parameter in that call. On rows that share a key — a policy, a household, a claim
+number — the vendor's default holdout **leaks key information across the boundary**, and early
+stopping then selects on a contaminated signal. That is a property of the code, not a criticism of it:
+the library never claims otherwise.
+
+The way around it is in the same signature and unmentioned by any example:
+
+> **verified**, `FinetunedTabPFNBase.fit(X, y, X_val=None, y_val=None, output_dir=None)` — an explicit
+> validation set is accepted, forwarded to `_fit`, and consumed by `_evaluate_model`.
+
+So a **group-safe holdout is expressible without touching the library**: split on the group key
+yourself and pass `X_val` / `y_val`. Both fine-tune examples use the random split instead.
+
+## 21. State, refits, and what "one `fit()` per torchrun session" is about
+
+The example's warning is about the **process group**, not the weights:
+
+> **verified**, `_maybe_setup_ddp` returns `created_process_group = not already_initialized`, so a fit
+> that joins an existing group does not tear it down; the caller does, which is why the example calls
+> `dist.destroy_process_group()` at the end. `main_process_first()` is a barrier helper, not state.
+
+Two other statements about repeat use are clearer than the warning:
+
+- At the lower level, `fit_from_preprocessed(..., no_refit=True)` documents "if True, the classifier
+  will not be reinitialized when calling fit multiple times" — repeated fits are an anticipated
+  pattern there, and a test pins the equivalence (`test__fit_from_preprocessed__earlier_use__output_matches_fresh_estimator`).
+- With early stopping off, the loop says outright: "The 'best model' concept only exists under early
+  stopping (which requires validation): **without it the last epoch is the result**."
+
+Two behaviours worth knowing before designing around the trainer:
+
+- **NaN targets are masked** in the training loss — `valid_mask_BQ = ~torch.isnan(targets_BQ)` — and
+  two tests assert it. Missing labels are supported by design, not by accident.
+- **The classifier skips a batch** when a query label is absent from that batch's context labels, with
+  a warning. The regressor never skips (`_should_skip_batch` returns `False`: "Never skip a batch for
+  regression").
+
+## 22. `group_col`, stated precisely
+
+At the pin, `group_col` is not a promise in a fragment — it is **implemented**: a constructor parameter
+on both estimators (`regressor.py:307`, `classifier.py:274`), documented, with an encoder described as
+"the encoder that replaced the `group_col` columns with one categorical feature". Its release note is
+still in `changelog/`. And it is **refused on the fine-tuning path**:
+
+> **verified**, `fit_from_preprocessed`: `reject_group_col(self.group_col, "fit_from_preprocessed")`.
+
+So on 9.x: `group_col` works for in-context fitting, raises for fine-tuning, and does not exist at all
+in our 8.5.0 pin.
+
+## 23. Tests as the contract — now read
+
+The fine-tuning suites are 605 + 2025 lines and they pin behaviours the examples only demonstrate:
+
+| Test | Behaviour it fixes |
+|---|---|
+| `test__finetuned_tabpfn__model_version_tracks_package_default` | the default model follows the package (§14) — the flip is tested, not incidental |
+| `test__finetuned_tabpfn_classifier__fit_without_validation` | validation off is a supported mode |
+| `test__finetuned_tabpfn_classifier__no_improvement_restores_base_model` | early stop restores the best weights, not the last |
+| `test__finetuned_tabpfn_classifier__validation_frequency_*` (4 tests) | patience counts checks, not epochs |
+| `test__finetuned_tabpfn_classifier__checkpoint_resumption` | training resumes from `output_dir` |
+| `test__forward_with_loss__uses_raw_targets_for_member_pipeline` | the §19 target-space claim |
+| `test__compute_regression_loss__masks_nan_targets` | missing labels are tolerated |
+| `test__get_estimator_shard__covers_estimators_and_scales_gradients` | multi-GPU sharding arithmetic |
+| `test__fit_from_preprocessed__earlier_use__output_matches_fresh_estimator` | reuse equals a fresh fit |
+
+For a reader, this is the highest-value part of the repository: the examples show what the vendor ran,
+the tests state what the wrapper must do. A claim that contradicts one of these names is a reading
+error, not a version difference.
+
+## 24. What this does and does not establish
+
+- It establishes what the trainer does with the defaults: CRPS + mean-MSE in estimator space, selection
+  on raw MSE, one chunk per step, a non-group-aware internal holdout that can be replaced.
+- It does **not** establish any number. No fit was run, so the size or direction of any of these effects
+  is unknown from this note.
+- One correction to Part 2: §15 listed `group_col` as a fragment. It is implemented in the 9.2.0 tree;
+  the fragment is only its release note, and the fine-tuning path refuses it.
 
 ## Housekeeping
 
