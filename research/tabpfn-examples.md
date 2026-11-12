@@ -1,7 +1,11 @@
-# The vendor's code-level surface: `PriorLabs/TabPFN/examples/`
+# The vendor's repository as a source: `PriorLabs/TabPFN`
+
+**Part 1** reads the `examples/` set (17 scripts). **Part 2** registers the repository
+itself — `src/`, `tests/`, `changelog/`, the build file and CI — because the corpus had never
+read it at all, and the fine-tuning claims that matter are decided in `src/`, not `examples/`.
 
 > **Status:** reading only, written 2026-11-12. **No script was executed and no model was fitted.**
-> Nothing here is a measurement — it is what the vendor's runnable examples *say*, read at source.
+> Nothing here is a measurement — it is what the vendor's repository *says*, read at source.
 > Research ticket [#83](https://github.com/IFoA-ADSWP/fm4sd/issues/83). This file lives on a branch
 > because the research layer never merges (`docs/RESEARCH.md`); `main` has no `research/` directory.
 >
@@ -15,8 +19,8 @@ against an installed package, command stated) · **unverified** (the source says
 
 ## 0. Why this is not a paper digest
 
-The corpus indexes papers. This note covers an artifact no paper replaces: the vendor's 17 example
-scripts and 2 notebooks. They carry the *constants* a paper omits — the fine-tuning recipe down to
+The corpus indexes papers. This note covers an artifact no paper replaces: the vendor's repository —
+17 example scripts, and the `src/`, `tests/` and `changelog/` that decide what those examples mean. They carry the *constants* a paper omits — the fine-tuning recipe down to
 the patience, the name of each inference-time lever, and what each one costs.
 
 It sits beside the digests, not inside `references/summaries/`: digests quote `papers/<slug>/text.txt`
@@ -219,8 +223,159 @@ guard no example mentions — `MIN_NUM_SAMPLES_RECOMMENDED_FOR_TUNING = 500`.
 
 - Every claim is tagged; the untagged ones do not exist.
 - Nothing was run. No timing, memory, accuracy or coverage number in this file comes from us.
-- The example set moves under us: `main` was at `3f2e9f9` when this was read. A later reading supersedes
+- The tree moves under us: `main` was at `3f2e9f9` when this was read. A later reading supersedes
   this one; do not silently edit it.
+
+---
+
+# Part 2 — the repository as a source
+
+## 12. Coverage: what has been read, and what has not
+
+The tree at the pin is **322 files / 6.0 MB, of which 213 are Python**. Reading all of it is not the
+job; knowing which part a claim rests on is.
+
+| Area | Files | What was done | Tag |
+|---|---:|---|---|
+| `examples/` | 19 (17 `.py`, 2 `.ipynb`) | all 17 scripts read in full; notebooks listed only | **verified** |
+| `src/` | 96 (94 `.py`) | names and module layout surveyed; two bodies read in full — elsewhere, in `tabpfn-reserving` (`finetuning/data_util.py`, `finetuning/finetuned_base.py`) | **listed** |
+| `tests/` | 145 (99 `.py`) | inventory by directory and filename; no test body read | **listed** |
+| `changelog/` | 25 | all 24 fragments' first line; 4 read in full | **verified** (as stated) |
+| `CHANGELOG.md` | 73 KB | release sections for 8.5.0, 9.0.0, 9.1.0 and 9.2.0 read | **verified** |
+| `docs/` | 2 | two SVG assets, no prose | **verified** (absence) |
+| `pyproject.toml`, `.github/workflows/` | 1 + 12 | read / name-and-trigger only | **verified** / **listed** |
+
+The honest summary: **17 of 213 Python files read in full (~8%)**, plus the changelog, the build file
+and the CI inventory. Nothing below claims more than that.
+
+## 13. The module map
+
+`src/tabpfn/` is organised so that a claim can be traced to a file. The names are the vendor's:
+
+| Module | Files | What it owns |
+|---|---:|---|
+| `preprocessing/` | 43 (+11 under `torch/`) | the whole front end: `modality_detection`, `clean`, `datetimes`, `group_ids`, `label_encoder`, `ensemble`, `pipeline_factory`, and `steps/` — `reshape_feature_distribution_step`, `adaptive_quantile_transformer`, `kdi_transformer`, `safe_power_transformer`, `squashing_scaler_transformer`, `remove_constant_features_step`, `add_svd_features_step`, `add_fingerprint_features_step`, `differentiable_z_norm_step`, `shuffle_features_step`. `target_transform.py` + `presets.py` hold the target-transform registry; `torch/` is the GPU path |
+| `architectures/` | 22 | **one module per model version** — `tabpfn_v2`, `_v2_5`, `_v2_6`, `_v3`, `_v3_5` — plus `shared/bar_distribution.py` (the bucket grid), `kv_cache`, and attention backends (`fa3_`, `mlx_`, MPS workarounds) |
+| `finetuning/` | 8 | `data_util`, `finetuned_base`, `finetuned_classifier`, `finetuned_regressor`, `train_util`, `logging`, `_torch_compat` |
+| top level | 15 | the estimators (`classifier`, `regressor`), `inference`, `inference_config`, `inference_tuning`, `model_loading`, `checkpoint`, `validation`, `settings`, `regression_metrics`, `parallel_execute`, `downsample_correction`, `memory`, `browser_auth` |
+| `visualisation/`, `misc/` | 4 | `regression_distribution`; `_sklearn_compat`, `debug_versions` |
+
+Two things follow. First, "preprocessing" is not one thing: it is a pipeline of named steps, each of
+which can change a prediction, and `preprocessing/steps/` is where the vendor documentation's
+preprocessing levers actually live. Second, the model lineage is **in the code as files** — a version
+is a module, not a label on one checkpoint.
+
+## 14. The version lineage — and the default-model flip
+
+`CHANGELOG.md` is the ledger. Release headings present at the pin:
+
+| Release | Date | Bearing on us |
+|---|---|---|
+| **8.5.0** | 2026-08-27 | **our pin** in `tabular-foundation-model` |
+| **9.0.0** | 2026-09-15 | **the default model changes** (below); two `eval_metric` combinations now raise |
+| 9.1.0 | 2026-10-02 | `ModelSpecs` replaces three spec classes; `kv_cache_precision="adaptive"` |
+| 9.2.0 | 2026-10-12 | `enable_torch_compile`; batched v3/v3.5 cached-inference fix |
+
+### 14.1 The flip, which is the single most useful line in the repository
+
+> **verified**, `CHANGELOG.md`, 9.0.0: "TabPFN-3.5 is the default model: `TabPFNClassifier()` and
+> `TabPFNRegressor()` now load `ModelVersion.V3_5` unless a `model_path` or another version is given.
+> The previous default, TabPFN-3, stays available through `create_default_for_version(ModelVersion.V3)`."
+
+> **verified-in-code**, `tabpfn==8.5.0`: `ModelVersion` has no `V3_5` member — it enumerates
+> `[V2, V2_5, V2_6, V3]` — and `resolve_model_path(..., version="v3")` defaults to `v3`.
+
+So an unpinned estimator resolves to **v3 on 8.5.0** and to **v3.5 on 9.0.0 or later**, with
+2026-09-15 as the boundary. That is a dated, checkable answer to the question "what did `auto`
+mean?"— and it is version-specific: the same source line means two different models either side of
+it. Any result measured with an unpinned estimator needs its package version beside it, not just its
+model label.
+
+### 14.2 Two `eval_metric` combinations became errors
+
+> **verified**, 9.0.0: "`eval_metric="roc_auc"` combined with `tune_decision_thresholds=True` now
+> raises instead of silently optimizing balanced accuracy" — and `log_loss` with the same flag "now
+> raises instead of silently optimizing accuracy. … Use `calibrate_temperature=True`, which optimizes
+> log loss directly."
+
+The classifier tuning example (§6) passes `eval_metric="f1"` with `tune_decision_thresholds=True`,
+which survives; a reader copying the pattern with `log_loss` gets an exception on 9.x and a silently
+different objective on 8.x. Same code, two behaviours.
+
+## 15. Merged but unreleased: the changes that will move a number
+
+At the pin, `changelog/` holds 24 towncrier fragments written but not yet in a release. Ranked by
+what they would do to a measurement:
+
+| Fragment | Change | Why it bears on a number |
+|---|---|---|
+| `1198.breaking.md` | "Previously saved fitted regressors (`.tabpfn_fit` archives and pickled estimators) are incompatible with the updated target preprocessing and must be refitted. **Custom fine-tuning loops must pass `y_train_mean` and `y_train_std` to `fit_from_preprocessed`.**" | A saved artifact stops loading; a hand-written fine-tuning loop changes signature |
+| `1199.changed.md` | "Regression target transforms now act on **raw targets** before final standardization. Both `power` and `safepower` retain input standardization; `None` and `"none"` retain standardization only." | The target transform is the vendor's main regression lever. Its meaning moves, so a result either side of it is not comparable |
+| `1392.added.md` | "`TabPFNClassifier` and `TabPFNRegressor` take `group_col`: … or a list of labels whose joint value is one composite key. The selected columns are replaced by one categorical feature holding that key's integer code, **fitted on the training rows alone**." | **First-class grouped data.** This is the lever insurance work needs, and it does not exist in our pin |
+| `1198.changed.md` | "Regression ensembles now normalize targets using each member's training rows; without subsampling, only floating-point differences are expected." | Named effect size, per ensemble member |
+| `1402.changed.md` | Attention over an int8/float8 KV cache casts the cache and folds the scales into the query | Cached inference is the cost lever of §5 |
+| `1397.added.md`, `1398.added.md` | The `quantile_norm*` and `safepower` presets now run on GPU | Preprocessing cost, not correctness |
+| `1381.added.md` | Optional random sign flipping for numericals, reproducible per ensemble member | A new preprocessing option, off by default |
+| `1375.fixed.md` | Quantiles accept any real in `[0, 1]`, including `np.float32` and the ints 0 and 1 | A quantile call that raised now works |
+| `1376.fixed.md` | Constant features are removed **before** polynomial features are added | Changes predictions when `POLYNOMIAL_FEATURES` is set |
+| `1339.changed.md` | Licence and README text state that datasets stay local and are never sent to Prior Labs | A data-governance claim about the local path, worth quoting rather than paraphrasing |
+
+> **verified-in-code:** `group_col` and `enable_torch_compile` are absent from `tabpfn==8.5.0`'s
+> estimator signatures, so the two most interesting additions above are **after** our pin.
+
+Read as a set, these are a re-test trigger list: anything measured on 8.5.0 is measured against
+pre-9 target preprocessing, without `group_col`, and without per-member normalisation.
+
+## 16. Tests as specification
+
+145 test files, and the layout says what the vendor treats as load-bearing:
+
+| Path | Files | What it is |
+|---|---:|---|
+| `tests/test_preprocessing/` | 55 | the largest suite, by a wide margin — one test module per preprocessing step |
+| `tests/` root | 40 | the interface and behaviour suite |
+| `tests/test_architectures/` | 21 | one per architecture, plus shared components |
+| `tests/reference_predictions/` | 18 | **golden reference outputs** — the vendor pins predicted values |
+| `tests/test_torch_preprocessing/` | 11 | the GPU preprocessing path against the CPU one |
+
+The root suite names its own contract: `test_finetuning_regressor.py`, `test_finetuning_classifier.py`,
+`test_fit_from_preprocessed.py`, `test_save_load_fitted_model.py`, `test_inference_tuning.py`,
+`test_consistency.py`, `test_batched_prediction_shape_safety.py`, `test_input_immutability.py`,
+`test_model_specs.py`, `test_validation.py`.
+
+For our purposes the two fine-tuning test modules are the nearest thing to a specification of §3: the
+examples show what the vendor *ran*, the tests assert what the wrapper *must do*. Neither has been
+read here — that is the obvious next read, and it is named rather than implied.
+
+## 17. Build, CI, and what the repository does not contain
+
+- `pyproject.toml`: `name = "tabpfn"`, `version = "9.2.0"`, `requires-python = ">=3.10"`. So the tree
+  at the pin is a **9.2.0 tree**; the examples are 9.x code even where they demonstrate 8.x-compatible
+  calls.
+- 12 workflows: `ci.yml`, `check-changelog.yml` (towncrier — this is why `changelog/` exists and why
+  the fragments are reliable), `release-create-pr.yml`, `release-tag-on-merge.yml`,
+  `release-publish.yml`, `nightly-notebook-check.yml`, three Slack/Dependabot/PR helpers, and two
+  Claude review workflows. Triggers only; bodies not read.
+- `docs/` contains **two SVG diagrams and no prose**. The documentation is the external site
+  (`docs.priorlabs.ai`), which fm4sd does not hold either — so the vendor's written guidance is
+  outside this corpus by construction, not by oversight.
+
+## 18. What this changes for the corpus
+
+1. **A repository cannot be a corpus entry.** The glossary defines `skipped:not-paper` as "when the
+   link is a code repository or blog post", and 7 of 431 entries carry it. Reading code therefore has
+   no home in `references/`: the research layer is the only place it can live, which is why this file
+   is on a branch rather than beside the digests.
+2. **The corpus's only link to TabPFN's code is stale.** The 2023 `tabpfn` entry's `github` link is
+   `https://github.com/automl/TabPFN`; the current repository, `PriorLabs/TabPFN`, appears nowhere in
+   the manifest. The one `PriorLabs/*` repository entry is `tabpfn-rel`, a different project.
+3. **The version flip is a fact worth sharing.** `9.0.0` changed the default model on 2026-09-15, in
+   the local package. Any sibling work holding a number measured without a pin should be re-read
+   against its package version. That is a corpus-level caution, not a result.
+4. **Two candidate rules, for the owner, not for this note.** Either (a) the research layer is the
+   permanent home for code-level findings, and then the `research/<gap>` branch convention has to work
+   — it does not today (Housekeeping) — or (b) the corpus gains a `code` status/route, and the manifest
+   can record a repository as a first-class source. This note does not choose.
 
 ## Housekeeping
 
