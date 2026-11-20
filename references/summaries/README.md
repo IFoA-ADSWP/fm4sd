@@ -65,8 +65,8 @@ positive.**
 
 ## Coverage
 
-12 digest documents covering ~35 papers, of the manifest's fetched set (updated 2026-10-31:
-431 entries, 381 fetched — `python3 scripts/fm4sd_search.py stats` is the record). The rest
+12 digest documents covering ~35 papers, of the manifest's fetched set (updated 2026-11-20:
+433 entries, 383 fetched — `python3 scripts/fm4sd_search.py stats` is the record). The rest
 are corpus for sweeping — see `../manifest.json` and `../README.md`.
 
 Not yet digested but high-value on the current question set: `gotabpfn` (high-dim tokenization),

@@ -49,11 +49,11 @@ parsed; a non-paper link inside a parsed section is an entry with `skipped:not-p
 | Field | Value |
 |---|---|
 | Index parsed | **`README.md` in this fork** since 2026-10-08 (was upstream `main/README.md` at `62382d2`) |
-| Entries parsed | 431 (355 upstream + 37 actuarial + 39 comparison literature) |
-| With an arXiv id | 361 (84%) |
+| Entries parsed | 433 (357 upstream + 37 actuarial + 39 comparison literature) |
+| With an arXiv id | 363 (84%) |
 | Linking released code | 138 |
-| Fetched locally | 381 — 354 LaTeX source bundles, 22 PDF, 5 HTML/XML (4 web-native papers + 1 PMC full-text XML) |
-| Extracted text | 52.0 MB |
+| Fetched locally | 383 — 356 LaTeX source bundles, 22 PDF, 5 HTML/XML (4 web-native papers + 1 PMC full-text XML) |
+| Extracted text | 52.3 MB |
 | Source preference | `arxiv.org/src/<id>vN`, falling back to `arxiv.org/pdf/<id>vN` (revision pinned — see below); non-arXiv entries by route family (see below) |
 | PDF extractor | PyMuPDF 1.28.2 |
 | Rate limit | arXiv 3 req/s; non-arXiv web routes ~1 req/s, same real User-Agent |
@@ -360,7 +360,7 @@ against upstream and writes nothing.
 `--fetch` resolves arXiv entries' current revision through the export API (batched `id_list`
 queries), then fetches `/src/<id>vN` → `/pdf/<id>vN`; every other entry goes through its route
 family. `--only <slug> …` restricts a run (used to fetch the 18 non-arXiv papers without
-rebuilding the 361 arXiv payloads), and `--force` moves a pin to the revision arXiv serves now.
+rebuilding the 363 arXiv payloads), and `--force` moves a pin to the revision arXiv serves now.
 `--check-revisions` reports drift without writing. `--status` prints the fetched total and the
 reason tally.
 
@@ -383,3 +383,4 @@ any load-bearing claim against the paper before relying on it. `SWEEPS.md` recor
 | 2026-10-31 | A `sha256` now names the revision it belongs to: every id-bearing row records `arxiv_rev` and is fetched from the version-suffixed URL. All 323 arXiv rows were re-resolved and refetched, taking recorded digests from 115 to 340 (323 arXiv + 17 non-arXiv routes); the corpus counts did not move. Two metadata consequences are recorded here: `n_tex_files` was backfilled `0 → N` on 221 rows (the cached path never recovered it), and 16 rows' extracted text changed at the pinned refetch (12 LaTeX rows gained file counts or text; 4 PDF rows gained page counts). No digest claim depends on them — the only summaries citing those rows are two historical sweep-log lines. `--index` preserves the pin on a payload-less tree. See "Pinned arXiv revisions" (#33). |
 | 2026-10-31 | Nine digest claims were narrowed or retracted after the #52 impact review of the 48 comparison entries added by #47: `tabicl.md`'s "closest published support that TFMs beat GBDT" (contested by 2305.02997), `SWEEPS.md`'s "no actuarial / reserving / tail-calibration literature at all" (tail calibration is now indexed), its "no published counterpart" (now: no *ICL* counterpart), `actuarial.md`'s "the actuarial literature does not evaluate TFMs" (it now *reviews* them, 2609.14576), and the "beats the GBDT" reading of a depth-3/4-tree baseline (RF parity is not GBDT parity). Evidence: `research/digest-impact-2026-10-31.md` on `research/digest-impact`. |
 | 2026-10-31 | The five approved comparison lists landed (#47): 48 entries, taking the index 383 → 431, arXiv-resolvable 323 → 361, fetched 340 → 381 (317/18 → 354/22 LaTeX/PDF, 5 HTML/XML unchanged) and extracted text 43.6 → 52.0 MB. Three new `papers` bullets (`baselines`, `probabilistic`, `benchmark methodology`) and nine actuarial rows take that block from 28 to 37. Not-fetched 43 → 50: paywall 7 → 13 and unknown 5 → 6 from the citation-only actuarial rows. All 48 figures were recomputed from `fm4sd_search.py stats`. See "Comparison literature" above. |
+| 2026-11-20 | Two Prior Labs-adjacent papers from the community digest were indexed: `weights-and-caches` (arXiv 2611.20174) and `prts-transcriptomics` (arXiv 2611.18774), both under `papers` → `tabular`. Index 431 → 433, arXiv-resolvable 361 → 363, fetched 381 → 383 (354 → 356 LaTeX; PDF and HTML/XML unchanged), extracted text 52.0 → 52.3 MB. The cookbook row `multi_target_regression` was added to `## cookbooks`, which is listed-not-parsed and moves no entry. Figures recomputed from `fm4sd_search.py stats`. |
