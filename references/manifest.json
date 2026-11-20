@@ -1,7 +1,7 @@
 {
   "source": "LOCAL README.md",
   "note": "Parsed from the fm4sd README. Payload lives in gitignored papers/.",
-  "count": 431
+  "count": 433
 }
 --- entries ---
 [
@@ -379,6 +379,26 @@
     "arxiv_title": "Speedrunning Tabular Foundation Model Pretraining",
     "redistributable": false,
     "has_code": true
+  },
+  {
+    "slug": "weights-and-caches",
+    "arxiv_id": "2611.20174",
+    "section": "papers",
+    "category": "tabular",
+    "subcategory": "",
+    "citation": "hoo et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2611.20174"
+    },
+    "arxiv_rev": 1,
+    "source": "tex",
+    "path": "papers/weights-and-caches",
+    "text_bytes": 94644,
+    "pages": 0,
+    "n_tex_files": 7,
+    "sha256": "34640a6d465c841cda96c2e756092211313f87032da7ddecb3e917d3da3f386f",
+    "fetch_status": "ok",
+    "has_code": false
   },
   {
     "slug": "tabpfnv2closerlook",
@@ -1263,6 +1283,26 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "skipped:unreachable:captcha",
+    "has_code": false
+  },
+  {
+    "slug": "prts-transcriptomics",
+    "arxiv_id": "2611.18774",
+    "section": "papers",
+    "category": "tabular",
+    "subcategory": "",
+    "citation": "wang et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2611.18774"
+    },
+    "arxiv_rev": 1,
+    "source": "tex",
+    "path": "papers/prts-transcriptomics",
+    "text_bytes": 178306,
+    "pages": 0,
+    "n_tex_files": 1,
+    "sha256": "363822e82a54bbd0e5c69648a38f5d8d3c50cf49109253fa23d3d37fb614d035",
+    "fetch_status": "ok",
     "has_code": false
   },
   {

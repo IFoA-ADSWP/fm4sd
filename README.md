@@ -18,10 +18,10 @@ entries with no arXiv id.
 
 | | |
 |---|---|
-| **431** | entries in the index |
-| **361** | resolvable to arXiv |
-| **381** | fetched locally (**354** LaTeX source, **22** PDF, **5** HTML/XML) |
-| **52.0 MB** | of extracted plain text |
+| **433** | entries in the index |
+| **363** | resolvable to arXiv |
+| **383** | fetched locally (**356** LaTeX source, **22** PDF, **5** HTML/XML) |
+| **52.3 MB** | of extracted plain text |
 | **138** | link released code |
 | **12** | digest documents (~35 papers read closely), plus 9 corpus sweeps |
 
@@ -109,6 +109,7 @@ rm <id>.tar.gz
   - drifttabpfn — [arxiv](https://arxiv.org/abs/2411.10634) · [neurips](https://proceedings.neurips.cc/paper_files/paper/2024/hash/b2e2774c8e76afe191b5bf518f5cb727-Abstract-Conference.html) · [github](https://github.com/automl/Drift-Resilient_TabPFN) — [helli et al. 2024]
   - nanotabpfn — [arxiv](https://arxiv.org/abs/2511.03634) · [github](https://github.com/automl/nanoTabPFN) — [pfefferle et al. 2025]
   - modded-nanotabpfn — [arxiv](https://arxiv.org/abs/2606.03681) · [github](https://github.com/borawhocodess/modded-nanotabpfn) · [openreview](https://openreview.net/forum?id=QT1ySCPeW3) — [öztürk et al. 2026]
+  - weights-and-caches — [arxiv](https://arxiv.org/abs/2611.20174) — [hoo et al. 2026]
   - tabpfnv2closerlook — [arxiv](https://arxiv.org/abs/2502.17361) · [neurips](https://neurips.cc/virtual/2025/poster/116283) — [ye et al. 2025]
   - finetuningtfm — [arxiv](https://arxiv.org/abs/2506.08982) · [github](https://github.com/yandex-research/tabpfn-finetuning) — [rubachev et al. 2025]
   - tabicl — [arxiv](https://arxiv.org/abs/2502.05564) · [icml](https://proceedings.mlr.press/v267/qu25d.html) · [github](https://github.com/soda-inria/tabicl) — [qu et al. 2025]
@@ -144,6 +145,7 @@ rm <id>.tar.gz
   - localpfn — [arxiv](https://arxiv.org/abs/2406.05207) · [neurips](https://proceedings.neurips.cc/paper_files/paper/2024/file/c40daf14d7a6469e65116507c21faeb7-Paper-Conference.pdf) — [thomas et al. 2024]
   - tfm-priority — [arxiv](https://arxiv.org/abs/2405.01147) · [icml](https://proceedings.mlr.press/v235/van-breugel24a.html) — [van breugel and van der schaar 2024]
   - tfm-systematic-survey — [ssrn](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7531718) — [archetti et al. 2026]
+  - prts-transcriptomics — [arxiv](https://arxiv.org/abs/2611.18774) — [wang et al. 2026]
 - baselines
   - xgboost — [arxiv](https://arxiv.org/abs/1603.02754) — [chen and guestrin 2016]
   - catboost — [arxiv](https://arxiv.org/abs/1706.09516) — [prokhorenkova et al. 2017]
@@ -587,6 +589,7 @@ the recipes are notebooks and prose, and the repo carries no licence.
 - interpret_results — [cookbook](https://docs.priorlabs.ai/cookbook/interpret_results) — Interpreting Results with TabPFN
 - memory_optimisation — [cookbook](https://docs.priorlabs.ai/cookbook/memory_optimisation) — Fitting Large Datasets in Limited Memory
 - mlflow — [cookbook](https://docs.priorlabs.ai/cookbook/mlflow) — TabPFN with MLflow
+- multi_target_regression — [cookbook](https://docs.priorlabs.ai/cookbook/multi_target_regression) — Multi-Target Regression: Independent, Chained and Copula
 - predictive_distribution — [cookbook](https://docs.priorlabs.ai/cookbook/predictive_distribution) — Get Started with Predictive Distribution
 - pretrain_nanotabpfn — [cookbook](https://docs.priorlabs.ai/cookbook/pretrain_nanotabpfn) — Pretrain a Tabular Foundation Model from Scratch
 - quickstart — [cookbook](https://docs.priorlabs.ai/cookbook/quickstart) — TabPFN Quickstart
