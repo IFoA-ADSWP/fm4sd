@@ -184,6 +184,77 @@ carries the wrong label.
 
 Upstream's own `todos` file independently flags "quantization in the TFM world … applied to
 TabPFN", so this axis is already on the maintainer's radar.
+
+---
+
+## Q6. What published work closes the count / zero-inflated gap?
+
+Asked 2026-11-21, after the sibling repo's frontier losses were re-confirmed on v3.5:
+`freMTPL2freq` (Poisson deviance, loses to LightGBM), `bemt97_amount` (~89% zero mass, loses to
+OLS), `spanish_motor_severity`. These are the losses the adoption rule cannot explain away, so
+the question is what the literature offers that the project has not read.
+
+Run against the arXiv API, not the corpus: the corpus had none of these papers, which is the
+first finding.
+
+```text
+all:"zero-inflated" AND all:"in-context"          36 hits, none on TFMs (bandits, ecology, GEE)
+all:insurance AND all:"tabular foundation model"   1 hit  → tabpfn-insurance-pricing
+all:TabPFN AND all:"gradient boosting"            22 hits → pfn-boost, tfm-vs-tuned-gbdt-churn
+all:"in-context learning" AND all:"count regression"  1 hit, a medical VLM — off target
+```
+
+**The replication exists and agrees.** `tabpfn-insurance-pricing` (2605.22892) benchmarks v2.6
+and v3 against a Poisson/gamma GLM and XGBoost on `freMTPL2` and `beMTPL97` — our two datasets,
+5-fold — and finds TabPFN "falls behind the GLM on claim frequency… but is competitive on claim
+severity, where data are scarcer". Full digest: [`tabpfn-insurance-pricing.md`](tabpfn-insurance-pricing.md).
+Context size from 2,000 policies to the full fold does not close it (v3 deviance 0.363 → 0.343
+against the GLM's 0.296), so "give it more context" is not the remedy at these sizes.
+
+**The gap has a named mechanism.** The same paper: "TabPFN does not yet incorporate all aspects
+of **exposure**, **sparse claim counts**, **heterogeneous conditional variance**, and
+**distribution-specific loss functions**…" and, operationally, "supports neither an offset nor
+observation weights, so exposure cannot enter the model in the same way". Our harness has the
+same shape: exposure enters as a column, not as an offset, and there are no weights anywhere.
+
+**One published remedy shape.** `pfn-boost` (2502.02672) fits a GBDT on the residuals of
+TabPFN's predictions and reports that "LLM-Boost and PFN-Boost outperform both standalone
+components on a wide range of dataset sizes in between", with PFN-Boost "the best average
+performance among all methods we test for all but very small dataset sizes". **Scope limit:**
+every experiment is classification, judged on AUC. It is evidence for the mechanism, not a
+demonstrated fix for count regression.
+
+**Decomposition has measured support elsewhere.** `two-fold-zero-inflated` (2310.08088) splits a
+zero-inflated target into a presence classifier and a magnitude model and reports, on appliance
+classification, weighted precision/recall/F1/AUC gains of 27%/34%/49%/27%, with two-fold models
+best "in all cases" on shuttle demand and the difference significant. That is the #662 question
+answered in two non-actuarial domains — supporting, not settling, a two-stage TabPFN test.
+
+**Tuned baselines and calibration.** `tfm-vs-tuned-gbdt-churn` (2611.12942) puts four TFMs
+against Optuna-tuned LightGBM/XGBoost/CatBoost with 20 pre-declared comparisons: TabPFN-3.5
+keeps a significant expected-profit edge on two of three real-operator datasets and loses it
+after correction on the third. Its calibration result is the sharper one: a threshold policy on
+raw TabICL-v2 probabilities "loses 15.7% of attainable profit until it is recalibrated". Log
+loss alone does not catch that.
+
+**Imbalance-aware adaptation.** `v4finbench` (2605.10896) reports that "with
+prototype-undersampling context construction, TabPFN matches or exceeds gradient-boosted trees at
+longer horizons" at positive rates of 0.19–0.36%, and that its finetuned checkpoint transfers to
+an external dataset. Context construction, not gradient training — a different lever from the one
+the sibling repo's Phase 2 tested.
+
+**Negative result.** No in-context-learner paper addresses **count regression** as such: the one
+arXiv hit for `"in-context learning" AND "count regression"` is a medical vision-language
+chatbot. The literature's count work is GLM/GBDT/actuarial, and its TFM work is classification
+or generic regression. That is consistent with the earlier finding (D2) that no TFM paper
+evaluates tail accuracy.
+
+**Corpus-side check, after the full fetch.** 15 of the 389 fetched papers mention zero-inflation
+at all (`python3 scripts/fm4sd_search.py grep "zero.?inflat"`), and the two on the TFM side are
+TabPFN-2.5's and TabPFN-3's own use-case lists, where `zero_inflated` appears once each as a
+microbiome classification reference. Neither vendor report claims zero-inflated targets as a
+modelled case, which is worth knowing before anyone cites the prior as already covering them.
+
 ---
 
 # Sweep round 2 — targeted at this project's open questions (2026-10-08)

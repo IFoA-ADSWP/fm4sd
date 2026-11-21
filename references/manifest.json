@@ -1,7 +1,7 @@
 {
   "source": "LOCAL README.md",
   "note": "Parsed from the fm4sd README. Payload lives in gitignored papers/.",
-  "count": 433
+  "count": 439
 }
 --- entries ---
 [
@@ -1306,6 +1306,66 @@
     "has_code": false
   },
   {
+    "slug": "pfn-boost",
+    "arxiv_id": "2502.02672",
+    "section": "papers",
+    "category": "tabular",
+    "subcategory": "",
+    "citation": "jayawardhana et al. 2025",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2502.02672"
+    },
+    "arxiv_rev": 2,
+    "source": "tex",
+    "path": "papers/pfn-boost",
+    "text_bytes": 162973,
+    "pages": 0,
+    "n_tex_files": 11,
+    "sha256": "dd1ca3f7d7b814b53370d0aa91931f90baafe9a94b7171a571ddcc71737e60e1",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "tfm-vs-tuned-gbdt-churn",
+    "arxiv_id": "2611.12942",
+    "section": "papers",
+    "category": "tabular",
+    "subcategory": "",
+    "citation": "polas 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2611.12942"
+    },
+    "arxiv_rev": 2,
+    "source": "tex",
+    "path": "papers/tfm-vs-tuned-gbdt-churn",
+    "text_bytes": 111556,
+    "pages": 0,
+    "n_tex_files": 17,
+    "sha256": "d5c273a7bdd97265cf94ceefc4a801fc051200e105551cc1986c03eac163ee56",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "v4finbench",
+    "arxiv_id": "2605.10896",
+    "section": "papers",
+    "category": "tabular",
+    "subcategory": "",
+    "citation": "kostrzewa et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2605.10896"
+    },
+    "arxiv_rev": 2,
+    "source": "tex",
+    "path": "papers/v4finbench",
+    "text_bytes": 105304,
+    "pages": 0,
+    "n_tex_files": 2,
+    "sha256": "4768d83bfe109dcc885ff1530be3ad437dc11b8d00f1e3a3db3b73c6417f1726",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
     "slug": "xgboost",
     "arxiv_id": "1603.02754",
     "section": "papers",
@@ -1708,6 +1768,26 @@
     "pages": 0,
     "n_tex_files": 1,
     "sha256": "0465755bf4976e77cbfef7a9276c04458c89cb81b137c8bfc53d1c09e0cab704",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "two-fold-zero-inflated",
+    "arxiv_id": "2310.08088",
+    "section": "papers",
+    "category": "probabilistic",
+    "subcategory": "",
+    "citation": "ro\u017eanec et al. 2023",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2310.08088"
+    },
+    "arxiv_rev": 1,
+    "source": "tex",
+    "path": "papers/two-fold-zero-inflated",
+    "text_bytes": 54189,
+    "pages": 0,
+    "n_tex_files": 2,
+    "sha256": "89e2e8515be2849cdab64aa59bfd6fda0257bd452dd45e291014e5610846dc7f",
     "fetch_status": "ok",
     "has_code": false
   },
@@ -4136,6 +4216,46 @@
     "n_tex_files": 0,
     "sha256": "",
     "fetch_status": "skipped:unreachable:paywall",
+    "has_code": false
+  },
+  {
+    "slug": "tabpfn-insurance-pricing",
+    "arxiv_id": "2605.22892",
+    "section": "papers",
+    "category": "actuarial / loss modelling",
+    "subcategory": "frequency and count models",
+    "citation": "deprez et al. 2026",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2605.22892"
+    },
+    "arxiv_rev": 3,
+    "source": "tex",
+    "path": "papers/tabpfn-insurance-pricing",
+    "text_bytes": 24330,
+    "pages": 0,
+    "n_tex_files": 1,
+    "sha256": "fa565898b8efb5f62ec946064f890e54d56e7ac75fbb8f4847fe32c1305d0ab4",
+    "fetch_status": "ok",
+    "has_code": false
+  },
+  {
+    "slug": "zip-telematics-near-miss",
+    "arxiv_id": "2509.02614",
+    "section": "papers",
+    "category": "actuarial / loss modelling",
+    "subcategory": "frequency and count models",
+    "citation": "zhang et al. 2025",
+    "links": {
+      "arxiv": "https://arxiv.org/abs/2509.02614"
+    },
+    "arxiv_rev": 1,
+    "source": "tex",
+    "path": "papers/zip-telematics-near-miss",
+    "text_bytes": 87511,
+    "pages": 0,
+    "n_tex_files": 1,
+    "sha256": "6ab52ef1114fa0cb584bb241520e8b138f37fe4573674ab1f03986c3c937241e",
+    "fetch_status": "ok",
     "has_code": false
   },
   {
