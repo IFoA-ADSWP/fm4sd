@@ -75,6 +75,12 @@ This is the published form of what our regime note could only infer: the GLM and
 - **Baselines:** XGBoost at fixed hyperparameters (depth 3, 500 trees, learning rate 0.01,
   subsample 0.75, after Henckaerts et al.), TabPFN at defaults, no tuning on either side.
 - **Cost:** it reports inference time and finds TabPFN's "substantially longer".
+- **Exposure handling is the same on both sides.** Its workaround — exposure as an input column,
+  claim count as the target — is what our frontier harness already does: it replaces the
+  `Exposure` column with `log(Exposure)` and keeps counts as the target
+  (`scripts/eval/insurance_benchmark_v1/run_frontier_benchmark.py`, module docstring). So the
+  one thing a TFM without offsets or weights can do, both studies already do. There is no
+  "handle exposure properly" experiment left to run on this model version.
 
 ## What it does not say
 
