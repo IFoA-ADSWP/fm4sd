@@ -22,6 +22,15 @@ indicator/magnitude decomposition, (D) tail metrics.
 |---|---|
 | [actuarial](actuarial.md) | 28 papers added to the index to fill a void: the original corpus is **ML-methods only** and a sweep for `Tweedie|compound Poisson|loss ratio|actuarial|claim frequency` across 225 papers returned **two incidental hits**. Four extracts that bear on the tail seam — and three of them *narrow* existing claims in this repo rather than confirming them. |
 
+## Round 3 digest — added 2026-11-21
+
+Found by asking the arXiv API what closes the count / zero-inflated gap; none of these
+papers was in the index (sweep Q6 in [`SWEEPS.md`](SWEEPS.md)).
+
+| Paper | Why it is here |
+|---|---|
+| [tabpfn-insurance-pricing](tabpfn-insurance-pricing.md) | **The independent replication.** The same two datasets we use (`freMTPL2`, `beMTPL97`), 5-fold, and the same answer: TabPFN loses to a GLM on frequency and is competitive on severity. It also names the four mechanisms — exposure, sparse counts, heterogeneous variance, distribution-specific losses — that our regime note could only infer |
+
 ## Round 1 digests
 
 | Paper | Why it is here |
@@ -65,8 +74,8 @@ positive.**
 
 ## Coverage
 
-12 digest documents covering ~35 papers, of the manifest's fetched set (updated 2026-11-20:
-433 entries, 383 fetched — `python3 scripts/fm4sd_search.py stats` is the record). The rest
+13 digest documents covering ~36 papers, of the manifest's fetched set (updated 2026-11-21:
+439 entries, 389 fetched — `python3 scripts/fm4sd_search.py stats` is the record). The rest
 are corpus for sweeping — see `../manifest.json` and `../README.md`.
 
 Not yet digested but high-value on the current question set: `gotabpfn` (high-dim tokenization),

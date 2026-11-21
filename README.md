@@ -18,12 +18,12 @@ entries with no arXiv id.
 
 | | |
 |---|---|
-| **433** | entries in the index |
-| **363** | resolvable to arXiv |
-| **383** | fetched locally (**356** LaTeX source, **22** PDF, **5** HTML/XML) |
-| **52.3 MB** | of extracted plain text |
+| **439** | entries in the index |
+| **369** | resolvable to arXiv |
+| **389** | fetched locally (**362** LaTeX source, **22** PDF, **5** HTML/XML) |
+| **52.8 MB** | of extracted plain text |
 | **138** | link released code |
-| **12** | digest documents (~35 papers read closely), plus 9 corpus sweeps |
+| **13** | digest documents (~36 papers read closely), plus 9 corpus sweeps |
 
 The other 50 entries say why they are absent rather than that they lack an id: 22
 `skipped:unreachable:captcha`, 13 `paywall`, 6 `unknown`, 2 `dead`, and 7 `skipped:not-paper`
@@ -35,7 +35,7 @@ the same figures with their derivation.
 
 ```bash
 git clone https://github.com/IFoA-ADSWP/fm4sd && cd fm4sd
-python3 scripts/fm4sd_fetch.py --index && python3 scripts/fm4sd_fetch.py --fetch   # ~52 MB
+python3 scripts/fm4sd_fetch.py --index && python3 scripts/fm4sd_fetch.py --fetch   # ~52.8 MB
 pip install pymupdf    # only needed for the PDF fallback path
 
 python3 scripts/fm4sd_search.py stats
@@ -146,6 +146,9 @@ rm <id>.tar.gz
   - tfm-priority — [arxiv](https://arxiv.org/abs/2405.01147) · [icml](https://proceedings.mlr.press/v235/van-breugel24a.html) — [van breugel and van der schaar 2024]
   - tfm-systematic-survey — [ssrn](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7531718) — [archetti et al. 2026]
   - prts-transcriptomics — [arxiv](https://arxiv.org/abs/2611.18774) — [wang et al. 2026]
+  - pfn-boost — [arxiv](https://arxiv.org/abs/2502.02672) — [jayawardhana et al. 2025]
+  - tfm-vs-tuned-gbdt-churn — [arxiv](https://arxiv.org/abs/2611.12942) — [polas 2026]
+  - v4finbench — [arxiv](https://arxiv.org/abs/2605.10896) — [kostrzewa et al. 2026]
 - baselines
   - xgboost — [arxiv](https://arxiv.org/abs/1603.02754) — [chen and guestrin 2016]
   - catboost — [arxiv](https://arxiv.org/abs/1706.09516) — [prokhorenkova et al. 2017]
@@ -168,6 +171,7 @@ rm <id>.tar.gz
   - easy-uncertainty-quantification-easyuq — [arxiv](https://arxiv.org/abs/2212.08376) — [walz et al. 2022]
   - decompositions-of-the-mean-continuous-ranked-probability-score — [arxiv](https://arxiv.org/abs/2311.14122) — [arnold et al. 2023]
   - reliable-real-time-value-at-risk-estimation-via-quantile-regression-forest — [arxiv](https://arxiv.org/abs/2602.01912) — [wang et al. 2026]
+  - two-fold-zero-inflated — [arxiv](https://arxiv.org/abs/2310.08088) — [rožanec et al. 2023]
 - benchmark methodology
   - pmlb-a-large-benchmark-suite-for-machine-learning-evaluation-and-comparison — [arxiv](https://arxiv.org/abs/1703.00512) — [olson et al. 2017]
   - openml-benchmarking-suites — [arxiv](https://arxiv.org/abs/1708.03731) — [bischl et al. 2017]
@@ -292,6 +296,8 @@ rm <id>.tar.gz
   - fitting-tweedies-compound-poisson-model-to-insurance-claims-data — [doi](https://doi.org/10.1080/03461238.1994.10413930) — [jørgensen and de souza 1994]
   - zero-inflated-poisson-regression-with-an-application-to-defects — [doi](https://doi.org/10.2307/1269547) — [lambert 1992]
   - specification-and-testing-of-some-modified-count-data-models — [doi](https://doi.org/10.1016/0304-4076%2886%2990002-3) — [mullahy 1986]
+  - tabpfn-insurance-pricing — [arxiv](https://arxiv.org/abs/2605.22892) — [deprez et al. 2026]
+  - zip-telematics-near-miss — [arxiv](https://arxiv.org/abs/2509.02614) — [zhang et al. 2025]
 
   ## tail metrics, quantiles, reserving
   - local-quantile-regression — [arxiv](https://arxiv.org/abs/1208.5384) — [spokoiny et al. 2012]
