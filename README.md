@@ -18,9 +18,9 @@ entries with no arXiv id.
 
 | | |
 |---|---|
-| **439** | entries in the index |
-| **369** | resolvable to arXiv |
-| **389** | fetched locally (**362** LaTeX source, **22** PDF, **5** HTML/XML) |
+| **440** | entries in the index |
+| **370** | resolvable to arXiv |
+| **390** | fetched locally (**363** LaTeX source, **22** PDF, **5** HTML/XML) |
 | **52.8 MB** | of extracted plain text |
 | **138** | link released code |
 | **13** | digest documents (~36 papers read closely), plus 9 corpus sweeps |
@@ -256,6 +256,7 @@ rm <id>.tar.gz
   - lifelongicl — [arxiv](https://arxiv.org/abs/2606.25342) — [mcdermott et al. 2026]
   - rlfm — [arxiv](https://arxiv.org/abs/2606.18812) · [github](https://github.com/Shika-B/One-Shot-Reinforcement-Learning) — [zighem and vie 2026]
   - lejepa — [arxiv](https://arxiv.org/abs/2511.08544) · [video](https://www.youtube.com/watch?v=gVEr2cnDE_8&t=1944s) — [balestriero and lecun 2025]
+  - tabular-foundation-models-for-credit-risk-prediction-a-dedicated-review-and-empi — [arxiv](https://arxiv.org/abs/2605.18147) — [baesens et al. 2026]
 
 - actuarial / loss modelling
   Added 2026-10-08 (by us, not upstream). The original index is ML-methods only and is
