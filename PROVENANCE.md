@@ -49,10 +49,10 @@ parsed; a non-paper link inside a parsed section is an entry with `skipped:not-p
 | Field | Value |
 |---|---|
 | Index parsed | **`README.md` in this fork** since 2026-10-08 (was upstream `main/README.md` at `62382d2`) |
-| Entries parsed | 439 (363 upstream + 37 actuarial + 39 comparison literature) |
-| With an arXiv id | 369 (84%) |
+| Entries parsed | 440 (363 upstream + 37 actuarial + 39 comparison literature + 1 other) |
+| With an arXiv id | 370 (84%) |
 | Linking released code | 138 |
-| Fetched locally | 389 — 362 LaTeX source bundles, 22 PDF, 5 HTML/XML (4 web-native papers + 1 PMC full-text XML) |
+| Fetched locally | 390 — 363 LaTeX source bundles, 22 PDF, 5 HTML/XML (4 web-native papers + 1 PMC full-text XML) |
 | Extracted text | 52.8 MB |
 | Source preference | `arxiv.org/src/<id>vN`, falling back to `arxiv.org/pdf/<id>vN` (revision pinned — see below); non-arXiv entries by route family (see below) |
 | PDF extractor | PyMuPDF 1.28.2 |
@@ -384,4 +384,5 @@ any load-bearing claim against the paper before relying on it. `SWEEPS.md` recor
 | 2026-10-31 | Nine digest claims were narrowed or retracted after the #52 impact review of the 48 comparison entries added by #47: `tabicl.md`'s "closest published support that TFMs beat GBDT" (contested by 2305.02997), `SWEEPS.md`'s "no actuarial / reserving / tail-calibration literature at all" (tail calibration is now indexed), its "no published counterpart" (now: no *ICL* counterpart), `actuarial.md`'s "the actuarial literature does not evaluate TFMs" (it now *reviews* them, 2609.14576), and the "beats the GBDT" reading of a depth-3/4-tree baseline (RF parity is not GBDT parity). Evidence: `research/digest-impact-2026-10-31.md` on `research/digest-impact`. |
 | 2026-10-31 | The five approved comparison lists landed (#47): 48 entries, taking the index 383 → 431, arXiv-resolvable 323 → 361, fetched 340 → 381 (317/18 → 354/22 LaTeX/PDF, 5 HTML/XML unchanged) and extracted text 43.6 → 52.0 MB. Three new `papers` bullets (`baselines`, `probabilistic`, `benchmark methodology`) and nine actuarial rows take that block from 28 to 37. Not-fetched 43 → 50: paywall 7 → 13 and unknown 5 → 6 from the citation-only actuarial rows. All 48 figures were recomputed from `fm4sd_search.py stats`. See "Comparison literature" above. |
 | 2026-11-20 | Two Prior Labs-adjacent papers from the community digest were indexed: `weights-and-caches` (arXiv 2611.20174) and `prts-transcriptomics` (arXiv 2611.18774), both under `papers` → `tabular`. Index 431 → 433, arXiv-resolvable 361 → 363, fetched 381 → 383 (354 → 356 LaTeX; PDF and HTML/XML unchanged), extracted text 52.0 → 52.3 MB. The cookbook row `multi_target_regression` was added to `## cookbooks`, which is listed-not-parsed and moves no entry. Figures recomputed from `fm4sd_search.py stats`. |
+| 2026-11-22 | The credit-risk TFM review and comparison (`tabular-foundation-models-for-credit-risk-prediction-a-dedicated-review-and-empi`, 2605.18147) indexed under `other`, with a digest. It is the counterweight to `tabpfn-insurance-pricing`: index 439 → 440, arXiv-resolvable 369 → 370, fetched 389 → 390 (362 → 363 LaTeX). The companion insurance-pricing paper was already indexed in #86, so no duplicate was added. |
 | 2026-11-21 | Six papers from a count / zero-inflated sweep of the arXiv API were indexed (`tabpfn-insurance-pricing`, `zip-telematics-near-miss`, `two-fold-zero-inflated`, `pfn-boost`, `tfm-vs-tuned-gbdt-churn`, `v4finbench`), with a digest and sweep Q6. Index 433 → 439, arXiv-resolvable 363 → 369, fetched 383 → 389 (356 → 362 LaTeX), extracted text 52.3 → 52.8 MB. Every claim in Q6 was read from the fetched text, not from an abstract. |

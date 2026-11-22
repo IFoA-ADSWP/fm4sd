@@ -16,7 +16,7 @@ the *index* and the *digests*; the paper payload stays on disk.
 ## Layout
 
 ```
-references/manifest.json   COMMITTED — 439 entries: id, pinned revision, title, category,
+references/manifest.json   COMMITTED — 440 entries: id, pinned revision, title, category,
                             subcategory, citation, licence, shareable, sha256, fetch status,
                             published date
 references/summaries/      COMMITTED — digests and sweep findings
@@ -46,7 +46,7 @@ python3 scripts/fm4sd_search.py grep "zero.inflation" --context 2
 ```
 
 Fetch is resumable (`--force` to refetch) and cached via a `.fetched` marker per
-paper. The corpus is ~52.8 MB of text for the fetched subset: 389 of 439 entries
+paper. The corpus is ~52.8 MB of text for the fetched subset: 390 of 440 entries
 (362 LaTeX, 22 PDF, 5 HTML/XML).
 
 ## Why 50 entries are not in the corpus

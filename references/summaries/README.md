@@ -31,6 +31,12 @@ papers was in the index (sweep Q6 in [`SWEEPS.md`](SWEEPS.md)).
 |---|---|
 | [tabpfn-insurance-pricing](tabpfn-insurance-pricing.md) | **The independent replication.** The same two datasets we use (`freMTPL2`, `beMTPL97`), 5-fold, and the same answer: TabPFN loses to a GLM on frequency and is competitive on severity. It also names the four mechanisms — exposure, sparse counts, heterogeneous variance, distribution-specific losses — that our regime note could only infer |
 
+## Round 4 digest — added 2026-11-22
+
+| Paper | Why it is here |
+|---|---|
+| [tabular-foundation-models-for-credit-risk](tabular-foundation-models-credit-risk.md) | **The counterweight.** TFMs reviewed and compared on credit risk, where pretraining is conjectured to help when the target data is small. Bounds the negative in `tabpfn-insurance-pricing`: the finding is regime-specific, not a verdict on the model family |
+
 ## Round 1 digests
 
 | Paper | Why it is here |
@@ -74,8 +80,8 @@ positive.**
 
 ## Coverage
 
-13 digest documents covering ~36 papers, of the manifest's fetched set (updated 2026-11-21:
-439 entries, 389 fetched — `python3 scripts/fm4sd_search.py stats` is the record). The rest
+14 digest documents covering ~37 papers, of the manifest's fetched set (updated 2026-11-21:
+440 entries, 390 fetched — `python3 scripts/fm4sd_search.py stats` is the record). The rest
 are corpus for sweeping — see `../manifest.json` and `../README.md`.
 
 Not yet digested but high-value on the current question set: `gotabpfn` (high-dim tokenization),

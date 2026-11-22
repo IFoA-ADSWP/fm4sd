@@ -87,3 +87,7 @@ This is the published form of what our regime note could only infer: the GLM and
 No v3.5, no Thinking mode, no target decomposition, no fusion with trees, no ensembling. Two
 motor third-party-liability datasets; nothing on lapse, reserving, or severity tails. It
 establishes the *existence* of the gap on our data, not its cure.
+
+One domain is not a verdict on the family: see
+[tabular-foundation-models-for-credit-risk](tabular-foundation-models-credit-risk.md) for the
+review that argues TFMs pay off where target data is small.
